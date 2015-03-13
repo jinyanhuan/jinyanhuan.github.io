@@ -468,7 +468,7 @@ a {
   padding: 20% 0% 0% 15%;
 }
 #header a {
-  font-family: Roboto, "Roboto", serif;
+  font-family: "Century Gothic", "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
   color: #444;
 }
 #header a:hover {
