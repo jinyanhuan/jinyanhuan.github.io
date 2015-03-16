@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+		<style>
+			*{margin:0px;padding:0px;}
+			li{list-style:none;}
+			#calendar{
+				width:567px;
+				height:455px;
+				background:url(./images/bg1.jpg) no-repeat 0px 0px;
+				margin:20px auto;
+				overflow:hidden;
+				font-family:'微软雅黑';
+			}
+			#calendar .select{
+				width:143px;
+				height:38px;
+				margin:14px auto;
+				
+			}
+			#calendar .select .time{
+				width:143px;
+				height:32px;
+				padding-top:6px;
+				background:url(./images/bg.jpg) no-repeat -12px -12px;
+				position:relative;
+				z-index:1;
+			}
+			#calendar .select .time a{
+				display:block;
+				width:15px;
+				height:27px;
+				float:left;
+				margin-left:2px;
+			}
+			#calendar .select .time .btnPre:hover{
+				background:url(./images/bg.jpg) no-repeat -14px -61px;
+			}
+			#calendar .select .time .btnNext:hover{
+				background:url(./images/bg.jpg) no-repeat -138px -61px;
+			}
+			#calendar .select .time .year{
+				width:64px;
+				height:27px;
+				float:left;
+				margin-left:2px;
+				position:relative;
+				z-index:1;
+			}
+			#calendar .select .time .month{
+				width:39px;
+				height:27px;
+				float:left;
+				margin-left:2px;
+				position:relative;
+				z-index:1;
+			}
+			#calendar .select .time span{
+				display:block;
+				width:100%;
+				height:27px;
+				line-height:27px;
+				color:#503f25;
+				font-size:12px;
+				text-indent:3px;
+				cursor:pointer;
+			}
+			#calendar .select .time span i{
+				font-style:normal;
+			}
+			#calendar .select .time select{
+				position:absolute;
+				width:64px;
+				top:27px;
+				border:0;
+				display:none;
+				z-index:1;
+			}
+			#calendar table{
+				width:358px;
+				height:294px;
+				margin:50px auto;
+				position:relative;
+				border-collapse: collapse;
+				z-index:0;
+			}
+			#calendar table thead th{
+				width:50px;
+				height:32px;
+				background:#fbfbf9;
+				font-size:14px;
+				font-weight:100;
+			}
+			#calendar table thead th.red{
+				color:#ba4f2d;
+			}
+			#calendar table tbody td{
+				text-align:center;
+				width:50px;
+				height:43px;
+				cursor:pointer;
+				font-family:Arial;
+			}
+			#calendar table tbody td span{
+				color:#ccc;
+			}
+			#calendar table tbody td:hover{
+				background:url(./images/bg.jpg) no-repeat -436px -297px;
+			}
+			#calendar table tbody td.active{
+				color:#000;
+				background:url(./images/bg.jpg) no-repeat -384px -297px;
+			}
+			
+		</style>  
+  
+ <script type="text/javascript" src="http://cdnimg.ocj.com.cn/common/js/jquery-1.10.2.min.js"></script>
+ <script language="javascript" type="text/javascript">
+
+  $(function(){
+
+    /*加载年份和月份下拉菜单start*/
+    var selectYear = $('#yearSelect');
+	var selectMonth = $('#monthSelect');
+	for(var i=1900;i<=2050;i++){
+	  $('<option value=\"'+i+'\">'+i+'年</option>').appendTo(selectYear);
+	}
+	for(var i=0;i<=11;i++){
+	  $('<option value=\"'+i+'\">'+(i+1)+'月</option>').appendTo(selectMonth)
+	}
+	/*加载年份和月份下拉菜单end*/
+
+
+    /*定义整个日历需要用到的变量start*/
+    var date = new Date();                             //这些参数是初始的时候定义的
+	var year = date.getFullYear();                     //定义年份(初始化为今年)
+	var month = date.getMonth(); 	                   //定义月份(初始化为当月)
+	var calendar = $('#calendar');                     //获取日历元素
+	var calenderTd = $('td',calendar);                 //获取日历里的单元格
+    var yearCur = $('#yearNum');                       //获取显示年份的元素
+	var monthCur = $('#monthNum');                     //获取显示月份的元素
+	var preMonth = $('.btnPre');                       //获取上一月按钮
+	var nextMonth = $('.btnNext');                     //获取下一月按钮
+    var thisDay = date.getDate();                      //获取今天是几号
+    var days;                                          //在点击下个月或上个月的日子时,会需要用到days和week计算
+    var week;
+    /*定义整个日历需要用到的变量end*/
+
+
+    /*初始化时执行一次加载日期*/
+    loadDate(year,month);
+
+
+
+
+
+	/*加载日期的函数,year为年,month为月*/
+    /*每调用一次该函数,就会把相应年月的日期以及上个月的最后几天正确填入到td中*/
+	function loadDate(year,month){
+      yearCur.text(year);
+	  monthCur.text(month+1);
+	  days = getDaysNumber(year,month);                //获取这个月一共有多少天
+	  week = new Date(year,month,1).getDay();          //获取这个月的第一天是星期几
+	  week = (week==0)?7:week;                         //js中的星期天是0,所以要把0变为7
+	  var preDays = getDaysNumber(year,month-1);       //获取这个月的上一个月一共有多少天
+	  var nextTds = calenderTd.length-(week-1)-days;   //获取下个月的开头在这个月的日历里需要被显示多少天 
+
+	  var data = [];                                   //用于存放单元格里的日期数据
+	  for(var i=0;i<week-1;i++){                       //压入上个月的数据
+		data.push('<span>'+(preDays-week+2+i)+'</span>')	  
+	  }	
+	  for(var k=0;k<days;k++){                         //压入这个月的数据
+		if(thisDay==k+1){                              //判断是否到了今天
+		  calenderTd.eq(data.length).addClass('active')//如果是今天,为当前的的单元格添加active类名
+		}
+		data.push(k+1)
+	  }
+	  for(var l=0;l<nextTds;l++){                      //压入下个月的数据
+		data.push('<span>'+(l+1)+'</span>')            
+	  }
+	  for(var i=0;i<calenderTd.length;i++){            //将数据一一对应到单元格中
+		calenderTd.eq(i).html(data[i])
+	  }	
+	}
+
+
+    /*点击切换上一个月*/
+    preMonth.click(function(){
+        calenderTd.removeClass('active');
+        month--;
+        //month最少为1月份,当month为1月份的时候,它的值为0,再减一,就等于-1,这个时候,它就应该变为12月,值就是11
+        if(month==-1){
+            month = 11;
+            year--;
+        }
+        loadDate(year,month);
+    })
+
+
+    /*点击切换下一个月*/
+    nextMonth.click(function(){
+        calenderTd.removeClass('active');
+        month++;
+        //month最多为12月份,当month为12月份的时候,它的值为11,再加一,就等于12,这个时候,它就应该变为1月,值就是0
+        if(month==12){
+            month = 0;
+            year++;
+        }
+        loadDate(year,month)
+    })
+
+
+	/*为选择年月绑定事件(显示隐藏下拉菜单)*/
+	var selYearMouth = $('.time .current');            //获取点击显示下拉菜单选择年月的元素
+	selYearMouth.click(function(){
+	  $(this).siblings('select').toggle();
+	  var length = $(this).siblings('select').find('option').length;
+	  for (var i=0;i<length;i++){
+	    if($(this).siblings('select').find('option').eq(i).val()==year){
+		   $(this).siblings('select').find('option').eq(i).attr('selected',true)
+	    }
+	  }
+	})
+	
+
+	/*下拉菜单中选择年份的事件*/
+	$('#yearSelect option').click(function(){
+      year = Number($(this).val());
+	  $(this).parent().hide();
+	  calenderTd.removeClass('active');	  
+	  loadDate(year,month);
+	})
+	
+
+	/*下拉菜单中选择月份的事件*/
+	$('#monthSelect option').click(function(){
+      month = Number($(this).val());
+	  $(this).parent().hide();
+	  calenderTd.removeClass('active');	  
+	  loadDate(year,month);
+	})
+
+
+    calenderTd.click(function(){
+      calenderTd.removeClass('active')
+      //index是当前点击的td的索引
+      var index = calenderTd.index($(this));
+      //把高亮的日子改成所点击的日子
+      thisDay = Number($(this).text());
+
+      //week是第一天的星期几
+      if(index<week-1){
+          month--;
+          //month最少为1月份,当month为1月份的时候,它的值为0,再减一,就等于-1,这个时候,它就应该变为12月,值就是11
+          if(month==-1){
+              month = 11;
+              year--;
+          }
+          loadDate(year,month);
+      }
+      else if(index>week+days-2){
+          month++;
+          //month最多为12月份,当month为12月份的时候,它的值为11,再加一,就等于12,这个时候,它就应该变为1月,值就是0
+          if(month==12){
+              month = 0;
+              year++;
+          }
+          loadDate(year,month);
+      }
+      else{
+          $(this).addClass('active');
+      }
+    })
+
+  })
+
+  /*获取某年某月的天数的函数*/
+  /*传入年,月,即可得到当月的天数*/
+  function getDaysNumber(year,month){
+    var days=[31,28,31,30,31,30,31,31,30,31,30,31];
+    //获取上一个月的天数时,如果当月是1月(第0个月),那么,减一以后就会出现传入-1的情况,这个时候其实是要得到上一年的12月,也就是31天.	
+	if(month==-1){                                     
+	  return 31
+	}	
+	if(month==1){
+	  return ((year%4==0 && year%100!==0) || year%400==0)? 29 : 28
+	}
+	else{
+      return days[month]
+	}
+  }
+
+ </script>
+ </head>
+ <body>
+ <div id="calendar">
+			<div class='select'>
+				<div class='time' id="time">
+					<a href="javascript:void(0);" class='btnPre' id="btnPre"> </a>
+					<div class='year'>
+						<span class='current'>
+							<i id="yearNum">2013</i>年
+						</span>
+						<select id="yearSelect" size="12" >
+							
+						</select>
+					</div>
+					<div class='month'>
+						<span class='current'>
+							<i id="monthNum">5</i>月
+						</span>
+						<select id="monthSelect" size="12">
+							
+						</select>
+					</div>
+					<a href="javascript:void(0);" class='btnNext' id="btnNext"> </a>
+				</div>
+			</div>
+			<table border="1" bordercolor="#f0f0f0" class='rows6'>
+				<thead>
+					<tr>
+						<th>一</th>
+						<th>二</th>
+						<th>三</th>
+						<th>四</th>
+						<th>五</th>
+						<th class='red'>六</th>
+						<th class='red'>日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div> 
+ </body>
+</html>
