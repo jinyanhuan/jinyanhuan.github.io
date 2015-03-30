@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用hexo搭建github.io博客(四)-美化主题&amp;添加多说 | code_bunny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上一篇里介绍了怎么更换博客的主题,这篇介绍如何在细节上完善这个主题,以及如何添加多说评论
+完善细节
+hexo的博客主题使用的是stylus技术,类似于less和sass吧.最后的文章都只有一个css,就是style.css,它在E:hexo/public/css/style.css,不过这个是通过hexo generate编译过后得到的样式表,要修改的话,需要到主题包里去修改:主题包里样式在这里:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo搭建github.io博客(四)-美化主题&添加多说">
+<meta property="og:url" content="http://yoursite.com/2015/03/30/hexo-build-four/index.html">
+<meta property="og:site_name" content="code_bunny's blog">
+<meta property="og:description" content="上一篇里介绍了怎么更换博客的主题,这篇介绍如何在细节上完善这个主题,以及如何添加多说评论
+完善细节
+hexo的博客主题使用的是stylus技术,类似于less和sass吧.最后的文章都只有一个css,就是style.css,它在E:hexo/public/css/style.css,不过这个是通过hexo generate编译过后得到的样式表,要修改的话,需要到主题包里去修改:主题包里样式在这里:">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用hexo搭建github.io博客(四)-美化主题&添加多说">
+<meta name="twitter:description" content="上一篇里介绍了怎么更换博客的主题,这篇介绍如何在细节上完善这个主题,以及如何添加多说评论
+完善细节
+hexo的博客主题使用的是stylus技术,类似于less和sass吧.最后的文章都只有一个css,就是style.css,它在E:hexo/public/css/style.css,不过这个是通过hexo generate编译过后得到的样式表,要修改的话,需要到主题包里去修改:主题包里样式在这里:">
+  
+    <link rel="alternative" href="/atom.xml" title="code_bunny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">code_bunny</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">never giveup reading!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/OOP-Code-Bunny/" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/p/1005052438739075/home" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/OOP-Code-Bunny/">我的github</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/a5635268/">周孝刚</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://kingarthas37.github.io/">王麟</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/zhengyin/">郑印</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">虽然咸鱼翻身还是咸鱼,但至少可以变得好吃一点</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">code_bunny</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460">
+				<hgroup>
+				  <h1 class="header-author">code_bunny</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">never giveup reading!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/OOP-Code-Bunny/" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/p/1005052438739075/home" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-hexo-build-four" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/30/hexo-build-four/" class="article-date">
+  	<time datetime="2015-03-30T06:58:43.000Z" itemprop="datePublished">2015-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用hexo搭建github.io博客(四)-美化主题&amp;添加多说
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://jinyanhuan.github.io/2015/03/16/hexo-bulid-three/" target="_blank" rel="external">上一篇</a>里介绍了怎么更换博客的主题,这篇介绍如何在细节上完善这个主题,以及如何添加多说评论</p>
+<p><strong>完善细节</strong></p>
+<p>hexo的博客主题使用的是stylus技术,类似于less和sass吧.最后的文章都只有一个css,就是style.css,它在<code>E:hexo/public/css/style.css</code>,不过这个是通过<em>hexo generate</em>编译过后得到的样式表,要修改的话,需要到主题包里去修改:主题包里样式在这里:<code>E:\hexo\themes\yilia\source\css</code><br>然后就找到对应的样式,改改就可以了,具体怎么找,这个是stylus的技术.一般来说都很简单,都是小地方改动,都能找到的.</p>
+<p>举个栗子,这个主题本来所有的字体都是宋体,我希望把它换成雅黑,那我可以找到它:</p>
+<p><code>E:\hexo\themes\yilia\source\css\style.styl</code>:</p>
+<p>修改body的字体:</p>
+<pre><code>body
+  font-family:<span class="string">"Microsoft Yahei"</span>,<span class="string">"HelveticaNeue-Light"</span>,<span class="string">"Helvetica Neue Light"</span>,<span class="string">"Helvetica Neue"</span>,Helvetica,Arial,sans-serif;
+  <span class="keyword">...</span>
+</code></pre><p>这样,文章的字体就会变成雅黑</p>
+<p>又比如,它主题里的行内代码片段只有这样的<code>code</code>,但是我希望有一种这样的<em>code</em>,但是我觉得倾斜是不必要的,那么我就可以把markdown里面本来的倾斜体定义成<em>code</em>这种行内代码段:</p>
+<p><code>E:\hexo\themes\yilia\source\css\_partial\article.styl</code>:</p>
+<pre><code>.article-entry{
+  <span class="keyword">...</span>
+  em {
+    font-style: normal;
+    background: <span class="comment">#fbedeb;</span>
+    color: <span class="comment">#e2678f;</span>
+    padding: <span class="number">0</span> 5px;
+    margin: <span class="number">0</span> 2px;
+    font-size: <span class="number">0.</span>9em;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  }
+  <span class="keyword">...</span>
+}
+</code></pre><p>这样我就把原来主题中的斜体改成了我喜欢的<em>code</em>这样.</p>
+<p><strong>添加多说评论</strong></p>
+<p>登陆多说以后,访问<a href="http://duoshuo.com/create-site/" target="_blank" rel="external">这里</a>获取到通用代码,我的是这样的:</p>
+<pre><code><span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"请将此处替换成文章在你的站点中的ID"</span> <span class="attribute">data-title</span>=<span class="value">"请替换成文章的标题"</span> <span class="attribute">data-url</span>=<span class="value">"请替换成文章的网址"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
+<span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+    <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
+    (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+        <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+        ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
+        ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
+        ds.charset = <span class="string">'UTF-8'</span>;
+        (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]
+         || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);
+    })();
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
+</code></pre><p>这段代码可以在<a href="http://codebunny.duoshuo.com/admin/tools/" target="_blank" rel="external">这里</a>找到,其中的<em>codebunny</em>是它叫你填信息的时候填的多说域名</p>
+<blockquote>
+<p>注意这地方有个<code>short_name:&quot;codebunny&quot;</code></p>
+</blockquote>
+<p>然后找到主题里对应放置评论部分的视图模板,不同的主题所在的位置也不同,我的在这里:</p>
+<p><code>E:\hexo\themes\yilia\layout\_partial\article.ejs</code></p>
+<p>找到原来的评论部分:</p>
+<pre><code>&lt;% <span class="keyword">if</span> (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;
+    <span class="keyword">...</span>
+&lt;% } %&gt;
+</code></pre><p>替换为:</p>
+<pre><code><span class="xml"></span>&lt;%<span class="ruby"> <span class="keyword">if</span> (!index &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname){ </span>%&gt;<span class="xml">
+<span class="tag">&lt;<span class="title">section</span> <span class="attribute">id</span>=<span class="value">"comments"</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"</span></span></span>&lt;%=<span class="ruby"> post.layout </span>%&gt;<span class="xml"><span class="tag"><span class="value">-</span></span></span>&lt;%=<span class="ruby"> post.slug </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-title</span>=<span class="value">"</span></span></span>&lt;%=<span class="ruby"> post.title </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-url</span>=<span class="value">"</span></span></span>&lt;%=<span class="ruby"> page.permalink </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
+  <span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+    <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
+    (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+      <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+      ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
+      ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
+      ds.charset = <span class="string">'UTF-8'</span>;
+      (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]
+              || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);
+    })();
+  </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
+<span class="tag">&lt;/<span class="title">section</span>&gt;</span>
+</span>&lt;%<span class="ruby"> } </span>%&gt;<span class="xml"></span>
+</code></pre><p>也就是说,把前面得到的通用代码复制到<code>&lt;section id=&quot;comments&quot;&gt;&lt;/section&gt;</code>里面去,然后把<code>data-thread-key</code> <code>data-title</code> <code>data-url</code> 如上替换就好了.</p>
+<p>然后找到主题的<code>_config.yml</code>,添加一个变量:</p>
+<pre><code><span class="attribute">duoshuo_shortname</span>: <span class="string">codebunny</span>
+</code></pre><p>这里的<code>codebunny</code>就是刚才的short_name,也就是多说域名.</p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/03/16/hexo-bulid-three/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用hexo搭建github.io博客(三)-更换主题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hexo-build-four" data-title="使用hexo搭建github.io博客(四)-美化主题&amp;添加多说" data-url="http://yoursite.com/2015/03/30/hexo-build-four/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 code_bunny
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
