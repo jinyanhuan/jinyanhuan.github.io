@@ -232,6 +232,10 @@
 <p><img src="http://jinyanhuan.github.io/blogimages/20150404.02.gif" alt="webstorm配置sass自动编译2"></p>
 <p><em>Output paths to refresh</em>:</p>
 <p>改成这样:<code>$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map</code></p>
+<blockquote>
+<p>在使用的过程中还有两点需要注意:</p>
+</blockquote>
+<p>1.同步编译只能在项目文件夹下,也就是webstorm左侧打开的项目.随便打开一个项目外的文件是不行的.<br>2.这个和webstorm没有什么关系,就是sass编译不能带有中文,无论是路径名,文件名,文件里的内容,都不能识别中文,如果要修改它也不是不可以,但我觉得不用中文也挺好的,养成好习惯嘛.</p>
 
         
           <!-- show an end symbol if the article is fully displayed -->
