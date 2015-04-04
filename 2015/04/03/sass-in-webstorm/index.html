@@ -6,17 +6,38 @@
   <title>在webstorm中配置sass的自动编译 | code_bunny&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.
-点击左上角的File→Settings→File Watchers">
+本文使用的webstorm为8.0版本
+点击左上角的File→Settings→File Watchers
+在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss
+按照下图进行配置:
+
+其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.
+Arguments:
+可以配置编译后的文件的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在webstorm中配置sass的自动编译">
 <meta property="og:url" content="http://yoursite.com/2015/04/03/sass-in-webstorm/index.html">
 <meta property="og:site_name" content="code_bunny's blog">
 <meta property="og:description" content="webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.
-点击左上角的File→Settings→File Watchers">
+本文使用的webstorm为8.0版本
+点击左上角的File→Settings→File Watchers
+在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss
+按照下图进行配置:
+
+其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.
+Arguments:
+可以配置编译后的文件的">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在webstorm中配置sass的自动编译">
 <meta name="twitter:description" content="webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.
-点击左上角的File→Settings→File Watchers">
+本文使用的webstorm为8.0版本
+点击左上角的File→Settings→File Watchers
+在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss
+按照下图进行配置:
+
+其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.
+Arguments:
+可以配置编译后的文件的">
   
     <link rel="alternative" href="/atom.xml" title="code_bunny&#39;s blog" type="application/atom+xml">
   
@@ -234,7 +255,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.</p>
+<p>本文使用的webstorm为8.0版本</p>
 <p>点击左上角的<code>File</code>→<code>Settings</code>→<code>File Watchers</code></p>
+<p>在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss</p>
+<p>按照下图进行配置:</p>
+<p><img src="" alt="webstorm配置sass自动编译1"></p>
+<p>其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.</p>
+<p><em>Arguments</em>:</p>
+<p>可以配置编译后的文件的输出路径,我这里写的是:</p>
+<p><code>--no-cache --update --sourcemap --watch $FileName$:$FileParentDir$\css\$FileNameWithoutExtension$.css</code></p>
+<p>注意, <code>$FileName$</code>后面有个冒号,然后<code>$FileParentDir$</code>表示的是<strong>scss文件所在的文件夹的父级文件夹</strong>,而不是scss文件的父文件夹.</p>
+<p>举个栗子,我的项目叫<code>sass-learn</code>,里面有个scss文件夹,里面存放scss文件,那么按照这样配置的结果,style.scss所在的文件夹就是scss,scss的父文件夹就是sass-learn,然后找到sass-learn下的css文件夹,编译后的style.css文件就会在这里.</p>
+<p><img src="" alt="webstorm配置sass自动编译2"></p>
+<p><em>Output paths to refresh</em>:</p>
+<p>改成这样:<code>$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map</code></p>
 
         
       
