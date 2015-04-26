@@ -247,7 +247,7 @@
 <p>举个栗子,我工作中需要用到这样的路径: less文件夹下按照模块分,公共部分直接在less文件夹下,其它的各个板块分别在各自的文件夹下,比如index模块,就在index文件夹下,最后编译出来的css都到css文件夹下:</p>
 <p><img src="http://jinyanhuan.github.io/blogimages/20150426.04.png" alt="webstorm配置less自动编译4"></p>
 <p>就可以这样配置<em>Outputpaths to refresh</em>:</p>
-<p><em>$ProjectFileDir$/css/$FileNameWithoutExtension$.css</em></p>
+<p><em>\$ProjectFileDir\$/css/\$FileNameWithoutExtension\$.css</em></p>
 <blockquote>
 <p>这样,webstorm自带的配置方法已经可以满足很多需求了,如果项目架构实在太复杂,那只能移步grunt或者fis了,后续会继续学习grunt.</p>
 </blockquote>
