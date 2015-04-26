@@ -1,0 +1,488 @@
+@charset "utf-8";
+/* CSS Document */
+html {
+   -webkit-text-size-adjust:none
+}
+
+.cf:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+.cf{*zoom:1}
+
+span.icon-jifen {
+display:block; padding-left:17px; width:36px; height:12px; line-height:12px; color:#505966; background:url(../images/common/icon_jifen.gif) no-repeat
+}
+span.icon-cu {
+display:block; padding-left:17px; width:36px; height:12px; line-height:12px; color:#505966; background:url(../images/detailshop/cu.gif) no-repeat
+}
+
+input.text-tpl1 {
+height:23px; background: url(../images/cart/input-bg.gif) repeat-x; border:1px solid #b8bfc6; padding:0 5px
+}
+
+
+
+/*订单页面*/
+.white_bg {
+height:100%;width:100%;position:fixed;left:0px;top:0px;z-index:9996;background:#fff;opacity:0.3;filter:alpha(opacity=30);display:none;
+}
+.check-step{
+margin-top:30px
+}
+.check-step .step {
+border:1px solid #e1e4e6; color:#505966; font-size:12px; padding-bottom:10px; margin-top:5px; _clear:both
+}
+.check-step .step-title {
+line-height: 45px; height:45px; 
+}
+.check-step .step-title p{
+font-size:14px; font-weight:bold; line-height:45px; padding-left:20px; float:left;
+}
+.check-step .step-title .step-action {
+padding-left: 10px; line-height:45px
+}
+.check-step .cur-step .step-title .step-action {
+display:none
+}
+.check-step .step-title .step-action a{
+color:#239cdc; text-decoration:underline; 
+}
+.check-step .step-content .start {
+margin-left:47px; color:#505966; margin-bottom:15px
+}
+.check-step .step-content .start a {
+color:#239cdc; text-decoration:underline; margin: 0 4px
+}
+.check-step .step-content .tip1 {
+padding-left:45px; color:#7d8289
+}
+.check-step .step-content .dot_line {
+width:1000px; border-top:1px dotted #ccc; margin:auto; _height:1px; _overflow:hidden
+}
+.check-step .step-content .content-l{
+float:left;padding-left:45px; padding:10px 0 10px 45px; font-weight:bold
+}
+.check-step .step-content .content-r {
+float:left; color:#212529; padding:10px 0 10px 0;
+}
+.check-step .step-content .content-r p {
+margin-bottom:5px
+}
+.check-step .step-content .content-r p.title {
+margin-bottom:5px; font-weight:bold
+}
+.check-step .cur-step {
+border:3px solid #239cdc; position:relative; z-index:9997
+}
+.check-step .step-content .address-list {
+margin-left:8px; height:161px; overflow:hidden; *position:relative
+}
+.check-step .step-content .address-list-cur {
+height:auto
+}
+/*0917 edit start*/
+.check-step .step-content .address-list .list{
+float:left; width:229px; height:143px; background:url(../images/cart/mail.gif) no-repeat -486px 0; padding:5px 6px; margin-left:8px; opacity:0.5; filter:alpha(opacity=50);position:relative; cursor:pointer; margin-bottom:8px;
+}
+.check-step .step-content .address-list .list:hover{
+opacity:1;filter:alpha(opacity=100); background-position:-243px 0
+}
+.check-step .step-content .address-list .list .close {
+position:absolute; width:13px; height:13px; background:url(../images/cart/space.gif) repeat; cursor:pointer; right:0px; top:0px
+}
+.check-step .step-content .address-list .cur-list {
+background-position:0 0; opacity:1; filter:alpha(opacity=100); cursor:default
+}
+.check-step .step-content .address-list .cur-list:hover {
+background-position:0 0
+}
+/*0917 edit end*/
+.check-step .step-content .address-list .list .person {
+height:42px;line-height:42px; margin-left:12px
+}
+.check-step .step-content .address-list .list .person .using {
+color:#b8b8b8; margin:0 10px; width:80px
+}
+.check-step .step-content .address-list .list .person .change {
+color:#239cdc; text-decoration:underline; display:none
+}
+.check-step .step-content .address-list .cur-list .person .change {
+display:inline; cursor:pointer
+}
+.check-step .step-content .address-list .list .infos {
+width:200px; margin:12px 12px 0
+}
+.check-step .step-content .address-list .list .infos .city{
+margin-right:8px
+}
+.check-step .step-content .address-list .list .infos p {
+line-height:19px
+}
+.check-step .step-content .address-list .list .infos p b {
+margin-right:6px
+}
+.check-step .step-content .address-list .list .infos p.tel {
+line-height:25px
+}
+.check-step .step-content .other {
+height:20px; width:985px; margin: 15px auto; line-height:20px; color:#239cdc; background:url(../images/cart/dotted_bg.gif) repeat-x
+}
+.check-step .step-content .other a{
+cursor:pointer; color:#666b7e; display:block; border:1px solid #d5d5d5; border-top:0; width:98px; height:19px; line-height:17px; margin:0 auto; text-indent:30px; background:#fff url(../images/cart/shoppingcart.png) no-repeat 66px -659px; _background-image: url(../images/cart/shoppingcart_for6.png);
+}
+.check-step .step-content .other a.cur {
+background-position: 66px -684px;
+}
+.check-step .step-content .other a:hover{
+text-decoration:underline
+}
+.check-step .step-content .input_wrap1 {
+margin-left:17px
+}
+.check-step .step-content .btn-order {
+color:#505966; font-weight:bold; line-height:31px; margin:0 0 6px 0; width:142px; height:32px; background:url(../images/cart/shoppingcart.png) no-repeat -479px -354px; _background-image: url(../images/cart/shoppingcart_for6.png); cursor:pointer; border:0;
+}
+.check-step .step-content .btn-order:hover {
+background-position:-479px -320px
+}
+.check-step .step-content .send-time {
+height:30px; line-height:30px
+}
+.check-step .step-content .send-time span {
+display:block; float:left; margin-left:45px
+}
+.check-step .step-content .send-time input {
+vertical-align:-2px; margin-right:2px
+}
+.check-step .step-content .send-time label {
+margin-right:16px; margin-left:5px; color:#212529
+}
+.check-step .step-content .dotted {
+width:1003px; border-top:1px dotted #ccc; margin:12px auto; clear:both
+}
+.check-step .step-content .send-tip {
+margin-left:45px; margin-bottom:17px; margin-top:17px
+}
+.check-step .step-content .send-tip p{
+line-height:18px; color:#7d8289
+}
+.check-step .step-content .fapiao-tip {
+margin-left:45px; padding-bottom:20px; padding-top:8px; height:auto; margin-top:6px
+}
+.check-step .step-content .fapiao-tip .tip1 {
+padding-left:0; line-height:26px
+}
+.check-step .step-content .fapiao-tip .fapiao_one {
+height:24px; line-height:24px; color:#7d8289
+}
+.check-step .step-content .fapiao-tip .fapiao_one em {
+color:#505966; margin-right:4px
+}
+.check-step .step-content .fapiao-tip .fapiao_two {
+height:24px; line-height:24px; color:#7d8289; position:relative; z-index:2
+}
+.check-step .step-content .fapiao-tip .fapiao_two em {
+color:#505966; margin-right:4px
+}
+.check-step .step-content .fapiao-tip .fapiao_two em.safekeep {
+color:#212529; padding-right:16px
+}
+.check-step .step-content .fapiao-tip .fapiao_two a {
+color:#239cdc
+}
+.check-step .step-content .fapiao-tip .fapiao_two em.safekeep {
+background: url(../images/cart/question_icon.gif) no-repeat 65px -14px; cursor: pointer; _overflow:hidden
+}
+.check-step .step-content .fapiao-tip .fapiao_two em.cur {
+background-position: 65px 1px
+}
+.check-step .step-content .fapiao-tip .fapiao_two .answer {
+width:683px; padding:2px 10px; height:443px; border:2px solid #239CDC; background:#fff; position:absolute; left:0; top:18px; display:none
+}
+.check-step .step-content .fapiao-tip .fapiao_two .answer h3 {
+margin:7px auto; font-size:14px; color:#505966; font-weight:bold; padding-left:20px; background:url(../images/cart/shoppingcart.png) no-repeat -887px -5px; _background-image: url(../images/cart/shoppingcart_for6.png)
+}
+.check-step .step-content .fapiao-tip .fapiao_two .answer p {
+padding-left:20px; line-height:20px
+}
+.check-step .step-content .fapiao-tip .fapiao_two .close {
+display:none; cursor:pointer ;width:14px; height:14px; left:691px; top:453px; position:absolute; background:url(../images/cart/shoppingcart.png) no-repeat -30px -308px; _background-image: url(../images/cart/shoppingcart_for6.png)
+}
+
+.check-step .step-content .fapiao-tip .fapiao_three {
+height:24px; line-height:24px; font-weight:bold
+}
+
+.check-step .step-content input.f-title {
+width:185px; height:25px; border:0; margin-top:-6px; padding-left:5px; background:url(../images/cart/shoppingcart.png) no-repeat -135px -485px; _background-image: url(../images/cart/shoppingcart_for6.png); *line-height:26px
+}
+.check-step .step-content .print-tip {
+height:40px; line-height:40px; color:#7d8289
+}
+.check-step .step-content .remark {
+
+}
+.check-step .step-content .remark p{
+margin-left:44px
+}
+.check-step .step-content .remark p span {
+color:#7d8289; margin:0 5px
+}
+.check-step .step-content .remark p a {
+color:#239cdc; text-decoration:underline
+}
+.check-step .step-content .remark textarea {
+height:31px; width:268px; margin:10px 0 0 96px; font-size:12px; background: url(../images/cart/input-bg.gif) repeat-x; border:1px solid #b8bfc6; padding:5px; color:#aeb2b7; resize:none
+}
+.check-step .product-content {
+width:963px; margin:10px auto 0; font-family:Verdana, Geneva, sans-serif
+}
+.check-step .product-content .title div{
+border-bottom: 1px solid #d7dfe5; height:29px; background:#f7f7f7; text-align:center; float:left; line-height:29px
+}
+.check-step .product-content .title .col3 span {
+display:block; height: 29px; line-height:29px; float:left
+}
+.check-step .product-content .title .col3 span.jifen{
+margin:0 5px 0 41px; _margin-left:20px
+}
+.check-step .product-content .title .col3 span.question {
+position:relative;
+}
+.check-step .product-content .title .col3 span.question .icon {
+position:absolute; width:11px; height:11px; background:url(../images/cart/shoppingcart.png) no-repeat 0px -312px; _background-image: url(../images/cart/shoppingcart_for6.png); top:10px; cursor:pointer
+}
+.check-step .product-content .title .col3 span.question .cur {
+background-position:-15px -312px;
+}
+.check-step .product-content .title .col3 span.question .answer {
+position:absolute; width:526px; border:2px solid #239cdc; padding:6px 10px; line-height:20px; height:auto; background:#fff; top:21px; left:-90px; text-align:left; display:none
+}
+.check-step .product-content .title .col3 span.question .close {
+width:14px; height:14px; position:absolute; right:0px; bottom:0px; background:url(../images/cart/shoppingcart.png) no-repeat -30px -309px; _background-image: url(../images/cart/shoppingcart_for6.png); cursor:pointer
+}
+
+
+.check-step .product-content .col2{
+width:404px;
+}
+.check-step .product-content .sub_col2{
+width:477px;
+}
+.check-step .product-content .col3{
+width:122px;
+}
+.check-step .product-content .sub_col3{
+width:110px;
+}
+.check-step .product-content .col4{
+width:90px;
+}
+.check-step .product-content .sub_col4{
+width:115px;
+}
+.check-step .product-content .col5{
+width:146px;
+}
+.check-step .product-content .col6{
+width:87px;
+}
+.check-step .product-content .sub_col6{
+width:80px;
+}
+.check-step .product-content .col7{
+width:113px;
+}
+.check-step .product-content .sub_col7{
+width:181px;
+}
+.check-step .product-content .list-box .col{
+float:left; text-align:center; min-height:1px
+}
+.check-step .product-content .list-box .col p {
+line-height:20px; color:#84878c
+}
+.check-step .product-content .list-box .col1 span{
+display:block; margin:auto; line-height:20px; margin-top:10px
+}
+.check-step .product-content .list-box {
+overflow:hidden; border-bottom:1px solid #d7dfe5
+}
+.check-step .product-content .list-box .product-list {
+border-top: 1px dotted #ccc ;padding:10px 0; margin-top:-1px
+}
+.check-step .product-content .list-box .col2{
+text-align:left;
+}
+.check-step .product-content .list-box .col2 em.pre-icon{
+display: block; float: left; width: 46px; height: 17px; background: url(../images/cart/shoppingcart.png) no-repeat; _background-image: url(../images/cart/shoppingcart_for6.png); margin-right: 5px
+}
+.check-step .product-content .list-box .col2 em.hio{
+background-position: -39px -388px
+}
+.check-step .product-content .list-box .col2 em.tv{
+background: url(../images/detailshop/tv-icon.png) no-repeat;
+}
+.check-step .product-content .list-box .col2 em.yt{
+background-position: -73px -253px; width:53px
+}
+.check-step .product-content .list-box .col2 a{
+color:#212529; line-height:17px
+}
+.check-step .product-content .list-box .col2 a:hover{
+color:#239cdc; text-decoration:underline;
+}
+.check-step .product-content .list-box .col3 span{
+margin:4px auto 0
+}
+.check-step .product-content .list-box .col5 span{
+display:block; width:53px; height:13px; line-height:13px; background:#ff6c00; color:#fff; margin: 4px auto 0
+}
+.check-step .product-content .list-box .col5 span.o-ticket {
+width: 80px; height: 14px; background: url(../images/cart/shoppingcart.png) no-repeat 0px -511px; _background-image: url(../images/cart/shoppingcart_for6.png); float: none; margin: 5px auto; _display: block; color: #229CDB; font-weight: bold; font-size: 11px; text-indent: 32px
+}
+.check-step .product-content .list-box .col7 p{
+color:#ea0505
+} 
+.check-step .product-content .add-list {
+height:30px; background:#e6fdde; border-top:1px solid #d7dfe5;*width:962px
+}
+.check-step .product-content .add-list span {
+display:block; float:left; line-height:30px;
+}
+.check-step .product-content .add-list .dot {
+margin: 9px 13px 0 18px; height: 13px; padding-bottom: 1px; border-bottom: 1px dotted #757677;
+}
+.check-step .product-content .add-list .cut {
+height: 13px; width: 60px; background: #31bf00; color: #fff; line-height: 13px; text-align: center;
+}
+.check-step .product-content .account {
+width:328px; height:auto; border:4px solid #e1e4e6; float:right; padding:7px
+}
+.check-step .product-content .account p {
+line-height:20px
+}
+.check-step .product-content .account .top {
+border-bottom: 1px dotted #dbdbdb; padding-bottom:8px; margin-bottom:5px
+}
+.check-step .product-content .account .left{
+text-align:right; width:142px; float:left
+}
+.check-step .product-content .account .left p b{
+font-weight:bold; color:#239cdc; margin:0 4px
+}
+.check-step .product-content .account .left p.c_red {
+font-weight:bold; color:#F10000; font-size:14px; line-height:30px
+}
+.check-step .product-content .account .right {
+width:175px; text-align:right; float:right; margin-right:4px
+}
+.check-step .product-content .account .bottom {
+height:34px; line-height:34px
+}
+.check-step .product-content .account .bottom .left {
+font-size:14px; font-weight:bold
+}
+.check-step .product-content .account .bottom .right {
+font-size:26px; color:#f10000
+}
+.check-step .product-content .account .bottom .right b {
+font-size:14px;
+}
+
+.check-step .step-content .start {
+margin-left:47px; color:#505966; margin-bottom:15px
+}
+.check-step .step-content .start .main-info {
+width:600px; height:210px; margin-top:10px; padding:15px 0
+}
+.check-step .step-content .start .main-info .row {
+height:25px; padding:8px 0 7px; line-height:25px; color:#7d8289
+}
+.check-step .step-content .start .main-info .row .left {
+float:left; width:80px; text-align:right; min-height:1px
+}
+.check-step .step-content .start .main-info .row .left span{
+color:#fe0000; margin-right:5px
+}
+.check-step .step-content .start .main-info .row .right {
+float:left; width:500px; margin-left:15px;
+}
+.check-step .step-content .start .main-info .row .error{
+margin-left:12px; color:#fc0000
+}
+.check-step .step-content .start .main-info .row .right input {
+float:left; height:23px; border:1px solid #a7a6ac; color:#8b8d8e; text-indent:8px; background:url(../images/cart/input-bg.gif) repeat-x; line-height:23px;
+}
+
+/*1230 新版选择地址 2 start*/
+.check-step .step-content .start .main-info .row .right .sel {
+height:23px; width:78px; margin-right:12px; border:1px solid #a7a6ac; color:#8b8d8e; text-indent:8px; background:url(../images/cart/input-bg.gif) repeat-x; float:left; position:relative; cursor:pointer;
+}
+.check-step .step-content .start .main-info .row .right .sel .current {
+
+}
+.check-step .step-content .start .main-info .row .right .sel .arrow {
+float:right; display:block; background:url(../images/cart/shoppingcart.png) no-repeat -121px -460px; _background-image: url(../images/cart/shoppingcart_for6.png); width:8px; height:23px; margin-right:8px
+}
+.check-step .step-content .start .main-info .row .right .sel .down{
+background-position:-121px -486px;
+}
+.check-step .step-content .start .main-info .row .right .sel ul {
+border:1px solid #a7a6ac; width:78px; margin-left:-1px; margin-top:-2px; background:#fff; display:none
+}
+.check-step .step-content .start .main-info .row .right .sel ul li:hover{
+background:#f6f6f6; cursor:pointer
+}
+/*1230 新版选择地址 2 end*/
+
+.check-step .step-content .start .main-info .row .right input.name {
+*margin-left:-15px
+}
+.check-step .step-content .start .main-info .row .right input.address-big {
+margin-right:0; width:348px; *margin-left:-15px
+}
+.check-step .step-content .start .main-info .row .right input.area-code {
+width:68px; *margin-left:-15px
+}
+.check-step .step-content .start .main-info .row .right span.break {
+float:left; display:inline; height:25px; margin:0 6px;
+}
+.check-step .step-content .start .main-info .row .right input.tel-code {
+width:48px; *margin-left:-15px
+}
+.check-step .step-content .start .main-info .row .right input.tel {
+width:98px
+}
+.check-step .step-content .start .main-info .row .right input.zcode {
+width:98px; *margin-left:-15px
+}
+.check-step .step-content .start .main-info .row .right input.tree {
+width:48px
+}
+.check-step .step-content .start .main-info .row .right input.cell-phone {
+width:118px; *margin-left:-15px
+}
+.check-step .step-content .start .input_wrap2 {
+margin-left:29px
+}
+.check-step .step-content .start input.save{
+font-weight:bold; line-height:31px; color:#505966; width:132px; height:33px; background:url(../images/cart/shoppingcart.png) no-repeat -623px -355px; _background-image: url(../images/cart/shoppingcart_for6.png); border:none; margin:9px 0 19px 0; float:left; cursor:pointer
+}
+.check-step .step-content .start input.save:hover{
+background-position:-623px -321px;
+}
+.check-step .step-content .start .main-info .row .right input.sch-zcode{
+font-weight:bold; line-height:31px; color:#505966; width:100px; height:33px; background:url(../images/cart/shoppingcart.png) no-repeat -376px -355px; _background-image: url(../images/cart/shoppingcart_for6.png); border:none; margin-top:-2px; margin-left:10px; float:left; cursor:pointer; position:relative; text-indent:0; text-align:center;
+}
+.check-step .step-content .start .main-info .row .right input.sch-zcode:hover{
+background-position:-272px -355px;
+}
+.check-step .step-content .start span.cancel{
+float:left; margin:9px 0 0 26px; height:33px; line-height:32px; color:#505966; cursor:pointer
+}
+.check-step .step-content .start span.cancel:hover{
+color:#239cdc; text-decoration:underline
+}
+
+
+
+
