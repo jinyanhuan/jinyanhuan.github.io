@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,165 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-hexo-build-two" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/12/hexo-build-two/" class="article-date">
+  	<time datetime="2015-03-12T09:59:53.000Z" itemprop="datePublished">2015-03-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/12/hexo-build-two/">使用hexo搭建github.io博客(二)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">使用hexo搭建github.io博客(一)</a>这篇文章我是写在博客园上的,现在既然成功的搭建了github.io博客,那我就拿这篇开刀,真正的在我的github博客上发布一篇文章吧~</p>
+<p>在搭建(一)完成后,就有了一个空的博客,里面只有一篇’Hello World’.现在就来学习如何写博客</p>
+<h3 id="在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的-">在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的.</h3><p><strong>一.配置整站</strong></p>
+<p>打开hexo目录下的<code>_config.yml</code>文件,做如下配置,如果没有写到的,那就是保持默认:</p>
+<pre><code><span class="comment"># Hexo Configuration</span>
+<span class="comment">## Docs: http://hexo.io/docs/configuration.html</span>
+<span class="comment">## Source: https://github.com/hexojs/hexo/</span>
+
+<span class="comment"># Site</span>
+title: code_bunny's blog                      <span class="comment">#设置header里的title</span>
+subtitle: never giveup reading!               <span class="comment">#副标题</span>
+description: never giveup reading!            <span class="comment">#描述</span>
+author: code_bunny                            <span class="comment">#作者名,会显示在左下角</span>
+email: <span class="number">973295131</span>@qq.com                       <span class="comment">#邮箱呗</span>
+language: zh-CN                               <span class="comment">#设置中文</span>
+timezone:
+
+<span class="comment"># URL</span>
+<span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span>
+url: http://yoursite.com
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+<span class="comment"># Directory</span>
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+<span class="comment"># Writing</span>
+new_post_name: :title.md <span class="comment"># File name of new posts</span>
+default_layout: post
+titlecase: <span class="literal">false</span> <span class="comment"># Transform title into titlecase</span>
+external_link: <span class="literal">true</span> <span class="comment"># Open external links in new tab</span>
+filename_case: <span class="number">0</span>
+render_drafts: <span class="literal">false</span>
+post_asset_folder: <span class="literal">false</span>
+relative_link: <span class="literal">false</span>
+future: <span class="literal">true</span>
+highlight:
+  enable: <span class="literal">true</span>
+  line_number: <span class="literal">true</span>
+  tab_replace:
+
+<span class="comment"># Category &amp; Tag</span>
+default_category: uncategorized
+category_map:
+tag_map:
+
+<span class="comment"># Date / Time format</span>
+<span class="comment">## Hexo uses Moment.js to parse and display date</span>
+<span class="comment">## You can customize the date format as defined in</span>
+<span class="comment">## http://momentjs.com/docs/#/displaying/format/</span>
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+<span class="comment"># Pagination</span>
+<span class="comment">## Set per_page to 0 to disable pagination</span>
+per_page: <span class="number">5</span>                               <span class="comment">#设置每页显示多少篇文章</span>
+pagination_dir: page
+
+<span class="comment"># Extensions</span>
+<span class="comment">## Plugins: http://hexo.io/plugins/</span>
+<span class="comment">## Themes: http://hexo.io/themes/</span>
+theme: yilia                              <span class="comment">#设置要使用的模板,暂时不要改,以后会说到怎么换模板</span>
+
+<span class="comment"># Deployment 这些还是按照上一篇配置</span>
+<span class="comment">## Docs: http://hexo.io/docs/deployment.html</span>
+deploy:
+  type: git
+  repository: https://github.com/jinyanhuan/jinyanhuan.github.io
+  branch: master
+</code></pre><p><strong>二.添加新文章</strong></p>
+<p>在hexo所在的文件夹下右键打开<code>Git Bash</code></p>
+<p>执行:<em>hexo new “my new post”</em></p>
+<blockquote>
+<p>注意,这里的”my new post”要有引号,必须是英文,不能是数字哦</p>
+</blockquote>
+<p>然后在<code>E:\hexo\source\_posts\</code>下面找到这个名为<code>my new post.md</code>的文件,在编辑器里打开它.</p>
+<p>如下配置:</p>
+<pre><code><span class="label">title:</span> <span class="string">"my new post"</span>             <span class="preprocessor">#可以随意修改,可以是中文</span>
+<span class="label">date:</span> <span class="number">2015</span>-<span class="number">03</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">54</span>:<span class="number">06</span>        <span class="preprocessor">#创建的时间,一般不改</span>
+<span class="label">categories:</span> blog                 <span class="preprocessor">#文章文类</span>
+<span class="label">tags:</span> [标签<span class="number">1</span>,便签<span class="number">2</span>]                 <span class="preprocessor">#文章tag标签,多个标签用逗号隔开</span>
+---
+<span class="preprocessor">#这里开始使用markdown语法书写文章的内容</span>
+</code></pre><p>执行: <em>hexo generate</em> 生成</p>
+<p>执行: <em>hexo server</em> 在本地预览</p>
+<p>没有问题后,执行: <em>hexo deploy</em> 发布到github</p>
+<blockquote>
+<p>现在为止，就已经搭建起博客，进行一些基本配置，并学会了怎么发表文章。下一篇讲解怎么更换博客主题,让博客变得美美哒</p>
+</blockquote>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-my-new-post" class="article article-type-post" itemscope itemprop="blogPost">
   

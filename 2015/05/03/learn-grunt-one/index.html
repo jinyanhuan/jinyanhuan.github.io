@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>grunt学习实战(1) | code_bunny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="grunt基础知识我就不再写了,直接看官网就可以了.官网的教程还是挺清楚的.
+大概看了一点以后,打算自己试试看,就按照现在公司的项目需求,拿来练练手.需求如下:
+
+gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件夹下,有一些公共的less文件,像global.less,mixins.less,variables.less.
+像index,buy,这些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grunt学习实战(1)">
+<meta property="og:url" content="http://yoursite.com/2015/05/03/learn-grunt-one/index.html">
+<meta property="og:site_name" content="code_bunny's blog">
+<meta property="og:description" content="grunt基础知识我就不再写了,直接看官网就可以了.官网的教程还是挺清楚的.
+大概看了一点以后,打算自己试试看,就按照现在公司的项目需求,拿来练练手.需求如下:
+
+gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件夹下,有一些公共的less文件,像global.less,mixins.less,variables.less.
+像index,buy,这些">
+<meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20150503.01.png">
+<meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20150503.02.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="grunt学习实战(1)">
+<meta name="twitter:description" content="grunt基础知识我就不再写了,直接看官网就可以了.官网的教程还是挺清楚的.
+大概看了一点以后,打算自己试试看,就按照现在公司的项目需求,拿来练练手.需求如下:
+
+gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件夹下,有一些公共的less文件,像global.less,mixins.less,variables.less.
+像index,buy,这些">
+  
+    <link rel="alternative" href="/atom.xml" title="code_bunny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">code_bunny</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">never giveup reading!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/OOP-Code-Bunny/" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/p/1005052438739075/home" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/OOP-Code-Bunny/">我的github</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/a5635268/">周孝刚</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://kingarthas37.github.io/">王麟</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/zhengyin/">郑印</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">虽然咸鱼翻身还是咸鱼,但至少可以变得好吃一点</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">code_bunny</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460">
+				<hgroup>
+				  <h1 class="header-author">code_bunny</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">never giveup reading!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/OOP-Code-Bunny/" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/p/1005052438739075/home" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-learn-grunt-one" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/03/learn-grunt-one/" class="article-date">
+  	<time datetime="2015-05-03T07:47:22.000Z" itemprop="datePublished">2015-05-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      grunt学习实战(1)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grunt/">grunt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端工程化/">前端工程化</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>grunt基础知识我就不再写了,直接看<a href="http://gruntjs.com/" target="_blank" rel="external">官网</a>就可以了.官网的教程还是挺清楚的.</p>
+<p>大概看了一点以后,打算自己试试看,就按照现在公司的项目需求,拿来练练手.需求如下:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150503.01.png" alt="项目结构"></p>
+<p><code>gruntProject</code>根目录下,有html页面,less文件夹,jssrc文件夹.<br>less文件夹下,有一些公共的less文件,像<code>global.less</code>,<code>mixins.less</code>,<code>variables.less</code>.</p>
+<p>像index,buy,这些比较大的页面,会有一个文件夹,把它里面的每个版块分别写入一个less文件,而根目录下的index.less,则引入了index文件夹下的less文件.</p>
+<p><code>jssrc</code>文件夹下则是每个页面引入的js,至于jq等框架,则不在这个根目录下,在更外层,这里暂时不需要考虑.</p>
+<p>我们的需求就是,<code>404.less</code>,<code>buy.less</code>,<code>index.less</code>,这些页面需要直接引用的less,是需要被编译成css,并且压缩的,压缩后输出在根目录的<code>css</code>文件夹下.而公共的less,则不需要编译,另外,less文件夹下的文件夹里的less文件,也是不需要编译并输出的.说白了就是,一个页面引入一个css,其它作为依赖被引入的less文件,都不需要编译.而js文件,每个都需要压缩,压缩后输出到js文件夹下.</p>
+<hr>
+<p>这样,一共需要用到四个插件:</p>
+<ol>
+<li>编译less的插件: <em>grunt-contrib-less</em></li>
+<li>压缩js的插件: <em>grunt-contrib-uglify</em></li>
+<li>实时监测的插件: <em>grunt-contrib-watch</em></li>
+<li>加载所有插件的插件: <em>load-grunt-tasks</em></li>
+</ol>
+<hr>
+<p>首先创建一个<code>package.json</code>文件: <em>npm init</em></p>
+<p>然后安装插件:</p>
+<ol>
+<li>安装grunt-cli: <em>sudo npm install -g grunt-cli</em></li>
+<li>安装grunt: <em>npm install grunt —save-dev</em></li>
+<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks —save-dev</em></li>
+<li>安装另外几个插件,不赘述</li>
+</ol>
+<p>然后开始书写<code>Gruntfile.js</code>:</p>
+<pre><code><span class="pi">'use strict'</span>;
+
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+
+    <span class="built_in">require</span>(<span class="string">'load-grunt-tasks'</span>)(grunt)
+
+    <span class="comment">// Project configuration.</span>
+    grunt.initConfig({
+        pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),
+        watch: {
+            files:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+            tasks:[<span class="string">'default'</span>]
+        },
+        uglify: {
+            build: {
+                expand: <span class="literal">true</span>,
+                cwd: <span class="string">'jssrc/'</span>,
+                src: <span class="string">'*.js'</span>,
+                dest: <span class="string">'js/'</span>,
+                ext: <span class="string">'.min.js'</span>,
+                extDot: <span class="string">'last'</span>
+            }
+        },
+        less: {
+            options: {
+                compress:<span class="literal">true</span>
+            },
+            build: {
+                expand: <span class="literal">true</span>,
+                cwd: <span class="string">'less/'</span>,
+                src: [<span class="string">'*.less'</span>,<span class="string">'!global.less'</span>,<span class="string">'!mixins.less'</span>,<span class="string">'!variables.less'</span>],
+                dest: <span class="string">'css/'</span>,
+                ext: <span class="string">'.min.css'</span>,
+                extDot: <span class="string">'last'</span>
+            }
+        }
+    });
+
+    <span class="comment">// 默认被执行的任务列表。</span>
+    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+
+};
+</code></pre><p>下面分析一下这个文件:</p>
+<p>1.基本格式:</p>
+<pre><code><span class="pi">'use strict'</span>;
+
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+
+    ...
+
+};
+</code></pre><hr>
+<p>2.加载<code>package.json</code>的devDependencies里的插件:</p>
+<pre><code><span class="function"><span class="title">require</span><span class="params">(<span class="string">'load-grunt-tasks'</span>)</span><span class="params">(grunt)</span></span>
+</code></pre><hr>
+<p>3.配置任务:</p>
+<pre><code>grunt.initConfig({
+
+    <span class="keyword">...</span>
+
+})
+</code></pre><hr>
+<p>4.获取<code>package.json</code>里的参数(这个例子用不到):</p>
+<pre><code>pkg: grunt<span class="class">.file</span><span class="class">.readJSON</span>(<span class="string">'package.json'</span>),
+</code></pre><hr>
+<p>5.配置<code>uglify</code>任务:</p>
+<pre><code><span class="tag">uglify</span>: {
+    <span class="tag">build</span>: {
+        <span class="attribute">expand</span>: true,
+        <span class="attribute">cwd</span>: <span class="string">'jssrc/'</span>,
+        <span class="attribute">src</span>: <span class="string">'*.js'</span>,
+        <span class="attribute">dest</span>: <span class="string">'js/'</span>,
+        <span class="attribute">ext</span>: <span class="string">'.min.js'</span>,
+        <span class="attribute">extDot</span>: <span class="string">'last'</span>
+    }
+}
+</code></pre><p>这里使用的是<strong>动态配置</strong>的方法,就是说,不是针对某几个文件,而是所有匹配的文件.</p>
+<ul>
+<li><em>expand</em>: <em>true</em> 开始动态配置</li>
+<li><em>cwd</em>: 路径,是下面的<em>src</em>的相对路径</li>
+<li><em>src</em>: 需要压缩的文件,相对于<em>cwd</em>路径,<em>\</em>.js<em>表示</em>cwd<em>根目录下的所有js文件.<em>*(不包括子文件夹下的js)</em></em></li>
+<li><em>dest</em>: 压缩后输入的js的路径.不是相对于<em>cwd</em>哦,就是相对于项目根目录.</li>
+<li><em>ext</em>: 压缩后的文件的后缀名替换.</li>
+<li><em>extDot</em>: 从文件名里的第几个句点开始替换.这里定义<em>last</em>,就表示从最后一个句点开始替换.比如<code>a.b.c.js</code>,从最后一个句点开始替换,就是<code>.js</code>部分替换成<em>ext</em>.</li>
+</ul>
+<p>这样做的好处是不需要经常改动配置文件,但是当文件非常多,并且开启了<code>watch</code>任务的时候,对电脑的性能是个很大的挑战.</p>
+<hr>
+<p>6.配置<code>less</code>任务:</p>
+<pre><code><span class="tag">less</span>: {
+    <span class="tag">options</span>: {
+        <span class="tag">compress</span><span class="pseudo">:true</span>
+    },
+    <span class="tag">build</span>: {
+        <span class="attribute">expand</span>: true,
+        <span class="attribute">cwd</span>: <span class="string">'less/'</span>,
+        <span class="attribute">src</span>: [<span class="string">'*.less'</span>,<span class="string">'!global.less'</span>,<span class="string">'!mixins.less'</span>,<span class="string">'!variables.less'</span>],
+        <span class="attribute">dest</span>: <span class="string">'css/'</span>,
+        <span class="attribute">ext</span>: <span class="string">'.min.css'</span>,
+        <span class="attribute">extDot</span>: <span class="string">'last'</span>
+    }
+}
+</code></pre><p>less任务的options中设置<em>compress</em>属性为<em>true</em>,表示编译后需要压缩.</p>
+<p>同样,less任务也使用动态配置,它和<code>uglify</code>任务的配置有一点不同:</p>
+<p><em>src</em>里排除了<code>global.lee</code>,<code>mixins.less</code>,<code>variables.less</code>,这些全局的,不需要编译的文件.</p>
+<hr>
+<p>7.配置<code>watch</code>任务:</p>
+<pre><code><span class="tag">watch</span>: {
+    <span class="attribute">files</span>:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+    <span class="attribute">tasks</span>:[<span class="string">'default'</span>]
+}
+</code></pre><p><em>files</em>属性配置需要监测变化的文件,<em>tasks</em>属性配置文件变化以后需要执行的任务.</p>
+<p>这里再次用到了一个很重要的知识点: <em>/\</em>.js<em> 表示目录下所有的js文件,<strong>不包括</strong>目录的子目录下的js文件. </em>/**/*.less* 表示目录下的所有less文件,包括目录的子目录下的less文件.</p>
+<hr>
+<p>8.注册<code>default</code>任务:</p>
+<pre><code>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+</code></pre><p>把默认要执行的任务定义为<code>uglify</code>任务和<code>less</code>任务.</p>
+<hr>
+<p>然后执行一下<em>grunt</em>,就可以看到文件被编译压缩好了:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150503.02.png" alt="编译压缩"></p>
+<p>开启实时监测模式: <em>grunt watch</em>, 然后修改less或者js,都会实时编译压缩.</p>
+<hr>
+<blockquote>
+<p>其实grunt就是使用一个又一个的插件,它的复杂在于插件很多都是英文的,比较难看懂,锻炼英文水平挺好~还有就是当多个插件混合使用的时候,尤其是使用了yeoman,下次我就会学习使用了yeoman以后再使用grunt.到时候再来写博客.</p>
+</blockquote>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/26/less-in-webstorm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在webstorm中配置less的自动编译</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="learn-grunt-one" data-title="grunt学习实战(1)" data-url="http://yoursite.com/2015/05/03/learn-grunt-one/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 code_bunny
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,217 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-learn-grunt-one" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/03/learn-grunt-one/" class="article-date">
+  	<time datetime="2015-05-03T07:47:22.000Z" itemprop="datePublished">2015-05-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/03/learn-grunt-one/">grunt学习实战(1)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>grunt基础知识我就不再写了,直接看<a href="http://gruntjs.com/" target="_blank" rel="external">官网</a>就可以了.官网的教程还是挺清楚的.</p>
+<p>大概看了一点以后,打算自己试试看,就按照现在公司的项目需求,拿来练练手.需求如下:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150503.01.png" alt="项目结构"></p>
+<p><code>gruntProject</code>根目录下,有html页面,less文件夹,jssrc文件夹.<br>less文件夹下,有一些公共的less文件,像<code>global.less</code>,<code>mixins.less</code>,<code>variables.less</code>.</p>
+<p>像index,buy,这些比较大的页面,会有一个文件夹,把它里面的每个版块分别写入一个less文件,而根目录下的index.less,则引入了index文件夹下的less文件.</p>
+<p><code>jssrc</code>文件夹下则是每个页面引入的js,至于jq等框架,则不在这个根目录下,在更外层,这里暂时不需要考虑.</p>
+<p>我们的需求就是,<code>404.less</code>,<code>buy.less</code>,<code>index.less</code>,这些页面需要直接引用的less,是需要被编译成css,并且压缩的,压缩后输出在根目录的<code>css</code>文件夹下.而公共的less,则不需要编译,另外,less文件夹下的文件夹里的less文件,也是不需要编译并输出的.说白了就是,一个页面引入一个css,其它作为依赖被引入的less文件,都不需要编译.而js文件,每个都需要压缩,压缩后输出到js文件夹下.</p>
+<hr>
+<p>这样,一共需要用到四个插件:</p>
+<ol>
+<li>编译less的插件: <em>grunt-contrib-less</em></li>
+<li>压缩js的插件: <em>grunt-contrib-uglify</em></li>
+<li>实时监测的插件: <em>grunt-contrib-watch</em></li>
+<li>加载所有插件的插件: <em>load-grunt-tasks</em></li>
+</ol>
+<hr>
+<p>首先创建一个<code>package.json</code>文件: <em>npm init</em></p>
+<p>然后安装插件:</p>
+<ol>
+<li>安装grunt-cli: <em>sudo npm install -g grunt-cli</em></li>
+<li>安装grunt: <em>npm install grunt —save-dev</em></li>
+<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks —save-dev</em></li>
+<li>安装另外几个插件,不赘述</li>
+</ol>
+<p>然后开始书写<code>Gruntfile.js</code>:</p>
+<pre><code><span class="pi">'use strict'</span>;
+
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+
+    <span class="built_in">require</span>(<span class="string">'load-grunt-tasks'</span>)(grunt)
+
+    <span class="comment">// Project configuration.</span>
+    grunt.initConfig({
+        pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),
+        watch: {
+            files:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+            tasks:[<span class="string">'default'</span>]
+        },
+        uglify: {
+            build: {
+                expand: <span class="literal">true</span>,
+                cwd: <span class="string">'jssrc/'</span>,
+                src: <span class="string">'*.js'</span>,
+                dest: <span class="string">'js/'</span>,
+                ext: <span class="string">'.min.js'</span>,
+                extDot: <span class="string">'last'</span>
+            }
+        },
+        less: {
+            options: {
+                compress:<span class="literal">true</span>
+            },
+            build: {
+                expand: <span class="literal">true</span>,
+                cwd: <span class="string">'less/'</span>,
+                src: [<span class="string">'*.less'</span>,<span class="string">'!global.less'</span>,<span class="string">'!mixins.less'</span>,<span class="string">'!variables.less'</span>],
+                dest: <span class="string">'css/'</span>,
+                ext: <span class="string">'.min.css'</span>,
+                extDot: <span class="string">'last'</span>
+            }
+        }
+    });
+
+    <span class="comment">// 默认被执行的任务列表。</span>
+    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+
+};
+</code></pre><p>下面分析一下这个文件:</p>
+<p>1.基本格式:</p>
+<pre><code><span class="pi">'use strict'</span>;
+
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+
+    ...
+
+};
+</code></pre><hr>
+<p>2.加载<code>package.json</code>的devDependencies里的插件:</p>
+<pre><code><span class="function"><span class="title">require</span><span class="params">(<span class="string">'load-grunt-tasks'</span>)</span><span class="params">(grunt)</span></span>
+</code></pre><hr>
+<p>3.配置任务:</p>
+<pre><code>grunt.initConfig({
+
+    <span class="keyword">...</span>
+
+})
+</code></pre><hr>
+<p>4.获取<code>package.json</code>里的参数(这个例子用不到):</p>
+<pre><code>pkg: grunt<span class="class">.file</span><span class="class">.readJSON</span>(<span class="string">'package.json'</span>),
+</code></pre><hr>
+<p>5.配置<code>uglify</code>任务:</p>
+<pre><code><span class="tag">uglify</span>: {
+    <span class="tag">build</span>: {
+        <span class="attribute">expand</span>: true,
+        <span class="attribute">cwd</span>: <span class="string">'jssrc/'</span>,
+        <span class="attribute">src</span>: <span class="string">'*.js'</span>,
+        <span class="attribute">dest</span>: <span class="string">'js/'</span>,
+        <span class="attribute">ext</span>: <span class="string">'.min.js'</span>,
+        <span class="attribute">extDot</span>: <span class="string">'last'</span>
+    }
+}
+</code></pre><p>这里使用的是<strong>动态配置</strong>的方法,就是说,不是针对某几个文件,而是所有匹配的文件.</p>
+<ul>
+<li><em>expand</em>: <em>true</em> 开始动态配置</li>
+<li><em>cwd</em>: 路径,是下面的<em>src</em>的相对路径</li>
+<li><em>src</em>: 需要压缩的文件,相对于<em>cwd</em>路径,<em>\</em>.js<em>表示</em>cwd<em>根目录下的所有js文件.<em>*(不包括子文件夹下的js)</em></em></li>
+<li><em>dest</em>: 压缩后输入的js的路径.不是相对于<em>cwd</em>哦,就是相对于项目根目录.</li>
+<li><em>ext</em>: 压缩后的文件的后缀名替换.</li>
+<li><em>extDot</em>: 从文件名里的第几个句点开始替换.这里定义<em>last</em>,就表示从最后一个句点开始替换.比如<code>a.b.c.js</code>,从最后一个句点开始替换,就是<code>.js</code>部分替换成<em>ext</em>.</li>
+</ul>
+<p>这样做的好处是不需要经常改动配置文件,但是当文件非常多,并且开启了<code>watch</code>任务的时候,对电脑的性能是个很大的挑战.</p>
+<hr>
+<p>6.配置<code>less</code>任务:</p>
+<pre><code><span class="tag">less</span>: {
+    <span class="tag">options</span>: {
+        <span class="tag">compress</span><span class="pseudo">:true</span>
+    },
+    <span class="tag">build</span>: {
+        <span class="attribute">expand</span>: true,
+        <span class="attribute">cwd</span>: <span class="string">'less/'</span>,
+        <span class="attribute">src</span>: [<span class="string">'*.less'</span>,<span class="string">'!global.less'</span>,<span class="string">'!mixins.less'</span>,<span class="string">'!variables.less'</span>],
+        <span class="attribute">dest</span>: <span class="string">'css/'</span>,
+        <span class="attribute">ext</span>: <span class="string">'.min.css'</span>,
+        <span class="attribute">extDot</span>: <span class="string">'last'</span>
+    }
+}
+</code></pre><p>less任务的options中设置<em>compress</em>属性为<em>true</em>,表示编译后需要压缩.</p>
+<p>同样,less任务也使用动态配置,它和<code>uglify</code>任务的配置有一点不同:</p>
+<p><em>src</em>里排除了<code>global.lee</code>,<code>mixins.less</code>,<code>variables.less</code>,这些全局的,不需要编译的文件.</p>
+<hr>
+<p>7.配置<code>watch</code>任务:</p>
+<pre><code><span class="tag">watch</span>: {
+    <span class="attribute">files</span>:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+    <span class="attribute">tasks</span>:[<span class="string">'default'</span>]
+}
+</code></pre><p><em>files</em>属性配置需要监测变化的文件,<em>tasks</em>属性配置文件变化以后需要执行的任务.</p>
+<p>这里再次用到了一个很重要的知识点: <em>/\</em>.js<em> 表示目录下所有的js文件,<strong>不包括</strong>目录的子目录下的js文件. </em>/**/*.less* 表示目录下的所有less文件,包括目录的子目录下的less文件.</p>
+<hr>
+<p>8.注册<code>default</code>任务:</p>
+<pre><code>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+</code></pre><p>把默认要执行的任务定义为<code>uglify</code>任务和<code>less</code>任务.</p>
+<hr>
+<p>然后执行一下<em>grunt</em>,就可以看到文件被编译压缩好了:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150503.02.png" alt="编译压缩"></p>
+<p>开启实时监测模式: <em>grunt watch</em>, 然后修改less或者js,都会实时编译压缩.</p>
+<hr>
+<blockquote>
+<p>其实grunt就是使用一个又一个的插件,它的复杂在于插件很多都是英文的,比较难看懂,锻炼英文水平挺好~还有就是当多个插件混合使用的时候,尤其是使用了yeoman,下次我就会学习使用了yeoman以后再使用grunt.到时候再来写博客.</p>
+</blockquote>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grunt/">grunt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端工程化/">前端工程化</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-less-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -616,165 +827,6 @@ duoshuo_shortname: codebunny                                             <span c
 <p><em>hexo generate</em> <em>hexo deploy</em> 发布到github.io</p>
 <blockquote>
 <p>下一篇讲解怎么对主题做一些美化修改,以及添加多说评论</p>
-</blockquote>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-hexo-build-two" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/03/12/hexo-build-two/" class="article-date">
-  	<time datetime="2015-03-12T09:59:53.000Z" itemprop="datePublished">2015-03-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/12/hexo-build-two/">使用hexo搭建github.io博客(二)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">使用hexo搭建github.io博客(一)</a>这篇文章我是写在博客园上的,现在既然成功的搭建了github.io博客,那我就拿这篇开刀,真正的在我的github博客上发布一篇文章吧~</p>
-<p>在搭建(一)完成后,就有了一个空的博客,里面只有一篇’Hello World’.现在就来学习如何写博客</p>
-<h3 id="在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的-">在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的.</h3><p><strong>一.配置整站</strong></p>
-<p>打开hexo目录下的<code>_config.yml</code>文件,做如下配置,如果没有写到的,那就是保持默认:</p>
-<pre><code><span class="comment"># Hexo Configuration</span>
-<span class="comment">## Docs: http://hexo.io/docs/configuration.html</span>
-<span class="comment">## Source: https://github.com/hexojs/hexo/</span>
-
-<span class="comment"># Site</span>
-title: code_bunny's blog                      <span class="comment">#设置header里的title</span>
-subtitle: never giveup reading!               <span class="comment">#副标题</span>
-description: never giveup reading!            <span class="comment">#描述</span>
-author: code_bunny                            <span class="comment">#作者名,会显示在左下角</span>
-email: <span class="number">973295131</span>@qq.com                       <span class="comment">#邮箱呗</span>
-language: zh-CN                               <span class="comment">#设置中文</span>
-timezone:
-
-<span class="comment"># URL</span>
-<span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span>
-url: http://yoursite.com
-root: /
-permalink: :year/:month/:day/:title/
-permalink_defaults:
-
-<span class="comment"># Directory</span>
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
-skip_render:
-
-<span class="comment"># Writing</span>
-new_post_name: :title.md <span class="comment"># File name of new posts</span>
-default_layout: post
-titlecase: <span class="literal">false</span> <span class="comment"># Transform title into titlecase</span>
-external_link: <span class="literal">true</span> <span class="comment"># Open external links in new tab</span>
-filename_case: <span class="number">0</span>
-render_drafts: <span class="literal">false</span>
-post_asset_folder: <span class="literal">false</span>
-relative_link: <span class="literal">false</span>
-future: <span class="literal">true</span>
-highlight:
-  enable: <span class="literal">true</span>
-  line_number: <span class="literal">true</span>
-  tab_replace:
-
-<span class="comment"># Category &amp; Tag</span>
-default_category: uncategorized
-category_map:
-tag_map:
-
-<span class="comment"># Date / Time format</span>
-<span class="comment">## Hexo uses Moment.js to parse and display date</span>
-<span class="comment">## You can customize the date format as defined in</span>
-<span class="comment">## http://momentjs.com/docs/#/displaying/format/</span>
-date_format: YYYY-MM-DD
-time_format: HH:mm:ss
-
-<span class="comment"># Pagination</span>
-<span class="comment">## Set per_page to 0 to disable pagination</span>
-per_page: <span class="number">5</span>                               <span class="comment">#设置每页显示多少篇文章</span>
-pagination_dir: page
-
-<span class="comment"># Extensions</span>
-<span class="comment">## Plugins: http://hexo.io/plugins/</span>
-<span class="comment">## Themes: http://hexo.io/themes/</span>
-theme: yilia                              <span class="comment">#设置要使用的模板,暂时不要改,以后会说到怎么换模板</span>
-
-<span class="comment"># Deployment 这些还是按照上一篇配置</span>
-<span class="comment">## Docs: http://hexo.io/docs/deployment.html</span>
-deploy:
-  type: git
-  repository: https://github.com/jinyanhuan/jinyanhuan.github.io
-  branch: master
-</code></pre><p><strong>二.添加新文章</strong></p>
-<p>在hexo所在的文件夹下右键打开<code>Git Bash</code></p>
-<p>执行:<em>hexo new “my new post”</em></p>
-<blockquote>
-<p>注意,这里的”my new post”要有引号,必须是英文,不能是数字哦</p>
-</blockquote>
-<p>然后在<code>E:\hexo\source\_posts\</code>下面找到这个名为<code>my new post.md</code>的文件,在编辑器里打开它.</p>
-<p>如下配置:</p>
-<pre><code><span class="label">title:</span> <span class="string">"my new post"</span>             <span class="preprocessor">#可以随意修改,可以是中文</span>
-<span class="label">date:</span> <span class="number">2015</span>-<span class="number">03</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">54</span>:<span class="number">06</span>        <span class="preprocessor">#创建的时间,一般不改</span>
-<span class="label">categories:</span> blog                 <span class="preprocessor">#文章文类</span>
-<span class="label">tags:</span> [标签<span class="number">1</span>,便签<span class="number">2</span>]                 <span class="preprocessor">#文章tag标签,多个标签用逗号隔开</span>
----
-<span class="preprocessor">#这里开始使用markdown语法书写文章的内容</span>
-</code></pre><p>执行: <em>hexo generate</em> 生成</p>
-<p>执行: <em>hexo server</em> 在本地预览</p>
-<p>没有问题后,执行: <em>hexo deploy</em> 发布到github</p>
-<blockquote>
-<p>现在为止，就已经搭建起博客，进行一些基本配置，并学会了怎么发表文章。下一篇讲解怎么更换博客主题,让博客变得美美哒</p>
 </blockquote>
 
         
