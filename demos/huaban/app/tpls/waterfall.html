@@ -13,7 +13,7 @@
                 <a href="#" class="repin btn btn14 rbtn"><span class="text">采集</span></a>
             </div>
         </div>
-        <a ng-href="/pins/{{id}}/" target="_self" rel="" class="img x layer-view loaded" ng-class="{long:pin.ifLong}">
+        <a href="pins/{{pin.id}}/" rel="" class="img x layer-view loaded" ng-class="{long:pin.ifLong}">
             <div class="default-bg">{{source}}</div>
             <img ng-src="{{pin.picUrl}}" width="236" height="{{236*pin.height/pin.width}}px" alt="{{pin.userName}}采集到{{pin.board}}">
             <span ng-show="pin.ifLong" class="stop"></span>

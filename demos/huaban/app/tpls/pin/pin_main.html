@@ -1,0 +1,45 @@
+<div id="pin_view_layer">
+    <div class="close-layer"><i></i></div>
+    <div data-id="304362199" class="pin-view">
+        <div class="pin-view-wrapper">
+            <div class="main-part">
+                <!--大图片区域-->
+                <div ui-view="image-piece"></div>
+
+                <!--图片信息区域-->
+                <div ui-view="info-piece"></div>
+
+                <!--转采等信息区域-->
+                <div ui-view="repin-info-piece"></div>
+
+                <div class="category-info-piece">该采集属于<a href="http://huaban.com/explore/UI/" class="brown-link x">UI设计</a>分类</div>
+            </div>
+            <div class="side-part">
+
+                <!--画板图片小瀑布流区域-->
+                <div ui-view="board-piece"></div>
+
+                <!--"同采自" 区域-->
+                <div ui-view="siblings-piece"></div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bottom-part">
+            <div class="pin-view-wrapper">
+
+                <!--"该采集也在以下画板" 区域-->
+                <div ui-view="related-boards"></div>
+
+                <!--"推荐给你的采集" 区域-->
+                <div ui-view="recommend-pins"></div>
+            </div>
+        </div>
+    </div>
+    <div class="pin-view-arrows">
+        <a style="visibility: visible; position: fixed; right: 17px;" class="next x layer-view" href="/pins/264218028/" data-id="264218028"></a>
+        <a style="visibility: hidden; position: fixed; left: 0px;" class="prev x layer-view"></a>
+    </div>
+    <div elevator_item ng-controller="sideCtrl"></div>
+
+</div>

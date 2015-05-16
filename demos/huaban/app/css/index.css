@@ -2845,7 +2845,7 @@ a.remove_activity_rec:hover, a.remove_activity_invite:hover {
     left: 0;
     right: 0;
     height: 48px;
-    z-index: 99997;
+    z-index: 99992;
     background: #fff;
     box-shadow: 0 0 4px rgba(0, 0, 0, .2)
 }

@@ -281,7 +281,8 @@ hbDirectives.directive('comment',['$timeout','getUserUrl',function($timeout,getU
                 e.preventDefault();
                 e.stopPropagation();
                 if(!valid){
-                    return false
+                    loseFoucs();
+                    return
                 }
                 if(!scope.pin.comments){
                     scope.pin.comments = [];
@@ -325,6 +326,10 @@ hbDirectives.directive('comment',['$timeout','getUserUrl',function($timeout,getU
 
             function getFoucs(){
                 $(iele).find('textarea').focus();
+            }
+
+            function loseFoucs(){
+                $(iele).find('textarea').blur();
             }
         }
     }
