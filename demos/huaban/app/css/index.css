@@ -13484,7 +13484,7 @@ h1#thin_logo {
 
 #pin_view_add_comment .post {
     float: right;
-    display: none
+    /*display: none*/
 }
 
 .pin-view .repin-info-piece {
@@ -14367,7 +14367,7 @@ h1#thin_logo {
 }
 
 .huaban-share-unit .menu {
-    display: none;
+    /*display: none;*/
     position: absolute;
     right: -22px;
     top: 42px;

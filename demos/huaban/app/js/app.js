@@ -1,4 +1,4 @@
-var hbApp = angular.module('huaban', ['ui.router', 'huabanCtrls', 'huabanDirectives','huabanFilters', 'huabanServices']);
+var hbApp = angular.module('huaban', ['ui.router', 'huabanCtrls', 'huabanDetailCtrls', 'huabanDirectives','huabanDetailDirectives','huabanFilters', 'huabanServices']);
 
 hbApp.config(function($stateProvider,$locationProvider,$urlRouterProvider){
     $locationProvider.html5Mode(true).hashPrefix('!');
@@ -14,13 +14,40 @@ hbApp.config(function($stateProvider,$locationProvider,$urlRouterProvider){
         url:'/:pinId/',
         views:{
             'image-piece@pin':{
-                templateUrl:'tpls/pin/image_piece.html'
+                templateUrl:'tpls/pin/image_piece.html',
+                resolve:{
+                    'imgPiece':function($http,$stateParams){
+                        return $http({
+                            method:'get',
+                            url:'cache/detail/piece/image-piece_' +  $stateParams.pinId + '.json'
+                        });
+                    }
+                },
+                controller: 'imagePiece'
             },
             'info-piece@pin':{
-                templateUrl:'tpls/pin/info_piece.html'
+                templateUrl:'tpls/pin/info_piece.html',
+                resolve:{
+                    'ifoPiece':function($http,$stateParams){
+                        return $http({
+                            method:'get',
+                            url:'cache/detail/info/info-piece_' +  $stateParams.pinId + '.json'
+                        });
+                    }
+                },
+                controller: 'infoPiece'
             },
             'repin-info-piece@pin':{
-                templateUrl:'tpls/pin/repin_info_piece.html'
+                templateUrl:'tpls/pin/repin_info_piece.html',
+                resolve: {
+                    'reInfoPiece':function($http,$stateParams){
+                        return $http({
+                            method:'get',
+                            url:'cache/detail/repinInfo/repin-info_' + $stateParams.pinId + '.json'
+                        })
+                    }
+                },
+                controller: 'repinInfoPiece'
             },
             'board-piece@pin':{
                 templateUrl:'tpls/pin/board_piece.html'

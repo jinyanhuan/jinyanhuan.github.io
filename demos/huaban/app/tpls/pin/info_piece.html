@@ -1,49 +1,46 @@
 <div class="info-piece piece">
     <div class="info">
-        <a href="/a5635268/" title="黑丝小白兔" rel="nofollow" class="img x">
-            <img src="http://img.hb.aicdn.com/cb12280d100e07d620be64a4834d44405139b584682-2ngcej_sq75sf" class="avt">
+        <a href="http://www.huaban.com/{{userID}}/" title="{{userName}}" rel="nofollow" class="img x">
+            <img ng-src="{{userAvt}}" class="avt">
         </a>
 
         <div class="main">
-            <a href="/a5635268/" rel="nofollow">黑丝小白兔</a>
+            <a href="http://www.huaban.com/{{userID}}/" rel="nofollow">{{userName}}</a>
             <span class="space">从</span>
-            <a href="/xingchen511314/" rel="nofollow">^^嘀哒^^</a>
+            <a ng-href="http://www.huaban.com/{{fromUrl}}/" rel="nofollow">{{from}}</a>
         </div>
-        <div class="sub">转采于<span data-ts="1420514321" class="ts-words space">2015-01-06 11:18:41</span></div>
+        <div class="sub">转采于<span data-ts="{{time}}" class="ts-words space">{{time*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span></div>
     </div>
-    <div class="description">html5响应式图标导航菜单样式点击图标导航选项卡切换效果</div>
+    <div class="description">{{description}}</div>
     <div class="comments">
-        <div data-id="1245257" class="comment">
-            <a href="/a5635268/" title="黑丝小白兔" class="img x">
-                <img
-                        src="http://img.hb.aicdn.com/cb12280d100e07d620be64a4834d44405139b584682-2ngcej_sq75sf"
-                        class="avatar">
+        <div data-id="{{com.id}}" class="comment" ng-repeat="com in comments">
+            <a href="http://www.huaban.com/{{com.userID}}/" title="{{com.userName}}" class="img x">
+                <img ng-src="{{com.avt}}" class="avatar">
             </a>
 
             <div class="meta">
-                <a href="/a5635268/" class="author">黑丝小白兔</a>&nbsp;-&nbsp;<span data-ts="1430897024" class="ts-words"> 5 天前</span>说：
+                <a href="http://www.huaban.com/{{com.userID}}/" class="author">{{com.userName}}</a>&nbsp;-&nbsp;<span data-ts="{{com.time}}" class="ts-words">{{com.time | toCurTime}}</span>说：
             </div>
-            <div class="text">很好看~</div>
+            <div class="text">{{com.content}}</div>
             <div class="action-buttons">
-                <a data-name="黑丝小白兔" title="回复" class="reply-button"></a>
-                <a data-url="/pins/304362199/comments/1245257/" title="删除" class="delete"></a>
+                <a data-name="{{com.userName}}" title="回复" class="reply-button"></a>
+                <a data-url="/pins/304362199/comments/{{com.id}}/" title="删除" class="delete"></a>
             </div>
         </div>
     </div>
-    <div id="pin_view_add_comment" data-id="304362199" class="clearfix">
-        <a href="/a5635268/" title="黑丝小白兔" class="img x">
-            <img src="http://img.hb.aicdn.com/cb12280d100e07d620be64a4834d44405139b584682-2ngcej_sq75sf"
-                 class="avatar">
+    <div id="pin_view_add_comment" data-id="{{id}}" class="clearfix" info-piece-comment>
+        <a href="http://www.huaban.com/{{userID}}/" title="{{userName}}" class="img x">
+            <img ng-src="{{userAvt}}" class="avatar">
         </a>
-        <textarea name="caption" placeholder="添加评论或把采集@给好友" class="clear-input"></textarea>
-        <a href="#" class="post disabled btn btn14">
+        <textarea name="caption" placeholder="添加评论或把采集@给好友" class="clear-input" ng-focus="getFocus($event)" ng-model="comContent" required></textarea>
+        <a href="#" ng-show = "ifShowBtn" class="post disabled btn btn14" ng-class="{disabled:!comContent.length}" >
             <span class="text"> 添加评论</span>
         </a>
     </div>
     <div class="likes clearfix">
-        <h4>1喜欢</h4>
-        <a href="/fangzijia/" title="小蘑菇691" class="img x">
-            <img width="46" height="46" src="http://img.hb.aicdn.com/2c22be357c729e72d1950be177784336e714823015d1d-nOI0XN_sq75sf">
+        <h4>{{like.length}}喜欢</h4>
+        <a ng-repeat="_like in like" ng-href="http://www.huaban.com/{{_like.domain}}/" title="{{_like.title}}" class="img x">
+            <img width="46" height="46" ng-src="{{_like.avt}}">
         </a>
     </div>
 </div>
