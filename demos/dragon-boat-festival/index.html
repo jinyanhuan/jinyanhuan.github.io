@@ -466,25 +466,24 @@
 
 
         zzBox.onclick = function(){
-            loadImage(function(){
+            loadImg(imgsZr,function(){
                 queue2.start();
             });
             zzBox.onclick = null;
         };
 
-        var imgs = ['img/zzr_2.png','img/zzr_3.png','img/zzr_4.png'];
-        function loadImage (callback){
-            for (var i in imgs){
+        function loadImg (imgArr,callback){
+            for (var i in imgArr) {
                 var img = new Image();
-                img.onload = function(){
-                    imgs.pop();
-                    if(!imgs.length){
-                        callback();
-                    }
+                img.onload = function () {
+                    imgArr.pop();
+                    if (!imgArr.length) callback();
                 };
-                img.src = imgs[i];
+                img.src = imgArr[i];
             }
         }
+
+        var imgsZr = ['img/zzr_2.png','img/zzr_3.png','img/zzr_4.png','img/line_2.png','img/line_3.png','img/line_4.png']
 
     </script>
 </body>
