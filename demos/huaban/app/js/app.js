@@ -1,4 +1,4 @@
-var hbApp = angular.module('huaban', ['ui.router', 'huabanCtrls', 'huabanDetailCtrls', 'huabanDirectives','huabanDetailDirectives','huabanFilters', 'huabanServices']);
+var hbApp = angular.module('huaban', ['ui.router', 'huabanCtrls', 'huabanDetailCtrls', 'huabanDirectives','huabanDetailDirectives','huabanFilters', 'huabanServices','huabanDetailServices']);
 
 hbApp.config(function($stateProvider,$locationProvider,$urlRouterProvider){
     $locationProvider.html5Mode(true).hashPrefix('!');
@@ -50,7 +50,16 @@ hbApp.config(function($stateProvider,$locationProvider,$urlRouterProvider){
                 controller: 'repinInfoPiece'
             },
             'board-piece@pin':{
-                templateUrl:'tpls/pin/board_piece.html'
+                templateUrl:'tpls/pin/board_piece.html',
+                resolve: {
+                    'boardPieces':function($http,$stateParams){
+                        return $http({
+                            method:'get',
+                            url:'cache/detail/boardPiece/board-piece_' + $stateParams.pinId + '.json'
+                        })
+                    }
+                },
+                controller: 'boardPiece'
             },
             'siblings-piece@pin':{
                 templateUrl:'tpls/pin/siblings_piece.html'

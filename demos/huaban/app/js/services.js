@@ -79,9 +79,9 @@ hbServices.factory('checkIfEnd',function(){
 });
 
 //为window绑定滚动事件回调
-hbServices.factory('scrollCheck',['checkIfEnd','getPins',function(checkIfEnd,getPins){
-    return function(callback){
-        $(window).scroll(function(){
+hbServices.factory('scrollCheck',['checkIfEnd',function(checkIfEnd){
+    return function(ele,callback){
+        ele.scroll(function(){
             if(checkIfEnd()){
                 callback.apply(this,Array.prototype.slice.call(arguments));
             }

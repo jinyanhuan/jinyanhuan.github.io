@@ -153,7 +153,7 @@ hbDirectives.directive('waterfall', ['$rootScope','getPins','getWrapper','scroll
             };
 
             //滚动实现瀑布流加载
-            scrollCheck(function(){
+            scrollCheck($(window),function(){
                 //判断现有数据有多少,如果已经超过了100条,就不加载了.
                 if(scope.pins.length>=100){
                     $rootScope.ifLoadEnd = true;

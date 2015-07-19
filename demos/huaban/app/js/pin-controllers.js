@@ -12,3 +12,6 @@ hbDeteilCtrls.controller('repinInfoPiece',['$scope','$stateParams','reInfoPiece'
     $.extend($scope,reInfoPiece.data);
 }]);
 
+hbDeteilCtrls.controller('boardPiece',['$scope','$stateParams','boardPieces',function($scope,$stateParams,boardPieces){
+    $.extend($scope,boardPieces.data);
+}]);
