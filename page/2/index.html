@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,149 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-hexo-bulid-three" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/16/hexo-bulid-three/" class="article-date">
+  	<time datetime="2015-03-16T09:42:28.000Z" itemprop="datePublished">2015-03-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/16/hexo-bulid-three/">使用hexo搭建github.io博客(三)-更换主题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<a href="http://jinyanhuan.github.io/2015/03/12/hexo-build-two/" target="_blank" rel="external">上一篇</a>完成后,我们知道了要怎么来发布博客文章,但是,这个博客丑了点,这篇就来说说怎么更换主题让博客变得高大上</p>
+<p><strong>一.寻找喜欢的主题</strong></p>
+<p>可以在<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">这里</a>找到</p>
+<p>我自己找到了一款更好看的,在<a href="http://litten.github.io/2014/08/31/hexo-theme-yilia/" target="_blank" rel="external">这里</a></p>
+<p>以我自己的安装过程为例:</p>
+<p><strong>二.安装主题</strong>:</p>
+<p>到hexo所在的路径下<code>E:hexo</code>,右键打开<code>Git Bush</code>,执行:</p>
+<pre><code><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/litten</span><span class="regexp">/hexo-theme-yilia.git themes/yilia</span>
+</code></pre><p><strong>三.使用主题</strong>:</p>
+<p>打开<code>_config.yml</code>做如下修改:</p>
+<pre><code><span class="attribute">theme</span>: <span class="string">yilia</span>
+</code></pre><p><strong>四.更新主题</strong>:</p>
+<p>进入<code>E:hexo/themes/yilia</code>,右键打开<code>Git Bush</code>,执行 <em>git pull</em>:</p>
+<p><strong>五.测试推送</strong>:</p>
+<p>回到<code>E:hexo</code>,执行: <em>hexo generate</em> <em>hexo server</em>, 打开<code>localhost:4000</code>预览,就可以看到新的主题了</p>
+<p>然后<em>hexo deploy</em>推送到github.io</p>
+<p><strong>六.配置主题</strong>:</p>
+<p>主题配置在<code>E:\hexo\themes\yilia</code>下的<code>_config.yml</code>:</p>
+<p>我是这样配置的:</p>
+<pre><code><span class="preprocessor"># Header</span>
+menu:
+ 主页: /
+ 所有文章: /archives
+ # 随笔: /tags/随笔
+
+<span class="preprocessor"># SubNav</span>
+subnav:
+ github: <span class="string">"https://github.com/OOP-Code-Bunny/"</span>       <span class="comment">//github地址</span>
+ weibo: <span class="string">"http://weibo.com/p/1005052438739075/home"</span>  <span class="comment">//微博地址</span>
+ rss: <span class="string">"#"</span>                                           <span class="comment">//订阅</span>
+ zhihu: <span class="string">"#"</span>                                         <span class="comment">//知乎地址</span>
+ #douban: <span class="string">"#"</span>                                       <span class="comment">//下面这些前面带#的,就不显示在主页上,如果有账号,就可以打开</span>
+ #mail: <span class="string">"#"</span>
+ #facebook: <span class="string">"#"</span>
+ #google: <span class="string">"#"</span>
+ #twitter: <span class="string">"#"</span>
+ #linkedin: <span class="string">"#"</span>
+
+rss: /atom.xml
+
+<span class="preprocessor"># Content</span>
+excerpt_link: more
+fancybox: <span class="literal">true</span>
+mathjax: <span class="literal">true</span>
+
+<span class="preprocessor"># Miscellaneous</span>
+google_analytics: <span class="string">''</span>
+favicon: /favicon.png
+
+<span class="preprocessor">#你的头像url</span>
+avatar: <span class="string">"https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460"</span>     <span class="comment">//设置头像图片</span>
+<span class="preprocessor">#是否开启分享</span>
+share: <span class="literal">true</span>
+<span class="preprocessor">#是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key</span>
+<span class="preprocessor">#若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论</span>
+duoshuo: <span class="literal">true</span>                                                             <span class="comment">//使用'多说'评论</span>
+<span class="preprocessor">#是否开启云标签</span>
+tagcloud: <span class="literal">true</span>
+
+<span class="preprocessor">#是否开启友情链接</span>
+<span class="preprocessor">#不开启——</span>
+<span class="preprocessor">#friends: false</span>
+<span class="preprocessor">#开启——</span>
+friends:
+ 我的github: https:<span class="comment">//github.com/OOP-Code-Bunny/                           //自定义友情链接</span>
+ 周孝刚: https:<span class="comment">//github.com/a5635268/</span>
+ 王麟: http:<span class="comment">//kingarthas37.github.io/</span>
+ 郑印: https:<span class="comment">//github.com/zhengyin/</span>
+
+<span class="preprocessor">#是否开启“关于我”。</span>
+<span class="preprocessor">#不开启——</span>
+<span class="preprocessor">#aboutme: false</span>
+<span class="preprocessor">#开启——</span>
+aboutme: 虽然咸鱼翻身还是咸鱼,但至少可以变得好吃一点                                   <span class="comment">//关于我介绍</span>
+
+duoshuo_shortname: codebunny                                             <span class="comment">//多说域名,后面再解释</span>
+</code></pre><p><strong>七.发布主题</strong>:</p>
+<p><em>hexo generate</em> <em>hexo deploy</em> 发布到github.io</p>
+<blockquote>
+<p>下一篇讲解怎么对主题做一些美化修改,以及添加多说评论</p>
+</blockquote>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-hexo-build-two" class="article article-type-post" itemscope itemprop="blogPost">
   

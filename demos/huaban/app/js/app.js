@@ -62,7 +62,16 @@ hbApp.config(function($stateProvider,$locationProvider,$urlRouterProvider){
                 controller: 'boardPiece'
             },
             'siblings-piece@pin':{
-                templateUrl:'tpls/pin/siblings_piece.html'
+                templateUrl:'tpls/pin/siblings_piece.html',
+                resolve: {
+                    'siblingsPieces':function($http,$stateParams){
+                        return $http({
+                            method:'get',
+                            url: 'cache/detail/siblingsPiece/sibling-piece_' + $stateParams.pinId + '.json'
+                        })
+                    }
+                },
+                controller: 'siblingsPiece'
             },
             'related-boards@pin':{
                 templateUrl:'tpls/pin/related_boards.html'

@@ -1,11 +1,12 @@
 <div class="siblings-piece piece">
-    <a href="/from/17sucai.com/" class="inner x">
+    <a href="www.huaban.com/from/{{path}}/" class="inner x">
         <div>同采自</div>
-        <div class="site">17sucai.com</div>
+        <div class="site">{{path}}</div>
+
         <div class="pins clearfix">
-            <img src="http://img.hb.aicdn.com/1aa12d6aa75dab15acac576d1e2cf2a68baec64f24cc6-nixGOa_sq120" class="space">
-            <img src="http://img.hb.aicdn.com/80aa2dbda3ae949fd46a3f37d1bb0ddfaba6ca4a33bb9-KDcszM_sq120" class="space">
-            <img src="http://img.hb.aicdn.com/3d96386d9ca1d1b69e36cc254ed26ed923b8217d31daa-HdZeHT_sq120" class=""></div>
+            <img ng-src="{{pin}}" ng-repeat="pin in pins" ng-class="{space:$index!=2}"/>
+        </div>
         <div class="arrow"></div>
+
     </a>
 </div>

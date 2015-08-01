@@ -1,4 +1,5 @@
 var hbDetailDirectives = angular.module('huabanDetailDirectives', []);
+//详情页分享的显示隐藏
 hbDetailDirectives.directive('share',function($timeout){
     return {
         restrict :'EA',
@@ -22,6 +23,7 @@ hbDetailDirectives.directive('share',function($timeout){
         }
     }
 });
+//详情页评论采集功能
 hbDetailDirectives.directive('infoPieceComment',function(){
     return {
         restrict : 'EA',
@@ -35,6 +37,8 @@ hbDetailDirectives.directive('infoPieceComment',function(){
         }
     }
 });
+
+//详情页小瀑布流指令
 hbDetailDirectives.directive('smallwaterfall',['scrollCheckCell','getCellPins','$timeout',function(scrollCheckCell,getCellPins,$timeout){
     return {
         restrict:'EA',

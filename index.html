@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,122 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-install-mongodb-in-mac" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/02/install-mongodb-in-mac/" class="article-date">
+  	<time datetime="2015-08-01T17:40:45.000Z" itemprop="datePublished">2015-08-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/02/install-mongodb-in-mac/">mac下安装mongodb</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前已经在win7下安装了mongodb,现在要在mac下再安装一遍.</p>
+<p>一.下载安装:<br>首先是: <a href="https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-3.0.5.tgz" target="_blank" rel="external">下载链接</a></p>
+<p>解压它:</p>
+<pre><code>code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:Downloads</span> code_bunny<span class="variable">$ </span>tar zxvf mongodb-osx-x86_64-<span class="number">3.0</span>.<span class="number">5</span>.tgz
+</code></pre><hr>
+<p>mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装完.接下来我们可以把它移到我希望的路径去并放在mongodb文件夹里:</p>
+<pre><code>code-bunnydeMacBook-<span class="string">Air:</span>~ code_bunny$ mv <span class="regexp">/Users/</span>code_bunny<span class="regexp">/Downloads/</span>mongodb-osx-x86_64-<span class="number">3.0</span><span class="number">.5</span> mongodb
+</code></pre><p>bin目录说明:</p>
+<ul>
+<li>bsondump 导出BSON结构</li>
+<li>mongo 客户端</li>
+<li>mongod 服务端</li>
+<li>mongodump 整体数据库二进制导出</li>
+<li>mongoexport 导出易识别的json文档或csv文档</li>
+<li>mongorestore 数据库整体导入</li>
+<li>mongos 路由器(分片用)</li>
+<li>mongofiles GridFS工具，内建的分布式文件系统</li>
+<li>mongoimport 数据导入程序</li>
+<li>mongotop 运维监控</li>
+<li>mongooplog</li>
+<li>mongoperf</li>
+<li>mongostat</li>
+</ul>
+<hr>
+<p>二.然后在里面创建两个文件夹,一个data文件夹用于存放数据,一个logs文件夹用于存放日志:</p>
+<pre><code>code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:mongodb</span> code_bunny<span class="variable">$ </span>mkdir data
+code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:mongodb</span> code_bunny<span class="variable">$ </span>mkdir logs
+</code></pre><blockquote>
+<p>不一定要建在mongodb的安装包下.可以是任意地方,下面会配置.</p>
+</blockquote>
+<hr>
+<p>在logs文件夹下创建一个log文件:</p>
+<pre><code>code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:logs</span> code_bunny<span class="variable">$ </span>touch mongo.log
+code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:logs</span> code_bunny<span class="variable">$ </span>chmod <span class="number">777</span> mongo.log
+</code></pre><hr>
+<p>三.启动服务端:</p>
+<pre><code>code-bunnydeMacBook-<span class="string">Air:</span>mongodb code_bunny$ sudo .<span class="regexp">/bin/</span>mongod --dbpath <span class="regexp">/Users/</span>code_bunny<span class="regexp">/mongodb/</span>data --logpath <span class="regexp">/Users/</span>code_bunny<span class="regexp">/mongodb/</span>logs/mongo.log --fork --port <span class="number">27017</span>
+</code></pre><p>其中: —dbpath表示数据存放的路径,就是刚才建的data文件夹. —logpath表示日志存放位置,它必须是个log文件. —fork表示后台运行程序. —port是端口</p>
+<p>显示这样一段东西,表示启动成功:</p>
+<pre><code>about <span class="keyword">to</span> fork child <span class="keyword">process</span>, waiting <span class="keyword">until</span> server <span class="keyword">is</span> ready <span class="keyword">for</span> connections.
+forked <span class="keyword">process</span>: <span class="number">6266</span>
+child <span class="keyword">process</span> started successfully, parent exiting
+</code></pre><hr>
+<p>四.启动客户端:</p>
+<pre><code>sudo .<span class="regexp">/bin/m</span>ongo
+</code></pre><p>显示这样一段东西,表示启动成功:</p>
+<pre><code>MongoDB <span class="keyword">shell</span> <span class="keyword">version</span>: 3.0.5
+connecting to: <span class="keyword">test</span>
+Welcome to the MongoDB <span class="keyword">shell</span>.
+<span class="keyword">For</span> interactive <span class="keyword">help</span>, <span class="keyword">type</span> <span class="string">"help"</span>.
+<span class="keyword">For</span> <span class="keyword">more</span> comprehensive documentation, see
+    http:<span class="comment">//docs.mongodb.org/</span>
+Questions? Try the support <span class="literal">group</span>
+    http:<span class="comment">//groups.google.com/group/mongodb-user</span>
+</code></pre>
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-learn-grunt-one" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -686,149 +802,6 @@
 <p>然后找到主题的<code>_config.yml</code>,添加一个变量:</p>
 <pre><code><span class="attribute">duoshuo_shortname</span>: <span class="string">codebunny</span>
 </code></pre><p>这里的<code>codebunny</code>就是刚才的short_name,也就是多说域名.</p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-hexo-bulid-three" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/03/16/hexo-bulid-three/" class="article-date">
-  	<time datetime="2015-03-16T09:42:28.000Z" itemprop="datePublished">2015-03-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/16/hexo-bulid-three/">使用hexo搭建github.io博客(三)-更换主题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在<a href="http://jinyanhuan.github.io/2015/03/12/hexo-build-two/" target="_blank" rel="external">上一篇</a>完成后,我们知道了要怎么来发布博客文章,但是,这个博客丑了点,这篇就来说说怎么更换主题让博客变得高大上</p>
-<p><strong>一.寻找喜欢的主题</strong></p>
-<p>可以在<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">这里</a>找到</p>
-<p>我自己找到了一款更好看的,在<a href="http://litten.github.io/2014/08/31/hexo-theme-yilia/" target="_blank" rel="external">这里</a></p>
-<p>以我自己的安装过程为例:</p>
-<p><strong>二.安装主题</strong>:</p>
-<p>到hexo所在的路径下<code>E:hexo</code>,右键打开<code>Git Bush</code>,执行:</p>
-<pre><code><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/litten</span><span class="regexp">/hexo-theme-yilia.git themes/yilia</span>
-</code></pre><p><strong>三.使用主题</strong>:</p>
-<p>打开<code>_config.yml</code>做如下修改:</p>
-<pre><code><span class="attribute">theme</span>: <span class="string">yilia</span>
-</code></pre><p><strong>四.更新主题</strong>:</p>
-<p>进入<code>E:hexo/themes/yilia</code>,右键打开<code>Git Bush</code>,执行 <em>git pull</em>:</p>
-<p><strong>五.测试推送</strong>:</p>
-<p>回到<code>E:hexo</code>,执行: <em>hexo generate</em> <em>hexo server</em>, 打开<code>localhost:4000</code>预览,就可以看到新的主题了</p>
-<p>然后<em>hexo deploy</em>推送到github.io</p>
-<p><strong>六.配置主题</strong>:</p>
-<p>主题配置在<code>E:\hexo\themes\yilia</code>下的<code>_config.yml</code>:</p>
-<p>我是这样配置的:</p>
-<pre><code><span class="preprocessor"># Header</span>
-menu:
- 主页: /
- 所有文章: /archives
- # 随笔: /tags/随笔
-
-<span class="preprocessor"># SubNav</span>
-subnav:
- github: <span class="string">"https://github.com/OOP-Code-Bunny/"</span>       <span class="comment">//github地址</span>
- weibo: <span class="string">"http://weibo.com/p/1005052438739075/home"</span>  <span class="comment">//微博地址</span>
- rss: <span class="string">"#"</span>                                           <span class="comment">//订阅</span>
- zhihu: <span class="string">"#"</span>                                         <span class="comment">//知乎地址</span>
- #douban: <span class="string">"#"</span>                                       <span class="comment">//下面这些前面带#的,就不显示在主页上,如果有账号,就可以打开</span>
- #mail: <span class="string">"#"</span>
- #facebook: <span class="string">"#"</span>
- #google: <span class="string">"#"</span>
- #twitter: <span class="string">"#"</span>
- #linkedin: <span class="string">"#"</span>
-
-rss: /atom.xml
-
-<span class="preprocessor"># Content</span>
-excerpt_link: more
-fancybox: <span class="literal">true</span>
-mathjax: <span class="literal">true</span>
-
-<span class="preprocessor"># Miscellaneous</span>
-google_analytics: <span class="string">''</span>
-favicon: /favicon.png
-
-<span class="preprocessor">#你的头像url</span>
-avatar: <span class="string">"https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460"</span>     <span class="comment">//设置头像图片</span>
-<span class="preprocessor">#是否开启分享</span>
-share: <span class="literal">true</span>
-<span class="preprocessor">#是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key</span>
-<span class="preprocessor">#若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论</span>
-duoshuo: <span class="literal">true</span>                                                             <span class="comment">//使用'多说'评论</span>
-<span class="preprocessor">#是否开启云标签</span>
-tagcloud: <span class="literal">true</span>
-
-<span class="preprocessor">#是否开启友情链接</span>
-<span class="preprocessor">#不开启——</span>
-<span class="preprocessor">#friends: false</span>
-<span class="preprocessor">#开启——</span>
-friends:
- 我的github: https:<span class="comment">//github.com/OOP-Code-Bunny/                           //自定义友情链接</span>
- 周孝刚: https:<span class="comment">//github.com/a5635268/</span>
- 王麟: http:<span class="comment">//kingarthas37.github.io/</span>
- 郑印: https:<span class="comment">//github.com/zhengyin/</span>
-
-<span class="preprocessor">#是否开启“关于我”。</span>
-<span class="preprocessor">#不开启——</span>
-<span class="preprocessor">#aboutme: false</span>
-<span class="preprocessor">#开启——</span>
-aboutme: 虽然咸鱼翻身还是咸鱼,但至少可以变得好吃一点                                   <span class="comment">//关于我介绍</span>
-
-duoshuo_shortname: codebunny                                             <span class="comment">//多说域名,后面再解释</span>
-</code></pre><p><strong>七.发布主题</strong>:</p>
-<p><em>hexo generate</em> <em>hexo deploy</em> 发布到github.io</p>
-<blockquote>
-<p>下一篇讲解怎么对主题做一些美化修改,以及添加多说评论</p>
-</blockquote>
 
         
           <!-- show an end symbol if the article is fully displayed -->
