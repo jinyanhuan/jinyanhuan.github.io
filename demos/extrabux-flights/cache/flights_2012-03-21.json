@@ -1,0 +1,38 @@
+[
+    {
+        "id": "21",
+        "date": "2012-03-21",
+        "departure_city": "San Diego",
+        "arrival_city": "Honolulu",
+        "departure_time": "2012-03-21 08:00:00",
+        "arrival_time": "2012-03-21 20:40:00",
+        "flight_number": "875",
+        "routing": "0",
+        "first_class_price": "960",
+        "economy_class_price": "620"
+    },
+    {
+        "id": "22",
+        "date": "2012-03-21",
+        "departure_city": "Houston",
+        "arrival_city": "Las Vegas",
+        "departure_time": "2012-03-21 09:10:00",
+        "arrival_time": "2012-03-21 13:30:00",
+        "flight_number": "2112",
+        "routing": "0",
+        "first_class_price": "725",
+        "economy_class_price": "220"
+    },
+    {
+        "id": "23",
+        "date": "2012-03-21",
+        "departure_city": "New Orleans",
+        "arrival_city": "Philadelphia",
+        "departure_time": "2012-03-21 11:50:00",
+        "arrival_time": "2012-03-21 18:10:00",
+        "flight_number": "13",
+        "routing": "1",
+        "first_class_price": "745",
+        "economy_class_price": "510"
+    }
+]
