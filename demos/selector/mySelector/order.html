@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/base2013.css" />
+<link rel="stylesheet" type="text/css" href="css/cart2013.css" />
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/shoppingcart.js"></script>
+<title>联动菜单</title>
+</head>
+
+<body>
+<div class="check-step">
+<div class="step cur-step">
+  <div class="step-title">
+    <p>收货信息</p>
+    <span class="step-action"> <a href="#none" style="display:none">修改</a> </span> </div>
+
+  <div class="step-content">
+    <!--初次使用时,显示start-->
+    <div class="start">
+      <div>还没有任何收获信息，请新建收货地址</div>
+      <div class="main-info">
+        <div class="row cf">
+          <div class="left"><span>*</span>收货人</div>
+          <div class="right">
+            <input type="text" value="" class="name" mark="default-text"/>
+            <span class="error">请填写收货人姓名</span>
+          </div>
+        </div>
+
+        <!--1230 modify 3 start-->
+        <div class="row cf">
+          <div class="left"><span>*</span>收货地址</div>
+          <div id="selector" class="right">
+          </div>
+        </div>
+        <div class="row cf">
+          <div class="left"><span>*</span>详细地址</div>
+          <div class="right">
+            <input type="text" class="address-big" value="隆昌路619号"/>
+            <span class="error">请填写详细地址</span>
+          </div>
+        </div>
+        <!--1230 modify 3 end-->
+
+        <div class="row cf">
+          <div class="left"><span>*</span>固定电话</div>
+          <div class="right">
+            <input type="text" class="tel-code" value="区号" mark="default-text"/>
+            <span class="break">-</span>
+            <input type="text" class="tel" value="电话号码" mark="default-text"/>
+            <span class="break">-</span>
+            <input type="text" class="tree" value="分机号" mark="default-text"/>
+            <span class="break">分机号(可不填)</span>
+            <span class="error">请填写固定电话号码</span>
+          </div>
+        </div>
+        <div class="row cf">
+          <div class="left"><span>*</span>手机号码</div>
+          <div class="right">
+            <input type="text" class="cell-phone" value="" mark="default-text"/>
+            <span class="error">请填写手机号码</span>
+          </div>
+        </div>
+      </div>
+      <div class="input_wrap2"><input type="button" class="save" value="保存收货地址"/></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+</div>
+
+
+
+
+</body>
+</html>

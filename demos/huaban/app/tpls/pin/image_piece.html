@@ -1,0 +1,42 @@
+<div class="image-piece piece">
+    <div class="tool-bar">
+        <a href="" class="repin-btn btn rbtn"><span class="text"> 采集</span></a>
+        <a href="" class="edit-btn btn"><span class="text"> 编辑</span></a>
+        <a href="" class="del-btn btn"><span class="text"> 删除</span></a>
+        <div class="right-part">
+            <div share></div>
+            <a ng-href="/pins/{{id}}/zoom/" title="查看原图" class="zoomin btn-with-icon btn"><i class="class"></i></a>
+        </div>
+    </div>
+    <div class="main-image">
+        <div class="image-holder">
+            <a ng-href="http://huaban.com/go/?pin_id={{id}}" target="_blank" rel="nofollow">
+                <img alt="{{imgAlt}}" ng-src="{{imgSrc}}">
+            </a>
+        </div>
+    </div>
+    <div class="tool-bar-bottom">
+        <a class="repin-btn btn-with-icon btn">
+            <i class="class"></i>
+            <span class="text"> 采集 <span class="num">{{repin}}</span></span>
+        </a>
+        <a href="#" onclick="return false;" class="like-btn btn-with-icon btn">
+            <i class="class"></i>
+            <span class="text"> 喜欢 <span class="num">{{like}}</span></span>
+        </a>
+        <a href="#" class="comment-btn btn-with-icon btn">
+            <i class="class"></i>
+            <span class="text"> 评论 <span class="num">{{comment}}</span></span>
+        </a>
+
+        <div class="right-part">
+            <a title="举报这张采集" class="report-btn btn-with-icon btn">
+                <i class="class"></i>
+            </a>
+            <a href="http://huaban.com/go/?pin_id={{id}}" rel="nofollow" target="_blank" class="source btn-with-icon btn">
+                <i class="class"></i><span class="text"> 查看来源 {{source}}</span>
+            </a>
+        </div>
+    </div>
+    <div class="extra-box"></div>
+</div>

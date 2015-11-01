@@ -1,0 +1,38 @@
+[
+    {
+        "id": "13",
+        "date": "2012-03-19",
+        "departure_city": "San Diego",
+        "arrival_city": "Chicago",
+        "departure_time": "2012-03-19 07:30:00",
+        "arrival_time": "2012-03-19 12:15:00",
+        "flight_number": "620",
+        "routing": "1",
+        "first_class_price": "745",
+        "economy_class_price": "463"
+    },
+    {
+        "id": "14",
+        "date": "2012-03-19",
+        "departure_city": "Phoenix",
+        "arrival_city": "Newark",
+        "departure_time": "2012-03-19 09:10:00",
+        "arrival_time": "2012-03-19 18:30:00",
+        "flight_number": "11",
+        "routing": "2",
+        "first_class_price": "1049",
+        "economy_class_price": "615"
+    },
+    {
+        "id": "15",
+        "date": "2012-03-19",
+        "departure_city": "San Francisco",
+        "arrival_city": "Boston",
+        "departure_time": "2012-03-19 07:30:00",
+        "arrival_time": "2012-03-19 20:50:00",
+        "flight_number": "65",
+        "routing": "1",
+        "first_class_price": "1089",
+        "economy_class_price": "730"
+    }
+]

@@ -1,0 +1,96 @@
+body {
+  background:#f2f2f2; min-width:1024px;
+}
+.mainBg {
+  display:none;
+}
+.row1 {
+  width:100%; height:32px; background:#f6f6f6; border-bottom:1px solid #d9d9d9;
+}
+
+.row2 {
+  height:117px; background:#fff; 
+}
+
+.row3 {
+  width:100%; height:3px; background:#ff4800;
+}
+
+.row4 {
+  height:47px; background:#fbfbfb; border-bottom:1px solid #ced8d9;
+}
+
+.main_box_1 {
+  width:100%; background:#f2f2f2;
+}
+
+.main_box_1 .main {
+  position:relative; margin:auto; z-index: 3
+}
+
+.main_box_1 .main .side_bar_box {
+  float:left; margin-right:10px;
+}
+
+.main_box_1 .main .side_bar {
+  position:absolute; top:-48px; 
+}
+
+.main_box_1 .main .side_bar.fixed {
+  position:fixed; top:0;
+}
+
+.main_box_1 .main .main_content {
+  float:right; padding-top:9px;
+}
+
+.m_row1_l {
+  float:left;
+}
+
+.m_row1_r {
+  float:left; margin-left:10px;
+}
+
+.main_banner {
+  margin-top:10px; position:relative;
+}
+
+.main_banner .banner_l {
+  position:absolute; left:0; cursor:pointer;
+}
+
+.main_banner .banner_r {
+  position:absolute; right:0; cursor:pointer;
+}
+
+.m_row2 {
+  margin-top:10px;
+}
+
+.row5 {
+  width:100%; height:13px; background:url('../images/common/line_bg.gif') repeat-x; margin-top:20px;
+}
+.row6 a {
+  display:block; width:100%; height:90px; 
+}
+
+.row6 {
+  width:100%; height:90px; background:#fbd832 url('../images/common/banner_yellow.jpg') no-repeat 50%  
+}
+
+.row7 .main_content {
+  margin-top:10px; float:right;
+}
+
+.row7 .main {
+  border-bottom:3px solid #5e676e;
+}
+
+.search_bar_2 {
+  width:100%; position:fixed; height:50px; border-bottom:1px solid #ced7d6; z-index: 2; background:#fbfbfb; display:none;
+}
+
+.footer {
+  width:100%; background:#fff;
+}
