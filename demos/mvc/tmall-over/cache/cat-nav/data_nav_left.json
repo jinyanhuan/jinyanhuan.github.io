@@ -1,0 +1,190 @@
+{
+    "1": {
+        "title":"㑑",
+        "content":{
+            "end":{
+                "url":"",
+                "name":"精选市场"
+            }
+        }
+    },
+    "2": {
+        "title":"㑙",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"女装"
+            },
+            "end":{
+                "url":"http://neiyi.tmall.com",
+                "name":"女装"
+            }
+        }
+    },
+    "3": {
+        "title":"㑬",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"男装"
+            },
+            "1":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"运动"
+            },
+            "end":{
+                "url":"http://huwai.tmall.com",
+                "name":"户外"
+            }
+        }
+    },
+    "4": {
+        "title":"㑭",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"女鞋"
+            },
+            "1":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"男鞋"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"箱包"
+            }
+        }
+    },
+    "5": {
+        "title":"㑜",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"化妆品"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"个人护理"
+            }
+        }
+    },
+    "6": {
+        "title":"㑗",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"手机数码"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"电脑办公"
+            }
+        }
+    },
+    "7": {
+        "title":"㑖",
+        "content":{
+            "end":{
+                "url":"http://nanzhuang.tmall.com",
+                "name":"母婴玩具"
+            }
+        }
+    },
+    "8": {
+        "title":"㑕",
+        "content":{
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"食品"
+            }
+        }
+    },
+    "9": {
+        "title":"㑔",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"大家电"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"生活电器"
+            }
+        }
+    },
+    "10": {
+        "title":"㑞",
+        "content":{
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"家具建材"
+            }
+        }
+    },
+    "11": {
+        "title":"㑒",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"珠宝饰品"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"手表眼镜"
+            }
+        }
+    },
+    "12": {
+        "title":"㑝",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"全新整车"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"汽车配件"
+            }
+        }
+    },
+    "13": {
+        "title":"㑮",
+        "content":{
+            "0":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"家纺"
+            },
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"家饰"
+            }
+        }
+    },
+    "14": {
+        "title":"㑠",
+        "content":{
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"医药保健"
+            }
+        }
+    },
+    "15": {
+        "title":"㑟",
+        "content":{
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"厨房清洁"
+            }
+        }
+    },
+    "16": {
+        "title":"㑡",
+        "content":{
+            "end":{
+                "url":"http://nvzhuang.tmall.com",
+                "name":"图书音像"
+            }
+        }
+    }
+}
