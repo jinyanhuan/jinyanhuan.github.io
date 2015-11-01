@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ <script src="http://cdnimg.ocj.com.cn/common/js/jquery-1.10.2.min.js"></script>
+ <script language="javascript" type="text/javascript">
+
+  
+  
+  function getDaysNumber(year,mouth){
+    var days=[31,28,31,30,31,30,31,31,30,31,30,31];
+	if(mouth==1){
+	  return ((year%4==0 && year%100!==0) || year%400==0)? 29 : 28
+	}
+	else{
+      return days[mouth]
+	}
+  }
+  
+  alert(getDaysNumber(1900,1))
+
+ </script>
+ </head>
+ <body>
+  
+ </body>
+</html>
