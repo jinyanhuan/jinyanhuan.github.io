@@ -1,0 +1,17 @@
+<div ng-mouseover="showMenu($event)" ng-mouseout="hideMenu($event)">
+  <a href="" class="nav-link dm-nav"><img width="26" height="26" src="{{headSrc}}" class="avt">
+    <div class="arrow"></div>
+    <div class="num ">{{email}}</div>
+  </a>
+  <div class="menu" ng-class="{show:ifmenu}">
+    <div class="group">
+      <a ng-href="{{myHuaban}}">我的花瓣<i class="mine"></i></a><a title="私信" class="dm-nav">私信<i class="messages"></i>
+      <div class="num in-line ">{{email}}</div>
+    </a>
+      <a href="">我的关注<i class="following"></i></a>
+    </div>
+    <div class="group"><a href="">查找好友<i class="friends"></i></a></div>
+    <div class="group"><a href="">帐号设置<i class="settings"></i></a><a href="/logout/">退出<i class="exit"></i></a></div>
+  </div>
+</div>
+
