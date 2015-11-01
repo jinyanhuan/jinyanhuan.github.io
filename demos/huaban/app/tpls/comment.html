@@ -1,9 +1,0 @@
-<div ng-show="pin.showComment" class="write convo clearfix" ng-class="{focus:pin.showComBtn}">
-    <a href="/{{pin.userId}}/" title="{{pin.userName}}" class="img x">
-        <img ng-src="{{pin.headUrl}}">
-    </a>
-    <form name="addcom">
-        <textarea placeholder="添加评论或把采集@给好友" class="clear-input GridComment" ng-focus="focusChange($event,true)" ng-blur="focusChange($event,false)" ng-model="comcontent" required></textarea>
-        <a href="#" class="grid_comment_button btn" ng-mousedown="addComment($event,addcom.$valid)"><span class="text">添加评论</span></a>
-    </form>
-</div>

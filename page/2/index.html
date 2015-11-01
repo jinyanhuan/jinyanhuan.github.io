@@ -191,6 +191,148 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-hexo-build-four" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/30/hexo-build-four/" class="article-date">
+  	<time datetime="2015-03-30T06:58:43.000Z" itemprop="datePublished">2015-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/30/hexo-build-four/">使用hexo搭建github.io博客(四)-美化主题&amp;添加多说</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://jinyanhuan.github.io/2015/03/16/hexo-bulid-three/" target="_blank" rel="external">上一篇</a>里介绍了怎么更换博客的主题,这篇介绍如何在细节上完善这个主题,以及如何添加多说评论</p>
+<p><strong>完善细节</strong></p>
+<p>hexo的博客主题使用的是stylus技术,类似于less和sass吧.最后的文章都只有一个css,就是style.css,它在<code>E:hexo/public/css/style.css</code>,不过这个是通过<em>hexo generate</em>编译过后得到的样式表,要修改的话,需要到主题包里去修改:主题包里样式在这里:<code>E:\hexo\themes\yilia\source\css</code><br>然后就找到对应的样式,改改就可以了,具体怎么找,这个是stylus的技术.一般来说都很简单,都是小地方改动,都能找到的.</p>
+<p>举个栗子,这个主题本来所有的字体都是宋体,我希望把它换成雅黑,那我可以找到它:</p>
+<p><code>E:\hexo\themes\yilia\source\css\style.styl</code>:</p>
+<p>修改body的字体:</p>
+<pre><code><span class="tag">body</span>
+  <span class="attribute">font-family</span><span class="value">:<span class="string">"Microsoft Yahei"</span>,<span class="string">"HelveticaNeue-Light"</span>,<span class="string">"Helvetica Neue Light"</span>,<span class="string">"Helvetica Neue"</span>,Helvetica,Arial,sans-serif;</span>
+  ...
+</code></pre><p>这样,文章的字体就会变成雅黑</p>
+<p>又比如,它主题里的行内代码片段只有这样的<code>code</code>,但是我希望有一种这样的<em>code</em>,但是我觉得倾斜是不必要的,那么我就可以把markdown里面本来的倾斜体定义成<em>code</em>这种行内代码段:</p>
+<p><code>E:\hexo\themes\yilia\source\css\_partial\article.styl</code>:</p>
+<pre><code><span class="class">.article-entry</span>{
+  ...
+  <span class="tag">em</span> {
+    <span class="attribute">font-style</span>: normal;
+    <span class="attribute">background</span>: <span class="hexcolor">#fbedeb</span>;
+    <span class="attribute">color</span>: <span class="hexcolor">#e2678f</span>;
+    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">5px</span>;
+    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">2px</span>;
+    <span class="attribute">font-size</span>: <span class="number">0.9em</span>;
+    <span class="attribute">-webkit-border-radius</span>: <span class="number">3px</span>;
+    <span class="attribute">border-radius</span>: <span class="number">3px</span>;
+  }
+  ...
+}
+</code></pre><p>这样我就把原来主题中的斜体改成了我喜欢的<em>code</em>这样.</p>
+<p><strong>添加多说评论</strong></p>
+<p>登陆多说以后,访问<a href="http://duoshuo.com/create-site/" target="_blank" rel="external">这里</a>获取到通用代码,我的是这样的:</p>
+<pre><code><span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"请将此处替换成文章在你的站点中的ID"</span> <span class="attribute">data-title</span>=<span class="value">"请替换成文章的标题"</span> <span class="attribute">data-url</span>=<span class="value">"请替换成文章的网址"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
+<span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+    <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
+    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+        ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
+        ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
+        ds.charset = <span class="string">'UTF-8'</span>;
+        (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]
+         || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);
+    })();
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
+</code></pre><p>这段代码可以在<a href="http://codebunny.duoshuo.com/admin/tools/" target="_blank" rel="external">这里</a>找到,其中的<em>codebunny</em>是它叫你填信息的时候填的多说域名</p>
+<blockquote>
+<p>注意这地方有个<code>short_name:&quot;codebunny&quot;</code></p>
+</blockquote>
+<p>然后找到主题里对应放置评论部分的视图模板,不同的主题所在的位置也不同,我的在这里:</p>
+<p><code>E:\hexo\themes\yilia\layout\_partial\article.ejs</code></p>
+<p>找到原来的评论部分:</p>
+<pre><code>&lt;<span class="preprocessor">%</span> <span class="keyword">if</span> <span class="comment">(!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)</span>{ <span class="preprocessor">%</span>&gt;
+    ...
+&lt;<span class="preprocessor">%</span> } <span class="preprocessor">%</span>&gt;
+</code></pre><p>替换为:</p>
+<pre><code><span class="xml"></span>&lt;%<span class="perl"> <span class="keyword">if</span> (!<span class="keyword">index</span> &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname){ </span>%&gt;<span class="xml">
+<span class="tag">&lt;<span class="title">section</span> <span class="attribute">id</span>=<span class="value">"comments"</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> post.layout </span>%&gt;<span class="xml"><span class="tag"><span class="value">-</span></span></span>&lt;%=<span class="perl"> post.slug </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-title</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> post.title </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-url</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> page.permalink </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
+  <span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+    <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
+    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+      ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
+      ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
+      ds.charset = <span class="string">'UTF-8'</span>;
+      (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]
+              || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);
+    })();
+  </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
+<span class="tag">&lt;/<span class="title">section</span>&gt;</span>
+</span>&lt;%<span class="perl"> } </span>%&gt;<span class="xml"></span>
+</code></pre><p>也就是说,把前面得到的通用代码复制到<code>&lt;section id=&quot;comments&quot;&gt;&lt;/section&gt;</code>里面去,然后把<code>data-thread-key</code> <code>data-title</code> <code>data-url</code> 如上替换就好了.</p>
+<p>然后找到主题的<code>_config.yml</code>,添加一个变量:</p>
+<pre><code><span class="attribute">duoshuo_shortname</span>: <span class="string">codebunny</span>
+</code></pre><p>这里的<code>codebunny</code>就是刚才的short_name,也就是多说域名.</p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-hexo-bulid-three" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
