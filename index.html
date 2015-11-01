@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -220,7 +220,7 @@
         <p>之前已经在win7下安装了mongodb,现在要在mac下再安装一遍.</p>
 <p>一.下载安装:<br>首先是: <a href="https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-3.0.5.tgz" target="_blank" rel="external">下载链接</a></p>
 <p>解压它:</p>
-<pre><code>code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:Downloads</span> code_bunny<span class="variable">$ </span>tar zxvf mongodb-osx-x86_64-<span class="number">3.0</span>.<span class="number">5</span>.tgz
+<pre><code>code-bunnydeMacBook-Air:Downloads code_bunny$ tar zxvf mongodb-osx-x86_64-<span class="number">3.0</span><span class="number">.5</span>.tgz
 </code></pre><hr>
 <p>mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装完.接下来我们可以把它移到我希望的路径去并放在mongodb文件夹里:</p>
 <pre><code>code-bunnydeMacBook-<span class="string">Air:</span>~ code_bunny$ mv <span class="regexp">/Users/</span>code_bunny<span class="regexp">/Downloads/</span>mongodb-osx-x86_64-<span class="number">3.0</span><span class="number">.5</span> mongodb
@@ -254,7 +254,7 @@ code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:logs<
 </code></pre><hr>
 <p>三.启动服务端:</p>
 <pre><code>code-bunnydeMacBook-<span class="string">Air:</span>mongodb code_bunny$ sudo .<span class="regexp">/bin/</span>mongod --dbpath <span class="regexp">/Users/</span>code_bunny<span class="regexp">/mongodb/</span>data --logpath <span class="regexp">/Users/</span>code_bunny<span class="regexp">/mongodb/</span>logs/mongo.log --fork --port <span class="number">27017</span>
-</code></pre><p>其中: —dbpath表示数据存放的路径,就是刚才建的data文件夹. —logpath表示日志存放位置,它必须是个log文件. —fork表示后台运行程序. —port是端口</p>
+</code></pre><p>其中: –dbpath表示数据存放的路径,就是刚才建的data文件夹. –logpath表示日志存放位置,它必须是个log文件. –fork表示后台运行程序. –port是端口</p>
 <p>显示这样一段东西,表示启动成功:</p>
 <pre><code>about <span class="keyword">to</span> fork child <span class="keyword">process</span>, waiting <span class="keyword">until</span> server <span class="keyword">is</span> ready <span class="keyword">for</span> connections.
 forked <span class="keyword">process</span>: <span class="number">6266</span>
@@ -353,14 +353,14 @@ Questions? Try the support <span class="literal">group</span>
 <p>然后安装插件:</p>
 <ol>
 <li>安装grunt-cli: <em>sudo npm install -g grunt-cli</em></li>
-<li>安装grunt: <em>npm install grunt —save-dev</em></li>
-<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks —save-dev</em></li>
+<li>安装grunt: <em>npm install grunt –save-dev</em></li>
+<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks –save-dev</em></li>
 <li>安装另外几个插件,不赘述</li>
 </ol>
 <p>然后开始书写<code>Gruntfile.js</code>:</p>
 <pre><code><span class="pi">'use strict'</span>;
 
-<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>{
 
     <span class="built_in">require</span>(<span class="string">'load-grunt-tasks'</span>)(grunt)
 
@@ -404,7 +404,7 @@ Questions? Try the support <span class="literal">group</span>
 <p>1.基本格式:</p>
 <pre><code><span class="pi">'use strict'</span>;
 
-<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>{
 
     ...
 
@@ -414,9 +414,9 @@ Questions? Try the support <span class="literal">group</span>
 <pre><code><span class="function"><span class="title">require</span><span class="params">(<span class="string">'load-grunt-tasks'</span>)</span><span class="params">(grunt)</span></span>
 </code></pre><hr>
 <p>3.配置任务:</p>
-<pre><code>grunt.initConfig({
+<pre><code><span class="tag">grunt</span><span class="class">.initConfig</span>({
 
-    <span class="keyword">...</span>
+    ...
 
 })
 </code></pre><hr>
@@ -464,15 +464,15 @@ Questions? Try the support <span class="literal">group</span>
 <p><em>src</em>里排除了<code>global.lee</code>,<code>mixins.less</code>,<code>variables.less</code>,这些全局的,不需要编译的文件.</p>
 <hr>
 <p>7.配置<code>watch</code>任务:</p>
-<pre><code><span class="tag">watch</span>: {
-    <span class="attribute">files</span>:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
-    <span class="attribute">tasks</span>:[<span class="string">'default'</span>]
-}
+<pre><code><span class="tag">watch</span>: <span class="rules">{
+    <span class="rule"><span class="attribute">files</span>:<span class="value">[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+    tasks:[<span class="string">'default'</span>]
+</span></span></span>}
 </code></pre><p><em>files</em>属性配置需要监测变化的文件,<em>tasks</em>属性配置文件变化以后需要执行的任务.</p>
 <p>这里再次用到了一个很重要的知识点: <em>/\</em>.js<em> 表示目录下所有的js文件,<strong>不包括</strong>目录的子目录下的js文件. </em>/**/*.less* 表示目录下的所有less文件,包括目录的子目录下的less文件.</p>
 <hr>
 <p>8.注册<code>default</code>任务:</p>
-<pre><code>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+<pre><code><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
 </code></pre><p>把默认要执行的任务定义为<code>uglify</code>任务和<code>less</code>任务.</p>
 <hr>
 <p>然后执行一下<em>grunt</em>,就可以看到文件被编译压缩好了:</p>
@@ -728,25 +728,25 @@ Questions? Try the support <span class="literal">group</span>
 <p>举个栗子,这个主题本来所有的字体都是宋体,我希望把它换成雅黑,那我可以找到它:</p>
 <p><code>E:\hexo\themes\yilia\source\css\style.styl</code>:</p>
 <p>修改body的字体:</p>
-<pre><code>body
-  font-family:<span class="string">"Microsoft Yahei"</span>,<span class="string">"HelveticaNeue-Light"</span>,<span class="string">"Helvetica Neue Light"</span>,<span class="string">"Helvetica Neue"</span>,Helvetica,Arial,sans-serif;
-  <span class="keyword">...</span>
+<pre><code><span class="tag">body</span>
+  <span class="attribute">font-family</span><span class="value">:<span class="string">"Microsoft Yahei"</span>,<span class="string">"HelveticaNeue-Light"</span>,<span class="string">"Helvetica Neue Light"</span>,<span class="string">"Helvetica Neue"</span>,Helvetica,Arial,sans-serif;</span>
+  ...
 </code></pre><p>这样,文章的字体就会变成雅黑</p>
 <p>又比如,它主题里的行内代码片段只有这样的<code>code</code>,但是我希望有一种这样的<em>code</em>,但是我觉得倾斜是不必要的,那么我就可以把markdown里面本来的倾斜体定义成<em>code</em>这种行内代码段:</p>
 <p><code>E:\hexo\themes\yilia\source\css\_partial\article.styl</code>:</p>
-<pre><code>.article-entry{
-  <span class="keyword">...</span>
-  em {
-    font-style: normal;
-    background: <span class="comment">#fbedeb;</span>
-    color: <span class="comment">#e2678f;</span>
-    padding: <span class="number">0</span> 5px;
-    margin: <span class="number">0</span> 2px;
-    font-size: <span class="number">0.</span>9em;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+<pre><code><span class="class">.article-entry</span>{
+  ...
+  <span class="tag">em</span> {
+    <span class="attribute">font-style</span>: normal;
+    <span class="attribute">background</span>: <span class="hexcolor">#fbedeb</span>;
+    <span class="attribute">color</span>: <span class="hexcolor">#e2678f</span>;
+    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">5px</span>;
+    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">2px</span>;
+    <span class="attribute">font-size</span>: <span class="number">0.9em</span>;
+    <span class="attribute">-webkit-border-radius</span>: <span class="number">3px</span>;
+    <span class="attribute">border-radius</span>: <span class="number">3px</span>;
   }
-  <span class="keyword">...</span>
+  ...
 }
 </code></pre><p>这样我就把原来主题中的斜体改成了我喜欢的<em>code</em>这样.</p>
 <p><strong>添加多说评论</strong></p>
@@ -757,7 +757,7 @@ Questions? Try the support <span class="literal">group</span>
 <span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
     <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
-    (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
         <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
         ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
         ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
@@ -774,19 +774,19 @@ Questions? Try the support <span class="literal">group</span>
 <p>然后找到主题里对应放置评论部分的视图模板,不同的主题所在的位置也不同,我的在这里:</p>
 <p><code>E:\hexo\themes\yilia\layout\_partial\article.ejs</code></p>
 <p>找到原来的评论部分:</p>
-<pre><code>&lt;% <span class="keyword">if</span> (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;
-    <span class="keyword">...</span>
-&lt;% } %&gt;
+<pre><code>&lt;<span class="preprocessor">%</span> <span class="keyword">if</span> <span class="comment">(!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)</span>{ <span class="preprocessor">%</span>&gt;
+    ...
+&lt;<span class="preprocessor">%</span> } <span class="preprocessor">%</span>&gt;
 </code></pre><p>替换为:</p>
-<pre><code><span class="xml"></span>&lt;%<span class="ruby"> <span class="keyword">if</span> (!index &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname){ </span>%&gt;<span class="xml">
+<pre><code><span class="xml"></span>&lt;%<span class="perl"> <span class="keyword">if</span> (!<span class="keyword">index</span> &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname){ </span>%&gt;<span class="xml">
 <span class="tag">&lt;<span class="title">section</span> <span class="attribute">id</span>=<span class="value">"comments"</span>&gt;</span>
   <span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"</span></span></span>&lt;%=<span class="ruby"> post.layout </span>%&gt;<span class="xml"><span class="tag"><span class="value">-</span></span></span>&lt;%=<span class="ruby"> post.slug </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-title</span>=<span class="value">"</span></span></span>&lt;%=<span class="ruby"> post.title </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-url</span>=<span class="value">"</span></span></span>&lt;%=<span class="ruby"> page.permalink </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> post.layout </span>%&gt;<span class="xml"><span class="tag"><span class="value">-</span></span></span>&lt;%=<span class="perl"> post.slug </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-title</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> post.title </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-url</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> page.permalink </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
   <span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
   <span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
   <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
     <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
-    (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
       <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
       ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
       ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
@@ -797,7 +797,7 @@ Questions? Try the support <span class="literal">group</span>
   </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
   <span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
 <span class="tag">&lt;/<span class="title">section</span>&gt;</span>
-</span>&lt;%<span class="ruby"> } </span>%&gt;<span class="xml"></span>
+</span>&lt;%<span class="perl"> } </span>%&gt;<span class="xml"></span>
 </code></pre><p>也就是说,把前面得到的通用代码复制到<code>&lt;section id=&quot;comments&quot;&gt;&lt;/section&gt;</code>里面去,然后把<code>data-thread-key</code> <code>data-title</code> <code>data-url</code> 如上替换就好了.</p>
 <p>然后找到主题的<code>_config.yml</code>,添加一个变量:</p>
 <pre><code><span class="attribute">duoshuo_shortname</span>: <span class="string">codebunny</span>

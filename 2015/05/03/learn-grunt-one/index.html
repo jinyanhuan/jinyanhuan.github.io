@@ -21,6 +21,7 @@ gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件�
 像index,buy,这些">
 <meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20150503.01.png">
 <meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20150503.02.png">
+<meta property="og:updated_time" content="2015-05-16T08:51:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grunt学习实战(1)">
 <meta name="twitter:description" content="grunt基础知识我就不再写了,直接看官网就可以了.官网的教程还是挺清楚的.
@@ -127,7 +128,7 @@ gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -264,14 +265,14 @@ gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件�
 <p>然后安装插件:</p>
 <ol>
 <li>安装grunt-cli: <em>sudo npm install -g grunt-cli</em></li>
-<li>安装grunt: <em>npm install grunt —save-dev</em></li>
-<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks —save-dev</em></li>
+<li>安装grunt: <em>npm install grunt –save-dev</em></li>
+<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks –save-dev</em></li>
 <li>安装另外几个插件,不赘述</li>
 </ol>
 <p>然后开始书写<code>Gruntfile.js</code>:</p>
 <pre><code><span class="pi">'use strict'</span>;
 
-<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>{
 
     <span class="built_in">require</span>(<span class="string">'load-grunt-tasks'</span>)(grunt)
 
@@ -315,7 +316,7 @@ gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件�
 <p>1.基本格式:</p>
 <pre><code><span class="pi">'use strict'</span>;
 
-<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span> </span>{
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>{
 
     ...
 
@@ -325,9 +326,9 @@ gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件�
 <pre><code><span class="function"><span class="title">require</span><span class="params">(<span class="string">'load-grunt-tasks'</span>)</span><span class="params">(grunt)</span></span>
 </code></pre><hr>
 <p>3.配置任务:</p>
-<pre><code>grunt.initConfig({
+<pre><code><span class="tag">grunt</span><span class="class">.initConfig</span>({
 
-    <span class="keyword">...</span>
+    ...
 
 })
 </code></pre><hr>
@@ -375,15 +376,15 @@ gruntProject根目录下,有html页面,less文件夹,jssrc文件夹.less文件�
 <p><em>src</em>里排除了<code>global.lee</code>,<code>mixins.less</code>,<code>variables.less</code>,这些全局的,不需要编译的文件.</p>
 <hr>
 <p>7.配置<code>watch</code>任务:</p>
-<pre><code><span class="tag">watch</span>: {
-    <span class="attribute">files</span>:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
-    <span class="attribute">tasks</span>:[<span class="string">'default'</span>]
-}
+<pre><code><span class="tag">watch</span>: <span class="rules">{
+    <span class="rule"><span class="attribute">files</span>:<span class="value">[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+    tasks:[<span class="string">'default'</span>]
+</span></span></span>}
 </code></pre><p><em>files</em>属性配置需要监测变化的文件,<em>tasks</em>属性配置文件变化以后需要执行的任务.</p>
 <p>这里再次用到了一个很重要的知识点: <em>/\</em>.js<em> 表示目录下所有的js文件,<strong>不包括</strong>目录的子目录下的js文件. </em>/**/*.less* 表示目录下的所有less文件,包括目录的子目录下的less文件.</p>
 <hr>
 <p>8.注册<code>default</code>任务:</p>
-<pre><code>grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+<pre><code><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
 </code></pre><p>把默认要执行的任务定义为<code>uglify</code>任务和<code>less</code>任务.</p>
 <hr>
 <p>然后执行一下<em>grunt</em>,就可以看到文件被编译压缩好了:</p>

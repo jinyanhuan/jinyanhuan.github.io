@@ -21,6 +21,7 @@ mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装�
 code-bunnydeMacBook-Air:Downloads code_bunny$ tar zxvf mongodb-osx-x86_64-3.0.5.tgz
 
 mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装完.接下来我们可以把它移到我希望的路径去并放在mo">
+<meta property="og:updated_time" content="2015-08-01T18:45:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac下安装mongodb">
 <meta name="twitter:description" content="之前已经在win7下安装了mongodb,现在要在mac下再安装一遍.
@@ -128,7 +129,7 @@ mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a><a href="/tags/grunt/" style="font-size: 10px;">grunt</a><a href="/tags/hexo/" style="font-size: 20px;">hexo</a><a href="/tags/less/" style="font-size: 10px;">less</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a><a href="/tags/sass/" style="font-size: 10px;">sass</a><a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a><a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -248,7 +249,7 @@ mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装�
         <p>之前已经在win7下安装了mongodb,现在要在mac下再安装一遍.</p>
 <p>一.下载安装:<br>首先是: <a href="https://fastdl.mongodb.org/osx/mongodb-osx-x86_64-3.0.5.tgz" target="_blank" rel="external">下载链接</a></p>
 <p>解压它:</p>
-<pre><code>code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:Downloads</span> code_bunny<span class="variable">$ </span>tar zxvf mongodb-osx-x86_64-<span class="number">3.0</span>.<span class="number">5</span>.tgz
+<pre><code>code-bunnydeMacBook-Air:Downloads code_bunny$ tar zxvf mongodb-osx-x86_64-<span class="number">3.0</span><span class="number">.5</span>.tgz
 </code></pre><hr>
 <p>mongodb是个绿色软件,不需要手动安装,所以它解压完即是安装完.接下来我们可以把它移到我希望的路径去并放在mongodb文件夹里:</p>
 <pre><code>code-bunnydeMacBook-<span class="string">Air:</span>~ code_bunny$ mv <span class="regexp">/Users/</span>code_bunny<span class="regexp">/Downloads/</span>mongodb-osx-x86_64-<span class="number">3.0</span><span class="number">.5</span> mongodb
@@ -282,7 +283,7 @@ code-bunnydeMacBook-<span class="constant">Air</span><span class="symbol">:logs<
 </code></pre><hr>
 <p>三.启动服务端:</p>
 <pre><code>code-bunnydeMacBook-<span class="string">Air:</span>mongodb code_bunny$ sudo .<span class="regexp">/bin/</span>mongod --dbpath <span class="regexp">/Users/</span>code_bunny<span class="regexp">/mongodb/</span>data --logpath <span class="regexp">/Users/</span>code_bunny<span class="regexp">/mongodb/</span>logs/mongo.log --fork --port <span class="number">27017</span>
-</code></pre><p>其中: —dbpath表示数据存放的路径,就是刚才建的data文件夹. —logpath表示日志存放位置,它必须是个log文件. —fork表示后台运行程序. —port是端口</p>
+</code></pre><p>其中: –dbpath表示数据存放的路径,就是刚才建的data文件夹. –logpath表示日志存放位置,它必须是个log文件. –fork表示后台运行程序. –port是端口</p>
 <p>显示这样一段东西,表示启动成功:</p>
 <pre><code>about <span class="keyword">to</span> fork child <span class="keyword">process</span>, waiting <span class="keyword">until</span> server <span class="keyword">is</span> ready <span class="keyword">for</span> connections.
 forked <span class="keyword">process</span>: <span class="number">6266</span>
