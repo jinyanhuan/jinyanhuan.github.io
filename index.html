@@ -236,10 +236,31 @@
 </ul>
 <p>当然,如果你使用POST方式发送Ajax是不能缓存的,因为POST请求永远不会被缓存.如果你的Ajax请求会产生其他作用(比如银行账户之间的转账),请使用POST请求.</p>
 <p>我们设置了一个demo(这个demo已经不能看了ヽ（≧□≦）ノ)来阐明这些头信息是如何工作的. 在HttpWatch里,你可以看到我们在响应头信息里设置了以上三个响应头</p>
-<p><img src="" alt="Ajax Caching Headers"></p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20151223.01.png" alt="Ajax Caching Headers"></p>
 <p>如果你规律的点击 ‘Ajax Update’ 按钮,时间的改变会趋向于每隔一分钟一次.因为Expires响应头被设置为未来的一分钟.在下面这张截图里你可以看到:重复的点击更新按钮时,Ajax请求会读取浏览器本地的缓存而不会产生网络活动(发送和传输栏的值都是0)</p>
-<p><img src="" alt="Ajax Caching Headers"></p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20151223.02.png" alt="Ajax Caching Headers"></p>
 <p>最后一次1:06.531时刻的点击发送的Ajax请求产生了网络数据传输,因为缓存的数据已经超过了一分钟. 服务器返回200响应状态表示获取到了一份新的数据.</p>
+<blockquote>
+<p>猜测这个demo应该是一个按钮,每点击一次获取一次当前时间然后回现在页面上.</p>
+</blockquote>
+<h2 id="真相2:IE浏览器在Expires时间过期之前不会刷新通过Ajax获取的内容-">真相2:IE浏览器在Expires时间过期之前不会刷新通过Ajax获取的内容.</h2><p>有些时候,Ajax在页面加载的时候就被用来填充页面的某些部分(比如一个价格列表).它并不是通过用户的某个事件(比如点击某个按钮)触发的,而是在页面加载的时候就通过javascript来发送的.就好像Ajax请求和那些嵌入资源(比如js和css)是一样的.</p>
+<p>如果你开发这样的页面,在刷新它的时候,很可能想要更新嵌入的Ajax请求内容.对于嵌入资源(CSS文件,图片等),浏览器会通过用户刷新的方式是F5(刷新)还是Ctrl+F5(强制刷新)来自动发送下列不同类型的请求:</p>
+<ol>
+<li>F5(刷新): 如果请求内容带有 <em>Last-Modified</em> 响应头,那么浏览器会发送条件性更新请求. 它使用 <em>If-Modified-Since</em> 请求头进行比较,这样服务器就可以返回304状态来避免传输不必要的数据.</li>
+<li>Ctrl+F5(强制刷新): 告诉浏览器发送无条件更新请求,请求头的 <em>Cache-Control</em> 被设置为<em>‘no-cache’</em>.这告诉所有的中间代理和缓存:浏览器需要获取最新的版本,无论它是否已经被缓存.</li>
+</ol>
+<p>Firefox把这个刷新的方式传播到了那些在页面加载的时候就发送的Ajax请求上,把这些Ajax请求当成嵌入资源来处理.下面是HttpWatch在火狐下的截图,显示了Ajax Caching demo(这个demo已经不能看了ヽ（≧□≦）ノ)刷新(F5)页面时Ajax请求的效果:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20151223.03.png" alt="Refresh of Ajax Request in Firefox"></p>
+<p>火狐确保Ajax发起的请求是条件性的.在这个例子里,如果缓存数据不到10秒,服务器返回304,超过10秒,服务器返回200,重新传送数据.</p>
+<p>在ie里,加载页面时就发起的Ajax请求被看做是和页面其他部分刷新毫无关系的,也不会被用户的刷新方式所左右.如果缓存的ajax数据没有过期,就不会有GET请求发送到服务器.它会直接从缓存里读取数据,从HttpWatch里看就是(Cache)结果.下面这个图是在ie下缓存没有过期的情况下按F5刷新:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20151223.04.png" alt="IE Refresh of Ajax Request"></p>
+<p>就算是通过 Ctrl+F5 强制刷新,通过Ajax获取的数据也是从缓存里读取:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20151223.05.png" alt="IE Refresh of Ajax Request"></p>
+<p>这就意味着,任何通过Ajax得到的内容如果没有过期,在ie下都不会被更新 - 即使你使用Ctrl+F5强制刷新. 唯一能确保你获取最新数据的方法就是手动清楚缓存. 可以使用HttpWatch的工具栏:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20151223.06.png" alt="IE Forced Refresh"></p>
+<blockquote>
+<p>注意,Cache结果和304结果是不同的.Cache其实是200(cache),304就是304.Cache其实没有向服务器发送请求,可以从chrome里看到,它的耗时是0,response也是空.而304不同,<br>304请求是浏览器发起了一个条件性的请求,这个请求携带了 <em>If-Modified-Since</em> 请求头,如果这个文件在浏览器发送的这个时间之后没有修改过,服务器端就回返回一个304状态,告诉浏览器使用它本地的缓存内容.它没有Cache快,因为请求还是发送到了服务器端,只不过服务器端没有发送数据.<br>可以看下taobao首页,里面既有200(cache)也有304.可以查看他们的区别.</p>
+</blockquote>
 
         
           <!-- show an end symbol if the article is fully displayed -->

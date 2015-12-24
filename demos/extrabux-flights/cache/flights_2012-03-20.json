@@ -1,0 +1,50 @@
+[
+    {
+        "id": "17",
+        "date": "2012-03-20",
+        "departure_city": "Honolulu",
+        "arrival_city": "Juneau",
+        "departure_time": "2012-03-20 10:35:00",
+        "arrival_time": "2012-03-20 20:25:00",
+        "flight_number": "320",
+        "routing": "0",
+        "first_class_price": "745",
+        "economy_class_price": "463"
+    },
+    {
+        "id": "18",
+        "date": "2012-03-20",
+        "departure_city": "Houston",
+        "arrival_city": "Orlando",
+        "departure_time": "2012-03-20 11:45:00",
+        "arrival_time": "2012-03-20 17:30:00",
+        "flight_number": "5311",
+        "routing": "0",
+        "first_class_price": "920",
+        "economy_class_price": "590"
+    },
+    {
+        "id": "19",
+        "date": "2012-03-20",
+        "departure_city": "Portland",
+        "arrival_city": "Cleveland",
+        "departure_time": "2012-03-20 09:30:00",
+        "arrival_time": "2012-03-20 17:45:00",
+        "flight_number": "89",
+        "routing": "1",
+        "first_class_price": "1017",
+        "economy_class_price": "533"
+    },
+    {
+        "id": "20",
+        "date": "2012-03-20",
+        "departure_city": "San Diego",
+        "arrival_city": "Newark",
+        "departure_time": "2012-03-20 09:50:00",
+        "arrival_time": "2012-03-20 18:30:00",
+        "flight_number": "1011",
+        "routing": "1",
+        "first_class_price": "989",
+        "economy_class_price": "700"
+    }
+]
