@@ -1,9 +1,0 @@
-{
-  "family": "tmall",
-  "name": "common",
-  "version": "1.0.0",
-
-  "spm": {
-      "output": ["ie7Patch.js", "tmall.css", "tmall-global.css"]
-  }
-}

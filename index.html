@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,91 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-ajax-caching" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/23/ajax-caching/" class="article-date">
+  	<time datetime="2015-12-23T08:53:19.000Z" itemprop="datePublished">2015-12-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/23/ajax-caching/">关于ajax缓存的两个真相</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>翻自 <a href="https://blog.httpwatch.com/2009/08/07/ajax-caching-two-important-facts/" target="_blank" rel="external">Ajax Caching: Two Important Facts</a></p>
+</blockquote>
+<p>Ajax的调用和其它的HTTP请求一样,用于构建web页面. 然后由于它是动态的,人们常常忽略了缓存它的好处.</p>
+<p><a href="http://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309/" target="_blank" rel="external"> &lt;&lt; High Performance Web Sites >></a>一书的<a href="http://stevesouders.com/hpws/rule-ajax.php" target="_blank" rel="external">第14条</a>说到:</p>
+<p><strong>让ajax请求可以被缓存</strong></p>
+<p><strong>确保你的ajax请求遵循高性能指导方针,尤其是要有一个设置未来过期时间的Expires头.</strong></p>
+<hr>
+<p>这篇文章剩下的部分会包含两个重要的真相,这会帮助你理解并高效的使用Ajax请求的缓存.</p>
+<h2 id="真相1:Ajax的缓存和HTTP的缓存是一样的">真相1:Ajax的缓存和HTTP的缓存是一样的</h2><p>现代浏览器的HTTP和缓存机制比Ajax的XMLHttpRequest对象要差很多,所以它不认识也不关心Ajax请求.它仅仅是遵循普通的HTTP缓存规则,通过服务器返回的响应头来进行缓存.</p>
+<p>如果你已经对 <a href="http://blog.httpwatch.com/2007/12/10/two-simple-rules-for-http-caching/" target="_blank" rel="external">HTTP缓存</a> 有了解,那么你可以把HTTP缓存的知识用对Ajax缓存的理解上. 他们只有一点不同的,就是设置响应头的方式会和普通文件不一样.</p>
+<p>下面这些响应头可以让你的Ajax可缓存:</p>
+<ul>
+<li><strong>Expires:</strong> 这一项应该被设置成未来的某个合适的时间点,时间点的设置取决于内容变动的频繁程度.举个栗子,如果请求的是个库存数量,那么Expires的值可以是10秒以后.如果请求的是一个相片,那么Expires的值就可以久一点,因为它不会经常变动.Expires头可以让浏览器在一段时间内重用本地缓存数据,从而避免任何不必要的与服务器数据交互.</li>
+<li><strong>Last-Modified:</strong> 设置这一项是一个很好的选择,通过它,浏览器在发送条件性GET请求的时候会使用请求头里的 <em>If-Modified-Since</em> 来检查本地缓存的内容.如果数据不需要更新,服务器会返回304响应状态.</li>
+<li><strong>Cache-Control:</strong> 在合适的情况下,这个值应该被设置为 <em>Public</em> ,这样所有的中间代理和缓存都可以被保存并且与其他用户共享内容.在火狐里,它还支持<a href="">HTTPS请求的缓存</a></li>
+</ul>
+<p>当然,如果你使用POST方式发送Ajax是不能缓存的,因为POST请求永远不会被缓存.如果你的Ajax请求会产生其他作用(比如银行账户之间的转账),请使用POST请求.</p>
+<p>我们设置了一个demo(这个demo已经不能看了ヽ（≧□≦）ノ)来阐明这些头信息是如何工作的. 在HttpWatch里,你可以看到我们在响应头信息里设置了以上三个响应头</p>
+<p><img src="" alt="Ajax Caching Headers"></p>
+<p>如果你规律的点击 ‘Ajax Update’ 按钮,时间的改变会趋向于每隔一分钟一次.因为Expires响应头被设置为未来的一分钟.在下面这张截图里你可以看到:重复的点击更新按钮时,Ajax请求会读取浏览器本地的缓存而不会产生网络活动(发送和传输栏的值都是0)</p>
+<p><img src="" alt="Ajax Caching Headers"></p>
+<p>最后一次1:06.531时刻的点击发送的Ajax请求产生了网络数据传输,因为缓存的数据已经超过了一分钟. 服务器返回200响应状态表示获取到了一份新的数据.</p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/">ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-browserify-handbook" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -649,87 +734,6 @@ Questions? Try the support <span class="literal">group</span>
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webstorm/">webstorm</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-sass-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/03/sass-in-webstorm/" class="article-date">
-  	<time datetime="2015-04-03T10:30:04.000Z" itemprop="datePublished">2015-04-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/03/sass-in-webstorm/">在webstorm中配置sass的自动编译</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.</p>
-<p>本文使用的webstorm为8.0版本</p>
-<p>点击左上角的<code>File</code>→<code>Settings</code>→<code>File Watchers</code></p>
-<p>在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss</p>
-<p>按照下图进行配置:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20150404.01.gif" alt="webstorm配置sass自动编译1"></p>
-<p>其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.</p>
-<p><em>Arguments</em>:</p>
-<p>可以配置编译后的文件的输出路径,我这里写的是:</p>
-<p><code>--no-cache --update --sourcemap --watch $FileName$:$FileParentDir$\css\$FileNameWithoutExtension$.css</code></p>
-<p>注意, <code>$FileName$</code>后面有个冒号,然后<code>$FileParentDir$</code>表示的是<strong>scss文件所在的文件夹的父级文件夹</strong>,而不是scss文件的父文件夹.</p>
-<p>举个栗子,我的项目叫<code>sass-learn</code>,里面有个scss文件夹,里面存放scss文件,那么按照这样配置的结果,style.scss所在的文件夹就是scss,scss的父文件夹就是sass-learn,然后找到sass-learn下的css文件夹,编译后的style.css文件就会在这里.</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20150404.02.gif" alt="webstorm配置sass自动编译2"></p>
-<p><em>Output paths to refresh</em>:</p>
-<p>改成这样:<code>$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map</code></p>
-<blockquote>
-<p>在使用的过程中还有两点需要注意:</p>
-</blockquote>
-<p>1.同步编译只能在项目文件夹下,也就是webstorm左侧打开的项目.随便打开一个项目外的文件是不行的.<br>2.这个和webstorm没有什么关系,就是sass编译不能带有中文,无论是路径名,文件名,文件里的内容,都不能识别中文,如果要修改它也不是不可以,但我觉得不用中文也挺好的,养成好习惯嘛.</p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webstorm/">webstorm</a></li></ul>
 	</div>
 
       

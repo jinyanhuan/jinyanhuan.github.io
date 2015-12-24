@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,87 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-sass-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/03/sass-in-webstorm/" class="article-date">
+  	<time datetime="2015-04-03T10:30:04.000Z" itemprop="datePublished">2015-04-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/03/sass-in-webstorm/">在webstorm中配置sass的自动编译</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.</p>
+<p>本文使用的webstorm为8.0版本</p>
+<p>点击左上角的<code>File</code>→<code>Settings</code>→<code>File Watchers</code></p>
+<p>在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss</p>
+<p>按照下图进行配置:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150404.01.gif" alt="webstorm配置sass自动编译1"></p>
+<p>其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.</p>
+<p><em>Arguments</em>:</p>
+<p>可以配置编译后的文件的输出路径,我这里写的是:</p>
+<p><code>--no-cache --update --sourcemap --watch $FileName$:$FileParentDir$\css\$FileNameWithoutExtension$.css</code></p>
+<p>注意, <code>$FileName$</code>后面有个冒号,然后<code>$FileParentDir$</code>表示的是<strong>scss文件所在的文件夹的父级文件夹</strong>,而不是scss文件的父文件夹.</p>
+<p>举个栗子,我的项目叫<code>sass-learn</code>,里面有个scss文件夹,里面存放scss文件,那么按照这样配置的结果,style.scss所在的文件夹就是scss,scss的父文件夹就是sass-learn,然后找到sass-learn下的css文件夹,编译后的style.css文件就会在这里.</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150404.02.gif" alt="webstorm配置sass自动编译2"></p>
+<p><em>Output paths to refresh</em>:</p>
+<p>改成这样:<code>$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map</code></p>
+<blockquote>
+<p>在使用的过程中还有两点需要注意:</p>
+</blockquote>
+<p>1.同步编译只能在项目文件夹下,也就是webstorm左侧打开的项目.随便打开一个项目外的文件是不行的.<br>2.这个和webstorm没有什么关系,就是sass编译不能带有中文,无论是路径名,文件名,文件里的内容,都不能识别中文,如果要修改它也不是不可以,但我觉得不用中文也挺好的,养成好习惯嘛.</p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webstorm/">webstorm</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-hexo-build-four" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -504,8 +585,7 @@ duoshuo_shortname: codebunny                                             <span c
       
         <p><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">使用hexo搭建github.io博客(一)</a>这篇文章我是写在博客园上的,现在既然成功的搭建了github.io博客,那我就拿这篇开刀,真正的在我的github博客上发布一篇文章吧~</p>
 <p>在搭建(一)完成后,就有了一个空的博客,里面只有一篇’Hello World’.现在就来学习如何写博客</p>
-<p>###在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的.</p>
-<p><strong>一.配置整站</strong></p>
+<h3 id="在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的-">在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的.</h3><p><strong>一.配置整站</strong></p>
 <p>打开hexo目录下的<code>_config.yml</code>文件,做如下配置,如果没有写到的,那就是保持默认:</p>
 <pre><code># Hexo Configuration
 ## Docs: http://hexo.io/docs/configuration.html
@@ -662,10 +742,7 @@ tags: [标签<span class="number">1</span>,便签<span class="number">2</span>] 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#这里是h1段落</p>
-<p>##这里是h2段落</p>
-<p>###这里是h3段落</p>
-<p>一段文字里带有<em>重点</em></p>
+        <h1 id="这里是h1段落">这里是h1段落</h1><h2 id="这里是h2段落">这里是h2段落</h2><h3 id="这里是h3段落">这里是h3段落</h3><p>一段文字里带有<em>重点</em></p>
 <p>一段文字里带有<strong>重点</strong></p>
 <p>一段文字里带有<code>coding</code></p>
 <blockquote>
@@ -681,8 +758,7 @@ tags: [标签<span class="number">1</span>,便签<span class="number">2</span>] 
 <li>这是有序列表项</li>
 <li>这是有序列表项</li>
 </ol>
-<p>#下面这个是嵌套的列表</p>
-<ul>
+<h1 id="下面这个是嵌套的列表">下面这个是嵌套的列表</h1><ul>
 <li>外层列表项目<ul>
 <li>内层列表项目</li>
 <li>内层无序列表项目</li>
