@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,102 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-less-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/26/less-in-webstorm/" class="article-date">
+  	<time datetime="2015-04-26T05:23:58.000Z" itemprop="datePublished">2015-04-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/26/less-in-webstorm/">在webstorm中配置less的自动编译</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇说了使用webstorm自动编译sass,这篇说说怎么自动编译less,其实是差不多的.</p>
+<p>由于我的hexo从原来的windows搬到了mac os 上,顺便也当练练手,试一下.</p>
+<p>首先,需要下载编译less的包,执行 <em>npm install -g less</em> (如果是mac下,需要加上sudo)</p>
+<p>安装完以后它会显示你安装的路径,这个路径需要记下来,后面会用到.</p>
+<p>下面几步和sass是一样的,只是选择的是less</p>
+<p>点击左上角的<code>File</code>→<code>Settings</code>→<code>File Watchers</code></p>
+<blockquote>
+<p>在mac os下,应该是<code>WebStorm</code>→<code>Preferences</code>→<code>Tools</code>→<code>File Watchers</code></p>
+</blockquote>
+<p>在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择less</p>
+<p>按照下图进行配置:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.01.png" alt="webstorm配置less自动编译1"></p>
+<p>其中有两个选项是需要修改配置的:</p>
+<p>1.<em>Program</em>:</p>
+<p>这里填写的是less编译包安装的路径,就是前面一开始要记下来的那个路径.</p>
+<p>2.<em>Outputpaths to refresh</em>:</p>
+<p>这里填写的是less编译后的css文件的路径,和sass里的Arguments参数一样,这里的<code>$FileParentDir$</code>表示的是less文件所在的文件夹的父级文件夹,而不是less文件的父文件夹.</p>
+<p>和sass一样,它只能编译你打开的项目里的文件</p>
+<p>比如打开<code>test1</code>项目,就可以自动编译less:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.02.png" alt="webstorm配置less自动编译2"></p>
+<p><strong>下面说个比较复杂的功能,sass和其它file watcher都一样用</strong></p>
+<p>在配置<em>Outputpaths to refresh</em>这个参数,以及sass里配置<em>Arguments</em>参数的时候,都用到了’$FileParentDir$’这个参数,那么这个是哪里来的? 如果我还有其它配置路径的需求,要怎么做呢?</p>
+<p>再回去看下的配置的图:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.01.png" alt="webstorm配置less自动编译1"></p>
+<p>可以看到,在每个参数的后面都有个按钮,叫 <code>insert macro...</code> 打开这个,就可以看到有哪些参数是可以配置的,选中以后,它会按照你当前打开的文件来举例说明这个参数的结果是什么.</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.03.png" alt="webstorm配置less自动编译3"></p>
+<p>比如这个 $FileName 就是当前文件的名字,其它的每个都可以点击查看,点击insert就插入这个参数.</p>
+<p>举个栗子,我工作中需要用到这样的路径: less文件夹下按照模块分,公共部分直接在less文件夹下,其它的各个板块分别在各自的文件夹下,比如index模块,就在index文件夹下,最后编译出来的css都到css文件夹下:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.04.png" alt="webstorm配置less自动编译4"></p>
+<p>就可以这样配置<em>Outputpaths to refresh</em>:</p>
+<p><em>\$ProjectFileDir\$/css/\$FileNameWithoutExtension\$.css</em></p>
+<blockquote>
+<p>这样,webstorm自带的配置方法已经可以满足很多需求了,如果项目架构实在太复杂,那只能移步grunt或者fis了,后续会继续学习grunt.</p>
+</blockquote>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webstorm/">webstorm</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-sass-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -716,117 +812,9 @@ tags: [标签<span class="number">1</span>,便签<span class="number">2</span>] 
 
 
   
-    <article id="post-my-new-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/03/10/my-new-post/" class="article-date">
-  	<time datetime="2015-03-10T09:54:06.000Z" itemprop="datePublished">2015-03-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/10/my-new-post/">markdown 格式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="这里是h1段落">这里是h1段落</h1><h2 id="这里是h2段落">这里是h2段落</h2><h3 id="这里是h3段落">这里是h3段落</h3><p>一段文字里带有<em>重点</em></p>
-<p>一段文字里带有<strong>重点</strong></p>
-<p>一段文字里带有<code>coding</code></p>
-<blockquote>
-<p>表示引用文字内容</p>
-</blockquote>
-<hr>
-<ul>
-<li>这是无序列表项</li>
-<li>这是无序列表项</li>
-<li>这是无序列表项</li>
-</ul>
-<ol>
-<li>这是有序列表项</li>
-<li>这是有序列表项</li>
-</ol>
-<h1 id="下面这个是嵌套的列表">下面这个是嵌套的列表</h1><ul>
-<li>外层列表项目<ul>
-<li>内层列表项目</li>
-<li>内层无序列表项目</li>
-<li>内层列表项目</li>
-</ul>
-</li>
-<li>外层列表项目</li>
-</ul>
-<p>直接把一个URL现实为超链接: <a href="http://www.cnblogs.com/liulangmao/" target="_blank" rel="external">我的博客园</a></p>
-<p>这是一个图像: <img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="兔子"></p>
-<p>行的开头空四格,表示程序代码(另外必须换行再换行,不能只换一次行):</p>
-<p>Javascript:</p>
-<pre><code><span class="comment">/**
- * nth element in the fibonacci series.
- * <span class="doctag">@param</span> n &gt;= 0
- * <span class="doctag">@return</span> the nth element, &gt;= 0.
- */</span>
-<span class="function"><span class="keyword">function</span> <span class="title">fib</span><span class="params">(n)</span> </span>{
-    <span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">1</span>;
-    <span class="keyword">var</span> tmp;
-    <span class="keyword">while</span> (--n &gt;= <span class="number">0</span>) {
-        tmp = a;
-        a += b;
-       b = tmp;
-    }
-    <span class="keyword">return</span> a;
-}
-
-document.write(fib(<span class="number">10</span>));
-</code></pre>
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
