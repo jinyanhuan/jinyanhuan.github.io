@@ -6,27 +6,30 @@
   <title>thinking-in-react | code_bunny&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="关于React的一些思考作者: Pete Hunt
+查看原文
 在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.
 React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.
-从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个设计师给出">
+从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="thinking-in-react">
 <meta property="og:url" content="http://yoursite.com/2016/01/17/thinking-in-react/index.html">
 <meta property="og:site_name" content="code_bunny's blog">
 <meta property="og:description" content="关于React的一些思考作者: Pete Hunt
+查看原文
 在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.
 React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.
-从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个设计师给出">
-<meta property="og:image" content="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg">
-<meta property="og:image" content="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg">
-<meta property="og:image" content="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg">
-<meta property="og:updated_time" content="2016-01-17T08:35:51.000Z">
+从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个">
+<meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20160117.01.png">
+<meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20160117.02.png">
+<meta property="og:image" content="http://jinyanhuan.github.io/blogimages/20160117.03.png">
+<meta property="og:updated_time" content="2016-01-25T04:24:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="thinking-in-react">
 <meta name="twitter:description" content="关于React的一些思考作者: Pete Hunt
+查看原文
 在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.
 React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.
-从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个设计师给出">
+从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个">
   
     <link rel="alternative" href="/atom.xml" title="code_bunny&#39;s blog" type="application/atom+xml">
   
@@ -240,10 +243,11 @@ React的一个重要部分就是,如何去思考你要构建的应用.在这篇�
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="关于React的一些思考">关于React的一些思考</h1><p>作者: Pete Hunt</p>
+<p><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank" rel="external">查看原文</a></p>
 <p>在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.</p>
 <p>React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.</p>
 <h2 id="从一个原型开始">从一个原型开始</h2><p>想象我们已经有一个JSON格式的数据文件以及一个设计师给出的原型.显然我们的设计师水平很烂,因为这个原型看起来是这样的:</p>
-<p><img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="Mockup"></p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20160117.01.png" alt="Mockup"></p>
 <p>我们的JSON文件返回的数据是这样的:</p>
 <pre><code>[
   {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$49.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Football"</span>},
@@ -256,7 +260,7 @@ React的一个重要部分就是,如何去思考你要构建的应用.在这篇�
 </code></pre><h2 id="第一步:_把视图拆分成层级组件">第一步: 把视图拆分成层级组件</h2><p>首先你需要画一个盒子模型草图,这个盒子模型包括了原型里的每个组件和它的子组件,然后给每个组件取名字.如果你和设计师协作,他们可能已经帮你完成了取名这件事,直接去问他们就行.ps图层名可能就是最后React组件的名字.</p>
 <p>但你怎么知道哪些应该是一个组件呢? 只需要通过判断你是否需要新建一个对象或者函数. 这个技术秉持<strong>各自负责原则</strong>,就是说,从理念上讲,一个组件只做一件事.如果它后面需要扩展,就应该被解耦成多个子组件.</p>
 <p>由于大多数时候你展示给用户的数据模型都是基于JSON格式的,你会发现,一旦你的模型建立正确,你的视图(连同你的组件结构)会很好匹配它.这是因为视图和数据模型倾向于依附同一个结构.这就意味着,把视图拆分成组件是很简单的,只需要按照每个组件匹配一个数据模型来拆分就可以了.</p>
-<p><img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="Mockup"></p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20160117.02.png" alt="Mockup"></p>
 <p>你可以看到,这个简单的应用里有5个组件.我已经用粗体字标明了每个组件代表了哪个数据模型.</p>
 <ol>
 <li><code>FilterableProductTable</code> <strong>(橙色)</strong>: 包含了整个栗子</li>
@@ -267,7 +271,60 @@ React的一个重要部分就是,如何去思考你要构建的应用.在这篇�
 </ol>
 <p>看一下 <code>ProductTable</code>, 你会发现,表格的标题部分(包括Name和Price两项)并不是一个单独的组件.这是由个人偏好决定的,也有争议说不应该这样处理.在这个例子里,我把它作为 <code>ProductTable</code> 的一部分,因为它也是渲染搜索结果数据的一部分,这个事情应该由 <code>ProductTable</code> 负责.但是,如果这个标题变得更复杂(比如我们要添加排序功能),显然就应该把它单独做成一个 <code>ProductTableHeader</code> 组件</p>
 <p>现在,我们已经给原型定义好了组件,让我们把它整理成一个层级关系.这很简单. 被包含在其他组件里的组件应该出现在层级图的子层:</p>
-<p><img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="hierarchy"></p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20160117.03.png" alt="hierarchy"></p>
+<h2 id="第二步:_使用React构建一个静态版本">第二步: 使用React构建一个静态版本</h2><p>代码在jsfiddle上:<a href="https://jsfiddle.net/reactjs/yun1vgqb/" target="_blank" rel="external">查看代码</a></p>
+<p>现在你已经有了组件的层级关系,就可以开始你的应用了.最简单的方法是构建一个不带有任何交互,仅使用数据模型来渲染出视图的版本.最好能够把把这个过程进行解耦,因为构建静态版本需要打很多不用动脑筋的代码,而添加交互不需要写很多代码,却很费脑子.我们来看下这是为什么.</p>
+<p>构建一个静态渲染数据模型的应用,你的组件里需要重用其他组件,然后通过 <em>props</em> 来传递数据.props用于从父组件向子组件传递数据. 如果你听说过’状态’这个概念,那么记住,<strong>不要在静态的版本里使用状态</strong>.状态是留给交互使用的,就是说,在一段时间后会改变的数据. 由于现在做的是静态版的应用,所以你用不到它.</p>
+<p>你的思考方式可以是从上到下,也可以是从下到上. 就是说,你可以从层级的最高层的组件开始做(比如从<code>FilterableProductTable</code>开始)或者最底层的那个(<code>ProductRow</code>).一般来说,在简单的情况下,从上到下会比较简单,在大型的项目里,从下到上的构建并编写测试会比较简单.</p>
+<p>在这一步的最后,你会得到一个可重用的组件库,用于渲染数据模型.组件只有 <code>render()</code> 方法,因为这是一个静态的版本.数据模型会被放在最外层的组件(<code>FilterableProductTable</code>)的prop属性里.如果你修改了底层的数据模型,然后再次调用 <code>ReactDOM.render()</code> 方法,视图会被更新.你可以很容易的看到视图是怎么被更新的,哪里发生了变化.因为没有什么复杂的事情发生.React的<strong>单向数据流</strong>(或称单向数据绑定)保证了页面的模块化和速度.</p>
+<p>如果你在这一步有什么问题,请参考<a href="https://facebook.github.io/react/docs/" target="_blank" rel="external">React文档</a>.</p>
+<h2 id="第三步:_定义视图的状态,要做到最小化但却完整-">第三步: 定义视图的状态,要做到最小化但却完整.</h2><p>要让视图实现交互,你需要触发底层数据模型发生改变.React通过状态来简单的实现了它.</p>
+<p>为了正确构建你的应用,首先要思考的是,应用有哪些变化的状态,他们的最小单位应该是什么.这里的关键是 DRY(Don’t Repeat Yourself) 原则: 不要自己重复自己.</p>
+<p>找出应用里所需要的最小单位的状态,而其他需要的东西,可以通过算法来实现. 举个栗子,如果你要做一个TODO列表,只需要有一个数组格式的TODOs的列表;不要给数量单独赋予一个状态,而是通过获取TODO数组的长度来得到TODOs的数量.</p>
+<p>考虑这个例子里的每条数据:</p>
+<ul>
+<li>商品的原始列表</li>
+<li>用户输入的搜索词</li>
+<li>checkbox是否被选中</li>
+<li>过滤出的商品列表</li>
+</ul>
+<p>让我们过一遍,找出哪些应该是状态.每条数据都问三个问题:</p>
+<ol>
+<li>它是不是通过父组件的props传入的? 如果是,那它很可能不是一个状态.</li>
+<li>它过一段时间会改变么? 如果不会,那它很可能不是一个状态.</li>
+<li>你可以通过计算其它状态和组件的props属性来得到它么? 如果是,那它就不是状态.</li>
+</ol>
+<p>商品原始列表是通过props属性传入的,所以它不是状态.搜索词和checkbox应该是状态,因为他们会发生改变,而且不能通过其它东西计算出结果.最后,过滤出的商品列表不是状态,因为它可以通过商品原始列表,搜索词,checkbox是否选中来计算出.</p>
+<p>所以最后,我们的状态应该是:</p>
+<ul>
+<li>用户输入的搜索内容</li>
+<li>checkbox的值</li>
+</ul>
+<h2 id="第四步:_确定状态应该放在哪里">第四步: 确定状态应该放在哪里</h2><p>代码在jsfiddle上:<a href="https://jsfiddle.net/reactjs/zafjbw1e/" target="_blank" rel="external">查看代码</a></p>
+<p>很好,现在我们已经确定了应用的最小单位状态.接下来,我们需要确认哪些组件是变化的,或者说,哪些组件拥有了这些状态.</p>
+<p>注意: React 是沿着组件的层级向下使用单向数据绑定的.所以不能立时片刻的搞清楚哪些组件应该拥有哪些状态.这通常也是对初学者来说理解起来最有挑战的部分,可以参考下面的步骤来找出它:</p>
+<p>对于应用中的每个状态:</p>
+<ul>
+<li>找出哪些组件渲染时需要用到那个状态</li>
+<li>找出一个公共组件 (就是包含了所有1里找到的组件的父级组件)</li>
+<li>可以是2里找到的公共组件,也可以是这个公共组件的父组件</li>
+<li>如果找不到这样一个应该拥有状态的组件,那就自己创建一个,这个被创建的组件仅仅用于存放状态.把这个组件放在公共组件的外层.</li>
+</ul>
+<p>让我们在这个应用里使用以上的策略:</p>
+<ul>
+<li><code>ProductTable</code> 组件需要通过状态来过滤产品列表, <code>SearchBar</code> 需要展示搜索内容和checked状态.</li>
+<li>这两个组件的公共组件是 <code>FilterableProductTable</code></li>
+<li>把搜索内容和checked值放在 <code>FilterableProductTable</code> 下,从概念上也是合理的.</li>
+</ul>
+<p>很好,现在我们已经决定了把状态放在 <code>FilterableProductTable</code> 组件上. 首先,给 <code>FilterableProductTable</code> 添加一个 <code>getInitialState()</code> 方法,返回 <code>{filter: &#39;&#39;, inStockOnly: false}</code> 来作为状态的初始值. 然后,把 <code>filterText</code> 和 <code>inStockOnly</code> 添加到 <code>ProductTable</code> 和 <code>SearchBar</code> 组件的prop属性里. 最后,通过这些属性,在 <code>ProductTable</code> 组件里过滤出内容,在 <code>SearchBar</code> 组件里设置表单控件的值.</p>
+<p>现在可以开始看到应用是怎么工作的了: 把 <code>filterText</code> 的值设置为 ‘ball’ ,然后刷新应用,你会看到数据列表被正确的更新了.</p>
+<h2 id="第五步:_添加反向数据流">第五步: 添加反向数据流</h2><p>代码在jsfiddle上:<a href="https://jsfiddle.net/reactjs/n47gckhr/" target="_blank" rel="external">查看代码</a></p>
+<p>目前为止,我们已经构建了一个通过props和状态,从上到下正确渲染出组件层级的应用了.是时候支持反向的数据流了:阶层底层的表单组件需要更新 <code>FilterableProductTable</code> 的状态.</p>
+<p>React数据流很清晰,很好理解程序是怎么运行的,但是这比传统的双向数据绑定要多写一些代码.<br>React 还提供了一种名为 <code>ReactLink</code> 的扩展,它可以使得这种模式和双向数据绑定一样的方便,但是这篇文章的目的不是这个,所以我们还是让数据流保持清晰.</p>
+<p>如果你尝试在这个版本的例子里输入内容或者点击checkbox,你会看到React忽略了你的输入.这是故意的,因为我们把 <code>input</code> 的 <code>value</code> 属性设置成了 <code>state</code> 的值,而 <code>state</code> 值是从 <code>FilterableProductTable</code> 传入的.</p>
+<p>让我们考虑一下我们希望实现什么效果.我们希望确保每当用户修改表单内容的时候,把状态更新为用户的输入内容.由于组件应该只更新自己的状态,所以 <code>FilterableProductTable</code> 应该传递一个回调给 <code>SearchBar</code> ,每当状态需要更新的时候,触发这个回调.我们在 inputs 上添加 <code>onChange</code> 事件来监听它.所有通过 <code>FilterableProductTable</code> 传入的回调都会调用 <code>setState()</code> 方法来更新应用的状态.</p>
+<p>虽然这听起来有点复杂,但其实只有几行代码.而且数据的整个流向过程十分清晰.</p>
+<h2 id="以上就是本文的内容">以上就是本文的内容</h2><p>希望这篇文章能够给你一些启发,如何使用React来构建组件和应用.虽然它可能会让你比以前多写一些代码,但你要知道,读代码的时间要远远多于写代码的时间,而这样模块化,清晰的代码可读性是很强的.当你开始构建大型的组件库的时候,你会感谢它的清晰和模块化,另外,由于代码的可重用性很高,越写到后面你需要写代码也就越少了.</p>
 
         
       
