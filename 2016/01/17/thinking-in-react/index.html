@@ -3,18 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>browserify handbook | code_bunny&#39;s blog</title>
+  <title>thinking-in-react | code_bunny&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="browserify handbook">
+  <meta name="description" content="关于React的一些思考作者: Pete Hunt
+在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.
+React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.
+从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个设计师给出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="browserify handbook">
-<meta property="og:url" content="http://yoursite.com/2015/11/01/browserify-handbook/index.html">
+<meta property="og:title" content="thinking-in-react">
+<meta property="og:url" content="http://yoursite.com/2016/01/17/thinking-in-react/index.html">
 <meta property="og:site_name" content="code_bunny's blog">
-<meta property="og:description" content="browserify handbook">
-<meta property="og:updated_time" content="2015-11-01T07:09:02.000Z">
+<meta property="og:description" content="关于React的一些思考作者: Pete Hunt
+在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.
+React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.
+从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个设计师给出">
+<meta property="og:image" content="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg">
+<meta property="og:image" content="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg">
+<meta property="og:image" content="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg">
+<meta property="og:updated_time" content="2016-01-17T08:35:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="browserify handbook">
-<meta name="twitter:description" content="browserify handbook">
+<meta name="twitter:title" content="thinking-in-react">
+<meta name="twitter:description" content="关于React的一些思考作者: Pete Hunt
+在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.
+React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.
+从一个原型开始想象我们已经有一个JSON格式的数据文件以及一个设计师给出">
   
     <link rel="alternative" href="/atom.xml" title="code_bunny&#39;s blog" type="application/atom+xml">
   
@@ -190,11 +202,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-browserify-handbook" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-thinking-in-react" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/01/browserify-handbook/" class="article-date">
-  	<time datetime="2015-11-01T07:08:19.000Z" itemprop="datePublished">2015-11-01</time>
+      <a href="/2016/01/17/thinking-in-react/" class="article-date">
+  	<time datetime="2016-01-17T05:36:22.000Z" itemprop="datePublished">2016-01-17</time>
 </a>
     </div>
   
@@ -207,7 +219,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      browserify handbook
+      thinking-in-react
     </h1>
   
 
@@ -216,6 +228,10 @@
       <div class="article-info">
         
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
 
         <div class="clearfix"></div>
       </div>
@@ -223,7 +239,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>browserify handbook</p>
+        <h1 id="关于React的一些思考">关于React的一些思考</h1><p>作者: Pete Hunt</p>
+<p>在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.</p>
+<p>React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.</p>
+<h2 id="从一个原型开始">从一个原型开始</h2><p>想象我们已经有一个JSON格式的数据文件以及一个设计师给出的原型.显然我们的设计师水平很烂,因为这个原型看起来是这样的:</p>
+<p><img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="Mockup"></p>
+<p>我们的JSON文件返回的数据是这样的:</p>
+<pre><code>[
+  {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$49.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Football"</span>},
+  {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$9.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Baseball"</span>},
+  {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$29.99"</span>, <span class="string">stocked:</span> <span class="literal">false</span>, <span class="string">name:</span> <span class="string">"Basketball"</span>},
+  {<span class="string">category:</span> <span class="string">"Electronics"</span>, <span class="string">price:</span> <span class="string">"$99.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"iPod Touch"</span>},
+  {<span class="string">category:</span> <span class="string">"Electronics"</span>, <span class="string">price:</span> <span class="string">"$399.99"</span>, <span class="string">stocked:</span> <span class="literal">false</span>, <span class="string">name:</span> <span class="string">"iPhone 5"</span>},
+  {<span class="string">category:</span> <span class="string">"Electronics"</span>, <span class="string">price:</span> <span class="string">"$199.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Nexus 7"</span>}
+];
+</code></pre><h2 id="第一步:_把视图拆分成层级组件">第一步: 把视图拆分成层级组件</h2><p>首先你需要画一个盒子模型草图,这个盒子模型包括了原型里的每个组件和它的子组件,然后给每个组件取名字.如果你和设计师协作,他们可能已经帮你完成了取名这件事,直接去问他们就行.ps图层名可能就是最后React组件的名字.</p>
+<p>但你怎么知道哪些应该是一个组件呢? 只需要通过判断你是否需要新建一个对象或者函数. 这个技术秉持<strong>各自负责原则</strong>,就是说,从理念上讲,一个组件只做一件事.如果它后面需要扩展,就应该被解耦成多个子组件.</p>
+<p>由于大多数时候你展示给用户的数据模型都是基于JSON格式的,你会发现,一旦你的模型建立正确,你的视图(连同你的组件结构)会很好匹配它.这是因为视图和数据模型倾向于依附同一个结构.这就意味着,把视图拆分成组件是很简单的,只需要按照每个组件匹配一个数据模型来拆分就可以了.</p>
+<p><img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="Mockup"></p>
+<p>你可以看到,这个简单的应用里有5个组件.我已经用粗体字标明了每个组件代表了哪个数据模型.</p>
+<ol>
+<li><code>FilterableProductTable</code> <strong>(橙色)</strong>: 包含了整个栗子</li>
+<li><code>SearchBar</code> <strong>(深蓝)</strong>: 接收用户输入的内容</li>
+<li><code>ProductTable</code> <strong>(绿色)</strong>: 过滤并展示基于用户输入搜索条件的匹配数据.</li>
+<li><code>ProductCategoryRow</code> <strong>(亮蓝)</strong>: 展示每个分类的标题.</li>
+<li><code>ProductRow</code> <strong>(红色)</strong>: 将每个产品一行一行显示出来.</li>
+</ol>
+<p>看一下 <code>ProductTable</code>, 你会发现,表格的标题部分(包括Name和Price两项)并不是一个单独的组件.这是由个人偏好决定的,也有争议说不应该这样处理.在这个例子里,我把它作为 <code>ProductTable</code> 的一部分,因为它也是渲染搜索结果数据的一部分,这个事情应该由 <code>ProductTable</code> 负责.但是,如果这个标题变得更复杂(比如我们要添加排序功能),显然就应该把它单独做成一个 <code>ProductTableHeader</code> 组件</p>
+<p>现在,我们已经给原型定义好了组件,让我们把它整理成一个层级关系.这很简单. 被包含在其他组件里的组件应该出现在层级图的子层:</p>
+<p><img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="hierarchy"></p>
 
         
       
@@ -234,18 +278,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/23/ajax-caching/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          关于ajax缓存的两个真相
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/02/install-mongodb-in-mac/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mac下安装mongodb</div>
+    <a href="/2015/12/29/react-turorial/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react-教程</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -274,7 +309,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="browserify-handbook" data-title="browserify handbook" data-url="http://yoursite.com/2015/11/01/browserify-handbook/"></div>
+	<div class="ds-thread" data-thread-key="thinking-in-react" data-title="thinking-in-react" data-url="http://yoursite.com/2016/01/17/thinking-in-react/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
