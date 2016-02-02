@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/es5/" style="font-size: 10px;">es5</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/es5/" style="font-size: 10px;">es5</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,181 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-let" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/02/let/" class="article-date">
+  	<time datetime="2016-02-02T07:39:15.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/02/let/">es6 let 详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>let</code> 语句声明一个块级作用域变量,它的初始化值为可选的.</p>
+<h2 id="语法">语法</h2><blockquote>
+<p>let var1 [= value1] [, var2 [= value2]] [, …, varN [= valueN]];</p>
+</blockquote>
+<h3 id="参数">参数</h3><p><strong>var1, var2, …, varN</strong><br>变量名.可以是任何合法的标识符.</p>
+<p><strong>value1, value2, …, valueN</strong><br>变量的初始值.可以是任何合法的表达式.</p>
+<h2 id="描述">描述</h2><p><code>let</code> 声明变量的作用域为语句或表达式所在的块.这和使用 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Statements/var" target="_blank" rel="external">var</a> 语句不同, <code>var</code> 声明的变量是全局变量,或者整个函数范围里的变量,而不是所在的代码块作用域.</p>
+<h3 id="块级作用域和_let">块级作用域和 <code>let</code></h3><p>在一个代码块里使用 <code>let</code> 语句定义变量</p>
+<pre><code><span class="keyword">if</span> (x &gt; y) {
+  let <span class="built_in">gamma</span> = <span class="number">12.7</span> + y;
+  i = <span class="built_in">gamma</span> * x;
+}
+</code></pre><p>通常, <code>let</code> 语句用在函数里嵌套函数的时候能使得代码更清晰. </p>
+<pre><code><span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"list"</span>);
+
+<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) {
+  <span class="keyword">var</span> item = <span class="built_in">document</span>.createElement(<span class="string">"LI"</span>);
+  item.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item "</span> + i));
+
+  <span class="keyword">let</span> j = i;
+  item.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>{
+    <span class="built_in">console</span>.log(<span class="string">"Item "</span> + j + <span class="string">" is clicked."</span>);
+  };
+  list.appendChild(item);
+}
+</code></pre><p>上面的这个例子能够按照所希望的那样运行,因为五个内嵌的匿名函数的实例里分别使用五个不同的变量 <code>j</code> 的实例.注意,如果你把 <code>let</code> 换成 <code>var</code> 或者移除变量 <code>j</code> 或者在内嵌的函数里使用 <code>i</code> ,是不行的. </p>
+<h4 id="作用域规则">作用域规则</h4><p>通过 <code>let</code> 声明的变量它的作用域是声明时所在的块级作用域,以及块级作用域的子块级作用域.就这一点来说, <code>let</code> 的工作方式和 <code>var</code> 很相似. 他们两者间最主要的区别是: <code>var</code> 声明的变量所在的作用域是整个闭包函数.</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">varTest</span>(<span class="params"></span>) </span>{
+  <span class="keyword">var</span> x = <span class="number">31</span>;
+  <span class="keyword">if</span> (<span class="literal">true</span>) {
+    <span class="keyword">var</span> x = <span class="number">71</span>;  <span class="comment">// x是同一个变量!</span>
+    <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
+  }
+  <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">letTest</span>(<span class="params"></span>) </span>{
+  <span class="keyword">let</span> x = <span class="number">31</span>;
+  <span class="keyword">if</span> (<span class="literal">true</span>) {
+    <span class="keyword">let</span> x = <span class="number">71</span>;  <span class="comment">// x是两个不同的变量</span>
+    <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
+  }
+  <span class="built_in">console</span>.log(x);  <span class="comment">// 31</span>
+}
+</code></pre><p>不同于使用 <code>var</code> , 如果在程序或者函数的最外层使用 <code>let</code> 语句,它不会给全局对象创建一个新的属性.举个栗子:</p>
+<pre><code><span class="keyword">var</span> x = <span class="string">'global'</span>;
+<span class="keyword">let</span> y = <span class="string">'global'</span>;
+<span class="built_in">console</span>.log(<span class="keyword">this</span>.x);   <span class="comment">//全局对象下有x属性</span>
+<span class="built_in">console</span>.log(<span class="keyword">this</span>.y);   <span class="comment">//全局对象下没有y属性</span>
+</code></pre><p>这段代码运行的结果: <code>this.x</code> 的输出为 <code>&quot;global&quot;</code> ,但 <code>this.y</code> 的输出为 <code>undefined</code>.</p>
+<h3 id="暂死区(temporal_dead_zone)和let相关报错">暂死区(temporal dead zone)和<code>let</code>相关报错</h3><p>在同一个函数或者代码块里使用 <code>let</code> 声明两个同样的变量会导致 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a>.</p>
+<pre><code><span class="keyword">if</span> (x) {
+  <span class="keyword">let</span> foo;
+  <span class="keyword">let</span> foo; <span class="comment">// TypeError thrown.</span>
+}
+</code></pre><p>ECMAScript 2015 会把通过 <code>let</code> 语句声明的变量<strong>提升到代码块的开头</strong>(类似于var声明变量的预解析). 然而,在变量声明之前访问这个变量会导致<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError" target="_blank" rel="external">ReferenceError</a>.<br>因为存在于代码块开头的变量还处在”暂死区”里,直到程序走到声明变量那里.</p>
+<blockquote>
+<p>补充说明一下:众所周知,<code>var</code> 声明的变量会被预声明,所以在 <code>var</code> 之前访问变量,不会报错,而是得到 <code>undefined</code>. 同样, <code>let</code> 声明的变量也会被提升到区块的顶部,但是却不能访问它,因为变量虽然声明了,但还处在 “暂死区” 里,直到程序走到 <code>let</code> 声明变量的语句,变量才从暂死区里被释放出来. 大致就是这样,点击了解更多关于<a href="http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified/" target="_blank" rel="external">暂死区</a>的概念.</p>
+</blockquote>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">do_something</span>(<span class="params"></span>) </span>{
+  <span class="built_in">console</span>.log(foo); <span class="comment">// ReferenceError</span>
+  <span class="keyword">let</span> foo = <span class="number">2</span>;
+}
+</code></pre><p>如果你在 [switch] 语句中使用 <code>let</code> ,可能会遇到错误,因为在 <code>switch</code> 语法里,它只有一个底层代码块    </p>
+<pre><code><span class="keyword">switch</span> (x) {
+  <span class="keyword">case</span> <span class="number">0</span>:
+    <span class="keyword">let</span> foo;
+    <span class="keyword">break</span>;
+
+  <span class="keyword">case</span> <span class="number">1</span>:
+    <span class="keyword">let</span> foo; <span class="comment">// 由于重复声明导致 TypeError .</span>
+    <span class="keyword">break</span>;
+}
+</code></pre><h3 id="for_循环里使用_let_时的作用域"><code>for</code> 循环里使用 <code>let</code> 时的作用域</h3><p>你可以在 <code>for</code> 循环里使用 <code>let</code> 语句来创建一个对应当前作用域的变量.这和在 <code>for</code> 循环头部使用 <code>var</code> 语句是不同的, <code>var</code> 声明的变量在不仅在循环里可用,在整个所在的函数里都可用.</p>
+<pre><code>var <span class="built_in">i</span>=<span class="number">0</span>;
+<span class="keyword">for</span> ( let <span class="built_in">i</span>=<span class="built_in">i</span> ; <span class="built_in">i</span> &lt; <span class="number">10</span> ; <span class="built_in">i</span>++ ) <span class="cell">{
+  console.log(i);
+}</span>
+</code></pre><blockquote>
+<p>注意这个例子是错的,它会抛出 ReferenceError 错误,在介绍 <a href="">暂死区</a> 的文章里有类似的例子…大致解释一下:变量 <code>i</code> 一开始就被预提升到整个块作用域了,但是还处在暂死区,然后当执行 <code>let i=i</code> 的时候,要给变量 <code>i</code> 进行词法绑定,但是绑定的值又是 <code>i</code>, 而 <code>i</code> 又处在暂死区,无法访问,所以就报错了.但是需要注意的是,由于 <code>i</code> 变量已经被预提升了,它不是一个不存在的变量,而是一个处在暂死区的变量,所以,它不会沿着作用域链向上寻找到外层 <code>var</code> 声明的 <code>i</code>,而是直接报错了.<br>然后这个例子正确的写法应该是:</p>
+</blockquote>
+<pre><code>var <span class="literal">a</span>=<span class="number">0</span><span class="comment">;</span>
+for ( let i=<span class="literal">a</span> <span class="comment">; i &lt; 10 ; i++ ) {</span>
+  console.log(i)<span class="comment">;</span>
+}
+</code></pre><h4 id="作用域规则-1">作用域规则</h4><blockquote>
+<p>for (let expr1; expr2; expr3) statement</p>
+</blockquote>
+<p>在这个例子里, <code>expr2</code>,<code>expr3</code> 以及 <code>statement</code> 语句,都会被隐式的包含到一个代码块里. <code>let</code> 声明的 <code>expr1</code> 变量就处在这个隐藏的代码块里. 这在上一个循环的例子里已经阐述过了.</p>
+<h2 id="栗子">栗子</h2><h3 id="let_vs_var"><code>let</code> vs <code>var</code></h3><p>在代码块里使用 <code>let</code> 语句,变量的作用域就是所在的代码块. 而 <code>var</code> 声明的变量,所在的作用域是声明时所在的整个函数.</p>
+<pre><code>var a = <span class="number">5</span>;
+var b = <span class="number">10</span>;
+
+<span class="keyword">if</span> (a === <span class="number">5</span>) {
+  let a = <span class="number">4</span>; <span class="comment">// 作用域是在 if 代码块里</span>
+  var b = <span class="number">1</span>; <span class="comment">// 作用域是在整个函数里</span>
+
+  console.<span class="built_in">log</span>(a);  <span class="comment">// 4</span>
+  console.<span class="built_in">log</span>(b);  <span class="comment">// 1</span>
+} 
+
+console.<span class="built_in">log</span>(a); <span class="comment">// 5</span>
+console.<span class="built_in">log</span>(b); <span class="comment">// 1</span>
+</code></pre><h3 id="循环里的_let">循环里的 <code>let</code></h3><p>建议在循环里使用 <code>let</code> 来创建一个作用于循环代码块下的变量,而不是使用 <code>var</code> 来创建一个全局的变量用于循环.</p>
+<pre><code><span class="keyword">for</span> (let i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++) {
+  console.<span class="built_in">log</span>(i); <span class="comment">// 0, 1, 2, 3, 4 ... 9</span>
+}
+
+console.<span class="built_in">log</span>(i); <span class="comment">// i is not defined</span>
+</code></pre><h2 id="非标准的_let_扩展">非标准的 <code>let</code> 扩展</h2><blockquote>
+<p>非标准的 <code>let</code> 扩展基本没有得到支持,而且很多已经被废弃,就不翻译了…..((☄⊙ω⊙)☄…好吧,因为快要下班了…)</p>
+</blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank" rel="external">原文地址</a></p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-Object-defineProperty-方法" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -490,9 +665,9 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
 </tr>
 </tbody>
 </table>
-<h2 id="兼容性问题补充说明">兼容性问题补充说明</h2><h3 id="重新定义数组对象的_length_属性">重新定义数组对象的 <code>length</code> 属性</h3><p>重新定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的,但也受制于普通的重定义时的限制.<br>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a>属性一开始是不能配置,不可枚举,但是可写的.<br>所以,改变一个没有被修改过(描述符)的数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的.<br>也可以把它改成不可写的,但是不允许修改它的可枚举性和可配置性.如果它已经被改成不可写的,也不能修改它的值,也不能修改它的可写性.)然而,并不是所有的浏览器都允许重定义它的.</p>
+<h2 id="兼容性问题补充说明">兼容性问题补充说明</h2><h3 id="重新定义数组对象的_length_属性">重新定义数组对象的 <code>length</code> 属性</h3><p>重新定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的,但也受制于普通的重定义时的限制.(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a>属性一开始是不能配置,不可枚举,但是可写的.所以,改变一个没有被修改过(描述符)的数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的.也可以把它改成不可写的,但是不允许修改它的可枚举性和可配置性.如果它已经被改成不可写的,也不能修改它的值,也不能修改它的可写性.)然而,并不是所有的浏览器都允许重定义它的.</p>
 <p>如果在 Firefox 4 到 22 里尝试此操作会抛出一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a> , 无论它是否允许重定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性. </p>
-<p>某些版本的Chrome浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改.<br>在某些情况下,修改它的可写性其实也没有生效(也不会报错).<br>另外,与此相关的是,一些修改数组的方法,比如 <code>Array.prototype.push</code> 却无视 <code>length</code> 属性的不可写性.(就是说,使用<code>push</code>方法,数组的<code>length</code>属性值依然会被改变,即使它是不可写的.)</p>
+<p>某些版本的Chrome浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改.在某些情况下,修改它的可写性其实也没有生效(也不会报错).另外,与此相关的是,一些修改数组的方法,比如 <code>Array.prototype.push</code> 却无视 <code>length</code> 属性的不可写性.(就是说,使用<code>push</code>方法,数组的<code>length</code>属性值依然会被改变,即使它是不可写的.)</p>
 <p>某些版本的Safari浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改,还会尝试去改变它的可写性,但最终,属性的可写性并没有被改变,这个过程也不会报错.</p>
 <p>只有ie 9 及以后的版本, Firefox 23 及以后的版本, 开始完全地,正确地支持重定义数组的 <code>length</code> 属性.到目前为止,不要指望使用 <code>Object.defineProperty()</code> 重定义数组的 <code>length</code> 属性能够以一种通用的方式正常工作.而且,就算它靠得住,也没有足够的理由去这样做.</p>
 <h3 id="针对ie8的特别说明">针对ie8的特别说明</h3><p>ie 8 下的 <code>Object.defineProperty()</code> 方法<a href="https://msdn.microsoft.com/en-us/library/dd229916%28VS.85%29.aspx" target="_blank" rel="external">只能被用在DOM对象</a>上.有一些事情需要注意:</p>
@@ -1458,61 +1633,6 @@ ReactDOM.render(
 	<a class="article-category-link" href="/categories/blog/">blog</a>
 	</div>
 
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-browserify-handbook" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/01/browserify-handbook/" class="article-date">
-  	<time datetime="2015-11-01T07:08:19.000Z" itemprop="datePublished">2015-11-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/01/browserify-handbook/">browserify handbook</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>browserify handbook</p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-      
 
       <div class="clearfix"></div>
     </div>
