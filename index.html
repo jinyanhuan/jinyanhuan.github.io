@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/es5/" style="font-size: 10px;">es5</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/webstorm/" style="font-size: 15px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -191,11 +191,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-let" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-charCodeAt-and-codePointAt" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/02/let/" class="article-date">
-  	<time datetime="2016-02-02T07:39:15.000Z" itemprop="datePublished">2016-02-02</time>
+      <a href="/2016/02/25/charCodeAt-and-codePointAt/" class="article-date">
+  	<time datetime="2016-02-25T07:46:18.000Z" itemprop="datePublished">2016-02-25</time>
 </a>
     </div>
   
@@ -208,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/let/">es6 let 详解</a>
+      <a class="article-title" href="/2016/02/25/charCodeAt-and-codePointAt/">charCodeAt() and codePointAt()</a>
     </h1>
   
 
@@ -217,119 +217,308 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>let</code> 语句声明一个块级作用域变量,它的初始化值为可选的.</p>
-<h2 id="语法">语法</h2><blockquote>
-<p>let var1 [= value1] [, var2 [= value2]] [, …, varN [= valueN]];</p>
-</blockquote>
-<h3 id="参数">参数</h3><p><strong>var1, var2, …, varN</strong><br>变量名.可以是任何合法的标识符.</p>
-<p><strong>value1, value2, …, valueN</strong><br>变量的初始值.可以是任何合法的表达式.</p>
-<h2 id="描述">描述</h2><p><code>let</code> 声明变量的作用域为语句或表达式所在的块.这和使用 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Statements/var" target="_blank" rel="external">var</a> 语句不同, <code>var</code> 声明的变量是全局变量,或者整个函数范围里的变量,而不是所在的代码块作用域.</p>
-<h3 id="块级作用域和_let">块级作用域和 <code>let</code></h3><p>在一个代码块里使用 <code>let</code> 语句定义变量</p>
-<pre><code><span class="keyword">if</span> (x &gt; y) {
-  let <span class="built_in">gamma</span> = <span class="number">12.7</span> + y;
-  i = <span class="built_in">gamma</span> * x;
-}
-</code></pre><p>通常, <code>let</code> 语句用在函数里嵌套函数的时候能使得代码更清晰. </p>
-<pre><code><span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"list"</span>);
-
-<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) {
-  <span class="keyword">var</span> item = <span class="built_in">document</span>.createElement(<span class="string">"LI"</span>);
-  item.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item "</span> + i));
-
-  <span class="keyword">let</span> j = i;
-  item.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>{
-    <span class="built_in">console</span>.log(<span class="string">"Item "</span> + j + <span class="string">" is clicked."</span>);
-  };
-  list.appendChild(item);
-}
-</code></pre><p>上面的这个例子能够按照所希望的那样运行,因为五个内嵌的匿名函数的实例里分别使用五个不同的变量 <code>j</code> 的实例.注意,如果你把 <code>let</code> 换成 <code>var</code> 或者移除变量 <code>j</code> 或者在内嵌的函数里使用 <code>i</code> ,是不行的. </p>
-<h4 id="作用域规则">作用域规则</h4><p>通过 <code>let</code> 声明的变量它的作用域是声明时所在的块级作用域,以及块级作用域的子块级作用域.就这一点来说, <code>let</code> 的工作方式和 <code>var</code> 很相似. 他们两者间最主要的区别是: <code>var</code> 声明的变量所在的作用域是整个闭包函数.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">varTest</span>(<span class="params"></span>) </span>{
-  <span class="keyword">var</span> x = <span class="number">31</span>;
-  <span class="keyword">if</span> (<span class="literal">true</span>) {
-    <span class="keyword">var</span> x = <span class="number">71</span>;  <span class="comment">// x是同一个变量!</span>
-    <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
-  }
-  <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
-}
-
-<span class="function"><span class="keyword">function</span> <span class="title">letTest</span>(<span class="params"></span>) </span>{
-  <span class="keyword">let</span> x = <span class="number">31</span>;
-  <span class="keyword">if</span> (<span class="literal">true</span>) {
-    <span class="keyword">let</span> x = <span class="number">71</span>;  <span class="comment">// x是两个不同的变量</span>
-    <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
-  }
-  <span class="built_in">console</span>.log(x);  <span class="comment">// 31</span>
-}
-</code></pre><p>不同于使用 <code>var</code> , 如果在程序或者函数的最外层使用 <code>let</code> 语句,它不会给全局对象创建一个新的属性.举个栗子:</p>
-<pre><code><span class="keyword">var</span> x = <span class="string">'global'</span>;
-<span class="keyword">let</span> y = <span class="string">'global'</span>;
-<span class="built_in">console</span>.log(<span class="keyword">this</span>.x);   <span class="comment">//全局对象下有x属性</span>
-<span class="built_in">console</span>.log(<span class="keyword">this</span>.y);   <span class="comment">//全局对象下没有y属性</span>
-</code></pre><p>这段代码运行的结果: <code>this.x</code> 的输出为 <code>&quot;global&quot;</code> ,但 <code>this.y</code> 的输出为 <code>undefined</code>.</p>
-<h3 id="暂死区(temporal_dead_zone)和let相关报错">暂死区(temporal dead zone)和<code>let</code>相关报错</h3><p>在同一个函数或者代码块里使用 <code>let</code> 声明两个同样的变量会导致 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a>.</p>
-<pre><code><span class="keyword">if</span> (x) {
-  <span class="keyword">let</span> foo;
-  <span class="keyword">let</span> foo; <span class="comment">// TypeError thrown.</span>
-}
-</code></pre><p>ECMAScript 2015 会把通过 <code>let</code> 语句声明的变量<strong>提升到代码块的开头</strong>(类似于var声明变量的预解析). 然而,在变量声明之前访问这个变量会导致<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError" target="_blank" rel="external">ReferenceError</a>.<br>因为存在于代码块开头的变量还处在”暂死区”里,直到程序走到声明变量那里.</p>
+        <p>这篇文章主要介绍javascript里的<code>charCodeAt()</code>方法和ES6引进的<code>codePointAt()</code>方法.</p>
+<p>在说这两个方法之前,必须要先补充一些关于Unicode编码的知识…</p>
+<p>ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point)[1].用于代表256个字符.但是这256个字符只是常用字符,各国语言,包括中文,远远超过这个范围.所以Unicode就出现了,Unicode源于一个很简单的想法：将全世界所有的字符包含在一个集合里，计算机只要支持这一个字符集，就能显示所有的字符，再也不会有乱码了。</p>
+<p>可以这么理解,Unicode码是ASCII码的一个超集(superset).它的前128个code point和ASCII是一致的.后面又增加了很多很多字符.而UTF-32,UTF-8,UTF-16,都是Unicode码的编码形式:</p>
+<p><strong>UTF-32</strong><br>用固定长度的四个字节来表示每个码点,就算有些字符只需要一个字节,也通过把空缺位添加0来强制转换成8个字节.由于四个字节有32-bit,所以称为UTF-32编码.由于太浪费空间,比ASCII编码文件要大四倍,所以不能使用.</p>
+<p><strong>UTF-8</strong><br>用可变长度的字节来表示每个码点,如果只需要一个字节就能表示的,就用一个字节,一个不够,就用两个…所以,在UTF-8编码下,一个字符有可能由1-4个字节组成.</p>
+<p><strong>UTF-16</strong><br>结合了固定长度和可变长度,它只有两个字节和四个字节两种方式来表示码点.如果是两个字节,那么码点的范围应该是（U+0000到U+FFFF）,如果是四个字节,那么码点的范围应该是（U+010000到U+10FFFF）.<br>但是注意,我们不能直接使用 <em>U+010000</em> 这样的形式(应该是因为位数不同所以不能…),所以,四个字节的码点需要使用两个 <em>code unit</em> [2],来组成一个 <em>surrogate pair</em> [3]. 其中第一个code unit的范围是从 <em>0xD800</em> 到 <em>0xDBFF</em>,被成为高位(high surrogate)或头位(lead surrogate),第二个code unit的范围是从 <em>0xDC00</em> 到 <em>0xDFFF</em>,被称为低位(low surrogate)或尾位(trail surrogate).</p>
+<p>好了,有了以上的这些知识,就可以看看 <code>charCodeAt()</code> 和 <code>codePointAt()</code>了.</p>
+<h2 id="charCodeAt()">charCodeAt()</h2><p><code>charCodeAt()</code>方法返回一个0-65535的整数,这个数代表了指定索引位置的UTF-16 code unit的码点.(UTF-16 code unit匹配的码点有两种可能,一种是这个码点本身可以代表一个字符,另一种是,这个code unit可能是一组 surrogate pair 里的一个code unit,它的码点本身不代表任何字符,比如 Unicode码点范围 &gt; 0x10000 的那些).如果你需要的是整个 surrogate pair 的码点值,请使用 <code>codePointAt*()</code> 方法.</p>
+<h3 id="语法">语法</h3><pre><code>str.<span class="function"><span class="title">charCodeAt</span><span class="params">(index)</span></span>
+</code></pre><h4 id="参数">参数</h4><p><strong>index</strong></p>
+<p>一个大于等于0,小于字符串长度的整数; 如果它不是一个数字,默认为0.</p>
+<h3 id="描述">描述</h3><p>Unicode 码点的范围是 0-1114111 (0x10FFFF). 最前面的128个Unicode码点和ASCII码指向的字符完全相同.</p>
+<p>注意, <code>charCodeAt()</code> 总是返回一个小于65536的值,这是因为,大于65536的码点会使用两个小于65536的’surrogate’伪字符来组成一个真实字符.因此,为了检查或重现这类字符的整个码点(大于等于65536),不仅需要使用 <code>charCodeAt(i)</code> 来检索,还需要使用 <code>charCodeAt(i+1)</code>,这就好像通过两个字母来检查重现一个字符串那样. 或者也可以使用 <code>codePointAt(i)</code>. 查看下面的例子2和3.</p>
+<p>如果索引值小于0或者大于等于字符串的长度,<code>charCodeAt()</code> 返回 <code>NaN</code>.</p>
 <blockquote>
-<p>补充说明一下:众所周知,<code>var</code> 声明的变量会被预声明,所以在 <code>var</code> 之前访问变量,不会报错,而是得到 <code>undefined</code>. 同样, <code>let</code> 声明的变量也会被提升到区块的顶部,但是却不能访问它,因为变量虽然声明了,但还处在 “暂死区” 里,直到程序走到 <code>let</code> 声明变量的语句,变量才从暂死区里被释放出来. 大致就是这样,点击了解更多关于<a href="http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified/" target="_blank" rel="external">暂死区</a>的概念.</p>
+<p>注意,字符串的长度并不一定是你看到的字符的长度,有些中文字,比如<a href="http://www.zdic.net/z/87/wy/20BB7.htm" target="_blank" rel="external">‘ji’</a>,虽然只有一个字,但它的length是2.它就是Unicode码点大于等于65536的一个例子.</p>
 </blockquote>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">do_something</span>(<span class="params"></span>) </span>{
-  <span class="built_in">console</span>.log(foo); <span class="comment">// ReferenceError</span>
-  <span class="keyword">let</span> foo = <span class="number">2</span>;
+<p>向下兼容: 在历史版本(比如JavaScript 1.2), charCodeAt() 方法返回对应索引位置字符指向 <em>ISO-Lation-1</em> 字符集的一个数字. <em>ISO-Latin-1</em> 字符集的范围是 0 到255.其中0-127直接映射ASCII码.</p>
+<h3 id="例子">例子</h3><h4 id="使用_charCodeAt()">使用 charCodeAt()</h4><p>下面这个例子返回65, ‘A’的Unicode码点.</p>
+<pre><code><span class="variable">'ABC</span><span class="variable">'.charCodeAt</span><span class="list">(<span class="keyword">0</span>)</span><span class="comment">; // returns 65</span>
+</code></pre><h4 id="改造charCodeAt()来处理当一开始并不知道非基本平面字符(non-Basic-Multilingual-Plane)_[4]的高位在哪个位置出现的情况:">改造charCodeAt()来处理当一开始并不知道非基本平面字符(non-Basic-Multilingual-Plane) [4]的高位在哪个位置出现的情况:</h4><p>这个版本可以用在循环或者类似的场景:一开始并不知道是否有非基本平面字符存在于指定的索引位置前.</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">fixedCharCodeAt</span>(<span class="params">str, idx</span>) </span>{
+  <span class="comment">// ex. fixedCharCodeAt('\uD800\uDC00', 0); // 65536</span>
+  <span class="comment">// ex. fixedCharCodeAt('\uD800\uDC00', 1); // false</span>
+  idx = idx || <span class="number">0</span>;
+  <span class="keyword">var</span> code = str.charCodeAt(idx);
+  <span class="keyword">var</span> hi, low;
+
+  <span class="comment">// 如果索引位置是一个高位 (可以把后面的十六进制改成0xDB7F来把高位当成一个单独的字符)</span>
+  <span class="keyword">if</span> (<span class="number">0xD800</span> &lt;= code &amp;&amp; code &lt;= <span class="number">0xDBFF</span>) {
+    hi = code;
+    low = str.charCodeAt(idx + <span class="number">1</span>);
+    <span class="keyword">if</span> (<span class="built_in">isNaN</span>(low)) {
+      <span class="keyword">throw</span> <span class="string">'High surrogate not followed by low surrogate in fixedCharCodeAt()'</span>;
+    }
+    <span class="keyword">return</span> ((hi - <span class="number">0xD800</span>) * <span class="number">0x400</span>) + (low - <span class="number">0xDC00</span>) + <span class="number">0x10000</span>;
+  }
+  <span class="keyword">if</span> (<span class="number">0xDC00</span> &lt;= code &amp;&amp; code &lt;= <span class="number">0xDFFF</span>) { <span class="comment">// 低位</span>
+    <span class="comment">// 返回false以跳出循环的本次迭代,因为在上次迭代时,遇到和它配对的那个高位时,已经处理过它了(处理的过程就是注释掉的那段)</span>
+    <span class="keyword">return</span> <span class="literal">false</span>;
+    <span class="comment">/*hi = str.charCodeAt(idx - 1);
+    low = code;
+    return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;*/</span>
+  }
+  <span class="keyword">return</span> code;
 }
-</code></pre><p>如果你在 [switch] 语句中使用 <code>let</code> ,可能会遇到错误,因为在 <code>switch</code> 语法里,它只有一个底层代码块    </p>
-<pre><code><span class="keyword">switch</span> (x) {
-  <span class="keyword">case</span> <span class="number">0</span>:
-    <span class="keyword">let</span> foo;
-    <span class="keyword">break</span>;
+</code></pre><h4 id="改造charCodeAt()来处理当一开始就已经知道非基本平面字符(non-Basic-Multilingual-Plane)_[4]的高位在哪个位置出现的情况:">改造charCodeAt()来处理当一开始就已经知道非基本平面字符(non-Basic-Multilingual-Plane) [4]的高位在哪个位置出现的情况:</h4><pre><code><span class="function"><span class="keyword">function</span> <span class="title">knownCharCodeAt</span>(<span class="params">str, idx</span>) </span>{
+  str += <span class="string">''</span>;
+  <span class="keyword">var</span> code,
+      end = str.length;
 
-  <span class="keyword">case</span> <span class="number">1</span>:
-    <span class="keyword">let</span> foo; <span class="comment">// 由于重复声明导致 TypeError .</span>
-    <span class="keyword">break</span>;
+  <span class="keyword">var</span> surrogatePairs = <span class="regexp">/[\uD800-\uDBFF][\uDC00-\uDFFF]/g</span>;
+  <span class="keyword">while</span> ((surrogatePairs.exec(str)) != <span class="literal">null</span>) {
+    <span class="keyword">var</span> li = surrogatePairs.lastIndex;
+    <span class="keyword">if</span> (li - <span class="number">2</span> &lt; idx) {
+      idx++;
+    }
+    <span class="keyword">else</span> {
+      <span class="keyword">break</span>;
+    }
+  }
+
+  <span class="keyword">if</span> (idx &gt;= end || idx &lt; <span class="number">0</span>) {
+    <span class="keyword">return</span> <span class="literal">NaN</span>;
+  }
+
+  code = str.charCodeAt(idx);
+
+  <span class="keyword">var</span> hi, low;
+  <span class="keyword">if</span> (<span class="number">0xD800</span> &lt;= code &amp;&amp; code &lt;= <span class="number">0xDBFF</span>) {
+    hi = code;
+    low = str.charCodeAt(idx + <span class="number">1</span>);
+    <span class="comment">// Go one further, since one of the "characters" is part of a surrogate pair</span>
+    <span class="keyword">return</span> ((hi - <span class="number">0xD800</span>) * <span class="number">0x400</span>) + (low - <span class="number">0xDC00</span>) + <span class="number">0x10000</span>;
+  }
+  <span class="keyword">return</span> code;
 }
-</code></pre><h3 id="for_循环里使用_let_时的作用域"><code>for</code> 循环里使用 <code>let</code> 时的作用域</h3><p>你可以在 <code>for</code> 循环里使用 <code>let</code> 语句来创建一个对应当前作用域的变量.这和在 <code>for</code> 循环头部使用 <code>var</code> 语句是不同的, <code>var</code> 声明的变量在不仅在循环里可用,在整个所在的函数里都可用.</p>
-<pre><code>var <span class="built_in">i</span>=<span class="number">0</span>;
-<span class="keyword">for</span> ( let <span class="built_in">i</span>=<span class="built_in">i</span> ; <span class="built_in">i</span> &lt; <span class="number">10</span> ; <span class="built_in">i</span>++ ) <span class="cell">{
-  console.log(i);
-}</span>
-</code></pre><blockquote>
-<p>注意这个例子是错的,它会抛出 ReferenceError 错误,在介绍 <a href="">暂死区</a> 的文章里有类似的例子…大致解释一下:变量 <code>i</code> 一开始就被预提升到整个块作用域了,但是还处在暂死区,然后当执行 <code>let i=i</code> 的时候,要给变量 <code>i</code> 进行词法绑定,但是绑定的值又是 <code>i</code>, 而 <code>i</code> 又处在暂死区,无法访问,所以就报错了.但是需要注意的是,由于 <code>i</code> 变量已经被预提升了,它不是一个不存在的变量,而是一个处在暂死区的变量,所以,它不会沿着作用域链向上寻找到外层 <code>var</code> 声明的 <code>i</code>,而是直接报错了.<br>然后这个例子正确的写法应该是:</p>
-</blockquote>
-<pre><code>var <span class="literal">a</span>=<span class="number">0</span><span class="comment">;</span>
-for ( let i=<span class="literal">a</span> <span class="comment">; i &lt; 10 ; i++ ) {</span>
-  console.log(i)<span class="comment">;</span>
+</code></pre><h2 id="codePointAt()">codePointAt()</h2><p><code>codePointAt()</code>方法返回一个Unicode码点值,它是一个非负整数,</p>
+<h3 id="语法-1">语法</h3><pre><code>str.<span class="function"><span class="title">codePointAt</span><span class="params">(pos)</span></span>
+</code></pre><h4 id="参数-1">参数</h4><p><strong>pos</strong></p>
+<p>指定从字符串里获取Unicode码点的索引位置.</p>
+<h3 id="描述-1">描述</h3><p>如果在指定的位置没有元素,返回undefined.如果指定位置没有 UTF-16 surrogate pair, 返回指定位置的 code unit 的码点.</p>
+<h3 id="栗子">栗子</h3><pre><code><span class="string">'ABC'</span>.codePointAt(<span class="number">1</span>);          <span class="comment">// 非UTF-16 surrogate pair ,返回A的Unicode码点: 66</span>
+<span class="string">'\uD800\uDC00'</span>.codePointAt(<span class="number">0</span>); <span class="comment">// UTF-16 surrogate pair 返回整个字符的码点: 65536</span>
+
+<span class="string">'XYZ'</span>.codePointAt(<span class="number">42</span>);         <span class="comment">// undefined</span>
+</code></pre><h3 id="兼容低版本浏览器(Polyfill)">兼容低版本浏览器(Polyfill)</h3><p>下面的扩展允许你在原本不支持这个方法的低版本的浏览器中像支持ES6一样的使用codePointAt()方法.</p>
+<pre><code><span class="comment">/*! http://mths.be/codepointat v0.1.0 by @mathias */</span>
+<span class="keyword">if</span> (!<span class="built_in">String</span>.prototype.codePointAt) {
+  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+<span class="pi">    'use strict'</span>; <span class="comment">// needed to support `apply`/`call` with `undefined`/`null`</span>
+    <span class="keyword">var</span> codePointAt = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>) </span>{
+      <span class="keyword">if</span> (<span class="keyword">this</span> == <span class="literal">null</span>) {
+        <span class="keyword">throw</span> <span class="built_in">TypeError</span>();
+      }
+      <span class="keyword">var</span> string = <span class="built_in">String</span>(<span class="keyword">this</span>);
+      <span class="keyword">var</span> size = string.length;
+      <span class="comment">// `ToInteger`</span>
+      <span class="keyword">var</span> index = position ? <span class="built_in">Number</span>(position) : <span class="number">0</span>;
+      <span class="keyword">if</span> (index != index) { <span class="comment">// better `isNaN`</span>
+        index = <span class="number">0</span>;
+      }
+      <span class="comment">// Account for out-of-bounds indices:</span>
+      <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) {
+        <span class="keyword">return</span> <span class="literal">undefined</span>;
+      }
+      <span class="comment">// Get the first code unit</span>
+      <span class="keyword">var</span> first = string.charCodeAt(index);
+      <span class="keyword">var</span> second;
+      <span class="keyword">if</span> ( <span class="comment">// check if it’s the start of a surrogate pair</span>
+        first &gt;= <span class="number">0xD800</span> &amp;&amp; first &lt;= <span class="number">0xDBFF</span> &amp;&amp; <span class="comment">// high surrogate</span>
+        size &gt; index + <span class="number">1</span> <span class="comment">// there is a next code unit</span>
+      ) {
+        second = string.charCodeAt(index + <span class="number">1</span>);
+        <span class="keyword">if</span> (second &gt;= <span class="number">0xDC00</span> &amp;&amp; second &lt;= <span class="number">0xDFFF</span>) { <span class="comment">// low surrogate</span>
+          <span class="comment">// http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae</span>
+          <span class="keyword">return</span> (first - <span class="number">0xD800</span>) * <span class="number">0x400</span> + second - <span class="number">0xDC00</span> + <span class="number">0x10000</span>;
+        }
+      }
+      <span class="keyword">return</span> first;
+    };
+    <span class="keyword">if</span> (<span class="built_in">Object</span>.defineProperty) {
+      <span class="built_in">Object</span>.defineProperty(<span class="built_in">String</span>.prototype, <span class="string">'codePointAt'</span>, {
+        <span class="string">'value'</span>: codePointAt,
+        <span class="string">'configurable'</span>: <span class="literal">true</span>,
+        <span class="string">'writable'</span>: <span class="literal">true</span>
+      });
+    } <span class="keyword">else</span> {
+      <span class="built_in">String</span>.prototype.codePointAt = codePointAt;
+    }
+  }());
 }
-</code></pre><h4 id="作用域规则-1">作用域规则</h4><blockquote>
-<p>for (let expr1; expr2; expr3) statement</p>
-</blockquote>
-<p>在这个例子里, <code>expr2</code>,<code>expr3</code> 以及 <code>statement</code> 语句,都会被隐式的包含到一个代码块里. <code>let</code> 声明的 <code>expr1</code> 变量就处在这个隐藏的代码块里. 这在上一个循环的例子里已经阐述过了.</p>
-<h2 id="栗子">栗子</h2><h3 id="let_vs_var"><code>let</code> vs <code>var</code></h3><p>在代码块里使用 <code>let</code> 语句,变量的作用域就是所在的代码块. 而 <code>var</code> 声明的变量,所在的作用域是声明时所在的整个函数.</p>
-<pre><code>var a = <span class="number">5</span>;
-var b = <span class="number">10</span>;
+</code></pre><h2 id="总结">总结</h2><p>上面关于<code>charCodeAt()</code>和<code>codePointAt()</code>的详解分别来自于:<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt" target="_blank" rel="external">charCodeAt()</a>以及<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt" target="_blank" rel="external">codePointAt()</a>;</p>
+<p>这里面有几个重点:</p>
+<ol>
+<li>Unicode 码点,基本多语言平面(Basic-Multilingual-Plane)只支持0-65535的码点,每个字符占用两个字节,对应一个码点,超过这个范围的码点,需要使用四个字节,两个 code unit,, 一个高位(U+D800到U+DBFF),一个低位(U+DC00到U+DFFF),他们组成一个 surrogate pair,代表一个字符.</li>
+<li>charCodeAt() 方法只返回对应位置的code unit对应的码点.不管这个码点是不是代表了一个字符,不管这个code unit是独立的字符还是 surrogate pair 的一部分.</li>
+<li>codePointAt() 方法返回对应位置的code unit 或 surrogate pair的码点: 遇到独立能代表字符的码点,就返回它; 遇到 surrogate pair 里的高位 code unit,就返回整个 surrogate pair 的码点; 遇到 surrogate pair 里的低位 code unit,也返回这个 code unit 对应的码点(虽然它不配合任何字符).</li>
+<li>文章中多次用到一个公式,就是已知 surrogate pair 的高位 code unit 的码点和低位 code unit 的码点,如何求得整个 surrogate pair 的码点,这个公式来自于<a href="http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae" target="_blank" rel="external">surrogate-formulae</a></li>
+</ol>
+<p>最后,再给出一个综合例子,帮助理解:<a href="https://jsfiddle.net/caqmpasb/1/" target="_blank" rel="external">online site</a></p>
+<pre><code>console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.charCodeAt(<span class="number">0</span>)); <span class="comment"> //55296  </span>
+console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.charCodeAt(<span class="number">1</span>)); <span class="comment"> //56320  </span>
+console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.codePointAt(<span class="number">0</span>));<span class="comment"> //65536  获取的是整个 surrogate pair 的码点</span>
+console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.codePointAt(<span class="number">1</span>));<span class="comment"> //56320  获取的是'\uDC00'的码点, 同charCodeAt()   </span>
+console.<span class="built_in">log</span>(<span class="string">'\uD800'</span>.codePointAt(<span class="number">0</span>));      <span class="comment"> //55296  获取的是'\uD800'的码点, 同charCodeAt()</span>
 
-<span class="keyword">if</span> (a === <span class="number">5</span>) {
-  let a = <span class="number">4</span>; <span class="comment">// 作用域是在 if 代码块里</span>
-  var b = <span class="number">1</span>; <span class="comment">// 作用域是在整个函数里</span>
+<span class="comment">
+//根据阮一峰老师的文章:"当我们遇到两个字节，发现它的码点在U+D800到U+DBFF之间，就可以断定，紧跟在后面的两个字节的码点，应该在U+DC00到U+DFFF之间，这四个字节必须放在一起解读。"</span><span class="comment">
+//所以,'\uD800\uDC00'应该两个码点一起解读,解读的结果就是65536</span>
 
-  console.<span class="built_in">log</span>(a);  <span class="comment">// 4</span>
-  console.<span class="built_in">log</span>(b);  <span class="comment">// 1</span>
-} 
+console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.<span class="built_in">length</span>); <span class="comment"> //2</span>
+console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.codePointAt(<span class="number">0</span>)); <span class="comment"> //134071 </span>
+console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.codePointAt(<span class="number">1</span>)); <span class="comment"> //57271</span>
+<span class="comment">
+//𠮷(ji)这个字,是由两个码点,四个字节组成的,所以它的length是2.两个码点一起解读,得到的结果就是134071</span>
+<span class="comment">
+//最后一点,当获取这类需要两个码点一起解读组成一个字符的时候,如果获取高位的code point,它得到的会是整个字符的Unicode值,但如果获取低位的code point,它得到的依然是第二个码点的Unicode值.</span>
+</code></pre><hr>
+<p>[1]:<em>code point(码点)</em> Unicode里的码点,有几种表达方式,比如 ‘©’ 符号,它的码点是 <em>U+00A9</em> 或 <em>0xA9</em> 或 <em>\u00A9</em> 或十进制的 <em>169</em><br>其中 <em>\u00A9</em> 是js字符串里使用的方法, <em>0xA9</em> 是写js的时候使用的方法, <em>169</em> 最容易理解,就是一一对应的数字嘛,和ASCII的0-255数字一样,每个数字代表一个码点.</p>
+<hr>
+<p>[2]:<em>code unit</em> 不知道中文应该翻译成啥,编码单元? 在UTF-16编码方式时,如果是一个四字节的字符,比如上面一个土,下面一个口,念<a href="http://www.zdic.net/z/87/wy/20BB7.htm" target="_blank" rel="external">‘ji’</a>的那个字,它的Unicode码点是 <em>U+20BB7</em>,变成两个字节以后应该是 <em>\uD842\uDFB7</em> .在UTF-16编码里,需要由两个字节组成的字符,其中的每个字节就称为一个 <em>code unit</em> ,两个 <em>code unit</em> 组成一个 <em>surrogate pair</em>.  </p>
+<hr>
+<p>[3]:<em>surrogate pair</em> 不知道中文翻译成啥. 在UTF-16编码里,如有四个字节,两个 <em>code unit</em> 组成的字符,它就被称为 surrogate pair </p>
+<hr>
+<p>[4]:<em>Basic-Multilingual-Plane</em> 基本多语言平面. Unicode码点是由多个平面组成的,每个平面存放65536(2^16)个码点,其中第一个平面被称为 基本多语言平面 或者 BMP. 它包含了从 U+0000 到 U+FFFF 的码点,这些是各国最常用的字符.</p>
+<hr>
+<p>其他参考:<a href="http://www.ruanyifeng.com/blog/2014/12/unicode.html" target="_blank" rel="external">阮一峰老师写的Unicode资料</a></p>
 
-console.<span class="built_in">log</span>(a); <span class="comment">// 5</span>
-console.<span class="built_in">log</span>(b); <span class="comment">// 1</span>
-</code></pre><h3 id="循环里的_let">循环里的 <code>let</code></h3><p>建议在循环里使用 <code>let</code> 来创建一个作用于循环代码块下的变量,而不是使用 <code>var</code> 来创建一个全局的变量用于循环.</p>
-<pre><code><span class="keyword">for</span> (let i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++) {
-  console.<span class="built_in">log</span>(i); <span class="comment">// 0, 1, 2, 3, 4 ... 9</span>
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/encoding/">encoding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unicode/">unicode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utf-16/">utf-16</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-method-definations" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/18/method-definations/" class="article-date">
+  	<time datetime="2016-02-18T02:16:41.000Z" itemprop="datePublished">2016-02-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/18/method-definations/">method definitions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从ECMAScript2015(ES6)开始,引入了一种在初始化对象的时候,给对象定义方法的简约语法.为原来给一个函数定义一个方法名的键值对语法提供了一种简写语法.</p>
+<h2 id="语法">语法</h2><pre><code>var obj = {
+  property( parameters… ) {},
+  *generator( parameters… ) {},
+// also with computed keys:
+  [<span class="link_label">property</span>](<span class="link_url"> parameters… </span>) {},
+  *[<span class="link_label">generator</span>](<span class="link_url"> parameters… </span>) {},
+// compare ES5 getter/setter syntax:
+  get property() {},
+  set property(value) {}
+};
+</code></pre><h2 id="描述">描述</h2><p>这种简写的语法类似于ES5引入的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">setter</a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set" target="_blank" rel="external">getter</a>语法</p>
+<p>比如下面的代码:</p>
+<pre><code><span class="keyword">var</span> obj = {
+  foo: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{},
+  bar: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}
+};
+</code></pre><p>现在你可以把他们简写成这样:</p>
+<pre><code>var obj = {
+  foo(){},
+  bar(){}     
+};
+</code></pre><p>简写generator方法:</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*" target="_blank" rel="external">Generator methods</a>也可以使用简写的语法.但是要注意,’<em>‘必须在属性名的前面,就是说 `</em> g(){}<code>是正确的,而</code>g *(){}` 是不对的.</p>
+<pre><code><span class="comment">// 使用一个属性名+函数 (ES6之前)</span>
+<span class="keyword">var</span> obj2 = {
+  g: <span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>{
+    <span class="keyword">var</span> index = <span class="number">0</span>;
+    <span class="keyword">while</span>(<span class="literal">true</span>)
+      <span class="keyword">yield</span> index++;
+  }
+};
+
+<span class="comment">// 同一个对象,使用简洁语法</span>
+<span class="keyword">var</span> obj2 = { 
+  * g() {
+    <span class="keyword">var</span> index = <span class="number">0</span>;
+    <span class="keyword">while</span>(<span class="literal">true</span>)
+      <span class="keyword">yield</span> index++;
+  }
+};
+
+<span class="keyword">var</span> it = obj2.g();
+<span class="built_in">console</span>.log(it.next().value); <span class="comment">// 0</span>
+<span class="built_in">console</span>.log(it.next().value); <span class="comment">// 1</span>
+</code></pre><h3 id="方法定义不是构造函数:">方法定义不是构造函数:</h3><p>方法定义的结果不是构造函数,尝试实例化它会返回一个<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">Type</a>; </p>
+<pre><code><span class="keyword">var</span> obj = { 
+  <span class="keyword">method</span>() {},
+};
+new obj.<span class="keyword">method</span>; // <span class="type">TypeError</span>: obj.<span class="keyword">method</span> <span class="keyword">is</span> <span class="keyword">not</span> a constructor
+
+<span class="keyword">var</span> obj = { 
+  * g() {} 
+};
+new obj.g; // <span class="type">TypeError</span>: obj.g <span class="keyword">is</span> <span class="keyword">not</span> a constructor (changed <span class="keyword">in</span> <span class="type">ES2016</span>)
+</code></pre><h2 id="栗子">栗子</h2><h3 id="简单的场景">简单的场景</h3><pre><code><span class="keyword">var</span> obj={
+    a:<span class="string">'foo'</span>,
+    b(){<span class="keyword">return</span> <span class="keyword">this</span>.a}
 }
+<span class="built_in">console</span>.log(obj.b());    <span class="comment">//'foo'</span>
+</code></pre><h3 id="计算后的属性名">计算后的属性名</h3><p>简洁语法也支持计算后的属性名</p>
+<pre><code>var bar = {
+  foo0 : function (){<span class="keyword">return</span> <span class="number">0</span>;},
+  foo1(){<span class="keyword">return</span> <span class="number">1</span>;},
+  [<span class="string">"foo"</span> + <span class="number">2</span>](){<span class="keyword">return</span> <span class="number">2</span>;},
+};
 
-console.<span class="built_in">log</span>(i); <span class="comment">// i is not defined</span>
-</code></pre><h2 id="非标准的_let_扩展">非标准的 <code>let</code> 扩展</h2><blockquote>
-<p>非标准的 <code>let</code> 扩展基本没有得到支持,而且很多已经被废弃,就不翻译了…..((☄⊙ω⊙)☄…好吧,因为快要下班了…)</p>
-</blockquote>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank" rel="external">原文地址</a></p>
+console.<span class="built_in">log</span>(bar.foo0()); <span class="comment">// 0</span>
+console.<span class="built_in">log</span>(bar.foo1()); <span class="comment">// 1</span>
+console.<span class="built_in">log</span>(bar.foo2()); <span class="comment">// 2</span>
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions" target="_blank" rel="external">原文地址</a></p>
 
         
           <!-- show an end symbol if the article is fully displayed -->
@@ -366,11 +555,11 @@ console.<span class="built_in">log</span>(i); <span class="comment">// i is not 
 
 
   
-    <article id="post-Object-defineProperty-方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-function-asterisk" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/27/Object-defineProperty-方法/" class="article-date">
-  	<time datetime="2016-01-27T07:26:50.000Z" itemprop="datePublished">2016-01-27</time>
+      <a href="/2016/02/16/function-asterisk/" class="article-date">
+  	<time datetime="2016-02-16T08:47:47.000Z" itemprop="datePublished">2016-02-16</time>
 </a>
     </div>
   
@@ -383,7 +572,7 @@ console.<span class="built_in">log</span>(i); <span class="comment">// i is not 
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/27/Object-defineProperty-方法/">Object.defineProperty()方法</a>
+      <a class="article-title" href="/2016/02/16/function-asterisk/">function asterisk</a>
     </h1>
   
 
@@ -392,303 +581,176 @@ console.<span class="built_in">log</span>(i); <span class="comment">// i is not 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Object-defineProperty()方法详解">Object.defineProperty()方法详解</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#Custom_Setters_and_Getters" target="_blank" rel="external">查看原文</a></p>
-<p><em>Object.defineProperty()</em> 方法可以直接给对象定义一个新的属性, 或者修改对象上已存在的某个属性, 最后返回这个对象.</p>
-<h2 id="语法">语法</h2><blockquote>
-<p>Object.defineProperty(obj, prop, descriptor)</p>
-</blockquote>
-<h3 id="Parameters">Parameters</h3><p><strong>obj</strong><br>需要被定义属性的对象</p>
-<p><strong>prop</strong><br>需要被定义(或修改)的属性名</p>
-<p><strong>descriptor</strong><br>对需要被定义(或修改)的属性的描述</p>
-<h2 id="介绍">介绍</h2><p>这个方法允许精确的添加或修改对象的属性.通过普通的分配方式给对象添加的属性,会在对象属性被枚举时展示(比如<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="external">for in</a>循环或者使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="external">Object.keys</a>),它的值也可以被修改,被<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete" target="_blank" rel="external">delete</a>.这个方法允许你通过更详细的配置来修改这些默认的行为. 默认情况下,通过 <code>Object.defineProperty()</code> 定义的属性值是不可变的.</p>
-<p>对象的属性的描述符(即descriptor参数)有两种方式定义: 数据描述符(<strong>data descriptor</strong>)和存取器描述符(<strong>accessor descriptor</strong>).<br><strong>数据描述符</strong>表示:这个属性有一个值,这个值可以是可写的,也可以是不可写的.<br><strong>存取器描述符</strong>表示:这个属性有一对函数,一个是获取函数,一个是设置函数(getter&amp;setter);<br>描述符必须是这两者之一,不能都有.</p>
-<p>数据描述符和存取器描述符都是对象. 他们都需要下列属性:</p>
-<p><strong>configurable</strong><br><code>true</code>: 当且仅当描述符可以被修改并且属性可以从相应的对象中被删除的时候<br><strong>默认是</strong><code>false</code>.</p>
-<p><strong>enumerable</strong><br><code>true</code>: 当且仅当这个属性需要在对象属性被枚举的时候被展示出来.<br><strong>默认是</strong><code>false</code>.</p>
-<p>数据描述符还拥有下列可选的属性:</p>
-<p><strong>value</strong><br>属性对应的值.可以是任何有效的Javascript值(数值,对象,函数,等等).<br><strong>默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a></strong>.</p>
-<p><strong>writable</strong><br><code>true</code>: 当且仅当属性的值可以通过赋值操作而被改变时.<br><strong>默认是</strong><code>false</code></p>
-<p>存取器描述符还拥有下列可选的属性:</p>
-<p><strong>get</strong><br>一个函数,它是属性的获取函数.如果没有定义获取函数,它就是undefined.函数的返回值就会成为这个属性的值.<br><strong>默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a></strong>.</p>
-<p><strong>set</strong><br>一个函数,它是属性的设置函数,如果没有定义设置函数,它就是undefined.当属性值被赋值(通过普通方式)的时候,这个新值会被作为唯一的参数传入.<br><strong>默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a></strong>.</p>
-<p>记住,上面这些选项不一定要是对象自身的属性,所以还需要考虑是否被继承的问题.为了确保在不写这些选项时,它取到的是默认值,你需要预先冻结<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype" target="_blank" rel="external">Object.prototype</a>. 所以,明确的指定每个选项,或者把 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto" target="_blank" rel="external">__proto__</a> 属性指定为 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="external">null</a>.</p>
-<pre><code><span class="comment">// 冻结 __proto__</span>
-<span class="keyword">var</span> obj = {};
-<span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, {
-  __proto__: <span class="literal">null</span>, <span class="comment">// no inherited properties</span>
-  value: <span class="string">'static'</span>  <span class="comment">// not enumerable</span>
-                   <span class="comment">// not configurable</span>
-                   <span class="comment">// not writable</span>
-                   <span class="comment">// as defaults</span>
-});
-
-<span class="comment">// 明确指定每个选项值</span>
-<span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, {
-  enumerable: <span class="literal">false</span>,
-  configurable: <span class="literal">false</span>,
-  writable: <span class="literal">false</span>,
-  value: <span class="string">'static'</span>
-});
-
-<span class="comment">// 重用同一个对象</span>
-<span class="function"><span class="keyword">function</span> <span class="title">withValue</span>(<span class="params">value</span>) </span>{
-  <span class="keyword">var</span> d = withValue.d || (
-    withValue.d = {
-      enumerable: <span class="literal">false</span>,
-      writable: <span class="literal">false</span>,
-      configurable: <span class="literal">false</span>,
-      value: <span class="literal">null</span>
-    }
-  );
-  d.value = value;
-  <span class="keyword">return</span> d;
+        <p><strong>function*</strong>声明(<code>function</code> 关键字加上一个星号)定义一个生成器函数,返回一个生成器(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator" target="_blank" rel="external">Generator</a>)对象.</p>
+<p>你还可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction" target="_blank" rel="external">GeneratorFunction</a>构造函数以及<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function*" target="_blank" rel="external">function* expression</a>来定义生成器函数.</p>
+<h2 id="语法">语法</h2><pre><code>function* <span class="built_in">name</span>([<span class="built_in">param</span>[, <span class="built_in">param</span>[, ... <span class="built_in">param</span>]]]) {
+    statements
 }
-<span class="comment">// ... 然后 ...</span>
-<span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, withValue(<span class="string">'static'</span>));
+</code></pre><p><strong>name</strong></p>
+<p>函数的名字</p>
+<p><strong>param</strong></p>
+<p>传递给函数的参数的名字.一个函数最多可以带有255个参数.</p>
+<p><strong>statements</strong></p>
+<p>statements由函数体组成.</p>
+<h2 id="描述">描述</h2><p>Generators 是可以退出和再次进入的函数.它的上下文(变量的绑定)在整个重新进入的过程中一直会被保存.</p>
+<p>调用一个generator函数,并不会立刻执行函数体;而是返回一个函数的迭代器(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterator" target="_blank" rel="external">iterator</a>).<br>每当调用迭代器的 <code>next()</code> 方法时,generator的函数体就会被执行,直到它遇到第一个<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield" target="_blank" rel="external">yield</a>表达式. 它指定了迭代器的返回值,如果使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*" target="_blank" rel="external">yield*</a>,则代理到另一个generator函数. <code>next()</code>方法返回一个对象,对象的 <code>value</code> 属性的值是 <code>yield</code> 表达式的值; <code>done</code> 属性的值表明该generator是否已经执行完了全部的yield. 详见<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/next" target="_blank" rel="external">Generator.prototype.next()</a>.<br>当调用迭代器的 <code>return(param)</code> 方法时,Generator被关闭,返回参数 <code>param</code> 的值,详见 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return" target="_blank" rel="external">Generator.prototype.return()</a> </p>
+<h2 id="栗子">栗子</h2><h3 id="简单的栗子">简单的栗子</h3><pre><code>function* idMaker(){
+  <span class="keyword">var</span> index = 0;
+  <span class="keyword">while</span>(index &lt; 3)
+    yield index++;
+}
 
-<span class="comment">// 如果freeze方法是可用的,阻止对对象 prototype 属性进行新增或删除.(value, get, set, enumerable, writable, configurable)   </span>
-(<span class="built_in">Object</span>.freeze || <span class="built_in">Object</span>)(<span class="built_in">Object</span>.prototype);
-</code></pre><h2 id="Examples">Examples</h2><p>如果你想知道如何使用<strong>二进制标识风格</strong>句法来使用 Object.defineProperty 方法,查看<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty/Additional_examples" target="_blank" rel="external">额外例子</a> (这个好恶心…━┳━　━┳━)</p>
-<h3 id="新建一个属性">新建一个属性</h3><p>当对象里没有既存的指定属性时,<code>Object.defineProperty()</code>方法会按照描述创建一个新的属性.描述符里的所有选项都可以省略,被省略的选项会取默认值.所有的布尔值都默认为<code>false</code>. <code>value</code>,<code>get</code>,<code>set</code>选项默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a>.如果一个属性,它的描述符里没有 <code>get/set/value/writable</code> 这些选项,它被称为 ‘通用型(generic)’, 并且被归类到数据描述符. </p>
-<pre><code><span class="keyword">var</span> o = {}; <span class="comment">// 创建一个新的对象</span>
+<span class="keyword">var</span> <span class="keyword">gen</span> = idMaker();
 
-<span class="comment">// 一个通过数据描述符,使用defineProperty来添加属性的例子</span>
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">37</span>,
-  writable: <span class="literal">true</span>,
-  enumerable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>
-});
+console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// 0</span>
+console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// 1</span>
+console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().done);  <span class="comment">// false</span>
+console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// 2</span>
+console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().done);  <span class="comment">// true</span>
+console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// undefined</span>
+</code></pre><h3 id="使用_yield*_的栗子">使用 <code>yield*</code> 的栗子</h3><pre><code><span class="function"><span class="keyword">function</span>* <span class="title">anotherGenerator</span>(<span class="params">i</span>) </span>{
+  <span class="keyword">yield</span> i + <span class="number">1</span>;
+  <span class="keyword">yield</span> i + <span class="number">2</span>;
+  <span class="keyword">yield</span> i + <span class="number">3</span>;
+}
 
-<span class="comment">// 'a' 属性存在于 o 对象中,它的值是37 </span>
+<span class="function"><span class="keyword">function</span>* <span class="title">generator</span>(<span class="params">i</span>)</span>{
+  <span class="keyword">yield</span> i;
+  <span class="keyword">yield</span>* anotherGenerator(i);
+  <span class="keyword">yield</span> i + <span class="number">10</span>;
+}
 
-<span class="comment">// 一个通过存取器描述符,使用defineProperty来添加属性的例子 </span>
-<span class="keyword">var</span> bValue = <span class="number">38</span>;
-Object.defineProperty(o, <span class="string">'b'</span>, {
-  <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> bValue; },
-  <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(newValue)</span> </span>{ bValue = newValue; },
-  enumerable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>
-});
-o.b; <span class="comment">// 38</span>
-<span class="comment">// 'b' 属性存在于 o 对象中,它的值是38</span>
-<span class="comment">// 现在, o.b的值永远等于bValue,除非重新定义o.b</span>
+<span class="keyword">var</span> gen = generator(<span class="number">10</span>);
 
-<span class="comment">// 你不能尝试结合两者:</span>
-Object.defineProperty(o, <span class="string">'conflict'</span>, {
-  value: <span class="number">0x9f91102</span>,
-  <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="number">0xdeadbeef</span>; }
-});
-<span class="comment">// throws a TypeError: value appears only in data descriptors, get appears only in accessor descriptors</span>
+<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 10</span>
+<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 11</span>
+<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 12</span>
+<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 13</span>
+<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 20</span>
 </code></pre><blockquote>
-<p>补充说一下这里的set选项,get选项很简单,就是通过这个函数来获取对象对应的属性值,而set函数,是当你使用 <code>.</code> 操作符来给属性分配值的时候被调用的. 需要注意的是,当使用 <code>.</code> 操作符来给属性分配值的时候,先调用 setter ,然后还会调用 getter.考虑以下代码:</p>
+<p>这里需要注意,使用yield*返回的代理迭代器拥有自己的闭包环境,两个i不是同一个i,如果把另一个参数换成a,可能更清晰一点…</p>
 </blockquote>
-<pre><code>Object.defineProperty(o, <span class="string">'b'</span>, {
-  <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> bValue; },
-  <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(newValue)</span> </span>{ bValue = newValue+<span class="number">1</span>; },
-  enumerable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>
-});
-o.b; <span class="comment">// 38</span>
-o.b = <span class="number">39</span>;
-console.log(o.b) <span class="comment">//40</span>
-</code></pre><blockquote>
-<p>当使用 <code>o.b = 39</code> 来给对象分配属性值时, 首先调用 setter ,然后调用 getter, 而o.b最终的值,依然是 getter 得到的结果. </p>
-</blockquote>
-<h3 id="修改属性">修改属性</h3><p>当属性已经存在, <code>Object.defineProperty()</code> 会尝试根据描述符里的值和对象目前的配置来修改这个属性. 如果原来的描述符里,<code>configurable</code> 属性被设置为 <code>false</code> (代表这个属性不能被配置),那么,除了<code>writable</code>之外的所有属性都不能被修改.在这样的情况下,也不能切换描述符的类型,不能把数据描述符改成存取器描述符,反之也不能.</p>
-<p>如果一个属性是不可配置的,它的 <code>writable</code> 属性只能被修改成 <code>false</code>.</p>
-<p>尝试修改一个不可配置的属性(除了 <code>writable</code>),除非修改后的值和原来一样,否则会抛出一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a> .</p>
-<h4 id="Writable_属性">Writable 属性</h4><p>当 <code>writable</code> 属性被设置为 <code>false</code> 的时候, 表示这个属性是不可写的. 它不能被重定义值.</p>
-<pre><code>var o = {}; <span class="comment">// 创建一个新的对象</span>
+<h3 id="生成器不是构造函数">生成器不是构造函数</h3><p>下面这样做是不行的:</p>
+<pre><code><span class="function"><span class="keyword">function</span>* <span class="title">f</span>(<span class="params"></span>) </span>{}
+<span class="keyword">var</span> obj = <span class="keyword">new</span> f; <span class="comment">// throws "TypeError: f is not a constructor"</span>
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*" target="_blank" rel="external">原文地址</a> </p>
 
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">37</span>,
-  writable: <span class="literal">false</span>
-});
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
 
-console.<span class="built_in">log</span>(o.a); <span class="comment">// 打印出 37</span>
-o.a = <span class="number">25</span>; <span class="comment">// 不会报错(如果是在严格模式下还是会报错,即使你定义的值和原来一样,也会报错)</span>
-console.<span class="built_in">log</span>(o.a); <span class="comment">// 打印出 37. 之前的定义没有生效</span>
-</code></pre><p>就如这个栗子所见, 尝试写入一个不可写的属性不会生效,但也不会报错</p>
-<blockquote>
-<p>虽然不能重写,但是是否可以删除取决于<code>configurable</code>,而不是<code>writable</code></p>
-</blockquote>
-<h4 id="Enumerable_属性">Enumerable 属性</h4><p><code>enumerable</code> 属性定义了对象属性在使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="external">for…in</a>循环或者<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" target="_blank" rel="external">Object.keys()</a>枚举时是否被展示</p>
-<pre><code><span class="keyword">var</span> o = {};
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { value: <span class="number">1</span>, enumerable: <span class="literal">true</span> });
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'b'</span>, { value: <span class="number">2</span>, enumerable: <span class="literal">false</span> });
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'c'</span>, { value: <span class="number">3</span> }); <span class="comment">// enumerable 默认为false</span>
-o.d = <span class="number">4</span>; <span class="comment">// 使用这种方式设置的时候,enumerable 默认为true</span>
-
-<span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> o) {
-  <span class="built_in">console</span>.log(i);
-}
-<span class="comment">// 打印出 'a' 和 'd' (in undefined order)</span>
-
-<span class="built_in">Object</span>.keys(o); <span class="comment">// ['a', 'd']</span>
-
-o.propertyIsEnumerable(<span class="string">'a'</span>); <span class="comment">// true</span>
-o.propertyIsEnumerable(<span class="string">'b'</span>); <span class="comment">// false</span>
-o.propertyIsEnumerable(<span class="string">'c'</span>); <span class="comment">// false</span>
-</code></pre><h4 id="Configurable_属性">Configurable 属性</h4><p><code>configurable</code> 同时控制了该属性是否能从对象中被删除,以及(描述符里的)属性(除了<code>writable</code>)是否可以被修改.</p>
-<pre><code><span class="keyword">var</span> o = {};
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, {
-  get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="number">1</span>; },
-  configurable: <span class="literal">false</span>
-});
-
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { configurable: <span class="literal">true</span> }); <span class="comment">// throws a TypeError</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { enumerable: <span class="literal">true</span> }); <span class="comment">// throws a TypeError</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { set: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{} }); <span class="comment">// throws a TypeError (set属性值之前是undefined)</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="number">1</span>; } }); <span class="comment">// throws a TypeError (即使新的函数做的事情和原来的一模一样)</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { value: <span class="number">12</span> }); <span class="comment">// throws a TypeError</span>
-
-<span class="built_in">console</span>.log(o.a); <span class="comment">// logs 1</span>
-<span class="keyword">delete</span> o.a; <span class="comment">// 什么也没发生</span>
-<span class="built_in">console</span>.log(o.a); <span class="comment">// logs 1</span>
-</code></pre><p>如果 <code>o.a</code> 的 <code>configurable</code> 属性被设置为 <code>true</code> , 以上报错都不会有,最后这个属性会被删除.</p>
-<h3 id="添加对象属性时的默认值">添加对象属性时的默认值</h3><p>有一个重要的事需要被考虑到:在你为对象添加属性的时候,属性的默认属性是怎么样的.通常来说,简单地使用 <code>.</code> 操作符和使用 <code>Object.defineProperty()</code> 来分配属性值是有区别的,如下栗子所示:</p>
-<pre><code>var o = {};
-
-o.a = <span class="number">1</span>;
-<span class="comment">// 也可以写成:</span>
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">1</span>,
-  writable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>,
-  enumerable: <span class="literal">true</span>
-});
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
 
 
-<span class="comment">// 另外,</span>
-Object.defineProperty(o, <span class="string">'a'</span>, { value: <span class="number">1</span> });
-<span class="comment">// 也可以写成:</span>
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">1</span>,
-  writable: <span class="literal">false</span>,
-  configurable: <span class="literal">false</span>,
-  enumerable: <span class="literal">false</span>
-});
-</code></pre><h3 id="自定义_Setters_和_Getters">自定义 Setters 和 Getters</h3><p>下面的例子展示了如何实现一个自动存档的对象.每当温度属性被设置, 存档数组都会有相应的记录.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Archiver</span><span class="params">()</span> </span>{
-  <span class="keyword">var</span> temperature = <span class="literal">null</span>;
-  <span class="keyword">var</span> archive = [];
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
 
-  Object.defineProperty(<span class="keyword">this</span>, <span class="string">'temperature'</span>, {
-    <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-      console.log(<span class="string">'get!'</span>);
-      <span class="keyword">return</span> temperature;
-    },
-    <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(value)</span> </span>{
-      temperature = value;
-      archive.push({ val: temperature });
-    }
-  });
 
-  <span class="keyword">this</span>.getArchive = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> archive; };
+
+
+
+
+  
+    <article id="post-setter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/16/setter/" class="article-date">
+  	<time datetime="2016-02-16T03:45:01.000Z" itemprop="datePublished">2016-02-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/16/setter/">setter</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>set</strong>语法把对象的某个属性绑定到一个函数上,当<strong>设置</strong>该属性的时候执行这个函数</p>
+<h2 id="语法">语法</h2><pre><code><span class="collection">{set prop<span class="list">(<span class="keyword"><span class="built_in">val</span></span>)</span> <span class="collection">{ . . . }</span>}</span>
+<span class="collection">{set <span class="collection">[expression]</span><span class="list">(<span class="keyword"><span class="built_in">val</span></span>)</span> <span class="collection">{ . . . }</span>}</span>
+</code></pre><h3 id="参数">参数</h3><p><strong>prop</strong></p>
+<p>需要绑定到函数的属性名</p>
+<p><strong>val</strong></p>
+<p>一个变量的别名,它的值就是想要赋值给 <code>prop</code> 属性的值.</p>
+<p><strong>表达式</strong></p>
+<p>从ECMAScript 6 开始,你可以使用一个表达式来得到一个计算后的属性名来绑定所给的函数.</p>
+<p><strong>描述</strong></p>
+<p>在JavaScript里,一个setter可以实现当指定的属性试图被改变的时候执行一个函数.Setter通常和getter结合使用来创建一个伪状态.属性的setter不能给该属性一个确定的属性值.</p>
+<p>使用 <code>set</code> 的时候需要注意一下几点:</p>
+<ul>
+<li>它可以拥有一个id,id可以是数字也可以是字符串</li>
+<li>它必须拥有一个参数.不能少也不能多(<a href="http://whereswalden.com/2010/08/22/incompatible-es5-change-literal-getter-and-setter-functions-must-now-have-exactly-zero-or-one-arguments/" target="_blank" rel="external">查看更多</a>)</li>
+<li>在对象字面量里,一个属性只能有一个setter,并且setter绑定函数的属性不能再指定它的值,反之亦然.({ set x(v) { }, set x(v) { } } and { x: …, set x(v) { } } 类似于这样的是不行的.)</li>
+</ul>
+<p>setter可以通过 <code>delete</code> 方法删除</p>
+<h2 id="栗子">栗子</h2><h3 id="在对象初始化的时候给属性添加setter">在对象初始化的时候给属性添加setter</h3><p>这会给 <code>o</code> 对象添加一个名为 <code>current</code> 的伪属性,每当它被分配属性值的时候, <code>log</code> 属性会被更新,被分配的属性值会被记录.</p>
+<pre><code>var o = {
+  <span class="function"><span class="built_in">set</span> <span class="title">current</span> <span class="params">(str)</span> </span>{
+    <span class="keyword">this</span>.<span class="built_in">log</span>[<span class="keyword">this</span>.<span class="built_in">log</span>.length] = str;
+  },
+  <span class="built_in">log</span>: []
 }
 
-<span class="keyword">var</span> arc = <span class="keyword">new</span> Archiver();
-arc.temperature; <span class="comment">// 'get!'</span>
-arc.temperature = <span class="number">11</span>;
-arc.temperature = <span class="number">13</span>;
-arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
-</code></pre><h2 id="版本说明">版本说明</h2><table>
-<thead>
-<tr>
-<th>版本</th>
-<th style="text-align:center">状态</th>
-<th style="text-align:right">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.ecma-international.org/ecma-262/5.1/#sec-15.2.3.6" target="_blank" rel="external">‘Object.defineProperty’方法被定义在了ECMAScript 5.1 (ECMA-262)</a></td>
-<td style="text-align:center"><em>ST</em> 标准</td>
-<td style="text-align:right">初次定义. 在JavaScript 1.8.5 里被实现</td>
-</tr>
-<tr>
-<td><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-object.defineproperty" target="_blank" rel="external">‘Object.defineProperty’方法被定义在了ECMAScript 2015 (6th Edition, ECMA-262)</a></td>
-<td style="text-align:center"><em>ST</em> 标准</td>
-<td style="text-align:right"></td>
-</tr>
-<tr>
-<td><a href="https://tc39.github.io/ecma262/#sec-object.defineproperty" target="_blank" rel="external">‘Object.defineProperty’方法被定义在了ECMAScript 2016 Draft (7th Edition, ECMA-262)</a></td>
-<td style="text-align:center"><em>D</em> 草案</td>
-</tr>
-</tbody>
-</table>
-<h2 id="浏览器兼容性">浏览器兼容性</h2><p><strong>桌面端</strong></p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th style="text-align:center">Firefox (Gecko)</th>
-<th style="text-align:right">Chrome</th>
-<th style="text-align:right">Internet Explorer</th>
-<th style="text-align:right">Opera</th>
-<th style="text-align:right">Safari</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基本支持</td>
-<td style="text-align:center">4.0(2)</td>
-<td style="text-align:right">5</td>
-<td style="text-align:right">9[1]</td>
-<td style="text-align:right">11.60</td>
-<td style="text-align:right">5.1[2]</td>
-</tr>
-</tbody>
-</table>
-<p>[1] 在ie8下只支持DOM对象, 而且有一些非标准行为.<br>[2] Safari5 也支持, 但不支持DOM对象. </p>
-<p><strong>移动端</strong></p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th style="text-align:center">Firefox Mobile (Gecko)</th>
-<th style="text-align:right">Android</th>
-<th style="text-align:right">IE Mobile</th>
-<th style="text-align:right">Opera Mobile</th>
-<th style="text-align:right">Safari Mobile</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基本支持</td>
-<td style="text-align:center">4.0(2)</td>
-<td style="text-align:right">(支持)</td>
-<td style="text-align:right">9</td>
-<td style="text-align:right">11.5</td>
-<td style="text-align:right">(支持)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="兼容性问题补充说明">兼容性问题补充说明</h2><h3 id="重新定义数组对象的_length_属性">重新定义数组对象的 <code>length</code> 属性</h3><p>重新定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的,但也受制于普通的重定义时的限制.(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a>属性一开始是不能配置,不可枚举,但是可写的.所以,改变一个没有被修改过(描述符)的数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的.也可以把它改成不可写的,但是不允许修改它的可枚举性和可配置性.如果它已经被改成不可写的,也不能修改它的值,也不能修改它的可写性.)然而,并不是所有的浏览器都允许重定义它的.</p>
-<p>如果在 Firefox 4 到 22 里尝试此操作会抛出一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a> , 无论它是否允许重定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性. </p>
-<p>某些版本的Chrome浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改.在某些情况下,修改它的可写性其实也没有生效(也不会报错).另外,与此相关的是,一些修改数组的方法,比如 <code>Array.prototype.push</code> 却无视 <code>length</code> 属性的不可写性.(就是说,使用<code>push</code>方法,数组的<code>length</code>属性值依然会被改变,即使它是不可写的.)</p>
-<p>某些版本的Safari浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改,还会尝试去改变它的可写性,但最终,属性的可写性并没有被改变,这个过程也不会报错.</p>
-<p>只有ie 9 及以后的版本, Firefox 23 及以后的版本, 开始完全地,正确地支持重定义数组的 <code>length</code> 属性.到目前为止,不要指望使用 <code>Object.defineProperty()</code> 重定义数组的 <code>length</code> 属性能够以一种通用的方式正常工作.而且,就算它靠得住,也没有足够的理由去这样做.</p>
-<h3 id="针对ie8的特别说明">针对ie8的特别说明</h3><p>ie 8 下的 <code>Object.defineProperty()</code> 方法<a href="https://msdn.microsoft.com/en-us/library/dd229916%28VS.85%29.aspx" target="_blank" rel="external">只能被用在DOM对象</a>上.有一些事情需要注意:</p>
-<ul>
-<li>如果尝试在原生的对象上使用 <code>Object.defineProperty()</code> 方法,会报错.</li>
-<li>定义属性时,描述符的选项必须被设置为指定的值. 如果是数据描述符,<code>configurable</code>,<code>enumerable</code>,<code>writable</code> 都必须被设置为<code>true</code>,如果是存取器描述符, <code>configurable</code> 必须是 <code>true</code>, <code>enumerable</code> 必须是 <code>false</code>, 如果设置的值不是这些,会报错.</li>
-<li>重定义属性的话,需要把原来的属性给删掉.如果原来的属性没有删掉,重定义不会生效,它还是保持原来的属性.</li>
-</ul>
-<h3 id="看看相关内容">看看相关内容</h3><ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties" target="_blank" rel="external">Enumerability and ownership of properties</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties" target="_blank" rel="external">Object.defineProperties()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/propertyIsEnumerable" target="_blank" rel="external">Object.propertyIsEnumerable()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor" target="_blank" rel="external">Object.getOwnPropertyDescriptor()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/watch" target="_blank" rel="external">Object.prototype.watch()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/unwatch" target="_blank" rel="external">Object.prototype.unwatch()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">get</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set" target="_blank" rel="external">set</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="external">Object.create()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty/Additional_examples" target="_blank" rel="external">Additional Object.defineProperty examples</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/defineProperty" target="_blank" rel="external">Reflect.defineProperty()</a></li>
-</ul>
+console.<span class="built_in">log</span>(o.current);
+o.current = <span class="number">1</span>;
+console.<span class="built_in">log</span>(o.<span class="built_in">log</span>);
+o.current = <span class="number">2</span>;
+console.<span class="built_in">log</span>(o.<span class="built_in">log</span>);
+</code></pre><p>注意,current属性并没有被定义,试图访问它会得到undefined.Note that current is not defined and any attempts to access it will result in undefined.</p>
+<h3 id="使用_delete_操作来删除setter">使用 <code>delete</code> 操作来删除setter</h3><p>如果你想把setter删除,只需要使用 <code>delete</code> 就行了.</p>
+<pre><code><span class="operator"><span class="keyword">delete</span> o.<span class="keyword">current</span>;</span>
+</code></pre><h3 id="使用_defineProperty_给一个既存的对象添加setter">使用 <code>defineProperty</code> 给一个既存的对象添加setter</h3><p>想要在任何时间给一个既存的对象添加setter ,可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">Object.defineProperty()</a></p>
+<pre><code><span class="keyword">var</span> o = { a:<span class="number">0</span> };
+
+<span class="built_in">Object</span>.defineProperty(o, <span class="string">"b"</span>, { set: <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>{ <span class="keyword">this</span>.a = x / <span class="number">2</span>; } });
+
+o.b = <span class="number">10</span>; <span class="comment">// Runs the setter, which assigns 10 / 2 (5) to the 'a' property</span>
+<span class="built_in">console</span>.log(o.a) <span class="comment">// 5</span>
+</code></pre><h3 id="使用计算后的属性名">使用计算后的属性名</h3><blockquote>
+<p>注意: 计算后的属性名属于试验中技术, ECMAScript 6 的目标的一部分, 还没有被浏览器广泛支持. 在不支持的环境下会触发语法错误.<br>(经过测试,在目前的chrome里是可以用的.)</p>
+</blockquote>
+<pre><code><span class="keyword">var</span> expr = <span class="string">"foo"</span>;
+
+<span class="keyword">var</span> obj = {
+  baz: <span class="string">"bar"</span>,
+  <span class="keyword">set</span> [expr](v) { <span class="keyword">this</span>.baz = v; }
+};
+
+<span class="built_in">console</span>.log(obj.baz); <span class="comment">// "bar"</span>
+obj.foo = <span class="string">"baz"</span>;      <span class="comment">// run the setter</span>
+<span class="built_in">console</span>.log(obj.baz); <span class="comment">// "baz"</span>
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">查看原文</a></p>
 
         
           <!-- show an end symbol if the article is fully displayed -->
@@ -703,7 +765,7 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
     <div class="article-info">
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 	</div>
 
       
@@ -725,11 +787,11 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
 
 
   
-    <article id="post-thinking-in-react" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-getter" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/17/thinking-in-react/" class="article-date">
-  	<time datetime="2016-01-17T05:36:22.000Z" itemprop="datePublished">2016-01-17</time>
+      <a href="/2016/02/15/getter/" class="article-date">
+  	<time datetime="2016-02-15T09:55:47.000Z" itemprop="datePublished">2016-02-15</time>
 </a>
     </div>
   
@@ -742,7 +804,7 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/17/thinking-in-react/">thinking-in-react</a>
+      <a class="article-title" href="/2016/02/15/getter/">getter</a>
     </h1>
   
 
@@ -751,89 +813,75 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="关于React的一些思考">关于React的一些思考</h1><p>作者: Pete Hunt</p>
-<p><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank" rel="external">查看原文</a></p>
-<p>在我看来,React是使用javascript构建大型快速应用的首选途径. 它在Instagram和facebook上都运行的很好.</p>
-<p>React的一个重要部分就是,如何去思考你要构建的应用.在这篇文章里,我会带领你一步一步思考如何使用React来实现一个搜索产品列表的功能.</p>
-<h2 id="从一个原型开始">从一个原型开始</h2><p>想象我们已经有一个JSON格式的数据文件以及一个设计师给出的原型.显然我们的设计师水平很烂,因为这个原型看起来是这样的:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20160117.01.png" alt="Mockup"></p>
-<p>我们的JSON文件返回的数据是这样的:</p>
-<pre><code>[
-  {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$49.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Football"</span>},
-  {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$9.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Baseball"</span>},
-  {<span class="string">category:</span> <span class="string">"Sporting Goods"</span>, <span class="string">price:</span> <span class="string">"$29.99"</span>, <span class="string">stocked:</span> <span class="literal">false</span>, <span class="string">name:</span> <span class="string">"Basketball"</span>},
-  {<span class="string">category:</span> <span class="string">"Electronics"</span>, <span class="string">price:</span> <span class="string">"$99.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"iPod Touch"</span>},
-  {<span class="string">category:</span> <span class="string">"Electronics"</span>, <span class="string">price:</span> <span class="string">"$399.99"</span>, <span class="string">stocked:</span> <span class="literal">false</span>, <span class="string">name:</span> <span class="string">"iPhone 5"</span>},
-  {<span class="string">category:</span> <span class="string">"Electronics"</span>, <span class="string">price:</span> <span class="string">"$199.99"</span>, <span class="string">stocked:</span> <span class="literal">true</span>, <span class="string">name:</span> <span class="string">"Nexus 7"</span>}
-];
-</code></pre><h2 id="第一步:_把视图拆分成层级组件">第一步: 把视图拆分成层级组件</h2><p>首先你需要画一个盒子模型草图,这个盒子模型包括了原型里的每个组件和它的子组件,然后给每个组件取名字.如果你和设计师协作,他们可能已经帮你完成了取名这件事,直接去问他们就行.ps图层名可能就是最后React组件的名字.</p>
-<p>但你怎么知道哪些应该是一个组件呢? 只需要通过判断你是否需要新建一个对象或者函数. 这个技术秉持<strong>各自负责原则</strong>,就是说,从理念上讲,一个组件只做一件事.如果它后面需要扩展,就应该被解耦成多个子组件.</p>
-<p>由于大多数时候你展示给用户的数据模型都是基于JSON格式的,你会发现,一旦你的模型建立正确,你的视图(连同你的组件结构)会很好匹配它.这是因为视图和数据模型倾向于依附同一个结构.这就意味着,把视图拆分成组件是很简单的,只需要按照每个组件匹配一个数据模型来拆分就可以了.</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20160117.02.png" alt="Mockup"></p>
-<p>你可以看到,这个简单的应用里有5个组件.我已经用粗体字标明了每个组件代表了哪个数据模型.</p>
-<ol>
-<li><code>FilterableProductTable</code> <strong>(橙色)</strong>: 包含了整个栗子</li>
-<li><code>SearchBar</code> <strong>(深蓝)</strong>: 接收用户输入的内容</li>
-<li><code>ProductTable</code> <strong>(绿色)</strong>: 过滤并展示基于用户输入搜索条件的匹配数据.</li>
-<li><code>ProductCategoryRow</code> <strong>(亮蓝)</strong>: 展示每个分类的标题.</li>
-<li><code>ProductRow</code> <strong>(红色)</strong>: 将每个产品一行一行显示出来.</li>
-</ol>
-<p>看一下 <code>ProductTable</code>, 你会发现,表格的标题部分(包括Name和Price两项)并不是一个单独的组件.这是由个人偏好决定的,也有争议说不应该这样处理.在这个例子里,我把它作为 <code>ProductTable</code> 的一部分,因为它也是渲染搜索结果数据的一部分,这个事情应该由 <code>ProductTable</code> 负责.但是,如果这个标题变得更复杂(比如我们要添加排序功能),显然就应该把它单独做成一个 <code>ProductTableHeader</code> 组件</p>
-<p>现在,我们已经给原型定义好了组件,让我们把它整理成一个层级关系.这很简单. 被包含在其他组件里的组件应该出现在层级图的子层:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20160117.03.png" alt="hierarchy"></p>
-<h2 id="第二步:_使用React构建一个静态版本">第二步: 使用React构建一个静态版本</h2><p>代码在jsfiddle上:<a href="https://jsfiddle.net/reactjs/yun1vgqb/" target="_blank" rel="external">查看代码</a></p>
-<p>现在你已经有了组件的层级关系,就可以开始你的应用了.最简单的方法是构建一个不带有任何交互,仅使用数据模型来渲染出视图的版本.最好能够把把这个过程进行解耦,因为构建静态版本需要打很多不用动脑筋的代码,而添加交互不需要写很多代码,却很费脑子.我们来看下这是为什么.</p>
-<p>构建一个静态渲染数据模型的应用,你的组件里需要重用其他组件,然后通过 <em>props</em> 来传递数据.props用于从父组件向子组件传递数据. 如果你听说过’状态’这个概念,那么记住,<strong>不要在静态的版本里使用状态</strong>.状态是留给交互使用的,就是说,在一段时间后会改变的数据. 由于现在做的是静态版的应用,所以你用不到它.</p>
-<p>你的思考方式可以是从上到下,也可以是从下到上. 就是说,你可以从层级的最高层的组件开始做(比如从<code>FilterableProductTable</code>开始)或者最底层的那个(<code>ProductRow</code>).一般来说,在简单的情况下,从上到下会比较简单,在大型的项目里,从下到上的构建并编写测试会比较简单.</p>
-<p>在这一步的最后,你会得到一个可重用的组件库,用于渲染数据模型.组件只有 <code>render()</code> 方法,因为这是一个静态的版本.数据模型会被放在最外层的组件(<code>FilterableProductTable</code>)的prop属性里.如果你修改了底层的数据模型,然后再次调用 <code>ReactDOM.render()</code> 方法,视图会被更新.你可以很容易的看到视图是怎么被更新的,哪里发生了变化.因为没有什么复杂的事情发生.React的<strong>单向数据流</strong>(或称单向数据绑定)保证了页面的模块化和速度.</p>
-<p>如果你在这一步有什么问题,请参考<a href="https://facebook.github.io/react/docs/" target="_blank" rel="external">React文档</a>.</p>
-<h2 id="第三步:_定义视图的状态,要做到最小化但却完整-">第三步: 定义视图的状态,要做到最小化但却完整.</h2><p>要让视图实现交互,你需要触发底层数据模型发生改变.React通过状态来简单的实现了它.</p>
-<p>为了正确构建你的应用,首先要思考的是,应用有哪些变化的状态,他们的最小单位应该是什么.这里的关键是 DRY(Don’t Repeat Yourself) 原则: 不要自己重复自己.</p>
-<p>找出应用里所需要的最小单位的状态,而其他需要的东西,可以通过算法来实现. 举个栗子,如果你要做一个TODO列表,只需要有一个数组格式的TODOs的列表;不要给数量单独赋予一个状态,而是通过获取TODO数组的长度来得到TODOs的数量.</p>
-<p>考虑这个例子里的每条数据:</p>
+        <p><strong>get</strong>语法把对象的某个属性绑定到一个函数上,当<strong>访问</strong>该属性的时候执行这个函数</p>
+<h2 id="语法">语法</h2><pre><code>{get prop() { ... } }
+{get [<span class="link_label">expression</span>](<span class="link_url"></span>) { ... } }
+</code></pre><h3 id="参数">参数</h3><p><strong>prop</strong></p>
+<p>需要绑定到函数的属性名</p>
+<p><strong>表达式</strong></p>
+<p>从ECMAScript 6 开始,你可以使用一个表达式来得到一个计算后的属性名来绑定所给的函数.</p>
+<h2 id="描述">描述</h2><p>有时候,你会想要让属性值是一个动态计算出的值,或者映射一个外部变量的状态而不需要显式地调用一个方法.在JavaScript里,你可以通过getter来实现它. 同一个对象的同一个属性不能同时绑定getter函数并且指定拥有一个值,但可以通过结合使用getter和setter来创建一个伪属性.</p>
+<p>使用getter的时候需要注意以下几点:</p>
 <ul>
-<li>商品的原始列表</li>
-<li>用户输入的搜索词</li>
-<li>checkbox是否被选中</li>
-<li>过滤出的商品列表</li>
+<li>它可以拥有一个id,id可以是数字也可以是字符串</li>
+<li>它不能拥有参数.一个也不能有.(<a href="http://whereswalden.com/2010/08/22/incompatible-es5-change-literal-getter-and-setter-functions-must-now-have-exactly-zero-or-one-arguments/" target="_blank" rel="external">查看更多</a>)</li>
+<li>在对象字面量里,一个属性只能有一个getter,并且getter绑定函数的属性不能再指定它的值,反之亦然.({ get x() { }, get x() { } } and { x: …, get x() { } } 类似于这样的是不行的.)</li>
 </ul>
-<p>让我们过一遍,找出哪些应该是状态.每条数据都问三个问题:</p>
-<ol>
-<li>它是不是通过父组件的props传入的? 如果是,那它很可能不是一个状态.</li>
-<li>它过一段时间会改变么? 如果不会,那它很可能不是一个状态.</li>
-<li>你可以通过计算其它状态和组件的props属性来得到它么? 如果是,那它就不是状态.</li>
-</ol>
-<p>商品原始列表是通过props属性传入的,所以它不是状态.搜索词和checkbox应该是状态,因为他们会发生改变,而且不能通过其它东西计算出结果.最后,过滤出的商品列表不是状态,因为它可以通过商品原始列表,搜索词,checkbox是否选中来计算出.</p>
-<p>所以最后,我们的状态应该是:</p>
+<p>getter可以通过 <code>delete</code> 方法删除</p>
+<h2 id="栗子">栗子</h2><h3 id="在对象初始化的时候给属性添加getter">在对象初始化的时候给属性添加getter</h3><p>这会给 <code>ocj</code> 对象创建一个名为 <code>latest</code> 的伪属性,在打印它的时候会返回数组的最后一个值.</p>
+<pre><code>var <span class="keyword">log</span> = [<span class="string">'test'</span>];
+var obj = {
+  get latest () {
+    <span class="keyword">if</span> (<span class="keyword">log</span>.<span class="keyword">length</span> == <span class="number">0</span>) <span class="keyword">return</span> undefined;
+    <span class="keyword">return</span> <span class="keyword">log</span>[<span class="keyword">log</span>.<span class="keyword">length</span> - <span class="number">1</span>]
+  }
+}
+console.<span class="keyword">log</span> (obj.latest); <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"test"</span>.
+</code></pre><p>注意,重新给 <code>latest</code> 属性指定值不会生效:</p>
+<pre><code>var <span class="keyword">log</span> = [<span class="string">'test'</span>];
+var obj = {
+  get latest () {
+    <span class="keyword">if</span> (<span class="keyword">log</span>.<span class="keyword">length</span> == <span class="number">0</span>) <span class="keyword">return</span> undefined;
+    <span class="keyword">return</span> <span class="keyword">log</span>[<span class="keyword">log</span>.<span class="keyword">length</span> - <span class="number">1</span>]
+  }
+}
+console.<span class="keyword">log</span> (obj.latest); <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"test"</span>.
+<span class="keyword">log</span>.<span class="keyword">push</span>(<span class="string">'bunny'</span>);
+console.<span class="keyword">log</span>(obj.latest);  <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"bunny"</span>
+obj.latest = <span class="number">3</span>;
+console.<span class="keyword">log</span>(obj.latest);  <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"bunny"</span> still
+</code></pre><h3 id="使用_delete_操作来删除getter">使用 <code>delete</code> 操作来删除getter</h3><p>如果你想把getter删除,只需要使用 <code>delete</code> 就行了.</p>
+<pre><code><span class="operator"><span class="keyword">delete</span> obj.latest;</span>
+</code></pre><h3 id="使用_defineProperty_给一个既存的对象添加getter">使用 <code>defineProperty</code> 给一个既存的对象添加getter</h3><p>想要在任何时间给一个既存的对象添加getter ,可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">Object.defineProperty()</a></p>
+<pre><code><span class="keyword">var</span> o = { a:<span class="number">0</span> }
+
+<span class="built_in">Object</span>.defineProperty(o, <span class="string">"b"</span>, { get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>; } });
+
+<span class="built_in">console</span>.log(o.b) <span class="comment">// Runs the getter, which yields a + 1 (which is 1)</span>
+</code></pre><h3 id="使用计算后的属性名">使用计算后的属性名</h3><blockquote>
+<p>注意: 计算后的属性名属于试验中技术, ECMAScript 6 的目标的一部分, 还没有被浏览器广泛支持. 在不支持的环境下会触发语法错误.<br>(经过测试,在目前的chrome里是可以用的.)</p>
+</blockquote>
+<pre><code>var expr = "foo";
+
+var obj = {
+  get [<span class="link_label">expr</span>](<span class="link_url"></span>) { return "bar"; }
+};
+
+console.log(obj.foo); // "bar"
+</code></pre><h3 id="智能_/_重写自身_/_懒getter">智能 / 重写自身 / 懒getter</h3><p>getter提供了一种定义对象属性的方式,但是它的值要到获取属性值的时候才会被计算. 也就是说, getter会延迟计算属性值,直到需要用到这个值,所以如果这个值一直用不到,则永远不需要为计算它而付出开销.</p>
+<p>另外一个对getter进行额外优化的技术方案是: 智能getters 或 <a href="https://en.wikipedia.org/wiki/Memoization" target="_blank" rel="external">制表</a>getters. 它可以延迟计算属性值,并且把计算结果进行缓存,让之后的访问直接获取缓存结果. 属性值会在第一次访问时进行计算并缓存,然后之后的访问会直接读取缓存结果而不是再次计算.这在以下场景下是很实用的:</p>
 <ul>
-<li>用户输入的搜索内容</li>
-<li>checkbox的值</li>
+<li>如果计算一个属性值会花费很多代价(占取很多随机内容,消耗CPU时间,产生大量工作线程,检索远程文件,等)</li>
+<li>属性值目前暂时不会用到,而是之后才会用到,甚至一直都用不到.</li>
+<li>如果它要被多次使用到,但是这个值不会变化,每次都不需要重新计算,甚至不能重新计算.</li>
 </ul>
-<h2 id="第四步:_确定状态应该放在哪里">第四步: 确定状态应该放在哪里</h2><p>代码在jsfiddle上:<a href="https://jsfiddle.net/reactjs/zafjbw1e/" target="_blank" rel="external">查看代码</a></p>
-<p>很好,现在我们已经确定了应用的最小单位状态.接下来,我们需要确认哪些组件是变化的,或者说,哪些组件拥有了这些状态.</p>
-<p>注意: React 是沿着组件的层级向下使用单向数据绑定的.所以不能立时片刻的搞清楚哪些组件应该拥有哪些状态.这通常也是对初学者来说理解起来最有挑战的部分,可以参考下面的步骤来找出它:</p>
-<p>对于应用中的每个状态:</p>
-<ul>
-<li>找出哪些组件渲染时需要用到那个状态</li>
-<li>找出一个公共组件 (就是包含了所有1里找到的组件的父级组件)</li>
-<li>可以是2里找到的公共组件,也可以是这个公共组件的父组件</li>
-<li>如果找不到这样一个应该拥有状态的组件,那就自己创建一个,这个被创建的组件仅仅用于存放状态.把这个组件放在公共组件的外层.</li>
-</ul>
-<p>让我们在这个应用里使用以上的策略:</p>
-<ul>
-<li><code>ProductTable</code> 组件需要通过状态来过滤产品列表, <code>SearchBar</code> 需要展示搜索内容和checked状态.</li>
-<li>这两个组件的公共组件是 <code>FilterableProductTable</code></li>
-<li>把搜索内容和checked值放在 <code>FilterableProductTable</code> 下,从概念上也是合理的.</li>
-</ul>
-<p>很好,现在我们已经决定了把状态放在 <code>FilterableProductTable</code> 组件上. 首先,给 <code>FilterableProductTable</code> 添加一个 <code>getInitialState()</code> 方法,返回 <code>{filter: &#39;&#39;, inStockOnly: false}</code> 来作为状态的初始值. 然后,把 <code>filterText</code> 和 <code>inStockOnly</code> 添加到 <code>ProductTable</code> 和 <code>SearchBar</code> 组件的prop属性里. 最后,通过这些属性,在 <code>ProductTable</code> 组件里过滤出内容,在 <code>SearchBar</code> 组件里设置表单控件的值.</p>
-<p>现在可以开始看到应用是怎么工作的了: 把 <code>filterText</code> 的值设置为 ‘ball’ ,然后刷新应用,你会看到数据列表被正确的更新了.</p>
-<h2 id="第五步:_添加反向数据流">第五步: 添加反向数据流</h2><p>代码在jsfiddle上:<a href="https://jsfiddle.net/reactjs/n47gckhr/" target="_blank" rel="external">查看代码</a></p>
-<p>目前为止,我们已经构建了一个通过props和状态,从上到下正确渲染出组件层级的应用了.是时候支持反向的数据流了:阶层底层的表单组件需要更新 <code>FilterableProductTable</code> 的状态.</p>
-<p>React数据流很清晰,很好理解程序是怎么运行的,但是这比传统的双向数据绑定要多写一些代码.<br>React 还提供了一种名为 <code>ReactLink</code> 的扩展,它可以使得这种模式和双向数据绑定一样的方便,但是这篇文章的目的不是这个,所以我们还是让数据流保持清晰.</p>
-<p>如果你尝试在这个版本的例子里输入内容或者点击checkbox,你会看到React忽略了你的输入.这是故意的,因为我们把 <code>input</code> 的 <code>value</code> 属性设置成了 <code>state</code> 的值,而 <code>state</code> 值是从 <code>FilterableProductTable</code> 传入的.</p>
-<p>让我们考虑一下我们希望实现什么效果.我们希望确保每当用户修改表单内容的时候,把状态更新为用户的输入内容.由于组件应该只更新自己的状态,所以 <code>FilterableProductTable</code> 应该传递一个回调给 <code>SearchBar</code> ,每当状态需要更新的时候,触发这个回调.我们在 inputs 上添加 <code>onChange</code> 事件来监听它.所有通过 <code>FilterableProductTable</code> 传入的回调都会调用 <code>setState()</code> 方法来更新应用的状态.</p>
-<p>虽然这听起来有点复杂,但其实只有几行代码.而且数据的整个流向过程十分清晰.</p>
-<h2 id="以上就是本文的内容">以上就是本文的内容</h2><p>希望这篇文章能够给你一些启发,如何使用React来构建组件和应用.虽然它可能会让你比以前多写一些代码,但你要知道,读代码的时间要远远多于写代码的时间,而这样模块化,清晰的代码可读性是很强的.当你开始构建大型的组件库的时候,你会感谢它的清晰和模块化,另外,由于代码的可重用性很高,越写到后面你需要写代码也就越少了.</p>
+<p>也就是说,如果某个属性值是可能会变化的,你就不能使用懒getter,因为它不会重新计算值.</p>
+<p>在下面的这个例子里,对象有一个getter作为它的notifier属性,在获取属性的时候,这个属性被删除后再次添加,但新增属性所拥有的就是普通的属性值.最后这个值被返回.</p>
+<pre><code><span class="keyword">get</span> notifier() {
+  <span class="keyword">delete</span> <span class="keyword">this</span>.notifier;
+  <span class="keyword">return</span> <span class="keyword">this</span>.notifier = <span class="built_in">document</span>.getElementById(<span class="string">"bookmarked-notification-anchor"</span>);
+},
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">查看原文</a></p>
 
         
           <!-- show an end symbol if the article is fully displayed -->
@@ -848,784 +896,7 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
     <div class="article-info">
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-react-turorial" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/29/react-turorial/" class="article-date">
-  	<time datetime="2015-12-29T02:47:19.000Z" itemprop="datePublished">2015-12-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/29/react-turorial/">react-教程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="教程">教程</h1><p>我们会创建一个简单却真实的评论列表,你可以把它用在博客里,就像Disqus,LiveFyre,FaceBook里的实时评论功能一样,但它只是一个基础的版本.</p>
-<p>我们会提供:</p>
-<ul>
-<li>一个包含所有评论的视图</li>
-<li>一个用于提交评论的表单</li>
-<li>可以自定义后端接口的钩子</li>
-</ul>
-<p>它还有一些新特性:</p>
-<ul>
-<li><strong>预显示评论</strong>: 新增评论会在被保存到服务器之前就显示在页面里,以获得更快的体验.</li>
-<li><strong>实时更新</strong>: 其他用户的评论会被实时的输出到评论视图里.</li>
-<li><strong>支持Markdown格式</strong>: 用户可以使用markdown语法来书写评论内容.</li>
-</ul>
-<h3 id="想要跳过本文直接看源码?">想要跳过本文直接看源码?</h3><p><a href="https://github.com/reactjs/react-tutorial" target="_blank" rel="external">源码都放在了Github上</a></p>
-<h3 id="启动服务端">启动服务端</h3><p>要开始这个教程,我们首先要启动一个服务端.我们只需要一个后端的API用来获取和保存数据.为了尽可能简化它,我们用脚本语言创建了一个简单的服务端,它刚好满足我们的需要.<strong>你可以<a href="https://github.com/reactjs/react-tutorial/" target="_blank" rel="external">查看源码</a>或者<a href="https://github.com/reactjs/react-tutorial/archive/master.zip" target="_blank" rel="external">下载zip压缩文件</a>,这里面包含了启动所需要的一切程序</strong>.</p>
-<p>为了更简化,我们要运行的服务端使用了一个 <em>JSON</em> 格式的文件来作为数据库.在开发环境不可能这样做,但能让这个API更简单的模拟你的操作.一旦启动服务端,它就可以支持我们的后端API,满足静态页面的生成需要.</p>
-<h3 id="开始">开始</h3><p>因为这只是个教程,所以我们尽可能的简化它. 在刚才讨论的服务端程序包里,有一个HTML页面,它就是我们要做的页面. 在你喜欢的编辑器里打开 <em>public/index.html</em> 页面. 它看起来应该像这样:</p>
-<pre><code><span class="comment">&lt;!-- index.html --&gt;</span>
-<span class="doctype">&lt;!DOCTYPE html&gt;</span>
-<span class="tag">&lt;<span class="title">html</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">head</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span> /&gt;</span>
-    <span class="tag">&lt;<span class="title">title</span>&gt;</span>React Tutorial<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">body</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"content"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span> <span class="attribute">src</span>=<span class="value">"scripts/example.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span>&gt;</span><span class="actionscript">
-      <span class="comment">// To get started with this tutorial running your own code, simply remove</span>
-      <span class="comment">// the script tag loading scripts/example.js and start writing code here.</span>
-    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
-</code></pre><p>教程的剩下部分,会教你如何在script标签里写自己的javascript代码.我们没有使用高级的自动刷新功能,所以每次保存以后需要手动刷新浏览器来查看更新.启动服务器以后,在浏览器里打开 <em><a href="http://localhost:3000" target="_blank" rel="external">http://localhost:3000</a></em> 来查看程序. 当你第一次打开这个它,还没有做过任何改动的时候,你可以看到完整的项目,这就是我们等下要做的.准备要开始学习,只需要把前面的 <em>script</em> 标签给删掉,然后就可以继续了.</p>
-<blockquote>
-<p><strong>注意:</strong> 为了等下方便发送ajax请求,我们在这里引入了jQuery,但React并不是强制使用jQuery才能工作的.</p>
-<p>由于直接在html文件的script标签里写react的话,intelliJ不能识别JSX语法,所以最好还是写在外链的js文件里.</p>
-</blockquote>
-<h3 id="你的第一个组件">你的第一个组件</h3><p>React都是模块化的, 由可编辑的组件组成. 我们的这个评论框例子由以下这些组件构成:</p>
-<pre><code>-<span class="ruby"> <span class="constant">CommentBox</span>
-</span>  -<span class="ruby"> <span class="constant">CommentList</span>
-</span>    -<span class="ruby"> <span class="constant">Comment</span>
-</span>  -<span class="ruby"> <span class="constant">CommentForm</span></span>
-</code></pre><p>让我们创建一个 CommentBox 组件,它只是一个简单的 <div> :</div></p>
-<pre><code><span class="comment">// tutorial1.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentBox"</span>&gt;
-        Hello, world! I am a CommentBox.
-      &lt;/div&gt;
-    );
-  }
-});
-ReactDOM.render(
-  &lt;CommentBox /&gt;,
-  document.getElementById(<span class="string">'content'</span>)
-);
-</code></pre><p>注意,原生的HTML元素是以小写字母开头的,而自定义的React类名应该以大写字母开头.</p>
-<h4 id="JSX_语法">JSX 语法</h4><p>首先要注意的是javascript里类似于XML的语法.它有一个简单的预编译机制,会把这个语法糖转换成纯javascript:</p>
-<pre><code><span class="comment">// tutorial1-raw.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({displayName: <span class="string">'CommentBox'</span>,
-  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">return</span> (
-      React.createElement(<span class="string">'div'</span>, {className: <span class="string">"commentBox"</span>},
-        <span class="string">"Hello, world! I am a CommentBox."</span>
-      )
-    );
-  }
-});
-ReactDOM.render(
-  React.createElement(CommentBox, <span class="literal">null</span>),
-  <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>)
-);
-</code></pre><p>是否要使用JSX语法是可选的,但是使用它会比不使用要更简单.了解更多关于 <a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank" rel="external">JSX语法</a></p>
-<h4 id="继续下一步">继续下一步</h4><p>我们把一些方法放在一个Javscript对象里,然后把它传给 <code>React.createClass()</code> ,以创建一个React组件.这些方法里最重要的就是 <code>render</code> 方法,它返回了React组件树,最后会渲染成HTML.</p>
-<p>这里的 <code>&lt;div&gt;</code> 标签并不是真正的DOM元素;他们是React <code>div</code> 组件的实例.你可以想象成他们是某种标记或数据,React知道要如何去处理他们.React是安全的,我们并不是生成HTML字符串,所以默认已经阻止了XSS攻击.</p>
-<p>你不需要返回所有的HTML.你可以返回一个你(或别人)创建的组件树.这就使得React是可重用的.可重用化是构建可维护的前端的一个重要原则.</p>
-<p><code>ReactDOM.render()</code> 实例化了根组件,开始构造组件内容,然后把内容注入到一个既存的原生DOM元素里.这个DOM元素可以通过第二个参数传入.</p>
-<p><code>ReactDOM</code> 模块暴露的是DOM特有的方法,而 <code>React</code> 类有一些核心的工具是可以在不同的使用React的平台上共享的.(比如 <a href="http://facebook.github.io/react-native/" target="_blank" rel="external">React Native</a>)</p>
-<p>很重要的一点是,可以在这个教程里看到, <code>ReactDOM.render</code> 方法是被放在script的最后调用的. <code>React.render</code> 只有在合成的组件被定义完成后才能被调用.</p>
-<h2 id="创建组件">创建组件</h2><p>让我们继续创建 <code>CommentList</code> 和 <code>CommentForm</code> 的骨架,也是简单的 <code>&lt;div&gt;</code>. 把这两个组件加到你的文件里,声明 <code>CommentBox</code> 组件和调用 <code>ReactDOM.render</code> 部分的代码不变:</p>
-<pre><code><span class="comment">// tutorial2.js</span>
-<span class="keyword">var</span> CommentList = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentList"</span>&gt;
-        Hello, world! I am a CommentList.
-      &lt;/div&gt;
-    );
-  }
-});
-
-<span class="keyword">var</span> CommentForm = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentForm"</span>&gt;
-        Hello, world! I am a CommentForm.
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>接下来,更新 <code>CommentBox</code> 组件的代码,使用新的组件:</p>
-<pre><code><span class="comment">// tutorial3.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentBox"</span>&gt;
-        &lt;h1&gt;Comments&lt;/h1&gt;
-        &lt;CommentList /&gt;
-        &lt;CommentForm /&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>注意我们是如何把HTML标签和我们创建的组件合在一起的.HTML组件只是普通的React组件,它和你自定义的组件只有一点不同.JSX编译机制会自动把HTML标签重写成 <code>React.createElement(tagName)</code> 表达式,其他都不变.这是为了防止污染全局命名空间.</p>
-<h3 id="使用属性">使用属性</h3><p>让我们来创建 <code>Comment</code> 组件,它依赖于父组件传给它的数据. 从父组件传入的数据可以通过子组件的’属性’来获取. 这些’属性’可以通过 <code>this.props</code> 来访问. 使用属性,我们可以获取到 <code>CommentList</code> 传给 <code>Comment</code> 的数据,然后生成元素.</p>
-<pre><code><span class="comment">// tutorial4.js</span>
-<span class="keyword">var</span> Comment = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"comment"</span>&gt;
-        &lt;h2 className=<span class="string">"commentAuthor"</span>&gt;
-          {<span class="keyword">this</span>.props.author}
-        &lt;/h2&gt;
-        {<span class="keyword">this</span>.props.children}
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>在JSX语法里(可以是属性,也可以是子组件),通过把一段Javascript表达式放在花括号里,可以插入文本或者在组件树里插入React组件.指定名字的属性值可以通过 <code>this.props</code> 对象中的对应的key来获取.嵌套的元素可以通过 <code>this.props.children</code> 来获取.</p>
-<h3 id="组件的属性">组件的属性</h3><p>现在我们定义了 <code>Comment</code> 组件,接下来我们想要给它传入作者名字和评论内容.这允许我们重用每个评论的代码.现在,在我们的 CommentList 组件里添加一些评论:</p>
-<pre><code><span class="comment">// tutorial5.js</span>
-<span class="keyword">var</span> CommentList = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentList"</span>&gt;
-        &lt;Comment author=<span class="string">"Pete Hunt"</span>&gt;This <span class="keyword">is</span> one comment&lt;/Comment&gt;
-        &lt;Comment author=<span class="string">"Jordan Walke"</span>&gt;This <span class="keyword">is</span> *another* comment&lt;/Comment&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>现在,我们通过 <code>CommentList</code> 组件向它的子组件 <code>Comment</code> 传递了一些数据.举个栗子,我们传入了 ‘Pete Hunt’(通过一个属性) 以及 ‘This is one comment’(通过一个像XML格式一样的子节点) 给第一条 <code>Comment</code>. 就像前面提到的, <code>Comment</code>组件可以通过 <code>this.props.author</code> 以及 <code>this.props.children</code> 来获取到这些属性.</p>
-<h3 id="添加Markdown支持">添加Markdown支持</h3><p>Markdown是一个简单的格式化文本的方法.举个栗子,用’*’包围的文字会变成强调部分(斜体).</p>
-<p>在这个教程里,我们使用第三方的库 <strong>marked</strong> 来处理Markdown文本,把它们转换成原生HTML. 我们已经在页面里引入了这个库,可以直接用它了.让我们把内容通过Markdown转换然后输出它:</p>
-<pre><code><span class="comment">// tutorial6.js</span>
-<span class="keyword">var</span> Comment = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"comment"</span>&gt;
-        &lt;h2 className=<span class="string">"commentAuthor"</span>&gt;
-          {<span class="keyword">this</span>.props.author}
-        &lt;/h2&gt;
-        {marked(<span class="keyword">this</span>.props.children.toString())}
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>我们这里所做的仅仅是调用了marked库,我们需要把被React封装过的 <code>this.props.children</code> 文本转换成原始的字符串,这样marked才能识别.所以我们明确的调用 <code>toString()</code>.</p>
-<p>但这样做有个问题! 我们渲染出来的评论内容在浏览器里看上去是这样的: <code>&quot;&lt;p&gt;This is &lt;em&gt;another&lt;/em&gt; comment&lt;/p&gt;&quot;</code> .我们希望的是这些标签能够真正地被转换成HTML.</p>
-<p>这是React保护你免受 <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="external">XXS攻击</a>.有一个方法可以解决这个问题,但是框架会给你一个警告,叫你不要这样做:</p>
-<pre><code><span class="comment">// tutorial7.js</span>
-<span class="keyword">var</span> Comment = React.createClass({
-  rawMarkup: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">var</span> rawMarkup = marked(<span class="keyword">this</span>.props.children.toString(), {sanitize: <span class="literal">true</span>});
-    <span class="keyword">return</span> { __html: rawMarkup };
-  },
-
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"comment"</span>&gt;
-        &lt;h2 className=<span class="string">"commentAuthor"</span>&gt;
-          {<span class="keyword">this</span>.props.author}
-        &lt;/h2&gt;
-        &lt;span dangerouslySetInnerHTML={<span class="keyword">this</span>.rawMarkup()} /&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>这是一个特殊的API,有意让插入原始的HTML变得困难.但对于marked来说,刚好可以利用它的优势.</p>
-<p><strong>注意</strong>: 要使用这个API,你就必须仰赖于marked是安全的. 在这里,我们传入 <code>sanitize:true</code> 来告诉marked,把所有的HTML标记进行转义,而不是直接输出HTML.</p>
-<blockquote>
-<p>解释一下:在你输入的内容是纯文字或者’*’等符号的时候,marked会把它转换成html文本,比如 <code>&lt;p&gt;123&lt;em&gt;456&lt;/em&gt;&lt;/p&gt;</code> ,这个时候,你希望这些标签能变成HTML标签,而不是文字,所以你可以使用React的 <code>dangerouslySetInnerHTML</code> ,但是如果用户本身在内容里输入了html文本,比如 ‘<a></a>‘ 这样,如果不在marked里面设置 <code>sanitize:true</code>,那么用户输入的这些html文本也会变成HTML标签,这样就不安全.所以需要开启 <code>sanitize:true</code> ,这样,首先marked会把用户输入的所有内容都转义成html文本,然后通过Markdown转换来把文本变成对应的HTML,最后React直接把HTML渲染.这样就确保了用户不能创建HTML插入,但是可以使用markdown所支持的语法.</p>
-</blockquote>
-<h3 id="连接数据模型">连接数据模型</h3><p>到目前为止,我们直接在源码里插入了评论内容.接下来,我们要用一堆JSON数据生成评论列表.到最后,数据应该从服务端获取,但现在我们还是把它写在源码里:</p>
-<pre><code><span class="comment">// tutorial8.js</span>
-var data = [
-  {<span class="string">id:</span> <span class="number">1</span>, <span class="string">author:</span> <span class="string">"Pete Hunt"</span>, <span class="string">text:</span> <span class="string">"This is one comment"</span>},
-  {<span class="string">id:</span> <span class="number">2</span>, <span class="string">author:</span> <span class="string">"Jordan Walke"</span>, <span class="string">text:</span> <span class="string">"This is *another* comment"</span>}
-];
-</code></pre><p>我们需要用模块化的方式把数据放到 <code>CommentList</code> 里. 修改 <code>CommentBox</code> 和 <code>ReactDOM.render()</code> 方法,通过props把数据传入 <code>CommentList</code>:</p>
-<pre><code>// tutorial9.js
-var CommentBox = React.createClass({
-  render: function() {
-    return (
-      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">"commentBox"</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Comments<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">CommentList</span> <span class="attribute">data</span>=<span class="value">{this.props.data}</span> /&gt;</span>
-        <span class="tag">&lt;<span class="title">CommentForm</span> /&gt;</span>
-      <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-    );
-  }
-});
-
-ReactDOM.render(
-  <span class="tag">&lt;<span class="title">CommentBox</span> <span class="attribute">data</span>=<span class="value">{data}</span> /&gt;</span>,
-  document.getElementById('content')
-);
-</code></pre><p>现在,数据就可以在 <code>CommentList</code> 里获取到了,让我们动态的生成评论:</p>
-<pre><code><span class="comment">// tutorial10.js</span>
-<span class="keyword">var</span> CommentList = React.createClass({
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">var</span> commentNodes = <span class="keyword">this</span>.props.data.map(<span class="function"><span class="keyword">function</span><span class="params">(comment)</span> </span>{
-      <span class="keyword">return</span> (
-        &lt;Comment author={comment.author} key={comment.id}&gt;
-          {comment.text}
-        &lt;/Comment&gt;
-      );
-    });
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentList"</span>&gt;
-        {commentNodes}
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>就系酱紫!</p>
-<h3 id="从服务端获取数据">从服务端获取数据</h3><p>让我们把硬编码的数据换成从服务端获取的动态数据.我们把data属性移除,换成一个获取数据的url属性:</p>
-<pre><code><span class="comment">// tutorial11.js</span>
-ReactDOM.render(
-  &lt;CommentBox url=<span class="string">"/api/comments"</span> /&gt;,
-  <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>)
-);
-</code></pre><p>这个组件和之前的组件不同,它必须重新渲染自己.这个组件在服务器没有返回数据之前是没有任何数据的,在得到数据的时候,他们需要渲染一些新的评论.</p>
-<p>注意: 代码在这一步是不能运行的.</p>
-<h3 id="响应式状态">响应式状态</h3><p>到目前为止,每个组件都会基于它的props属性渲染自己一次. <code>props</code> 是不可变的:他们是通过父组件传过来的,被父组件所’拥有’的.为了实现交互,我们引入可变的<strong>状态</strong>到组件里. <code>this.state</code> 是组件私有的,并且可以通过调用 <code>this.setState()</code> 来改变.当状态更新的时候,组件会重新渲染自己.</p>
-<p><code>render()</code> 方法用声明式的写法来使用 <code>this.props</code> 和 <code>this.state</code> 功能. 所以它确保了视图总是和输入保持一致.</p>
-<blockquote>
-<p>所谓的声明式,就像css类名一样,只需要声明一个类名,对应的样式修改了,元素的样式也就改变了,这个概念用到这里就是说,<code>render()</code>方法里的<code>this.props</code>和<code>this.state</code>变化的时候,视图也会同步发生变化.</p>
-</blockquote>
-<p>当服务器获取到数据的时候,评论的内容会变成新获取的数据.让我们添加一个评论的数组作为 <code>CommentBox</code> 组件的状态:</p>
-<pre><code><span class="comment">// tutorial12.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {data: []};
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentBox"</span>&gt;
-        &lt;h1&gt;Comments&lt;/h1&gt;
-        &lt;CommentList data={<span class="keyword">this</span>.state.data} /&gt;
-        &lt;CommentForm /&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p><code>getInitialState()</code> 方法在组件的生命周期里只会被执行一次,用于设置组件的初始状态.</p>
-<h4 id="更新状态">更新状态</h4><p>当组件第一次被创建后,我们想要通过GET请求从服务端去获取JSON数据,然后更新状态以映射最新获取的数据.我们使用jQuery向前面已经搭建好的服务器发送一个异步请求来获取我们需要的数据.数据已经被放在这个服务器端了(就是 <code>comments.json</code> 文件),所以当数据被获取后, <code>this.state.data</code> 看起来是这样的:</p>
-<pre><code>[
-  {<span class="string">"author"</span>: <span class="string">"Pete Hunt"</span>, <span class="string">"text"</span>: <span class="string">"This is one comment"</span>},
-  {<span class="string">"author"</span>: <span class="string">"Jordan Walke"</span>, <span class="string">"text"</span>: <span class="string">"This is *another* comment"</span>}
-]
-
-
-<span class="comment">// tutorial13.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {data: []};
-  },
-  componentDidMount: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      cache: <span class="literal">false</span>,
-      success: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span><span class="params">(xhr, status, err)</span> </span>{
-        console.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentBox"</span>&gt;
-        &lt;h1&gt;Comments&lt;/h1&gt;
-        &lt;CommentList data={<span class="keyword">this</span>.state.data} /&gt;
-        &lt;CommentForm /&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>这里, <code>componentDidMount</code> 方法会在组件第一次渲染完成后被React自动调用.实现动态更新的关键是 <code>this.setState()</code> 方法. 我们用从服务器获取的最新数据来替换原来的评论数组,然后视图会自动更新自己.由于它是响应式的,还需要加一个小改动来实现实时更新.我们这里只使用简单的轮询,你也可以很容易的使用WebSockets或者其他的技术.</p>
-<pre><code><span class="comment">// tutorial14.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  loadCommentsFromServer: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      cache: <span class="literal">false</span>,
-      success: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span><span class="params">(xhr, status, err)</span> </span>{
-        console.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {data: []};
-  },
-  componentDidMount: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">this</span>.loadCommentsFromServer();
-    setInterval(<span class="keyword">this</span>.loadCommentsFromServer, <span class="keyword">this</span>.props.pollInterval);
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentBox"</span>&gt;
-        &lt;h1&gt;Comments&lt;/h1&gt;
-        &lt;CommentList data={<span class="keyword">this</span>.state.data} /&gt;
-        &lt;CommentForm /&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-
-ReactDOM.render(
-  &lt;CommentBox url=<span class="string">"/api/comments"</span> pollInterval={<span class="number">2000</span>} /&gt;,
-  document.getElementById(<span class="string">'content'</span>)
-);
-</code></pre><p>这里所做的只是把AJAX部分的代码放到一个单独的方法里,然后在组件第一次渲染完毕后执行一次,然后再每隔2s执行一次.试着在浏览器里运行它,然后修改 <code>comment.json</code> 文件(在你启动的那个项目文件夹里); 在2s以内,改变就会被呈现出来!</p>
-<h3 id="添加评论">添加评论</h3><p>现在可以开始创建表单了.我们的 <code>CommentForm</code> 组件需要用户输入名字和评论内容,然后向服务器发送请求来保存评论:</p>
-<pre><code><span class="comment">// tutorial15.js</span>
-<span class="keyword">var</span> CommentForm = React.createClass({
-  render: function() {
-    <span class="keyword">return</span> (
-      &lt;<span class="keyword">form</span> className=<span class="string">"commentForm"</span>&gt;
-        &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"text"</span> placeholder=<span class="string">"Your name"</span> /&gt;
-        &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"text"</span> placeholder=<span class="string">"Say something..."</span> /&gt;
-        &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"Post"</span> /&gt;
-      &lt;/<span class="keyword">form</span>&gt;
-    );
-  }
-});
-</code></pre><h4 id="可控组件_(Controlled_components)">可控组件 (Controlled components)</h4><p>对于传统的DOM元素, <code>input</code> 元素渲染后由浏览器管理它的状态(就是渲染出的value值).所以,真正的DOM元素的状态和对应的组件的状态就不一样了. 视图和组件的状态不同,这可不是理想的状态. 在React里,组件的状态应该永远和视图同步,而不仅仅是在初始化的时候.</p>
-<p>因此,我们使用 <code>this.state</code> 在用户打字的时候保存他们输入的内容. 我们定义一个初始的 <code>state</code> ,它有两个属性 <code>author</code> 和 <code>text</code> ,一开始他们的值都是空字符串.在的 <code>&lt;input&gt;</code> 元素里,我们把 <code>value</code> 值设置成组件的 <code>state</code> ,然后给它们添加一个 <code>onChange</code> 事件处理句柄. 这类 <code>value</code> 被设置过的 <code>&lt;input&gt;</code> 元素,被成为可控元素.了解更多关于可控元素请查看 <a href="https://facebook.github.io/react/docs/forms.html#controlled-components" target="_blank" rel="external">表单</a></p>
-<pre><code><span class="comment">// tutorial16.js</span>
-<span class="keyword">var</span> CommentForm = React.createClass({
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {author: <span class="string">''</span>, text: <span class="string">''</span>};
-  },
-  handleAuthorChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    <span class="keyword">this</span>.setState({author: e.target.value});
-  },
-  handleTextChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    <span class="keyword">this</span>.setState({text: e.target.value});
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;form className=<span class="string">"commentForm"</span>&gt;
-        &lt;input
-          type=<span class="string">"text"</span>
-          placeholder=<span class="string">"Your name"</span>
-          value={<span class="keyword">this</span>.state.author}
-          onChange={<span class="keyword">this</span>.handleAuthorChange}
-        /&gt;
-        &lt;input
-          type=<span class="string">"text"</span>
-          placeholder=<span class="string">"Say something..."</span>
-          value={<span class="keyword">this</span>.state.text}
-          onChange={<span class="keyword">this</span>.handleTextChange}
-        /&gt;
-        &lt;input type=<span class="string">"submit"</span> value=<span class="string">"Post"</span> /&gt;
-      &lt;/form&gt;
-    );
-  }
-});
-</code></pre><h4 id="事件">事件</h4><p>React使用驼峰命名法给组件添加事件处理句柄.我们给这里的两个 <code>&lt;input&gt;</code> 元素添加了 <code>onChange</code> 事件处理句柄.现在,当用户在这两个 <code>&lt;input&gt;</code> 元素里输入内容的时候, 对应的 <code>onChange</code> 回调就会触发,组件的 <code>state</code> 就会被改变. 然后, <code>input</code> 元素所渲染的value值会被更新,映射组件当前的 <code>state</code> 值.</p>
-<h4 id="提交表单">提交表单</h4><p>让我们实现表单的交互.当用户提交表单的时候,我们应该清空它,然后提交一个请求到服务器,然后刷新评论列表.首先,让我们监听表单提交事件,然后清空它.</p>
-<pre><code><span class="comment">// tutorial17.js</span>
-<span class="keyword">var</span> CommentForm = React.createClass({
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {author: <span class="string">''</span>, text: <span class="string">''</span>};
-  },
-  handleAuthorChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    <span class="keyword">this</span>.setState({author: e.target.value});
-  },
-  handleTextChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    <span class="keyword">this</span>.setState({text: e.target.value});
-  },
-  handleSubmit: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    e.preventDefault();
-    <span class="keyword">var</span> author = <span class="keyword">this</span>.state.author.trim();
-    <span class="keyword">var</span> text = <span class="keyword">this</span>.state.text.trim();
-    <span class="keyword">if</span> (!text || !author) {
-      <span class="keyword">return</span>;
-    }
-    <span class="comment">// <span class="doctag">TODO:</span> send request to the server</span>
-    <span class="keyword">this</span>.setState({author: <span class="string">''</span>, text: <span class="string">''</span>});
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;form className=<span class="string">"commentForm"</span> onSubmit={<span class="keyword">this</span>.handleSubmit}&gt;
-        &lt;input
-          type=<span class="string">"text"</span>
-          placeholder=<span class="string">"Your name"</span>
-          value={<span class="keyword">this</span>.state.author}
-          onChange={<span class="keyword">this</span>.handleAuthorChange}
-        /&gt;
-        &lt;input
-          type=<span class="string">"text"</span>
-          placeholder=<span class="string">"Say something..."</span>
-          value={<span class="keyword">this</span>.state.text}
-          onChange={<span class="keyword">this</span>.handleTextChange}
-        /&gt;
-        &lt;input type=<span class="string">"submit"</span> value=<span class="string">"Post"</span> /&gt;
-      &lt;/form&gt;
-    );
-  }
-});
-</code></pre><p>我们给表单添加一个 <code>onSubmit</code> 事件处理句柄,当里面的表单被提交,并且表单控件都通过验证时,清空表单.</p>
-<p>在事件回调里执行 <code>preventDefault()</code> 来阻止浏览器的默认表单提交事件.</p>
-<h4 id="回调作为属性">回调作为属性</h4><p>当用户提交新评论的时候,我们需要更新评论列表来把新增的评论显示出来.应该把这个逻辑放在 <code>CommentBox</code> 里,因为 <code>CommentBox</code> 的状态对应的就是评论列表.</p>
-<p>我们需要把数据从子组件再传回到它的父组件.通过在父组件的 <code>render</code> 方法里传递一个回调(<code>handleCommentSubmit</code>)给子组件,绑定到子组件的 <code>handleCommentSubmit</code> 事件上.每当事件触发,回调就会被执行:</p>
-<pre><code><span class="comment">// tutorial18.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  loadCommentsFromServer: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      cache: <span class="literal">false</span>,
-      success: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span><span class="params">(xhr, status, err)</span> </span>{
-        console.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  handleCommentSubmit: <span class="function"><span class="keyword">function</span><span class="params">(comment)</span> </span>{
-    <span class="comment">// <span class="doctag">TODO:</span> submit to the server and refresh the list</span>
-  },
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {data: []};
-  },
-  componentDidMount: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">this</span>.loadCommentsFromServer();
-    setInterval(<span class="keyword">this</span>.loadCommentsFromServer, <span class="keyword">this</span>.props.pollInterval);
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;div className=<span class="string">"commentBox"</span>&gt;
-        &lt;h1&gt;Comments&lt;/h1&gt;
-        &lt;CommentList data={<span class="keyword">this</span>.state.data} /&gt;
-        &lt;CommentForm onCommentSubmit={<span class="keyword">this</span>.handleCommentSubmit} /&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre><p>当用户提交表单的时候,在 <code>CommentForm</code> 里调用回调:</p>
-<pre><code><span class="comment">// tutorial19.js</span>
-<span class="keyword">var</span> CommentForm = React.createClass({
-  getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> {author: <span class="string">''</span>, text: <span class="string">''</span>};
-  },
-  handleAuthorChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    <span class="keyword">this</span>.setState({author: e.target.value});
-  },
-  handleTextChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    <span class="keyword">this</span>.setState({text: e.target.value});
-  },
-  handleSubmit: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
-    e.preventDefault();
-    <span class="keyword">var</span> author = <span class="keyword">this</span>.state.author.trim();
-    <span class="keyword">var</span> text = <span class="keyword">this</span>.state.text.trim();
-    <span class="keyword">if</span> (!text || !author) {
-      <span class="keyword">return</span>;
-    }
-    <span class="keyword">this</span>.props.onCommentSubmit({author: author, text: text});
-    <span class="keyword">this</span>.setState({author: <span class="string">''</span>, text: <span class="string">''</span>});
-  },
-  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-    <span class="keyword">return</span> (
-      &lt;form className=<span class="string">"commentForm"</span> onSubmit={<span class="keyword">this</span>.handleSubmit}&gt;
-        &lt;input
-          type=<span class="string">"text"</span>
-          placeholder=<span class="string">"Your name"</span>
-          value={<span class="keyword">this</span>.state.author}
-          onChange={<span class="keyword">this</span>.handleAuthorChange}
-        /&gt;
-        &lt;input
-          type=<span class="string">"text"</span>
-          placeholder=<span class="string">"Say something..."</span>
-          value={<span class="keyword">this</span>.state.text}
-          onChange={<span class="keyword">this</span>.handleTextChange}
-        /&gt;
-        &lt;input type=<span class="string">"submit"</span> value=<span class="string">"Post"</span> /&gt;
-      &lt;/form&gt;
-    );
-  }
-});
-</code></pre><p>现在回调已经正确了,接下来只需要把请求发送到服务器然后更新列表:</p>
-<pre><code><span class="comment">// tutorial20.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  loadCommentsFromServer: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      cache: <span class="literal">false</span>,
-      success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, status, err</span>) </span>{
-        <span class="built_in">console</span>.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  handleCommentSubmit: <span class="function"><span class="keyword">function</span>(<span class="params">comment</span>) </span>{
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      type: <span class="string">'POST'</span>,
-      data: comment,
-      success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, status, err</span>) </span>{
-        <span class="built_in">console</span>.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">return</span> {data: []};
-  },
-  componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">this</span>.loadCommentsFromServer();
-    setInterval(<span class="keyword">this</span>.loadCommentsFromServer, <span class="keyword">this</span>.props.pollInterval);
-  },
-  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">return</span> (
-      <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">"commentBox"</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Comments<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">CommentList</span> <span class="attribute">data</span>=<span class="value">{this.state.data}</span> /&gt;</span>
-        <span class="tag">&lt;<span class="title">CommentForm</span> <span class="attribute">onCommentSubmit</span>=<span class="value">{this.handleCommentSubmit}</span> /&gt;</span>
-      <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-    )</span>;
-  }
-});
-</code></pre><h3 id="优化:乐观性更新">优化:乐观性更新</h3><p>现在这个应用的功能都已经完成了.但是需要等到评论成功发送到服务器以后才能看到列表更新,这样会比较慢,我们可以乐观的认为评论会提交成功,直接把它添加到列表里,这样可以让应用的体验更快一些.</p>
-<pre><code><span class="comment">// tutorial21.js</span>
-<span class="keyword">var</span> CommentBox = React.createClass({
-  loadCommentsFromServer: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      cache: <span class="literal">false</span>,
-      success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, status, err</span>) </span>{
-        <span class="built_in">console</span>.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  handleCommentSubmit: <span class="function"><span class="keyword">function</span>(<span class="params">comment</span>) </span>{
-    <span class="keyword">var</span> comments = <span class="keyword">this</span>.state.data;
-    <span class="comment">// 乐观地给评论添加一个id.将来这个id会被服务器端生成的id替换.</span>
-    <span class="comment">// 在生产环境下你可能不会使用 Date.now() 作为id,而是使用更合适更健壮的id体系.</span>
-    comment.id = <span class="built_in">Date</span>.now();
-    <span class="keyword">var</span> newComments = comments.concat([comment]);
-    <span class="keyword">this</span>.setState({data: newComments});
-    $.ajax({
-      url: <span class="keyword">this</span>.props.url,
-      dataType: <span class="string">'json'</span>,
-      type: <span class="string">'POST'</span>,
-      data: comment,
-      success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>{
-        <span class="keyword">this</span>.setState({data: data});
-      }.bind(<span class="keyword">this</span>),
-      error: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, status, err</span>) </span>{
-        <span class="keyword">this</span>.setState({data: comments});
-        <span class="built_in">console</span>.error(<span class="keyword">this</span>.props.url, status, err.toString());
-      }.bind(<span class="keyword">this</span>)
-    });
-  },
-  getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">return</span> {data: []};
-  },
-  componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">this</span>.loadCommentsFromServer();
-    setInterval(<span class="keyword">this</span>.loadCommentsFromServer, <span class="keyword">this</span>.props.pollInterval);
-  },
-  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="keyword">return</span> (
-      <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">"commentBox"</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Comments<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">CommentList</span> <span class="attribute">data</span>=<span class="value">{this.state.data}</span> /&gt;</span>
-        <span class="tag">&lt;<span class="title">CommentForm</span> <span class="attribute">onCommentSubmit</span>=<span class="value">{this.handleCommentSubmit}</span> /&gt;</span>
-      <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-    )</span>;
-  }
-});
-</code></pre><h3 id="恭喜!">恭喜!</h3><p>你已经通过一些简单的步骤搭建了一个评论功能. 想要知道更多<a href="https://facebook.github.io/react/docs/why-react.html" target="_blank" rel="external">为什么要使用React</a>? 深入了解<a href="https://facebook.github.io/react/docs/top-level-api.html" target="_blank" rel="external">API文档</a>,开始使用吧! Good luck!</p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-ajax-caching" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/23/ajax-caching/" class="article-date">
-  	<time datetime="2015-12-23T08:53:19.000Z" itemprop="datePublished">2015-12-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/23/ajax-caching/">关于ajax缓存的两个真相</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>翻自 <a href="https://blog.httpwatch.com/2009/08/07/ajax-caching-two-important-facts/" target="_blank" rel="external">Ajax Caching: Two Important Facts</a></p>
-</blockquote>
-<p>Ajax的调用和其它的HTTP请求一样,用于构建web页面. 然后由于它是动态的,人们常常忽略了缓存它的好处.</p>
-<p><a href="http://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309/" target="_blank" rel="external"> &lt;&lt; High Performance Web Sites >></a>一书的<a href="http://stevesouders.com/hpws/rule-ajax.php" target="_blank" rel="external">第14条</a>说到:</p>
-<p><strong>让ajax请求可以被缓存</strong></p>
-<p><strong>确保你的ajax请求遵循高性能指导方针,尤其是要有一个设置未来过期时间的Expires头.</strong></p>
-<hr>
-<p>这篇文章剩下的部分会包含两个重要的真相,这会帮助你理解并高效的使用Ajax请求的缓存.</p>
-<h2 id="真相1:Ajax的缓存和HTTP的缓存是一样的">真相1:Ajax的缓存和HTTP的缓存是一样的</h2><p>现代浏览器的HTTP和缓存机制比Ajax的XMLHttpRequest对象要差很多,所以它不认识也不关心Ajax请求.它仅仅是遵循普通的HTTP缓存规则,通过服务器返回的响应头来进行缓存.</p>
-<p>如果你已经对 <a href="http://blog.httpwatch.com/2007/12/10/two-simple-rules-for-http-caching/" target="_blank" rel="external">HTTP缓存</a> 有了解,那么你可以把HTTP缓存的知识用对Ajax缓存的理解上. 他们只有一点不同的,就是设置响应头的方式会和普通文件不一样.</p>
-<p>下面这些响应头可以让你的Ajax可缓存:</p>
-<ul>
-<li><strong>Expires:</strong> 这一项应该被设置成未来的某个合适的时间点,时间点的设置取决于内容变动的频繁程度.举个栗子,如果请求的是个库存数量,那么Expires的值可以是10秒以后.如果请求的是一个相片,那么Expires的值就可以久一点,因为它不会经常变动.Expires头可以让浏览器在一段时间内重用本地缓存数据,从而避免任何不必要的与服务器数据交互.</li>
-<li><strong>Last-Modified:</strong> 设置这一项是一个很好的选择,通过它,浏览器在发送条件性GET请求的时候会使用请求头里的 <em>If-Modified-Since</em> 来检查本地缓存的内容.如果数据不需要更新,服务器会返回304响应状态.</li>
-<li><strong>Cache-Control:</strong> 在合适的情况下,这个值应该被设置为 <em>Public</em> ,这样所有的中间代理和缓存都可以被保存并且与其他用户共享内容.在火狐里,它还支持<a href="">HTTPS请求的缓存</a></li>
-</ul>
-<p>当然,如果你使用POST方式发送Ajax是不能缓存的,因为POST请求永远不会被缓存.如果你的Ajax请求会产生其他作用(比如银行账户之间的转账),请使用POST请求.</p>
-<p>我们设置了一个demo(这个demo已经不能看了ヽ（≧□≦）ノ)来阐明这些头信息是如何工作的. 在HttpWatch里,你可以看到我们在响应头信息里设置了以上三个响应头</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20151223.01.png" alt="Ajax Caching Headers"></p>
-<p>如果你规律的点击 ‘Ajax Update’ 按钮,时间的改变会趋向于每隔一分钟一次.因为Expires响应头被设置为未来的一分钟.在下面这张截图里你可以看到:重复的点击更新按钮时,Ajax请求会读取浏览器本地的缓存而不会产生网络活动(发送和传输栏的值都是0)</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20151223.02.png" alt="Ajax Caching Headers"></p>
-<p>最后一次1:06.531时刻的点击发送的Ajax请求产生了网络数据传输,因为缓存的数据已经超过了一分钟. 服务器返回200响应状态表示获取到了一份新的数据.</p>
-<blockquote>
-<p>猜测这个demo应该是一个按钮,每点击一次获取一次当前时间然后回现在页面上.</p>
-</blockquote>
-<h2 id="真相2:IE浏览器在Expires时间过期之前不会刷新通过Ajax获取的内容-">真相2:IE浏览器在Expires时间过期之前不会刷新通过Ajax获取的内容.</h2><p>有些时候,Ajax在页面加载的时候就被用来填充页面的某些部分(比如一个价格列表).它并不是通过用户的某个事件(比如点击某个按钮)触发的,而是在页面加载的时候就通过javascript来发送的.就好像Ajax请求和那些嵌入资源(比如js和css)是一样的.</p>
-<p>如果你开发这样的页面,在刷新它的时候,很可能想要更新嵌入的Ajax请求内容.对于嵌入资源(CSS文件,图片等),浏览器会通过用户刷新的方式是F5(刷新)还是Ctrl+F5(强制刷新)来自动发送下列不同类型的请求:</p>
-<ol>
-<li>F5(刷新): 如果请求内容带有 <em>Last-Modified</em> 响应头,那么浏览器会发送条件性更新请求. 它使用 <em>If-Modified-Since</em> 请求头进行比较,这样服务器就可以返回304状态来避免传输不必要的数据.</li>
-<li>Ctrl+F5(强制刷新): 告诉浏览器发送无条件更新请求,请求头的 <em>Cache-Control</em> 被设置为<em>‘no-cache’</em>.这告诉所有的中间代理和缓存:浏览器需要获取最新的版本,无论它是否已经被缓存.</li>
-</ol>
-<p>Firefox把这个刷新的方式传播到了那些在页面加载的时候就发送的Ajax请求上,把这些Ajax请求当成嵌入资源来处理.下面是HttpWatch在火狐下的截图,显示了Ajax Caching demo(这个demo已经不能看了ヽ（≧□≦）ノ)刷新(F5)页面时Ajax请求的效果:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20151223.03.png" alt="Refresh of Ajax Request in Firefox"></p>
-<p>火狐确保Ajax发起的请求是条件性的.在这个例子里,如果缓存数据不到10秒,服务器返回304,超过10秒,服务器返回200,重新传送数据.</p>
-<p>在ie里,加载页面时就发起的Ajax请求被看做是和页面其他部分刷新毫无关系的,也不会被用户的刷新方式所左右.如果缓存的ajax数据没有过期,就不会有GET请求发送到服务器.它会直接从缓存里读取数据,从HttpWatch里看就是(Cache)结果.下面这个图是在ie下缓存没有过期的情况下按F5刷新:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20151223.04.png" alt="IE Refresh of Ajax Request"></p>
-<p>就算是通过 Ctrl+F5 强制刷新,通过Ajax获取的数据也是从缓存里读取:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20151223.05.png" alt="IE Refresh of Ajax Request"></p>
-<p>这就意味着,任何通过Ajax得到的内容如果没有过期,在ie下都不会被更新 - 即使你使用Ctrl+F5强制刷新. 唯一能确保你获取最新数据的方法就是手动清楚缓存. 可以使用HttpWatch的工具栏:</p>
-<p><img src="http://jinyanhuan.github.io/blogimages/20151223.06.png" alt="IE Forced Refresh"></p>
-<blockquote>
-<p>注意,Cache结果和304结果是不同的.Cache其实是200(cache),304就是304.Cache其实没有向服务器发送请求,可以从chrome里看到,它的耗时是0,response也是空.而304不同,<br>304请求是浏览器发起了一个条件性的请求,这个请求携带了 <em>If-Modified-Since</em> 请求头,如果这个文件在浏览器发送的这个时间之后没有修改过,服务器端就回返回一个304状态,告诉浏览器使用它本地的缓存内容.它没有Cache快,因为请求还是发送到了服务器端,只不过服务器端没有发送数据.<br>可以看下taobao首页,里面既有200(cache)也有304.可以查看他们的区别.</p>
-</blockquote>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/">ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 	</div>
 
       
@@ -1649,7 +920,7 @@ ReactDOM.render(
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
