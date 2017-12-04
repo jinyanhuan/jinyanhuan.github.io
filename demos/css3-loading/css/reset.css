@@ -1,0 +1,17 @@
+html,body,h1,h2,h3,h4,h5,h6,div,ul,ol,li,dl,dt,dd,iframe,textarea,input,button,p,strong,b,a,span,del,pre{margin:0; padding:0; -webkit-text-size-adjust:none;}
+h1,h2,h3,h4,h5,h6,em,del{font-style:normal; font-weight:normal; font-size:100%; -webkit-text-size-adjust:none;}
+
+ul,dl,ol{list-style:none;}
+img{border:0;}
+html{height:100%; overflow:hidden;}
+body{padding-top:150px; font-size:14px; font-family:Microsoft YaHei, 'Lato', Calibri, Arial, sans-serif;}
+h1{margin-bottom:10px; height:50px; line-height:50px; font-size:40px; color:#542E34;text-shadow: 0 1px 0 rgba(255,255,255,0.5); text-align:center;}
+h2,h2 a{
+    margin-bottom: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #642A50;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5)
+}
+h2 a:hover{text-decoration:underline;}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<title>苹果dock</title>
+  <style type="text/css">
+    * {margin:0; padding:0 }
+    .bar {position:fixed; display:block; width:100%; bottom:10px; text-align:center}
+    .bar a img {width:64px; margin:0 10px}
+
+  </style>
+  <script type="text/javascript" src="global.js"></script>
+  <script type="text/javascript" src="dock.js"></script>
+  <script type="text/javascript">
+    window.onload = function(){
+
+      var docks = new Dock({obj:document.getElementsByTagName('div')[0],objs:document.getElementsByTagName('img'),max:200});
+
+    }
+  </script>
+</head>
+<body>
+<div class="bar">
+  <a href=""><img src="images/1.png" alt=""/></a>
+  <a href=""><img src="images/2.png" alt=""/></a>
+  <a href=""><img src="images/3.png" alt=""/></a>
+  <a href=""><img src="images/4.png" alt=""/></a>
+</div>
+</body>
+</html>

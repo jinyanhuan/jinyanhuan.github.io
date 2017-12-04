@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/JSX/" style="font-size: 10px;">JSX</a> <a href="/tags/React/" style="font-size: 12.5px;">React</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -191,11 +191,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-classes" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-charCodeAt-and-codePointAt" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/14/classes/" class="article-date">
-  	<time datetime="2016-02-14T09:10:11.000Z" itemprop="datePublished">2016-02-14</time>
+      <a href="/2016/02/25/charCodeAt-and-codePointAt/" class="article-date">
+  	<time datetime="2016-02-25T07:46:18.000Z" itemprop="datePublished">2016-02-25</time>
 </a>
     </div>
   
@@ -208,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/14/classes/">Classes</a>
+      <a class="article-title" href="/2016/02/25/charCodeAt-and-codePointAt/">charCodeAt() and codePointAt()</a>
     </h1>
   
 
@@ -217,157 +217,84 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ECMAScript 6 引入了 JavaScript 类,给原有的JavaScript原型继承提供了语法糖. 类的语法并<strong>没有</strong>向JavaScript引进一个新的面向对象的继承模式. classes为创建对象,处理继承提供了简单,清晰的语法.</p>
-<h2 id="定义类">定义类</h2><p>类其实是”特殊的函数”.就像你可以定义 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function" target="_blank" rel="external">表达式函数 function expressions</a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function" target="_blank" rel="external">声明式函数 function declaration</a> 一样,类也有两种形式 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class" target="_blank" rel="external">表达式类</a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/class" target="_blank" rel="external">声明式类</a></p>
-<h3 id="声明式类">声明式类</h3><p>定义类的方式之一就是<strong>声明式类</strong>. 要声明一个类,可以使用 <code>class</code> 关键字,加上类的名字(在这里叫”Ploygon”).</p>
-<pre><code><span class="keyword">class</span> Polygon {
-  <span class="constructor"><span class="keyword">constructor</span>(height, width) </span>{
-    <span class="keyword">this</span>.height = height;
-    <span class="keyword">this</span>.width = width;
-  }
-}
-</code></pre><h4 id="预声明">预声明</h4><p>函数声明和类声明的一个重要区别在于,函数会预声明,而类不会.你必须先声明类,然后再使用它.像下面这样的代码会报错: <em>ReferenceError</em>.</p>
-<pre><code><span class="keyword">var</span> p = <span class="keyword">new</span> Polygon(); <span class="comment">// ReferenceError</span>
+        <p>这篇文章主要介绍javascript里的<code>charCodeAt()</code>方法和ES6引进的<code>codePointAt()</code>方法.</p>
+<p>在说这两个方法之前,必须要先补充一些关于Unicode编码的知识…</p>
+<p>ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point)[1].用于代表256个字符.但是这256个字符只是常用字符,各国语言,包括中文,远远超过这个范围.所以Unicode就出现了,Unicode源于一个很简单的想法：将全世界所有的字符包含在一个集合里，计算机只要支持这一个字符集，就能显示所有的字符，再也不会有乱码了。</p>
+<p>可以这么理解,Unicode码是ASCII码的一个超集(superset).它的前128个code point和ASCII是一致的.后面又增加了很多很多字符.而UTF-32,UTF-8,UTF-16,都是Unicode码的编码形式:</p>
+        <hr/>
+        <p class="article-more-link">
+          <a  href="/2016/02/25/charCodeAt-and-codePointAt/#more">more >></a>
+        </p>
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/encoding/">encoding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unicode/">unicode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utf-16/">utf-16</a></li></ul>
+	</div>
 
-<span class="class"><span class="keyword">class</span> <span class="title">Polygon</span> </span>{}
-</code></pre><h3 id="表达式类">表达式类</h3><p>表达式类是定义类的另一种方式. 表达式类可以有名字也没有没有名字.给一个已经有名字的表达式类一个变量名,两个名字必须相等…(正常人都不会这样玩吧…)</p>
-<pre><code><span class="comment">// unnamed</span>
-<span class="keyword">var</span> Polygon = <span class="keyword">class</span> {
-  <span class="constructor"><span class="keyword">constructor</span>(height, width) </span>{
-    <span class="keyword">this</span>.height = height;
-    <span class="keyword">this</span>.width = width;
-  }
-};
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
 
-<span class="comment">// named</span>
-<span class="keyword">var</span> Polygon = <span class="keyword">class</span> Polygon {
-  <span class="constructor"><span class="keyword">constructor</span>(height, width) </span>{
-    <span class="keyword">this</span>.height = height;
-    <span class="keyword">this</span>.width = width;
-  }
-};
-</code></pre><h2 id="类体和方法的定义">类体和方法的定义</h2><p>{}里的部分就被成为类体.这是你定义类内容的地方,比如类的方法和构造器.</p>
-<h3 id="严格模式">严格模式</h3><p>类体(无论是声明式类还是表达式类)里的代码,都是以严格模式执行的.</p>
-<h3 id="Constructor">Constructor</h3><p><a href="">constructor</a>是一个特殊的方法,用于从所在的 <code>class</code> 创建和实例化对象.在一个类里,只能有一个名叫 “constructor” 的特殊方法.如果 <code>constructor</code> 方法在一个类里出现一次以上,会报错: <em>SyntaxError</em></p>
-<p>constructor可以使用 <code>super</code> 关键字来调用父类的constructor</p>
-<h3 id="原型方法">原型方法</h3><p>参考 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions" target="_blank" rel="external">方法定义(method definitions)</a>.</p>
-<pre><code><span class="keyword">class</span> Polygon {
-  <span class="constructor"><span class="keyword">constructor</span>(height, width) </span>{
-    <span class="keyword">this</span>.height = height;
-    <span class="keyword">this</span>.width = width;
-  }
 
-  <span class="keyword">get</span> area() {
-    <span class="keyword">return</span> <span class="keyword">this</span>.calcArea();
-  }
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
 
-  calcArea() {
-    <span class="keyword">return</span> <span class="keyword">this</span>.height * <span class="keyword">this</span>.width;
-  }
-}
-</code></pre><h3 id="静态方法">静态方法</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static" target="_blank" rel="external">static</a> 关键字给类定义了静态方法.静态方法的调用不需要实例化类,并且实例化以后的实例不能调用静态方法.静态方法一般用于给应用提供工具函数.</p>
-<pre><code><span class="keyword">class</span> Point {
-    <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
-        <span class="keyword">this</span>.x = x;
-        <span class="keyword">this</span>.y = y;
-    }
 
-    <span class="keyword">static</span> distance(a, b) {
-        <span class="keyword">const</span> dx = a.x - b.x;
-        <span class="keyword">const</span> dy = a.y - b.y;
 
-        <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(dx*dx + dy*dy);
-    }
-}
 
-<span class="keyword">const</span> p1 = <span class="keyword">new</span> Point(<span class="number">5</span>, <span class="number">5</span>);
-<span class="keyword">const</span> p2 = <span class="keyword">new</span> Point(<span class="number">10</span>, <span class="number">10</span>);
 
-<span class="built_in">console</span>.log(Point.distance(p1, p2));
-</code></pre><h2 id="通过_extends_定义子类">通过 <code>extends</code> 定义子类</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends" target="_blank" rel="external">extends</a>关键字在声明式类和表达式类里都可以用,用于创建一个类的子类.</p>
-<pre><code><span class="keyword">class</span> Animal { 
-  <span class="constructor"><span class="keyword">constructor</span>(name) </span>{
-    <span class="keyword">this</span>.name = name;
-  }
 
-  speak() {
-    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);
-  }
-}
-
-<span class="keyword">class</span> Dog extends Animal {
-  speak() {
-    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' barks.'</span>);
-  }
-}
-</code></pre><h2 id="通过_super_调用超类">通过 <code>super</code> 调用超类</h2><p><a href="">super</a> 关键字可以调用父类的方法</p>
-<pre><code><span class="keyword">class</span> Cat { 
-  <span class="constructor"><span class="keyword">constructor</span>(name) </span>{
-    <span class="keyword">this</span>.name = name;
-  }
-
-  speak() {
-    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);
-  }
-}
-
-<span class="keyword">class</span> Lion extends Cat {
-  speak() {
-    <span class="keyword">super</span>.speak();
-    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);
-  }
-}
-</code></pre><h2 id="混合(Mix-ins)">混合(Mix-ins)</h2><p>抽象子类或混合,是类的模板.ECMAScript类只能拥有一个超类,所以,继承多个工具类是不可行的. 所有的工具函数都必须又超类提供.</p>
-<p>想要在 ECMAScript 里实现混合,可以创造一个函数,它接受一个超类作为输入参数,然后输出一个继承该超类的子类:</p>
-<pre><code><span class="keyword">var</span> <span class="type">CalculatorMixin</span> = <span class="type">Base</span> =&gt; <span class="class"><span class="keyword">class</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Base</span> {</span>
-  calc() { }
-};
-
-<span class="keyword">var</span> <span class="type">RandomizerMixin</span> = <span class="type">Base</span> =&gt; <span class="class"><span class="keyword">class</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Base</span> {</span>
-  randomize() { }
-};
-</code></pre><p>一个使用了这些混合的类看起来应该是这样的:</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> {</span> }
-<span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">CalculatorMixin</span>(</span><span class="type">RandomizerMixin</span>(<span class="type">Foo</span>)) { }
-</code></pre><blockquote>
-<p>这个可能比较难理解,因为我把以上代码转换成es5以后,发现代码非常多,非常长…所以还是先从概念上去理解…<br>首先,我把这个例子写的更深入一点:</p>
-</blockquote>
-<pre><code><span class="string">"use strict"</span>;
-<span class="keyword">var</span> <span class="type">CalculatorMixin</span> = <span class="type">Base</span> =&gt; <span class="class"><span class="keyword">class</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Base</span> {</span>
-  calc() { 
-    <span class="keyword">return</span> <span class="symbol">'calcResul</span>t';
-  }
-};
-
-<span class="keyword">var</span> <span class="type">RandomizerMixin</span> = <span class="type">Base</span> =&gt; <span class="class"><span class="keyword">class</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Base</span> {</span>
-  randomize() { 
-    <span class="keyword">return</span> <span class="symbol">'randomizeResul</span>t'
-  }
-};
-
-<span class="keyword">var</span> <span class="type">Bunny</span> = <span class="type">Base</span> =&gt; <span class="class"><span class="keyword">class</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Base</span> {</span>
-  bunny() { 
-    <span class="keyword">return</span> <span class="symbol">'bunn</span>y'
-  }
-};
-
-<span class="class"><span class="keyword">class</span> <span class="title">Foo</span> {</span> }
-<span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">CalculatorMixin</span>(</span><span class="type">RandomizerMixin</span>(<span class="type">Bunny</span>(<span class="type">Foo</span>))) { }
-
-<span class="keyword">var</span> bar = <span class="keyword">new</span> <span class="type">Bar</span>();
-console.log(bar.calc());       <span class="comment">//'calcResult'</span>
-console.log(bar.randomize());  <span class="comment">//'dandomizeResult'</span>
-console.log(bar.bunny());      <span class="comment">//'bunny'</span>
-</code></pre><p>通过这个例子,可以很好的明白,ECMAScript的”混合”是在做什么: 它可以让一个类去包含多个”混合”里的工具函数,然后实例化这个类的时候,实例也会继承来自多个”混合”的方法.</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="external">原文地址</a></p>
-
+  
+    <article id="post-method-definations" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/18/method-definations/" class="article-date">
+  	<time datetime="2016-02-18T02:16:41.000Z" itemprop="datePublished">2016-02-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/18/method-definations/">method definitions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从ECMAScript2015(ES6)开始,引入了一种在初始化对象的时候,给对象定义方法的简约语法.为原来给一个函数定义一个方法名的键值对语法提供了一种简写语法.</p>
+<h2 id="语法">语法</h2><pre><code>var obj = {
+  property( parameters… ) {},
+  *generator( parameters… ) {},
+// also with computed keys:
+  [<span class="link_label">property</span>](<span class="link_url"> parameters… </span>) {},
+  *[<span class="link_label">generator</span>](<span class="link_url"> parameters… </span>) {},
+// compare ES5 getter/setter syntax:
+  get property() {},
+  set property(value) {}
+};
+</code></pre>
+        <hr/>
+        <p class="article-more-link">
+          <a  href="/2016/02/18/method-definations/#more">more >></a>
+        </p>
       
     </div>
     
@@ -396,11 +323,11 @@ console.log(bar.bunny());      <span class="comment">//'bunny'</span>
 
 
   
-    <article id="post-destructuring-assignment" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-function-asterisk" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/07/destructuring-assignment/" class="article-date">
-  	<time datetime="2016-02-07T08:17:33.000Z" itemprop="datePublished">2016-02-07</time>
+      <a href="/2016/02/16/function-asterisk/" class="article-date">
+  	<time datetime="2016-02-16T08:47:47.000Z" itemprop="datePublished">2016-02-16</time>
 </a>
     </div>
   
@@ -413,7 +340,7 @@ console.log(bar.bunny());      <span class="comment">//'bunny'</span>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/07/destructuring-assignment/">destructuring assignment</a>
+      <a class="article-title" href="/2016/02/16/function-asterisk/">function asterisk</a>
     </h1>
   
 
@@ -422,188 +349,16 @@ console.log(bar.bunny());      <span class="comment">//'bunny'</span>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Javascript的<strong>解构分配</strong>语法通过映射数组或字面量对象的语法来提取从数组或对象里提取数据.</p>
-<h2 id="语法">语法</h2><pre><code>[a, b] = [<span class="number">1</span>, <span class="number">2</span>]
-[a, b, ...rest] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]
-{a, b} = {a:<span class="number">1</span>, b:<span class="number">2</span>}
-{a, b, ...rest} = {a:<span class="number">1</span>, b:<span class="number">2</span>, c:<span class="number">3</span>, d:<span class="number">4</span>}  <span class="comment">//ES7</span>
-</code></pre><blockquote>
-<p><code>{a, b} = {a:1, b:2}</code> 这个语法是不能独立使用的,因为左边的 <code>{a,b}</code> 会被认为是一个代码块,而不是一个字面量对象.<br> 但是,<code>({a, b} = {a:1, b:2})</code> 格式是可以的,它和 <code>var {a, b} = {a:1, b&quot;2}</code> 一致.</p>
-</blockquote>
-<h2 id="描述">描述</h2><p>对象和数组字面量表达式为创建临时数据包提供了一种简单的方法. 一旦成功创建了数据包,你可以随心所欲的使用它.你甚至可以把它放在函数的返回值里.</p>
-<p>使用解构分配有一个特别实用的功能: 你只需要通过一句代码就可以读取整个数据解构,可以用它做很多事情.下面会给出例子.</p>
-<p>这个特点某些其他语言也有,比如 Perl 和 Python.</p>
-<h2 id="数据解构">数据解构</h2><h3 id="简单的例子">简单的例子</h3><pre><code><span class="variable"><span class="keyword">var</span> foo</span> = [<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>];
-
-<span class="comment">// without destructuring</span>
-<span class="variable"><span class="keyword">var</span> one</span>   = foo[<span class="number">0</span>];
-<span class="variable"><span class="keyword">var</span> two</span>   = foo[<span class="number">1</span>];
-<span class="variable"><span class="keyword">var</span> three</span> = foo[<span class="number">2</span>];
-
-<span class="comment">// with destructuring</span>
-<span class="variable"><span class="keyword">var</span> [one, two, three]</span> = foo;
-</code></pre><h3 id="免声明分配">免声明分配</h3><p>在使用解构分配的时候,不一定要声明变量.</p>
-<pre><code>var a, b;
-
-<span class="string">[a, b]</span> = <span class="string">[1, 2]</span>;
-</code></pre><h3 id="变量交换">变量交换</h3><p>执行这段代码以后,<code>b</code>等于1,<code>a</code>等于3. 在没有解构分配功能之前,要实现这个操作需要一个临时变量</p>
-<pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">1</span>;
-<span class="variable"><span class="keyword">var</span> b</span> = <span class="number">3</span>;
-
-[a, b] = [b, a];
-</code></pre><h3 id="多变量返回值">多变量返回值</h3><p>多亏于解构分配,函数可以返回多个变量了.虽然它一直都可以返回一个数组,但是解构分配赋予了它更多使用灵活性.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span> </span>{
-  <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">2</span>];
+        <p><strong>function*</strong>声明(<code>function</code> 关键字加上一个星号)定义一个生成器函数,返回一个生成器(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator">Generator</a>)对象.</p>
+<p>你还可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction">GeneratorFunction</a>构造函数以及<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function*">function* expression</a>来定义生成器函数.</p>
+<h2 id="语法">语法</h2><pre><code>function* <span class="built_in">name</span>([<span class="built_in">param</span>[, <span class="built_in">param</span>[, ... <span class="built_in">param</span>]]]) {
+    statements
 }
-</code></pre><p>可以看到,函数返回了一个像数组一样的东西,把所有的值都放在’[]’里.你可以使用这种方式返回任何数量的数据.在这个栗子里, <code>f()</code> 返回 <code>[1,2]</code> 作为输出.</p>
-<pre><code>var <span class="literal">a</span>, b<span class="comment">;</span>
-[<span class="literal">a</span>, b] = f()<span class="comment">;</span>
-console.log(<span class="string">"A is "</span> + <span class="literal">a</span> + <span class="string">" B is "</span> + b)<span class="comment">;</span>
-</code></pre><p><code>[a,b] = f()</code> 这句代码会把函数返回的结果依次分配给’[]’里的变量: <code>a</code>被设置为1,<code>b</code>被设置为2.你也可以像以前一样把返回值当做数组用. </p>
-<pre><code><span class="keyword">var</span> a = <span class="literal">f</span>();
-console.<span class="literal">log</span>(<span class="string">"A is "</span> + a);
-</code></pre><p>在这个栗子里,<code>a</code> 是一个包含了1和2的数组.</p>
-<h3 id="忽略某些返回值">忽略某些返回值</h3><p>你还可以忽略某些你不需要的值:</p>
-<pre><code>function f() {
-  <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<span class="comment">;</span>
-}
-
-var [<span class="literal">a</span>, , b] = f()<span class="comment">;</span>
-console.log(<span class="string">"A is "</span> + <span class="literal">a</span> + <span class="string">" B is "</span> + b)<span class="comment">;</span>
-</code></pre><p>执行这段代码以后, <code>a</code>等于1,<code>b</code>等于3. 2这个值就被忽略了.你可以使用这种方式来忽略一个或多个(甚至全部)返回值.举个栗子:</p>
-<pre><code>[,,] = f()<span class="comment">;</span>
-</code></pre><h3 id="从正则表达式的匹配结果来拉取数据">从正则表达式的匹配结果来拉取数据</h3><p>当正则表达式通过 <code>exec()</code> 方法去匹配的时候,它会返回一个数组,数组的第一个值是整个被进行匹配的字符串,后面的值分别是匹配各个’()’里的内容得到的结果.解构分配能让你轻易地获取到数组里的各个部分内容,如果你不需要整个字符串,可以忽略它.</p>
-<pre><code><span class="variable"><span class="keyword">var</span> url</span> = <span class="string">"https://developer.mozilla.org/en-US/Web/JavaScript"</span>;
-
-<span class="variable"><span class="keyword">var</span> parsedURL</span> = /^(\w+)\:\/\/([^\/]+)\/(.*)$/.exec(url);
-<span class="variable"><span class="keyword">var</span> [, protocol, fullhost, fullpath]</span> = parsedURL;
-
-console.log(protocol); <span class="comment">// logs "https"</span>
-</code></pre><h2 id="对象解构">对象解构</h2><h3 id="简单的例子-1">简单的例子</h3><pre><code><span class="keyword">var</span> o = {p: <span class="number">42</span>, q: <span class="literal">true</span>};
-<span class="keyword">var</span> {p, q} = o;
-
-<span class="built_in">console</span>.log(p); <span class="comment">// 42</span>
-<span class="built_in">console</span>.log(q); <span class="comment">// true </span>
-
-<span class="comment">// 分配新的变量名</span>
-<span class="keyword">var</span> {p: foo, q: bar} = o;
-
-<span class="built_in">console</span>.log(foo); <span class="comment">// 42</span>
-<span class="built_in">console</span>.log(bar); <span class="comment">// true </span>
-</code></pre><h3 id="免声明分配-1">免声明分配</h3><p>同样,在使用解构分配对象的时候,也不一定要声明.</p>
-<pre><code><span class="keyword">var</span> a, b;
-
-(<span class="comment">{a, b}</span> = <span class="comment">{a:1, b:2}</span>);
-</code></pre><blockquote>
-<p>在使用免声明对象字面量解构分配时,包围语句的’( .. )’必须要有.</p>
-</blockquote>
-<h3 id="定义函数参数默认值">定义函数参数默认值</h3><h4 id="ES5版本">ES5版本</h4><pre><code>function drawES5Chart(<span class="keyword">options</span>) {
-  <span class="keyword">options</span> = <span class="keyword">options</span> === undefined ? {} : <span class="keyword">options</span>;
-  var <span class="keyword">size</span> = <span class="keyword">options</span>.<span class="keyword">size</span> === undefined ? <span class="string">'big'</span> : <span class="keyword">options</span>.<span class="keyword">size</span>;
-  var cords = <span class="keyword">options</span>.cords === undefined ? { x: <span class="number">0</span>, y: <span class="number">0</span> } : <span class="keyword">options</span>.cords;
-  var radius = <span class="keyword">options</span>.radius === undefined ? <span class="number">25</span> : <span class="keyword">options</span>.radius;
-  console.log(<span class="keyword">size</span>, cords, radius);
-  <span class="comment">// now finally do some chart drawing</span>
-}
-
-drawES5Chart({
-  cords: { x: <span class="number">18</span>, y: <span class="number">30</span> },
-  radius: <span class="number">30</span>
-});
-</code></pre><h4 id="ES6版本">ES6版本</h4><pre><code>function drawES6Chart({<span class="string">size:</span> size = <span class="string">'big'</span>, <span class="string">cords:</span> cords = { <span class="string">x:</span> <span class="number">0</span>, <span class="string">y:</span> <span class="number">0</span> }, <span class="string">radius:</span> radius = <span class="number">25</span>} = {}) 
-{
-  console.log(size, cords, radius);
-  <span class="comment">// do some chart drawing</span>
-}
-
-drawES6Chart({
-<span class="label">  cords:</span> { <span class="string">x:</span> <span class="number">18</span>, <span class="string">y:</span> <span class="number">30</span> },
-<span class="label">  radius:</span> <span class="number">30</span>
-});
-</code></pre><blockquote>
-<p>在火狐里,解构分配的默认值功能还没有被支持: <code>var { x = 3 } = {}</code> 以及 <code>var [foo = &quot;bar&quot;] = []</code>.查看关于函数参数解构分配默认值问题的bug: <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=932080" target="_blank" rel="external">bug 932080</a>;</p>
-</blockquote>
-<h3 id="模块化加载(非ES6方法)">模块化加载(非ES6方法)</h3><p>解构分配可以加载指定的非ES6子组件,比如这里,使用<a href="https://developer.mozilla.org/en-US/Add-ons/SDK" target="_blank" rel="external">插件SDK</a></p>
-<pre><code><span class="keyword">const</span> { Loader, main } = <span class="built_in">require</span>(<span class="string">'toolkit/loader'</span>);
-</code></pre><h3 id="嵌套对象和数组的解构分配">嵌套对象和数组的解构分配</h3><pre><code><span class="keyword">var</span> metadata = {
-    title: <span class="string">"Scratchpad"</span>,
-    translations: [
-       {
-        locale: <span class="string">"de"</span>,
-        localization_tags: [ ],
-        last_edit: <span class="string">"2014-04-14T08:43:37"</span>,
-        url: <span class="string">"/de/docs/Tools/Scratchpad"</span>,
-        title: <span class="string">"JavaScript-Umgebung"</span>
-       }
-    ],
-    url: <span class="string">"/en-US/docs/Tools/Scratchpad"</span>
-};
-
-<span class="keyword">var</span> { title: englishTitle, translations: [{ title: localeTitle }] } = metadata;
-
-<span class="built_in">console</span>.log(englishTitle); <span class="comment">// "Scratchpad"</span>
-<span class="built_in">console</span>.log(localeTitle);  <span class="comment">// "JavaScript-Umgebung"</span>
-</code></pre><h3 id="for循环里的解构分配">for循环里的解构分配</h3><pre><code>var people = [
-    {
-     name: <span class="string">"Mike Smith"</span>,
-     family: {
-       mother: <span class="string">"Jane Smith"</span>,
-       father: <span class="string">"Harry Smith"</span>,
-       sister: <span class="string">"Samantha Smith"</span>
-     },
-     age: <span class="number">35</span>
-    },
-    {
-     name: <span class="string">"Tom Jones"</span>,
-     family: {
-       mother: <span class="string">"Norah Jones"</span>,
-       father: <span class="string">"Richard Jones"</span>,
-       brother: <span class="string">"Howard Jones"</span>
-     },
-     age: <span class="number">25</span>
-    }
-];
-
-<span class="keyword">for</span> (var {name: n, family: { father: f } } <span class="keyword">of</span> people) {
-    console.log(<span class="string">"Name: "</span> + n + <span class="string">", Father: "</span> + f);
-}
-
-// <span class="string">"Name: Mike Smith, Father: Harry Smith"</span>
-// <span class="string">"Name: Tom Jones, Father: Richard Jones"</span>
-</code></pre><h3 id="从函数参数对象里获取对应属性值">从函数参数对象里获取对应属性值</h3><pre><code><span class="function"><span class="keyword">function</span> <span class="title">userId</span>(<span class="params">{id}</span>) </span>{
-  <span class="keyword">return</span> id;
-}
-
-<span class="function"><span class="keyword">function</span> <span class="title">whois</span>(<span class="params">{displayName: displayName, fullName: {firstName: name}}</span>)</span>{
-  <span class="built_in">console</span>.log(displayName + <span class="string">" is "</span> + name);
-}
-
-<span class="keyword">var</span> user = { 
-  id: <span class="number">42</span>, 
-  displayName: <span class="string">"jdoe"</span>,
-  fullName: { 
-      firstName: <span class="string">"John"</span>,
-      lastName: <span class="string">"Doe"</span>
-  }
-};
-
-<span class="built_in">console</span>.log(<span class="string">"userId: "</span> + userId(user)); <span class="comment">// "userId: 42"</span>
-whois(user); <span class="comment">// "jdoe is John"</span>
-</code></pre><p>这样可以获取对象里的 <code>id</code>,<code>displayName</code>,<code>firstName</code> 属性,然后打印出来.</p>
-<h3 id="计算后的属性名和解构分配">计算后的属性名和解构分配</h3><p>和字面量对象一样,计算后的属性名也可以用于结构分配(就是下标型的属性名)</p>
-<pre><code><span class="keyword">let</span> key = <span class="string">"z"</span>;
-<span class="keyword">let</span> { [key]: foo } = { z: <span class="string">"bar"</span> };
-
-console.log(foo); // <span class="string">"bar"</span>
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="external">原文地址</a></p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
+</code></pre>
+        <hr/>
+        <p class="article-more-link">
+          <a  href="/2016/02/16/function-asterisk/#more">more >></a>
+        </p>
       
     </div>
     
@@ -632,11 +387,11 @@ console.log(foo); // <span class="string">"bar"</span>
 
 
   
-    <article id="post-Arrow-Functions" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-setter" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/04/Arrow-Functions/" class="article-date">
-  	<time datetime="2016-02-04T04:25:20.000Z" itemprop="datePublished">2016-02-04</time>
+      <a href="/2016/02/16/setter/" class="article-date">
+  	<time datetime="2016-02-16T03:45:01.000Z" itemprop="datePublished">2016-02-16</time>
 </a>
     </div>
   
@@ -649,7 +404,7 @@ console.log(foo); // <span class="string">"bar"</span>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/04/Arrow-Functions/">Arrow Functions (箭头函数) 详解</a>
+      <a class="article-title" href="/2016/02/16/setter/">setter</a>
     </h1>
   
 
@@ -658,156 +413,21 @@ console.log(foo); // <span class="string">"bar"</span>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一个<strong>箭头函数表达式</strong>(也被成为<strong>大箭头函数</strong>)是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function" target="_blank" rel="external">普通函数表达式</a>的简写,它通过词法绑定来指定 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" target="_blank" rel="external">this</a> 指针的值(不会绑定自己的<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" target="_blank" rel="external">this</a>,<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments" target="_blank" rel="external">arguments</a>,<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super" target="_blank" rel="external">super</a>,或是 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new.target" target="_blank" rel="external">new.target</a>). 箭头函数总是匿名的.</p>
-<h2 id="语法">语法</h2><h3 id="基础语法">基础语法</h3><blockquote>
-<p>(param1, param2, …, paramN) =&gt; { statements }<br>  (param1, param2, …, paramN) =&gt; expression<br>         // 相当于:  =&gt; { return expression; }<br>  // 当只有一个参数的时候,’()’是可选的:<br>  (singleParam) =&gt; { statements }<br>  singleParam =&gt; { statements }<br>  // 没有参数的函数必须要使用’()’<br>  () =&gt; { statements }</p>
-</blockquote>
-<h3 id="高级语法">高级语法</h3><blockquote>
-<p>// 如果需要返回一个字面量对象,需要用’()’包括它.<br>  params =&gt; ({foo: bar})<br>  // 支持 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" target="_blank" rel="external">Rest parameters</a> 以及 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank" rel="external">default parameters</a><br>  (param1, param2, …rest) =&gt; { statements }<br>  (param1 = defaultValue1, param2, …, paramN = defaultValueN) =&gt; { statements }<br>  // 参数列表里还支持使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="external">解构赋值 destructuring</a><br>  var f = ([a, b] = [1, 2], {x: c} = {x: a + b}) =&gt; a + b + c;<br>  f();  // 6</p>
-</blockquote>
-<p>更多语法例子查看: <a href="http://wiki.ecmascript.org/doku.php?id=harmony:arrow_function_syntax" target="_blank" rel="external">这里</a></p>
-<h2 id="描述">描述</h2><p>也可以看这篇: <a href="https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/" target="_blank" rel="external">“ES6 In Depth: Arrow functions” on hacks.mozilla.org</a></p>
-<p>箭头函数引入了两个关键的影响因素: 简短函数和词法指针(<code>this</code>).</p>
-<h3 id="简短函数">简短函数</h3><p>在一些函数模型下,简短函数很受欢迎.比较以下内容:</p>
-<pre><code><span class="keyword">var</span> a = [
-  <span class="string">"Hydrogen"</span>,
-  <span class="string">"Helium"</span>,
-  <span class="string">"Lithium"</span>,
-  <span class="string">"Beryl­lium"</span>
-];
-
-<span class="keyword">var</span> a2 = a.map(<span class="function"><span class="keyword">function</span><span class="params">(s)</span></span>{ <span class="keyword">return</span> s.length });
-
-<span class="keyword">var</span> a3 = a.map( s =&gt; s.length );
-</code></pre><h3 id="词法绑定指针(this)">词法绑定指针(<code>this</code>)</h3><p>在箭头函数出现之前,每个函数的实例都有自己的指针(如果是一个构造函数,它就是实例化后的对象,如果是在严格模式下,直接调用函数,它就是undefined,如果是作为对象的方法被调用,它就是对象的上下文…等等…),这在面向对象编程里,是一个很麻烦的东西.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span> </span>{
-  <span class="comment">// Person() 构造函数里的 `this` 指向它自己的实例对象.</span>
-  <span class="keyword">this</span>.age = <span class="number">0</span>;
-
-  setInterval(<span class="function"><span class="keyword">function</span> <span class="title">growUp</span><span class="params">()</span> </span>{
-    <span class="comment">// 在非严格模式下, growUp()函数定义 this 指针指向全局对象,而不是Person()构造函数里的this.</span>
-    <span class="keyword">this</span>.age++;
-  }, <span class="number">1000</span>);
-}
-
-<span class="keyword">var</span> p = <span class="keyword">new</span> Person();
-</code></pre><p>在 ECMAScript 3/5 里, 通过把this赋值给一个新的封闭的变量,可以解决这个问题.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span> </span>{
-  <span class="keyword">var</span> <span class="keyword">self</span> = this; <span class="comment">// 有些人习惯用 that,而不是 self. </span>
-                   <span class="comment">// 习惯了用哪个就一直用下去.</span>
-  <span class="keyword">self</span>.age = <span class="number">0</span>;
-
-  setInterval(<span class="function"><span class="keyword">function</span> <span class="title">growUp</span><span class="params">()</span> </span>{
-    <span class="comment">// 回调里的self的值就是你期望的那个.</span>
-    <span class="keyword">self</span>.age++;
-  }, <span class="number">1000</span>);
-}
-</code></pre><p>另外,也可以创建一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="external">绑定了this的函数 bound function</a>, 这样,正确的 <code>this</code> 值就会被传递到 <code>growUp()</code> 函数里.</p>
-<p>箭头函数会捕捉到当前闭包环境下的 <code>this</code> 值,所以下面的代码会按照期望的那样运行:</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span></span>{
-  <span class="keyword">this</span>.age = <span class="number">0</span>;
-
-  setInterval(() =&gt; {
-    <span class="keyword">this</span>.age++; <span class="comment">// |this| 正确的指向了person对象</span>
-  }, <span class="number">1000</span>);
-}
-
-<span class="keyword">var</span> p = <span class="keyword">new</span> Person();
-</code></pre><h4 id="和严格模式的关系">和严格模式的关系</h4><p>假设 <code>this</code> 是词法绑定的,严格模式下关于 <code>this</code> 的相关规则会被忽视.</p>
-<pre><code>var f = <span class="function"><span class="params">()</span> =&gt;</span> {<span class="string">'use strict'</span>; <span class="keyword">return</span> <span class="keyword">this</span>};
-f() === <span class="built_in">window</span>; <span class="regexp">//</span> 或者是全局对象
-</code></pre><p>其余严格模式规则都正常执行.</p>
-<h4 id="通过_call_或者_apply_调用">通过 <code>call</code> 或者 <code>apply</code> 调用</h4><p>由于 <code>this</code> 已经被词法绑定了,通过 <code>call()</code> 和 <code>apply()</code> 调用只能起到传递参数的作用,不能改变 <code>this</code> 指针的指向:</p>
-<pre><code><span class="keyword">var</span> adder = {
-  base : <span class="number">1</span>,
-
-  add : <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>{
-    <span class="keyword">var</span> f = v =&gt; v + <span class="keyword">this</span>.base;
-    <span class="keyword">return</span> f(a);
-  },
-
-  addThruCall: <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>{
-    <span class="keyword">var</span> f = v =&gt; v + <span class="keyword">this</span>.base;
-    <span class="keyword">var</span> b = {
-      base : <span class="number">2</span>
-    };
-
-    <span class="keyword">return</span> f.call(b, a);
-  }
-};
-
-<span class="built_in">console</span>.log(adder.add(<span class="number">1</span>));         <span class="comment">// 2</span>
-<span class="built_in">console</span>.log(adder.addThruCall(<span class="number">1</span>)); <span class="comment">// 还是2</span>
-</code></pre><h3 id="词法绑定_arguments">词法绑定 <code>arguments</code></h3><p>箭头函数不会把参数对象 <code>arguments</code> 暴露给代码,所以 <code>arguments.length</code>, <code>arguments[0]</code>, <code>arguments[1]</code> 等得到的值和 <code>this</code> 一样,是词法绑定的,也就是说,它指向的是调用函数的闭包作用域下的 <code>arguments</code> 变量.</p>
-<pre><code><span class="keyword">var</span> <span class="built_in">arguments</span> = <span class="number">42</span>;
-<span class="keyword">var</span> arr = () =&gt; <span class="built_in">arguments</span>;
-
-arr(); <span class="comment">// 42</span>
-
-<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>{
-  <span class="keyword">var</span> f = (i) =&gt; <span class="built_in">arguments</span>[<span class="number">0</span>]+i; <span class="comment">// foo函数里隐式的绑定了arguments</span>
-  <span class="keyword">return</span> f(<span class="number">2</span>);
-}
-
-foo(<span class="number">1</span>); <span class="comment">// 3</span>
-</code></pre><p>箭头函数没有自己的 <code>arguments</code> 对象,但是在大多数情况下,使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" target="_blank" rel="external">rest parameters</a> 是一个很好的选择:</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>{ 
-  <span class="keyword">var</span> f = (...args) =&gt; args[<span class="number">0</span>]; 
-  <span class="keyword">return</span> f(<span class="number">2</span>); 
-}
-
-foo(<span class="number">1</span>); <span class="comment">// 2</span>
-</code></pre><h3 id="使用_yield_关键词">使用 <code>yield</code> 关键词</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield" target="_blank" rel="external">yield</a>关键词不能被用在箭头函数的函数体里.(除了用在函数里嵌套的函数里)所以,箭头函数不能被作为一个生成器.</p>
-<h2 id="函数体">函数体</h2><p>箭头函数既可以使用 “简约格式” 也可以使用普通的 “代码块” 作为函数体 </p>
-<p>使用代码块格式不会自动返回一个值.你需要明确地使用 <code>return</code> 语句.</p>
-<pre><code><span class="keyword">var</span> func = x =&gt; x * x;                  <span class="comment">// 简洁语法, 隐式调用 "return"</span>
-<span class="keyword">var</span> func = (x, y) =&gt; { <span class="keyword">return</span> x + y; }; <span class="comment">// 通过代码块, 需要显式地使用 "return" </span>
-</code></pre><h2 id="返回字面量对象">返回字面量对象</h2><p>记住,使用简洁语法来返回字面量对象 <code>params =&gt; {object:literal}</code> 不会像你预期的那样执行: </p>
-<pre><code><span class="keyword">var</span> <span class="func"><span class="keyword">func</span> = <span class="params">()</span></span> =&gt; {  foo: <span class="number">1</span>  };               <span class="comment">// 调用 func() 返回 undefined!</span>
-<span class="keyword">var</span> <span class="func"><span class="keyword">func</span> = <span class="params">()</span></span> =&gt; {  foo: function() {}  };   <span class="comment">// SyntaxError: function statement requires a name</span>
-</code></pre><p>这是因为花括号里内容会被当做语句顺序解析.(比如, <code>foo</code> 会被看做一个标签,而不是字面量对象的键)</p>
-<p>记得,把字面量对象用’()’包起来:</p>
-<pre><code>var <span class="function"><span class="keyword">func</span> = <span class="params">()</span> =&gt; <span class="params">({ foo: <span class="number">1</span> })</span>;</span>
-</code></pre><h2 id="一些栗子">一些栗子</h2><pre><code><span class="comment">// empty 箭头函数返回 undefined</span>
-<span class="keyword">let</span> <span class="keyword">empty</span> = () =&gt; {};
-
-(() =&gt; <span class="string">"foobar"</span>)() <span class="comment">// 返回 "foobar" </span>
-
-<span class="keyword">var</span> simple = a =&gt; a &gt; <span class="number">15</span> ? <span class="number">15</span> : a; 
-simple(<span class="number">16</span>); <span class="comment">// 15</span>
-simple(<span class="number">10</span>); <span class="comment">// 10</span>
-
-<span class="keyword">let</span> max = (a, b) =&gt; a &gt; b ? a : b;
-
-<span class="comment">// 简单的实现数组的过滤,迭代, ...</span>
-
-<span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">18</span>, <span class="number">23</span>];
-<span class="keyword">var</span> sum = arr.reduce((a, b) =&gt; a + b);  <span class="comment">// 66</span>
-<span class="keyword">var</span> even = arr.filter(v =&gt; v % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">// [6, 0, 18]</span>
-<span class="keyword">var</span> <span class="keyword">double</span> = arr.map(v =&gt; v * <span class="number">2</span>);       <span class="comment">// [10, 12, 26, 0, 2, 36, 46]</span>
-
-<span class="comment">// 更简约的promise链</span>
-promise.then(a =&gt; {
-  <span class="comment">// ...</span>
-}).then(b =&gt; {
-   <span class="comment">// ...</span>
-});
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">原文地址</a></p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
+        <p><strong>set</strong>语法把对象的某个属性绑定到一个函数上,当<strong>设置</strong>该属性的时候执行这个函数</p>
+<h2 id="语法">语法</h2><pre><code><span class="collection">{set prop<span class="list">(<span class="keyword"><span class="built_in">val</span></span>)</span> <span class="collection">{ . . . }</span>}</span>
+<span class="collection">{set <span class="collection">[expression]</span><span class="list">(<span class="keyword"><span class="built_in">val</span></span>)</span> <span class="collection">{ . . . }</span>}</span>
+</code></pre>
+        <hr/>
+        <p class="article-more-link">
+          <a  href="/2016/02/16/setter/#more">more >></a>
+        </p>
       
     </div>
     
     <div class="article-info">
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 	</div>
 
       
@@ -829,11 +449,11 @@ promise.then(a =&gt; {
 
 
   
-    <article id="post-let" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-getter" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/02/let/" class="article-date">
-  	<time datetime="2016-02-02T07:39:15.000Z" itemprop="datePublished">2016-02-02</time>
+      <a href="/2016/02/15/getter/" class="article-date">
+  	<time datetime="2016-02-15T09:55:47.000Z" itemprop="datePublished">2016-02-15</time>
 </a>
     </div>
   
@@ -846,7 +466,7 @@ promise.then(a =&gt; {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/let/">ECMAScript6 let 详解</a>
+      <a class="article-title" href="/2016/02/15/getter/">getter</a>
     </h1>
   
 
@@ -855,478 +475,75 @@ promise.then(a =&gt; {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>let</code> 语句声明一个块级作用域变量,它的初始化值为可选的.</p>
-<h2 id="语法">语法</h2><blockquote>
-<p>let var1 [= value1] [, var2 [= value2]] [, …, varN [= valueN]];</p>
-</blockquote>
-<h3 id="参数">参数</h3><p><strong>var1, var2, …, varN</strong><br>变量名.可以是任何合法的标识符.</p>
-<p><strong>value1, value2, …, valueN</strong><br>变量的初始值.可以是任何合法的表达式.</p>
-<h2 id="描述">描述</h2><p><code>let</code> 声明变量的作用域为语句或表达式所在的块.这和使用 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Statements/var" target="_blank" rel="external">var</a> 语句不同, <code>var</code> 声明的变量是全局变量,或者整个函数范围里的变量,而不是所在的代码块作用域.</p>
-<h3 id="块级作用域和_let">块级作用域和 <code>let</code></h3><p>在一个代码块里使用 <code>let</code> 语句定义变量</p>
-<pre><code><span class="keyword">if</span> (x &gt; y) {
-  let <span class="built_in">gamma</span> = <span class="number">12.7</span> + y;
-  i = <span class="built_in">gamma</span> * x;
-}
-</code></pre><p>通常, <code>let</code> 语句用在函数里嵌套函数的时候能使得代码更清晰. </p>
-<pre><code><span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"list"</span>);
-
-<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) {
-  <span class="keyword">var</span> item = <span class="built_in">document</span>.createElement(<span class="string">"LI"</span>);
-  item.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item "</span> + i));
-
-  <span class="keyword">let</span> j = i;
-  item.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>{
-    <span class="built_in">console</span>.log(<span class="string">"Item "</span> + j + <span class="string">" is clicked."</span>);
-  };
-  list.appendChild(item);
-}
-</code></pre><p>上面的这个例子能够按照所希望的那样运行,因为五个内嵌的匿名函数的实例里分别使用五个不同的变量 <code>j</code> 的实例.注意,如果你把 <code>let</code> 换成 <code>var</code> 或者移除变量 <code>j</code> 或者在内嵌的函数里使用 <code>i</code> ,是不行的. </p>
-<h4 id="作用域规则">作用域规则</h4><p>通过 <code>let</code> 声明的变量它的作用域是声明时所在的块级作用域,以及块级作用域的子块级作用域.就这一点来说, <code>let</code> 的工作方式和 <code>var</code> 很相似. 他们两者间最主要的区别是: <code>var</code> 声明的变量所在的作用域是整个闭包函数.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">varTest</span>(<span class="params"></span>) </span>{
-  <span class="keyword">var</span> x = <span class="number">31</span>;
-  <span class="keyword">if</span> (<span class="literal">true</span>) {
-    <span class="keyword">var</span> x = <span class="number">71</span>;  <span class="comment">// x是同一个变量!</span>
-    <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
-  }
-  <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
-}
-
-<span class="function"><span class="keyword">function</span> <span class="title">letTest</span>(<span class="params"></span>) </span>{
-  <span class="keyword">let</span> x = <span class="number">31</span>;
-  <span class="keyword">if</span> (<span class="literal">true</span>) {
-    <span class="keyword">let</span> x = <span class="number">71</span>;  <span class="comment">// x是两个不同的变量</span>
-    <span class="built_in">console</span>.log(x);  <span class="comment">// 71</span>
-  }
-  <span class="built_in">console</span>.log(x);  <span class="comment">// 31</span>
-}
-</code></pre><p>不同于使用 <code>var</code> , 如果在程序或者函数的最外层使用 <code>let</code> 语句,它不会给全局对象创建一个新的属性.举个栗子:</p>
-<pre><code><span class="keyword">var</span> x = <span class="string">'global'</span>;
-<span class="keyword">let</span> y = <span class="string">'global'</span>;
-<span class="built_in">console</span>.log(<span class="keyword">this</span>.x);   <span class="comment">//全局对象下有x属性</span>
-<span class="built_in">console</span>.log(<span class="keyword">this</span>.y);   <span class="comment">//全局对象下没有y属性</span>
-</code></pre><p>这段代码运行的结果: <code>this.x</code> 的输出为 <code>&quot;global&quot;</code> ,但 <code>this.y</code> 的输出为 <code>undefined</code>.</p>
-<h3 id="暂死区(temporal_dead_zone)和let相关报错">暂死区(temporal dead zone)和<code>let</code>相关报错</h3><p>在同一个函数或者代码块里使用 <code>let</code> 声明两个同样的变量会导致 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a>.</p>
-<pre><code><span class="keyword">if</span> (x) {
-  <span class="keyword">let</span> foo;
-  <span class="keyword">let</span> foo; <span class="comment">// TypeError thrown.</span>
-}
-</code></pre><p>ECMAScript 2015 会把通过 <code>let</code> 语句声明的变量<strong>提升到代码块的开头</strong>(类似于var声明变量的预解析). 然而,在变量声明之前访问这个变量会导致<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError" target="_blank" rel="external">ReferenceError</a>.<br>因为存在于代码块开头的变量还处在”暂死区”里,直到程序走到声明变量那里.</p>
-<blockquote>
-<p>补充说明一下:众所周知,<code>var</code> 声明的变量会被预声明,所以在 <code>var</code> 之前访问变量,不会报错,而是得到 <code>undefined</code>. 同样, <code>let</code> 声明的变量也会被提升到区块的顶部,但是却不能访问它,因为变量虽然声明了,但还处在 “暂死区” 里,直到程序走到 <code>let</code> 声明变量的语句,变量才从暂死区里被释放出来. 大致就是这样,点击了解更多关于<a href="http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified/" target="_blank" rel="external">暂死区</a>的概念.</p>
-</blockquote>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">do_something</span>(<span class="params"></span>) </span>{
-  <span class="built_in">console</span>.log(foo); <span class="comment">// ReferenceError</span>
-  <span class="keyword">let</span> foo = <span class="number">2</span>;
-}
-</code></pre><p>如果你在 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch" target="_blank" rel="external">switch</a> 语句中使用 <code>let</code> ,可能会遇到错误,因为在 <code>switch</code> 语法里,它只有一个底层代码块    </p>
-<pre><code><span class="keyword">switch</span> (x) {
-  <span class="keyword">case</span> <span class="number">0</span>:
-    <span class="keyword">let</span> foo;
-    <span class="keyword">break</span>;
-
-  <span class="keyword">case</span> <span class="number">1</span>:
-    <span class="keyword">let</span> foo; <span class="comment">// 由于重复声明导致 TypeError .</span>
-    <span class="keyword">break</span>;
-}
-</code></pre><h3 id="for_循环里使用_let_时的作用域"><code>for</code> 循环里使用 <code>let</code> 时的作用域</h3><p>你可以在 <code>for</code> 循环里使用 <code>let</code> 语句来创建一个对应当前作用域的变量.这和在 <code>for</code> 循环头部使用 <code>var</code> 语句是不同的, <code>var</code> 声明的变量在不仅在循环里可用,在整个所在的函数里都可用.</p>
-<pre><code>var <span class="built_in">i</span>=<span class="number">0</span>;
-<span class="keyword">for</span> ( let <span class="built_in">i</span>=<span class="built_in">i</span> ; <span class="built_in">i</span> &lt; <span class="number">10</span> ; <span class="built_in">i</span>++ ) <span class="cell">{
-  console.log(i);
-}</span>
-</code></pre><blockquote>
-<p>注意这个例子是错的,它会抛出 ReferenceError 错误,在介绍 <a href="">暂死区</a> 的文章里有类似的例子…大致解释一下:变量 <code>i</code> 一开始就被预提升到整个块作用域了,但是还处在暂死区,然后当执行 <code>let i=i</code> 的时候,要给变量 <code>i</code> 进行词法绑定,但是绑定的值又是 <code>i</code>, 而 <code>i</code> 又处在暂死区,无法访问,所以就报错了.但是需要注意的是,由于 <code>i</code> 变量已经被预提升了,它不是一个不存在的变量,而是一个处在暂死区的变量,所以,它不会沿着作用域链向上寻找到外层 <code>var</code> 声明的 <code>i</code>,而是直接报错了.<br>然后这个例子正确的写法应该是:</p>
-</blockquote>
-<pre><code>var <span class="literal">a</span>=<span class="number">0</span><span class="comment">;</span>
-for ( let i=<span class="literal">a</span> <span class="comment">; i &lt; 10 ; i++ ) {</span>
-  console.log(i)<span class="comment">;</span>
-}
-</code></pre><h4 id="作用域规则-1">作用域规则</h4><blockquote>
-<p>for (let expr1; expr2; expr3) statement</p>
-</blockquote>
-<p>在这个例子里, <code>expr2</code>,<code>expr3</code> 以及 <code>statement</code> 语句,都会被隐式的包含到一个代码块里. <code>let</code> 声明的 <code>expr1</code> 变量就处在这个隐藏的代码块里. 这在上一个循环的例子里已经阐述过了.</p>
-<h2 id="栗子">栗子</h2><h3 id="let_vs_var"><code>let</code> vs <code>var</code></h3><p>在代码块里使用 <code>let</code> 语句,变量的作用域就是所在的代码块. 而 <code>var</code> 声明的变量,所在的作用域是声明时所在的整个函数.</p>
-<pre><code>var a = <span class="number">5</span>;
-var b = <span class="number">10</span>;
-
-<span class="keyword">if</span> (a === <span class="number">5</span>) {
-  let a = <span class="number">4</span>; <span class="comment">// 作用域是在 if 代码块里</span>
-  var b = <span class="number">1</span>; <span class="comment">// 作用域是在整个函数里</span>
-
-  console.<span class="built_in">log</span>(a);  <span class="comment">// 4</span>
-  console.<span class="built_in">log</span>(b);  <span class="comment">// 1</span>
-} 
-
-console.<span class="built_in">log</span>(a); <span class="comment">// 5</span>
-console.<span class="built_in">log</span>(b); <span class="comment">// 1</span>
-</code></pre><h3 id="循环里的_let">循环里的 <code>let</code></h3><p>建议在循环里使用 <code>let</code> 来创建一个作用于循环代码块下的变量,而不是使用 <code>var</code> 来创建一个全局的变量用于循环.</p>
-<pre><code><span class="keyword">for</span> (let i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++) {
-  console.<span class="built_in">log</span>(i); <span class="comment">// 0, 1, 2, 3, 4 ... 9</span>
-}
-
-console.<span class="built_in">log</span>(i); <span class="comment">// i is not defined</span>
-</code></pre><h2 id="非标准的_let_扩展">非标准的 <code>let</code> 扩展</h2><blockquote>
-<p>非标准的 <code>let</code> 扩展基本没有得到支持,而且很多已经被废弃,就不翻译了…..((☄⊙ω⊙)☄…好吧,因为快要下班了…)</p>
-</blockquote>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank" rel="external">原文地址</a></p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-Object-defineProperty-方法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/27/Object-defineProperty-方法/" class="article-date">
-  	<time datetime="2016-01-27T07:26:50.000Z" itemprop="datePublished">2016-01-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/27/Object-defineProperty-方法/">Object.defineProperty()方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Object-defineProperty()方法详解">Object.defineProperty()方法详解</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#Custom_Setters_and_Getters" target="_blank" rel="external">查看原文</a></p>
-<p><em>Object.defineProperty()</em> 方法可以直接给对象定义一个新的属性, 或者修改对象上已存在的某个属性, 最后返回这个对象.</p>
-<h2 id="语法">语法</h2><blockquote>
-<p>Object.defineProperty(obj, prop, descriptor)</p>
-</blockquote>
-<h3 id="Parameters">Parameters</h3><p><strong>obj</strong><br>需要被定义属性的对象</p>
-<p><strong>prop</strong><br>需要被定义(或修改)的属性名</p>
-<p><strong>descriptor</strong><br>对需要被定义(或修改)的属性的描述</p>
-<h2 id="介绍">介绍</h2><p>这个方法允许精确的添加或修改对象的属性.通过普通的分配方式给对象添加的属性,会在对象属性被枚举时展示(比如<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="external">for in</a>循环或者使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="external">Object.keys</a>),它的值也可以被修改,被<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete" target="_blank" rel="external">delete</a>.这个方法允许你通过更详细的配置来修改这些默认的行为. 默认情况下,通过 <code>Object.defineProperty()</code> 定义的属性值是不可变的.</p>
-<p>对象的属性的描述符(即descriptor参数)有两种方式定义: 数据描述符(<strong>data descriptor</strong>)和存取器描述符(<strong>accessor descriptor</strong>).<br><strong>数据描述符</strong>表示:这个属性有一个值,这个值可以是可写的,也可以是不可写的.<br><strong>存取器描述符</strong>表示:这个属性有一对函数,一个是获取函数,一个是设置函数(getter&amp;setter);<br>描述符必须是这两者之一,不能都有.</p>
-<p>数据描述符和存取器描述符都是对象. 他们都需要下列属性:</p>
-<p><strong>configurable</strong><br><code>true</code>: 当且仅当描述符可以被修改并且属性可以从相应的对象中被删除的时候<br><strong>默认是</strong><code>false</code>.</p>
-<p><strong>enumerable</strong><br><code>true</code>: 当且仅当这个属性需要在对象属性被枚举的时候被展示出来.<br><strong>默认是</strong><code>false</code>.</p>
-<p>数据描述符还拥有下列可选的属性:</p>
-<p><strong>value</strong><br>属性对应的值.可以是任何有效的Javascript值(数值,对象,函数,等等).<br><strong>默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a></strong>.</p>
-<p><strong>writable</strong><br><code>true</code>: 当且仅当属性的值可以通过赋值操作而被改变时.<br><strong>默认是</strong><code>false</code></p>
-<p>存取器描述符还拥有下列可选的属性:</p>
-<p><strong>get</strong><br>一个函数,它是属性的获取函数.如果没有定义获取函数,它就是undefined.函数的返回值就会成为这个属性的值.<br><strong>默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a></strong>.</p>
-<p><strong>set</strong><br>一个函数,它是属性的设置函数,如果没有定义设置函数,它就是undefined.当属性值被赋值(通过普通方式)的时候,这个新值会被作为唯一的参数传入.<br><strong>默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a></strong>.</p>
-<p>记住,上面这些选项不一定要是对象自身的属性,所以还需要考虑是否被继承的问题.为了确保在不写这些选项时,它取到的是默认值,你需要预先冻结<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype" target="_blank" rel="external">Object.prototype</a>. 所以,明确的指定每个选项,或者把 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto" target="_blank" rel="external">__proto__</a> 属性指定为 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="external">null</a>.</p>
-<pre><code><span class="comment">// 冻结 __proto__</span>
-<span class="keyword">var</span> obj = {};
-<span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, {
-  __proto__: <span class="literal">null</span>, <span class="comment">// no inherited properties</span>
-  value: <span class="string">'static'</span>  <span class="comment">// not enumerable</span>
-                   <span class="comment">// not configurable</span>
-                   <span class="comment">// not writable</span>
-                   <span class="comment">// as defaults</span>
-});
-
-<span class="comment">// 明确指定每个选项值</span>
-<span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, {
-  enumerable: <span class="literal">false</span>,
-  configurable: <span class="literal">false</span>,
-  writable: <span class="literal">false</span>,
-  value: <span class="string">'static'</span>
-});
-
-<span class="comment">// 重用同一个对象</span>
-<span class="function"><span class="keyword">function</span> <span class="title">withValue</span>(<span class="params">value</span>) </span>{
-  <span class="keyword">var</span> d = withValue.d || (
-    withValue.d = {
-      enumerable: <span class="literal">false</span>,
-      writable: <span class="literal">false</span>,
-      configurable: <span class="literal">false</span>,
-      value: <span class="literal">null</span>
-    }
-  );
-  d.value = value;
-  <span class="keyword">return</span> d;
-}
-<span class="comment">// ... 然后 ...</span>
-<span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, withValue(<span class="string">'static'</span>));
-
-<span class="comment">// 如果freeze方法是可用的,阻止对对象 prototype 属性进行新增或删除.(value, get, set, enumerable, writable, configurable)   </span>
-(<span class="built_in">Object</span>.freeze || <span class="built_in">Object</span>)(<span class="built_in">Object</span>.prototype);
-</code></pre><h2 id="Examples">Examples</h2><p>如果你想知道如何使用<strong>二进制标识风格</strong>句法来使用 Object.defineProperty 方法,查看<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty/Additional_examples" target="_blank" rel="external">额外例子</a> (这个好恶心…━┳━　━┳━)</p>
-<h3 id="新建一个属性">新建一个属性</h3><p>当对象里没有既存的指定属性时,<code>Object.defineProperty()</code>方法会按照描述创建一个新的属性.描述符里的所有选项都可以省略,被省略的选项会取默认值.所有的布尔值都默认为<code>false</code>. <code>value</code>,<code>get</code>,<code>set</code>选项默认是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="external">undefined</a>.如果一个属性,它的描述符里没有 <code>get/set/value/writable</code> 这些选项,它被称为 ‘通用型(generic)’, 并且被归类到数据描述符. </p>
-<pre><code><span class="keyword">var</span> o = {}; <span class="comment">// 创建一个新的对象</span>
-
-<span class="comment">// 一个通过数据描述符,使用defineProperty来添加属性的例子</span>
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">37</span>,
-  writable: <span class="literal">true</span>,
-  enumerable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>
-});
-
-<span class="comment">// 'a' 属性存在于 o 对象中,它的值是37 </span>
-
-<span class="comment">// 一个通过存取器描述符,使用defineProperty来添加属性的例子 </span>
-<span class="keyword">var</span> bValue = <span class="number">38</span>;
-Object.defineProperty(o, <span class="string">'b'</span>, {
-  <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> bValue; },
-  <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(newValue)</span> </span>{ bValue = newValue; },
-  enumerable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>
-});
-o.b; <span class="comment">// 38</span>
-<span class="comment">// 'b' 属性存在于 o 对象中,它的值是38</span>
-<span class="comment">// 现在, o.b的值永远等于bValue,除非重新定义o.b</span>
-
-<span class="comment">// 你不能尝试结合两者:</span>
-Object.defineProperty(o, <span class="string">'conflict'</span>, {
-  value: <span class="number">0x9f91102</span>,
-  <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> <span class="number">0xdeadbeef</span>; }
-});
-<span class="comment">// throws a TypeError: value appears only in data descriptors, get appears only in accessor descriptors</span>
-</code></pre><blockquote>
-<p>补充说一下这里的set选项,get选项很简单,就是通过这个函数来获取对象对应的属性值,而set函数,是当你使用 <code>.</code> 操作符来给属性分配值的时候被调用的. 需要注意的是,当使用 <code>.</code> 操作符来给属性分配值的时候,先调用 setter ,然后还会调用 getter.考虑以下代码:</p>
-</blockquote>
-<pre><code>Object.defineProperty(o, <span class="string">'b'</span>, {
-  <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> bValue; },
-  <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(newValue)</span> </span>{ bValue = newValue+<span class="number">1</span>; },
-  enumerable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>
-});
-o.b; <span class="comment">// 38</span>
-o.b = <span class="number">39</span>;
-console.log(o.b) <span class="comment">//40</span>
-</code></pre><blockquote>
-<p>当使用 <code>o.b = 39</code> 来给对象分配属性值时, 首先调用 setter ,然后调用 getter, 而o.b最终的值,依然是 getter 得到的结果. </p>
-</blockquote>
-<h3 id="修改属性">修改属性</h3><p>当属性已经存在, <code>Object.defineProperty()</code> 会尝试根据描述符里的值和对象目前的配置来修改这个属性. 如果原来的描述符里,<code>configurable</code> 属性被设置为 <code>false</code> (代表这个属性不能被配置),那么,除了<code>writable</code>之外的所有属性都不能被修改.在这样的情况下,也不能切换描述符的类型,不能把数据描述符改成存取器描述符,反之也不能.</p>
-<p>如果一个属性是不可配置的,它的 <code>writable</code> 属性只能被修改成 <code>false</code>.</p>
-<p>尝试修改一个不可配置的属性(除了 <code>writable</code>),除非修改后的值和原来一样,否则会抛出一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a> .</p>
-<h4 id="Writable_属性">Writable 属性</h4><p>当 <code>writable</code> 属性被设置为 <code>false</code> 的时候, 表示这个属性是不可写的. 它不能被重定义值.</p>
-<pre><code>var o = {}; <span class="comment">// 创建一个新的对象</span>
-
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">37</span>,
-  writable: <span class="literal">false</span>
-});
-
-console.<span class="built_in">log</span>(o.a); <span class="comment">// 打印出 37</span>
-o.a = <span class="number">25</span>; <span class="comment">// 不会报错(如果是在严格模式下还是会报错,即使你定义的值和原来一样,也会报错)</span>
-console.<span class="built_in">log</span>(o.a); <span class="comment">// 打印出 37. 之前的定义没有生效</span>
-</code></pre><p>就如这个栗子所见, 尝试写入一个不可写的属性不会生效,但也不会报错</p>
-<blockquote>
-<p>虽然不能重写,但是是否可以删除取决于<code>configurable</code>,而不是<code>writable</code></p>
-</blockquote>
-<h4 id="Enumerable_属性">Enumerable 属性</h4><p><code>enumerable</code> 属性定义了对象属性在使用<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="external">for…in</a>循环或者<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" target="_blank" rel="external">Object.keys()</a>枚举时是否被展示</p>
-<pre><code><span class="keyword">var</span> o = {};
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { value: <span class="number">1</span>, enumerable: <span class="literal">true</span> });
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'b'</span>, { value: <span class="number">2</span>, enumerable: <span class="literal">false</span> });
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'c'</span>, { value: <span class="number">3</span> }); <span class="comment">// enumerable 默认为false</span>
-o.d = <span class="number">4</span>; <span class="comment">// 使用这种方式设置的时候,enumerable 默认为true</span>
-
-<span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> o) {
-  <span class="built_in">console</span>.log(i);
-}
-<span class="comment">// 打印出 'a' 和 'd' (in undefined order)</span>
-
-<span class="built_in">Object</span>.keys(o); <span class="comment">// ['a', 'd']</span>
-
-o.propertyIsEnumerable(<span class="string">'a'</span>); <span class="comment">// true</span>
-o.propertyIsEnumerable(<span class="string">'b'</span>); <span class="comment">// false</span>
-o.propertyIsEnumerable(<span class="string">'c'</span>); <span class="comment">// false</span>
-</code></pre><h4 id="Configurable_属性">Configurable 属性</h4><p><code>configurable</code> 同时控制了该属性是否能从对象中被删除,以及(描述符里的)属性(除了<code>writable</code>)是否可以被修改.</p>
-<pre><code><span class="keyword">var</span> o = {};
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, {
-  get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="number">1</span>; },
-  configurable: <span class="literal">false</span>
-});
-
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { configurable: <span class="literal">true</span> }); <span class="comment">// throws a TypeError</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { enumerable: <span class="literal">true</span> }); <span class="comment">// throws a TypeError</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { set: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{} }); <span class="comment">// throws a TypeError (set属性值之前是undefined)</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="number">1</span>; } }); <span class="comment">// throws a TypeError (即使新的函数做的事情和原来的一模一样)</span>
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">'a'</span>, { value: <span class="number">12</span> }); <span class="comment">// throws a TypeError</span>
-
-<span class="built_in">console</span>.log(o.a); <span class="comment">// logs 1</span>
-<span class="keyword">delete</span> o.a; <span class="comment">// 什么也没发生</span>
-<span class="built_in">console</span>.log(o.a); <span class="comment">// logs 1</span>
-</code></pre><p>如果 <code>o.a</code> 的 <code>configurable</code> 属性被设置为 <code>true</code> , 以上报错都不会有,最后这个属性会被删除.</p>
-<h3 id="添加对象属性时的默认值">添加对象属性时的默认值</h3><p>有一个重要的事需要被考虑到:在你为对象添加属性的时候,属性的默认属性是怎么样的.通常来说,简单地使用 <code>.</code> 操作符和使用 <code>Object.defineProperty()</code> 来分配属性值是有区别的,如下栗子所示:</p>
-<pre><code>var o = {};
-
-o.a = <span class="number">1</span>;
-<span class="comment">// 也可以写成:</span>
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">1</span>,
-  writable: <span class="literal">true</span>,
-  configurable: <span class="literal">true</span>,
-  enumerable: <span class="literal">true</span>
-});
-
-
-<span class="comment">// 另外,</span>
-Object.defineProperty(o, <span class="string">'a'</span>, { value: <span class="number">1</span> });
-<span class="comment">// 也可以写成:</span>
-Object.defineProperty(o, <span class="string">'a'</span>, {
-  value: <span class="number">1</span>,
-  writable: <span class="literal">false</span>,
-  configurable: <span class="literal">false</span>,
-  enumerable: <span class="literal">false</span>
-});
-</code></pre><h3 id="自定义_Setters_和_Getters">自定义 Setters 和 Getters</h3><p>下面的例子展示了如何实现一个自动存档的对象.每当温度属性被设置, 存档数组都会有相应的记录.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Archiver</span><span class="params">()</span> </span>{
-  <span class="keyword">var</span> temperature = <span class="literal">null</span>;
-  <span class="keyword">var</span> archive = [];
-
-  Object.defineProperty(<span class="keyword">this</span>, <span class="string">'temperature'</span>, {
-    <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-      console.log(<span class="string">'get!'</span>);
-      <span class="keyword">return</span> temperature;
-    },
-    <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(value)</span> </span>{
-      temperature = value;
-      archive.push({ val: temperature });
-    }
-  });
-
-  <span class="keyword">this</span>.getArchive = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{ <span class="keyword">return</span> archive; };
-}
-
-<span class="keyword">var</span> arc = <span class="keyword">new</span> Archiver();
-arc.temperature; <span class="comment">// 'get!'</span>
-arc.temperature = <span class="number">11</span>;
-arc.temperature = <span class="number">13</span>;
-arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
-</code></pre><h2 id="版本说明">版本说明</h2><table>
-<thead>
-<tr>
-<th>版本</th>
-<th style="text-align:center">状态</th>
-<th style="text-align:right">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.ecma-international.org/ecma-262/5.1/#sec-15.2.3.6" target="_blank" rel="external">‘Object.defineProperty’方法被定义在了ECMAScript 5.1 (ECMA-262)</a></td>
-<td style="text-align:center"><em>ST</em> 标准</td>
-<td style="text-align:right">初次定义. 在JavaScript 1.8.5 里被实现</td>
-</tr>
-<tr>
-<td><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-object.defineproperty" target="_blank" rel="external">‘Object.defineProperty’方法被定义在了ECMAScript 2015 (6th Edition, ECMA-262)</a></td>
-<td style="text-align:center"><em>ST</em> 标准</td>
-<td style="text-align:right"></td>
-</tr>
-<tr>
-<td><a href="https://tc39.github.io/ecma262/#sec-object.defineproperty" target="_blank" rel="external">‘Object.defineProperty’方法被定义在了ECMAScript 2016 Draft (7th Edition, ECMA-262)</a></td>
-<td style="text-align:center"><em>D</em> 草案</td>
-</tr>
-</tbody>
-</table>
-<h2 id="浏览器兼容性">浏览器兼容性</h2><p><strong>桌面端</strong></p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th style="text-align:center">Firefox (Gecko)</th>
-<th style="text-align:right">Chrome</th>
-<th style="text-align:right">Internet Explorer</th>
-<th style="text-align:right">Opera</th>
-<th style="text-align:right">Safari</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基本支持</td>
-<td style="text-align:center">4.0(2)</td>
-<td style="text-align:right">5</td>
-<td style="text-align:right">9[1]</td>
-<td style="text-align:right">11.60</td>
-<td style="text-align:right">5.1[2]</td>
-</tr>
-</tbody>
-</table>
-<p>[1] 在ie8下只支持DOM对象, 而且有一些非标准行为.<br>[2] Safari5 也支持, 但不支持DOM对象. </p>
-<p><strong>移动端</strong></p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th style="text-align:center">Firefox Mobile (Gecko)</th>
-<th style="text-align:right">Android</th>
-<th style="text-align:right">IE Mobile</th>
-<th style="text-align:right">Opera Mobile</th>
-<th style="text-align:right">Safari Mobile</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基本支持</td>
-<td style="text-align:center">4.0(2)</td>
-<td style="text-align:right">(支持)</td>
-<td style="text-align:right">9</td>
-<td style="text-align:right">11.5</td>
-<td style="text-align:right">(支持)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="兼容性问题补充说明">兼容性问题补充说明</h2><h3 id="重新定义数组对象的_length_属性">重新定义数组对象的 <code>length</code> 属性</h3><p>重新定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的,但也受制于普通的重定义时的限制.(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a>属性一开始是不能配置,不可枚举,但是可写的.所以,改变一个没有被修改过(描述符)的数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性是可行的.也可以把它改成不可写的,但是不允许修改它的可枚举性和可配置性.如果它已经被改成不可写的,也不能修改它的值,也不能修改它的可写性.)然而,并不是所有的浏览器都允许重定义它的.</p>
-<p>如果在 Firefox 4 到 22 里尝试此操作会抛出一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">TypeError</a> , 无论它是否允许重定义数组的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length" target="_blank" rel="external">length</a> 属性. </p>
-<p>某些版本的Chrome浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改.在某些情况下,修改它的可写性其实也没有生效(也不会报错).另外,与此相关的是,一些修改数组的方法,比如 <code>Array.prototype.push</code> 却无视 <code>length</code> 属性的不可写性.(就是说,使用<code>push</code>方法,数组的<code>length</code>属性值依然会被改变,即使它是不可写的.)</p>
-<p>某些版本的Safari浏览器在使用 <code>Object.defineProperty()</code> 来修改数组 <code>length</code> 属性时,如果修改后的值不同于数组当前的 <code>length</code> 属性,它会忽略这次修改,还会尝试去改变它的可写性,但最终,属性的可写性并没有被改变,这个过程也不会报错.</p>
-<p>只有ie 9 及以后的版本, Firefox 23 及以后的版本, 开始完全地,正确地支持重定义数组的 <code>length</code> 属性.到目前为止,不要指望使用 <code>Object.defineProperty()</code> 重定义数组的 <code>length</code> 属性能够以一种通用的方式正常工作.而且,就算它靠得住,也没有足够的理由去这样做.</p>
-<h3 id="针对ie8的特别说明">针对ie8的特别说明</h3><p>ie 8 下的 <code>Object.defineProperty()</code> 方法<a href="https://msdn.microsoft.com/en-us/library/dd229916%28VS.85%29.aspx" target="_blank" rel="external">只能被用在DOM对象</a>上.有一些事情需要注意:</p>
+        <p><strong>get</strong>语法把对象的某个属性绑定到一个函数上,当<strong>访问</strong>该属性的时候执行这个函数</p>
+<h2 id="语法">语法</h2><pre><code>{get prop() { ... } }
+{get [<span class="link_label">expression</span>](<span class="link_url"></span>) { ... } }
+</code></pre><h3 id="参数">参数</h3><p><strong>prop</strong></p>
+<p>需要绑定到函数的属性名</p>
+<p><strong>表达式</strong></p>
+<p>从ECMAScript 6 开始,你可以使用一个表达式来得到一个计算后的属性名来绑定所给的函数.</p>
+<h2 id="描述">描述</h2><p>有时候,你会想要让属性值是一个动态计算出的值,或者映射一个外部变量的状态而不需要显式地调用一个方法.在JavaScript里,你可以通过getter来实现它. 同一个对象的同一个属性不能同时绑定getter函数并且指定拥有一个值,但可以通过结合使用getter和setter来创建一个伪属性.</p>
+<p>使用getter的时候需要注意以下几点:</p>
 <ul>
-<li>如果尝试在原生的对象上使用 <code>Object.defineProperty()</code> 方法,会报错.</li>
-<li>定义属性时,描述符的选项必须被设置为指定的值. 如果是数据描述符,<code>configurable</code>,<code>enumerable</code>,<code>writable</code> 都必须被设置为<code>true</code>,如果是存取器描述符, <code>configurable</code> 必须是 <code>true</code>, <code>enumerable</code> 必须是 <code>false</code>, 如果设置的值不是这些,会报错.</li>
-<li>重定义属性的话,需要把原来的属性给删掉.如果原来的属性没有删掉,重定义不会生效,它还是保持原来的属性.</li>
+<li>它可以拥有一个id,id可以是数字也可以是字符串</li>
+<li>它不能拥有参数.一个也不能有.(<a href="http://whereswalden.com/2010/08/22/incompatible-es5-change-literal-getter-and-setter-functions-must-now-have-exactly-zero-or-one-arguments/" target="_blank" rel="external">查看更多</a>)</li>
+<li>在对象字面量里,一个属性只能有一个getter,并且getter绑定函数的属性不能再指定它的值,反之亦然.({ get x() { }, get x() { } } and { x: …, get x() { } } 类似于这样的是不行的.)</li>
 </ul>
-<h3 id="看看相关内容">看看相关内容</h3><ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties" target="_blank" rel="external">Enumerability and ownership of properties</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties" target="_blank" rel="external">Object.defineProperties()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/propertyIsEnumerable" target="_blank" rel="external">Object.propertyIsEnumerable()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor" target="_blank" rel="external">Object.getOwnPropertyDescriptor()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/watch" target="_blank" rel="external">Object.prototype.watch()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/unwatch" target="_blank" rel="external">Object.prototype.unwatch()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">get</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set" target="_blank" rel="external">set</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="external">Object.create()</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty/Additional_examples" target="_blank" rel="external">Additional Object.defineProperty examples</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/defineProperty" target="_blank" rel="external">Reflect.defineProperty()</a></li>
+<p>getter可以通过 <code>delete</code> 方法删除</p>
+<h2 id="栗子">栗子</h2><h3 id="在对象初始化的时候给属性添加getter">在对象初始化的时候给属性添加getter</h3><p>这会给 <code>ocj</code> 对象创建一个名为 <code>latest</code> 的伪属性,在打印它的时候会返回数组的最后一个值.</p>
+<pre><code>var <span class="keyword">log</span> = [<span class="string">'test'</span>];
+var obj = {
+  get latest () {
+    <span class="keyword">if</span> (<span class="keyword">log</span>.<span class="keyword">length</span> == <span class="number">0</span>) <span class="keyword">return</span> undefined;
+    <span class="keyword">return</span> <span class="keyword">log</span>[<span class="keyword">log</span>.<span class="keyword">length</span> - <span class="number">1</span>]
+  }
+}
+console.<span class="keyword">log</span> (obj.latest); <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"test"</span>.
+</code></pre><p>注意,重新给 <code>latest</code> 属性指定值不会生效:</p>
+<pre><code>var <span class="keyword">log</span> = [<span class="string">'test'</span>];
+var obj = {
+  get latest () {
+    <span class="keyword">if</span> (<span class="keyword">log</span>.<span class="keyword">length</span> == <span class="number">0</span>) <span class="keyword">return</span> undefined;
+    <span class="keyword">return</span> <span class="keyword">log</span>[<span class="keyword">log</span>.<span class="keyword">length</span> - <span class="number">1</span>]
+  }
+}
+console.<span class="keyword">log</span> (obj.latest); <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"test"</span>.
+<span class="keyword">log</span>.<span class="keyword">push</span>(<span class="string">'bunny'</span>);
+console.<span class="keyword">log</span>(obj.latest);  <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"bunny"</span>
+obj.latest = <span class="number">3</span>;
+console.<span class="keyword">log</span>(obj.latest);  <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"bunny"</span> still
+</code></pre><h3 id="使用_delete_操作来删除getter">使用 <code>delete</code> 操作来删除getter</h3><p>如果你想把getter删除,只需要使用 <code>delete</code> 就行了.</p>
+<pre><code><span class="operator"><span class="keyword">delete</span> obj.latest;</span>
+</code></pre><h3 id="使用_defineProperty_给一个既存的对象添加getter">使用 <code>defineProperty</code> 给一个既存的对象添加getter</h3><p>想要在任何时间给一个既存的对象添加getter ,可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">Object.defineProperty()</a></p>
+<pre><code><span class="keyword">var</span> o = { a:<span class="number">0</span> }
+
+<span class="built_in">Object</span>.defineProperty(o, <span class="string">"b"</span>, { get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>; } });
+
+<span class="built_in">console</span>.log(o.b) <span class="comment">// Runs the getter, which yields a + 1 (which is 1)</span>
+</code></pre><h3 id="使用计算后的属性名">使用计算后的属性名</h3><blockquote>
+<p>注意: 计算后的属性名属于试验中技术, ECMAScript 6 的目标的一部分, 还没有被浏览器广泛支持. 在不支持的环境下会触发语法错误.<br>(经过测试,在目前的chrome里是可以用的.)</p>
+</blockquote>
+<pre><code>var expr = "foo";
+
+var obj = {
+  get [<span class="link_label">expr</span>](<span class="link_url"></span>) { return "bar"; }
+};
+
+console.log(obj.foo); // "bar"
+</code></pre><h3 id="智能_/_重写自身_/_懒getter">智能 / 重写自身 / 懒getter</h3><p>getter提供了一种定义对象属性的方式,但是它的值要到获取属性值的时候才会被计算. 也就是说, getter会延迟计算属性值,直到需要用到这个值,所以如果这个值一直用不到,则永远不需要为计算它而付出开销.</p>
+<p>另外一个对getter进行额外优化的技术方案是: 智能getters 或 <a href="https://en.wikipedia.org/wiki/Memoization" target="_blank" rel="external">制表</a>getters. 它可以延迟计算属性值,并且把计算结果进行缓存,让之后的访问直接获取缓存结果. 属性值会在第一次访问时进行计算并缓存,然后之后的访问会直接读取缓存结果而不是再次计算.这在以下场景下是很实用的:</p>
+<ul>
+<li>如果计算一个属性值会花费很多代价(占取很多随机内容,消耗CPU时间,产生大量工作线程,检索远程文件,等)</li>
+<li>属性值目前暂时不会用到,而是之后才会用到,甚至一直都用不到.</li>
+<li>如果它要被多次使用到,但是这个值不会变化,每次都不需要重新计算,甚至不能重新计算.</li>
 </ul>
+<p>也就是说,如果某个属性值是可能会变化的,你就不能使用懒getter,因为它不会重新计算值.</p>
+<p>在下面的这个例子里,对象有一个getter作为它的notifier属性,在获取属性的时候,这个属性被删除后再次添加,但新增属性所拥有的就是普通的属性值.最后这个值被返回.</p>
+<pre><code><span class="keyword">get</span> notifier() {
+  <span class="keyword">delete</span> <span class="keyword">this</span>.notifier;
+  <span class="keyword">return</span> <span class="keyword">this</span>.notifier = <span class="built_in">document</span>.getElementById(<span class="string">"bookmarked-notification-anchor"</span>);
+},
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">查看原文</a></p>
 
         
           <!-- show an end symbol if the article is fully displayed -->
@@ -1341,7 +558,7 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
     <div class="article-info">
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 	</div>
 
       
@@ -1365,7 +582,7 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
@@ -1373,7 +590,7 @@ arc.getArchive(); <span class="comment">// [{ val: 11 }, { val: 13 }]</span>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 code_bunny
+    		&copy; 2017 code_bunny
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

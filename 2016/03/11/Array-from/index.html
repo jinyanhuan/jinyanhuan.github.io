@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Array.from() | code_bunny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Array.from() 方法从一个类数组或可迭代对象,创建一个新的数组实例.
+在 ES6里, 类的语法允许你从内置的类和自定义的类创建子类,因此,像 Array.from 这样类的静态方法也被 Array 的子类所继承了,它创建的是子类的实例,而不是 Array 的实例.
+语法Array.from(arrayLike[, mapFn[, thisArg]])
+参数arrayLike
+一个类数组或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array.from()">
+<meta property="og:url" content="http://yoursite.com/2016/03/11/Array-from/index.html">
+<meta property="og:site_name" content="code_bunny's blog">
+<meta property="og:description" content="Array.from() 方法从一个类数组或可迭代对象,创建一个新的数组实例.
+在 ES6里, 类的语法允许你从内置的类和自定义的类创建子类,因此,像 Array.from 这样类的静态方法也被 Array 的子类所继承了,它创建的是子类的实例,而不是 Array 的实例.
+语法Array.from(arrayLike[, mapFn[, thisArg]])
+参数arrayLike
+一个类数组或">
+<meta property="og:updated_time" content="2016-03-15T04:07:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Array.from()">
+<meta name="twitter:description" content="Array.from() 方法从一个类数组或可迭代对象,创建一个新的数组实例.
+在 ES6里, 类的语法允许你从内置的类和自定义的类创建子类,因此,像 Array.from 这样类的静态方法也被 Array 的子类所继承了,它创建的是子类的实例,而不是 Array 的实例.
+语法Array.from(arrayLike[, mapFn[, thisArg]])
+参数arrayLike
+一个类数组或">
+  
+    <link rel="alternative" href="/atom.xml" title="code_bunny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">code_bunny</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">never giveup reading!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/OOP-Code-Bunny/" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/p/1005052438739075/home" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JSX/" style="font-size: 10px;">JSX</a> <a href="/tags/React/" style="font-size: 12.5px;">React</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/OOP-Code-Bunny/">我的github</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/a5635268/">周孝刚</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://kingarthas37.github.io/">王麟</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/zhengyin/">郑印</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">虽然咸鱼翻身还是咸鱼,但至少可以变得好吃一点</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">code_bunny</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460">
+				<hgroup>
+				  <h1 class="header-author">code_bunny</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">never giveup reading!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/OOP-Code-Bunny/" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/p/1005052438739075/home" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Array-from" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/11/Array-from/" class="article-date">
+  	<time datetime="2016-03-11T09:17:55.000Z" itemprop="datePublished">2016-03-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Array.from()
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Array.from()</code> 方法从一个类数组或可迭代对象,创建一个新的数组实例.</p>
+<p>在 ES6里, 类的语法允许你从内置的类和自定义的类创建子类,因此,像 <code>Array.from</code> 这样类的静态方法也被 <code>Array</code> 的子类所继承了,它创建的是子类的实例,而不是 <code>Array</code> 的实例.</p>
+<h2 id="语法">语法</h2><pre><code>Array.<span class="function"><span class="title">from</span><span class="params">(arrayLike[, mapFn[, thisArg]])</span></span>
+</code></pre><h3 id="参数">参数</h3><p><strong>arrayLike</strong></p>
+<p>一个类数组或可迭代对象,用于被转换成数组.</p>
+<p><strong>mapFn</strong></p>
+<p>可选的.数组里每个元素都要经过这个函数的执行.</p>
+<p><strong>thisArg</strong></p>
+<p>可选的.当执行 <code>mapFn</code> 的时候,函数的this指针指向这个参数</p>
+<h2 id="描述">描述</h2><p><code>Array.from()</code> 允许你通过以下对象创建数组对象:</p>
+<ul>
+<li>类数组对象(有<code>length</code>属性,并且每个元素都有索引值的对象)</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank" rel="external">可迭代对象</a>(你可以获取到它的元素的对象,比如<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank" rel="external">Map</a>和<a href="">Set</a>)</li>
+</ul>
+<p><code>Array.from()</code> 有一个可选的参数 <code>mapFn</code> ,可以对创建的数组的每个元素迭代执行 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank" rel="external">map</a> 函数.说的更清楚点,<code>Array.from(obj,mapFn,thisArg)</code> 和 <code>Array.from(obj).map(mapFn,thisArg)</code> 效果是一样的,只是它不产生中间数组.这对某些数组子类是很有用的,比如 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays" target="_blank" rel="external">typed arrays</a>,因为对于他们,中间数组的值不得不被删减以适应对应的类型.</p>
+<p><code>from()</code>方法的<code>length</code>属性值是 1.</p>
+<h2 id="栗子">栗子</h2><pre><code><span class="comment">// 类数组对象 (arguments) 转数组</span>
+<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>);
+}
+
+f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); 
+<span class="comment">// [1, 2, 3]</span>
+
+
+<span class="comment">// 可迭代对象...</span>
+<span class="comment">// Set</span>
+<span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">"foo"</span>, <span class="built_in">window</span>]);
+<span class="built_in">Array</span>.from(s);   
+<span class="comment">// ["foo", window]</span>
+
+
+<span class="comment">// Map</span>
+<span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">8</span>]]);
+<span class="built_in">Array</span>.from(m);                          
+<span class="comment">// [[1, 2], [2, 4], [4, 8]]  </span>
+
+
+<span class="comment">// 字符串</span>
+<span class="built_in">Array</span>.from(<span class="string">"foo"</span>);                      
+<span class="comment">// ["f", "o", "o"]</span>
+<span class="comment">// 查看下面的pollify,可以看到,有一句是 Object(arrayLike),既把参数转换为对象.字符串`'foo'`通过`Object('foo')`以后,变成了这样的对象:</span>
+<span class="comment">// String {0: "f", 1: "o", 2: "o", length: 3, [[PrimitiveValue]]: "foo"}</span>
+
+
+<span class="comment">// 使用一个箭头函数作为map函数来操作元素.</span>
+<span class="built_in">Array</span>.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], x =&gt; x + x);      
+<span class="comment">// [2, 4, 6]</span>
+
+
+<span class="comment">// 生成数字序列</span>
+<span class="built_in">Array</span>.from({length: <span class="number">5</span>}, (v, k) =&gt; k);    
+<span class="comment">// [0, 1, 2, 3, 4]</span>
+</code></pre><h2 id="Polyfill">Polyfill</h2><p><code>Array.from</code> 方法被添加在第六版的 ECMA-262 标准中; 因此,在其他版本的标准中可能不能使用.你可以在你脚本的开头插入下面这段代码来使用它.这个算法事实上也是在ECMA-262第六版里指定的算法. 假设 <code>Object</code> 和 <code>TypeError</code> 是已经存在的方法. <code>callback.call</code> 相当于 <code>Function.prototype.call</code>. 另外,由于真正的迭代器不能被polyfilled,所以这个执行环境不支持 ECMA-262第六版所定义的 generic iterable</p>
+<pre><code><span class="comment">// Production steps of ECMA-262, Edition 6, 22.1.2.1</span>
+<span class="comment">// 参考: https://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.from</span>
+<span class="keyword">if</span> (!<span class="built_in">Array</span>.from) {
+  <span class="built_in">Array</span>.from = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> toStr = <span class="built_in">Object</span>.prototype.toString;
+    <span class="keyword">var</span> isCallable = <span class="function"><span class="keyword">function</span> (<span class="params">fn</span>) </span>{
+      <span class="keyword">return</span> <span class="keyword">typeof</span> fn === <span class="string">'function'</span> || toStr.call(fn) === <span class="string">'[object Function]'</span>;
+    };
+    <span class="keyword">var</span> toInteger = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>{
+      <span class="keyword">var</span> number = <span class="built_in">Number</span>(value);
+      <span class="keyword">if</span> (<span class="built_in">isNaN</span>(number)) { <span class="keyword">return</span> <span class="number">0</span>; }
+      <span class="keyword">if</span> (number === <span class="number">0</span> || !<span class="built_in">isFinite</span>(number)) { <span class="keyword">return</span> number; }
+      <span class="keyword">return</span> (number &gt; <span class="number">0</span> ? <span class="number">1</span> : -<span class="number">1</span>) * <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.abs(number));
+    };
+    <span class="keyword">var</span> maxSafeInteger = <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>;
+    <span class="keyword">var</span> toLength = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>{
+      <span class="keyword">var</span> len = toInteger(value);
+      <span class="keyword">return</span> <span class="built_in">Math</span>.min(<span class="built_in">Math</span>.max(len, <span class="number">0</span>), maxSafeInteger);
+    };
+
+    <span class="comment">// The length property of the from method is 1.</span>
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">from</span>(<span class="params">arrayLike<span class="comment">/*, mapFn, thisArg */</span></span>) </span>{
+      <span class="comment">// 1. 把this对象定义成变量C.</span>
+      <span class="keyword">var</span> C = <span class="keyword">this</span>;
+
+      <span class="comment">// 2. 把需要转换的类数组对象定义成变量items</span>
+      <span class="keyword">var</span> items = <span class="built_in">Object</span>(arrayLike);
+
+      <span class="comment">// 3. 如果遇到意外则抛出错误.(items).</span>
+      <span class="keyword">if</span> (arrayLike == <span class="literal">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"Array.from requires an array-like object - not null or undefined"</span>);
+      }
+
+      <span class="comment">// 4. mapfn没有定义时, 不执行mapping迭代操作</span>
+      <span class="keyword">var</span> mapFn = <span class="built_in">arguments</span>.length &gt; <span class="number">1</span> ? <span class="built_in">arguments</span>[<span class="number">1</span>] : <span class="keyword">void</span> <span class="literal">undefined</span>;
+      <span class="keyword">var</span> T;
+      <span class="keyword">if</span> (<span class="keyword">typeof</span> mapFn !== <span class="string">'undefined'</span>) {
+        <span class="comment">// 5. else</span>
+        <span class="comment">// 5. a. 如果 IsCallable(mapfn) 是false, 抛出 TypeError 错误.</span>
+        <span class="keyword">if</span> (!isCallable(mapFn)) {
+          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Array.from: when provided, the second argument must be a function'</span>);
+        }
+
+        <span class="comment">// 5. b. 如果提供了thisArg参数, 把thisArg定义成变量T; 反之,T就是undefined</span>
+        <span class="keyword">if</span> (<span class="built_in">arguments</span>.length &gt; <span class="number">2</span>) {
+          T = <span class="built_in">arguments</span>[<span class="number">2</span>];
+        }
+      }
+
+      <span class="comment">// 10. 获取对象的长度</span>
+      <span class="comment">// 11. 把对象的长度通过 ToLength(lenValue) 转换,并将结果赋值给len.</span>
+      <span class="keyword">var</span> len = toLength(items.length);
+
+      <span class="comment">// 13. 如果 IsConstructor(C) 是 true, 则:</span>
+      <span class="comment">// 13. a. 通过C来执行内部的Construct构造函数,把对象的长度作为参数传入.把执行结果定义为变量A.</span>
+      <span class="comment">// 14. a. 反之, 创建一个新的数组(len),并把它定义为变量A.</span>
+      <span class="keyword">var</span> A = isCallable(C) ? <span class="built_in">Object</span>(<span class="keyword">new</span> C(len)) : <span class="keyword">new</span> <span class="built_in">Array</span>(len);
+
+      <span class="comment">// 16. 定义变量k,初始值为0.</span>
+      <span class="keyword">var</span> k = <span class="number">0</span>;
+      <span class="comment">// 17. 循环 while k &lt; len… (also steps a - h)</span>
+      <span class="keyword">var</span> kValue;
+      <span class="keyword">while</span> (k &lt; len) {
+        kValue = items[k];
+        <span class="keyword">if</span> (mapFn) {
+          A[k] = <span class="keyword">typeof</span> T === <span class="string">'undefined'</span> ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+        } <span class="keyword">else</span> {
+          A[k] = kValue;
+        }
+        k += <span class="number">1</span>;
+      }
+      <span class="comment">// 18. 把length添加进去 Put(A, "length", len, true).</span>
+      A.length = len;
+      <span class="comment">// 20. 返回 A.</span>
+      <span class="keyword">return</span> A;
+    };
+  }());
+}
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from" target="_blank" rel="external">原文地址</a></p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/15/spread-operator/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          spread operator
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/04/fromCodePoint/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">fromCodePoint()</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Array-from" data-title="Array.from()" data-url="http://yoursite.com/2016/03/11/Array-from/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 code_bunny
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

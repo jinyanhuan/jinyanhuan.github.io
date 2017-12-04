@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/JSX/" style="font-size: 10px;">JSX</a> <a href="/tags/React/" style="font-size: 12.5px;">React</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -191,11 +191,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-charCodeAt-and-codePointAt" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-jsx-in-depth" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/25/charCodeAt-and-codePointAt/" class="article-date">
-  	<time datetime="2016-02-25T07:46:18.000Z" itemprop="datePublished">2016-02-25</time>
+      <a href="/2016/03/16/jsx-in-depth/" class="article-date">
+  	<time datetime="2016-03-16T04:12:15.000Z" itemprop="datePublished">2016-03-16</time>
 </a>
     </div>
   
@@ -208,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/25/charCodeAt-and-codePointAt/">charCodeAt() and codePointAt()</a>
+      <a class="article-title" href="/2016/03/16/jsx-in-depth/">jsx-in-depth</a>
     </h1>
   
 
@@ -217,309 +217,709 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这篇文章主要介绍javascript里的<code>charCodeAt()</code>方法和ES6引进的<code>codePointAt()</code>方法.</p>
-<p>在说这两个方法之前,必须要先补充一些关于Unicode编码的知识…</p>
-<p>ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point)[1].用于代表256个字符.但是这256个字符只是常用字符,各国语言,包括中文,远远超过这个范围.所以Unicode就出现了,Unicode源于一个很简单的想法：将全世界所有的字符包含在一个集合里，计算机只要支持这一个字符集，就能显示所有的字符，再也不会有乱码了。</p>
-<p>可以这么理解,Unicode码是ASCII码的一个超集(superset).它的前128个code point和ASCII是一致的.后面又增加了很多很多字符.而UTF-32,UTF-8,UTF-16,都是Unicode码的编码形式:</p>
-<p><strong>UTF-32</strong><br>用固定长度的四个字节来表示每个码点,就算有些字符只需要一个字节,也通过把空缺位添加0来强制转换成8个字节.由于四个字节有32-bit,所以称为UTF-32编码.由于太浪费空间,比ASCII编码文件要大四倍,所以不能使用.</p>
-<p><strong>UTF-8</strong><br>用可变长度的字节来表示每个码点,如果只需要一个字节就能表示的,就用一个字节,一个不够,就用两个…所以,在UTF-8编码下,一个字符有可能由1-4个字节组成.</p>
-<p><strong>UTF-16</strong><br>结合了固定长度和可变长度,它只有两个字节和四个字节两种方式来表示码点.如果是两个字节,那么码点的范围应该是（U+0000到U+FFFF）,如果是四个字节,那么码点的范围应该是（U+010000到U+10FFFF）.<br>但是注意,我们不能直接使用 <em>U+010000</em> 这样的形式(应该是因为位数不同所以不能…),所以,四个字节的码点需要使用两个 <em>code unit</em> [2],来组成一个 <em>surrogate pair</em> [3]. 其中第一个code unit的范围是从 <em>0xD800</em> 到 <em>0xDBFF</em>,被成为高位(high surrogate)或头位(lead surrogate),第二个code unit的范围是从 <em>0xDC00</em> 到 <em>0xDFFF</em>,被称为低位(low surrogate)或尾位(trail surrogate).</p>
-<p>好了,有了以上的这些知识,就可以看看 <code>charCodeAt()</code> 和 <code>codePointAt()</code>了.</p>
-<h2 id="charCodeAt()">charCodeAt()</h2><p><code>charCodeAt()</code>方法返回一个0-65535的整数,这个数代表了指定索引位置的UTF-16 code unit的码点.(UTF-16 code unit匹配的码点有两种可能,一种是这个码点本身可以代表一个字符,另一种是,这个code unit可能是一组 surrogate pair 里的一个code unit,它的码点本身不代表任何字符,比如 Unicode码点范围 &gt; 0x10000 的那些).如果你需要的是整个 surrogate pair 的码点值,请使用 <code>codePointAt*()</code> 方法.</p>
-<h3 id="语法">语法</h3><pre><code>str.<span class="function"><span class="title">charCodeAt</span><span class="params">(index)</span></span>
-</code></pre><h4 id="参数">参数</h4><p><strong>index</strong></p>
-<p>一个大于等于0,小于字符串长度的整数; 如果它不是一个数字,默认为0.</p>
-<h3 id="描述">描述</h3><p>Unicode 码点的范围是 0-1114111 (0x10FFFF). 最前面的128个Unicode码点和ASCII码指向的字符完全相同.</p>
-<p>注意, <code>charCodeAt()</code> 总是返回一个小于65536的值,这是因为,大于65536的码点会使用两个小于65536的’surrogate’伪字符来组成一个真实字符.因此,为了检查或重现这类字符的整个码点(大于等于65536),不仅需要使用 <code>charCodeAt(i)</code> 来检索,还需要使用 <code>charCodeAt(i+1)</code>,这就好像通过两个字母来检查重现一个字符串那样. 或者也可以使用 <code>codePointAt(i)</code>. 查看下面的例子2和3.</p>
-<p>如果索引值小于0或者大于等于字符串的长度,<code>charCodeAt()</code> 返回 <code>NaN</code>.</p>
+        <h2 id="深入JSX">深入JSX</h2><p><a href="https://facebook.github.io/jsx/" target="_blank" rel="external">JSX</a>是一个JavaScript语法的一个扩展,它看起来很像XML.你可以在React里使用JSX语法转换</p>
+<h3 id="为什么是JSX">为什么是JSX</h3><p>你不一定要在React里使用JSX,你可以使用纯JS,但是,我们建议你使用JSX,因为它提供了简洁,熟悉的语法来定义带有属性的树结构</p>
+<p>对于临时发开人员比如设计师来说,JSX更亲切.</p>
+<p>XML有标签的打开和闭合.这在树结构较大的时候,比调用函数或对象字面量更容易阅读.</p>
+<p>它并不改变JavaScript语法.</p>
+<h3 id="HTML标签和React组件">HTML标签和React组件</h3><p>React既可以渲染HTML标签(字符串),也可以渲染React组件(类)</p>
+<p>要渲染一个HTML标签,请在JSX中使用小写的标签名:</p>
+<pre><code><span class="keyword">var</span> myDivElement = &lt;<span class="keyword">div</span> className=<span class="variable">"foo"</span> /&gt;;
+ReactDOM.render(myDivElement, document.getElementById(<span class="string">'example'</span>));
+</code></pre><p>要渲染一个React组件,请创建一个本地变量,以大写字母开头:</p>
+<pre><code><span class="keyword">var</span> MyComponent = React.createClass({<span class="comment">/*...*/</span>});
+<span class="keyword">var</span> myElement = &lt;MyComponent someProperty={<span class="keyword">true</span>} /&gt;;
+ReactDOM.render(myElement, <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>));
+</code></pre><p>React的JSX约定: 通过使用大写和小写字母开头命名,来区分本地的组件和HTML标签.</p>
 <blockquote>
-<p>注意,字符串的长度并不一定是你看到的字符的长度,有些中文字,比如<a href="http://www.zdic.net/z/87/wy/20BB7.htm" target="_blank" rel="external">‘ji’</a>,虽然只有一个字,但它的length是2.它就是Unicode码点大于等于65536的一个例子.</p>
+<p>Note: 由于JSX是JavaScript,所以,<em>class</em>和<em>for</em>这类标识符不建议被用于XML的属性名. 取而代之的是,React的DOM建议给DOM元素的属性命名为类似于 <em>classNmae</em>,<em>htmlFor</em> 这样的规则.</p>
 </blockquote>
-<p>向下兼容: 在历史版本(比如JavaScript 1.2), charCodeAt() 方法返回对应索引位置字符指向 <em>ISO-Lation-1</em> 字符集的一个数字. <em>ISO-Latin-1</em> 字符集的范围是 0 到255.其中0-127直接映射ASCII码.</p>
-<h3 id="例子">例子</h3><h4 id="使用_charCodeAt()">使用 charCodeAt()</h4><p>下面这个例子返回65, ‘A’的Unicode码点.</p>
-<pre><code><span class="variable">'ABC</span><span class="variable">'.charCodeAt</span><span class="list">(<span class="keyword">0</span>)</span><span class="comment">; // returns 65</span>
-</code></pre><h4 id="改造charCodeAt()来处理当一开始并不知道非基本平面字符(non-Basic-Multilingual-Plane)_[4]的高位在哪个位置出现的情况:">改造charCodeAt()来处理当一开始并不知道非基本平面字符(non-Basic-Multilingual-Plane) [4]的高位在哪个位置出现的情况:</h4><p>这个版本可以用在循环或者类似的场景:一开始并不知道是否有非基本平面字符存在于指定的索引位置前.</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">fixedCharCodeAt</span>(<span class="params">str, idx</span>) </span>{
-  <span class="comment">// ex. fixedCharCodeAt('\uD800\uDC00', 0); // 65536</span>
-  <span class="comment">// ex. fixedCharCodeAt('\uD800\uDC00', 1); // false</span>
-  idx = idx || <span class="number">0</span>;
-  <span class="keyword">var</span> code = str.charCodeAt(idx);
-  <span class="keyword">var</span> hi, low;
+<h3 id="转换">转换</h3><p>React JSX 会把像XML一样的语法转换成原生JavaScript. XML元素,属性,子元素,都会变成参数,传递给 <code>React.createElement</code>.</p>
+<pre><code><span class="keyword">var</span> Nav;
+<span class="comment">// Input (JSX):</span>
+<span class="keyword">var</span> <span class="keyword">app</span> = &lt;Nav color=<span class="string">"blue"</span> /&gt;;
+<span class="comment">// Output (JS):</span>
+<span class="keyword">var</span> <span class="keyword">app</span> = React.createElement(Nav, {color:<span class="string">"blue"</span>});
+</code></pre><p>注意,要使用 <code>&lt;Nav /&gt;</code> , 作用域里必须有 <code>Nav</code> 变量.</p>
+<p>JSX还可以使用XML语法来定义子元素:</p>
+<pre><code><span class="variable"><span class="keyword">var</span> Nav, Profile;
+// Input (JSX)</span>:
+<span class="variable"><span class="keyword">var</span> app</span> = <span class="type">&lt;Nav color="blue"&gt;</span><span class="type">&lt;Profile&gt;</span>click<span class="type">&lt;/Profile&gt;</span><span class="type">&lt;/Nav&gt;</span>;
+<span class="comment">// Output (JS):</span>
+<span class="variable"><span class="keyword">var</span> app</span> = React.createElement(
+  Nav,
+  {color:<span class="string">"blue"</span>},
+  React.createElement(Profile, <span class="literal">null</span>, <span class="string">"click"</span>)
+);
+</code></pre><p>当 displayName 属性未被定义的时候, JSX 会通过它赋值的变量名来推断 <a href="https://facebook.github.io/react/docs/component-specs.html#displayname" target="_blank" rel="external">displayName</a></p>
+<pre><code><span class="comment">// Input (JSX):</span>
+<span class="variable"><span class="keyword">var</span> Nav</span> = React.createClass({ });
+<span class="comment">// Output (JS):</span>
+<span class="variable"><span class="keyword">var</span> Nav</span> = React.createClass({displayName: <span class="string">"Nav"</span>, });
+</code></pre><p>通过 <a href="https://babeljs.io/repl/" target="_blank" rel="external">Babel REPL</a> 来体验JSX是如何变成纯JavaScript的. 还有 <a href="https://facebook.github.io/react/html-jsx.html" target="_blank" rel="external">HTML to JSX converter</a> 这个网站可以把HTML转换成JSX.</p>
+<p>如果你想要使用JSX,<a href="https://facebook.github.io/react/docs/getting-started.html" target="_blank" rel="external">Getting Started</a>教程会展示如何设置编译.</p>
+<blockquote>
+<p>Note: JSX表达式最终的结果总是一个ReactElement.实际执行的细节会有一些变化.有一种优化的方法,它可以把ReactElement作为一个对象字面量内联进去,从而避免 React.createElement 的验证代码.</p>
+</blockquote>
+<h3 id="命名空间的组件">命名空间的组件</h3><p>如果你要创建一个有很多子元素的组件,比如form,你很可能会需要申明很多变量名.</p>
+<pre><code><span class="comment">// Awkward block of variable declarations</span>
+<span class="keyword">var</span> <span class="keyword">Form</span> = MyFormComponent;
+<span class="keyword">var</span> FormRow = <span class="keyword">Form</span>.Row;
+<span class="keyword">var</span> FormLabel = <span class="keyword">Form</span>.<span class="keyword">Label</span>;
+<span class="keyword">var</span> FormInput = <span class="keyword">Form</span>.<span class="keyword">Input</span>;
 
-  <span class="comment">// 如果索引位置是一个高位 (可以把后面的十六进制改成0xDB7F来把高位当成一个单独的字符)</span>
-  <span class="keyword">if</span> (<span class="number">0xD800</span> &lt;= code &amp;&amp; code &lt;= <span class="number">0xDBFF</span>) {
-    hi = code;
-    low = str.charCodeAt(idx + <span class="number">1</span>);
-    <span class="keyword">if</span> (<span class="built_in">isNaN</span>(low)) {
-      <span class="keyword">throw</span> <span class="string">'High surrogate not followed by low surrogate in fixedCharCodeAt()'</span>;
-    }
-    <span class="keyword">return</span> ((hi - <span class="number">0xD800</span>) * <span class="number">0x400</span>) + (low - <span class="number">0xDC00</span>) + <span class="number">0x10000</span>;
+<span class="keyword">var</span> <span class="keyword">App</span> = (
+  &lt;<span class="keyword">Form</span>&gt;
+    &lt;FormRow&gt;
+      &lt;FormLabel /&gt;
+      &lt;FormInput /&gt;
+    &lt;/FormRow&gt;
+  &lt;/<span class="keyword">Form</span>&gt;
+);
+</code></pre><p>为了简化它,命名空间的组件可以使用一个组件以及它的属性来作为它的子组件.</p>
+<pre><code><span class="keyword">var</span> <span class="keyword">Form</span> = MyFormComponent;
+
+<span class="keyword">var</span> <span class="keyword">App</span> = (
+  &lt;<span class="keyword">Form</span>&gt;
+    &lt;<span class="keyword">Form</span>.Row&gt;
+      &lt;<span class="keyword">Form</span>.<span class="keyword">Label</span> /&gt;
+      &lt;<span class="keyword">Form</span>.<span class="keyword">Input</span> /&gt;
+    &lt;/<span class="keyword">Form</span>.Row&gt;
+  &lt;/<span class="keyword">Form</span>&gt;
+);
+</code></pre><p>要实现这个功能,你只需要创建你的子组件作为父组件的属性就可以了.</p>
+<pre><code>var MyFormComponent = React.createClass(<span class="list">{ ... }</span>);
+
+MyFormComponent.<span class="keyword">Row</span> = React.createClass(<span class="list">{ ... }</span>);
+MyFormComponent.<span class="keyword">Label</span> = React.createClass(<span class="list">{ ... }</span>);
+MyFormComponent.<span class="keyword">Input</span> = React.createClass(<span class="list">{ ... }</span>);
+</code></pre><p>JSX在编译的时候会正确处理他们.</p>
+<pre><code>var App = <span class="list">(
+  <span class="keyword">React</span>.createElement<span class="list">(<span class="keyword">Form</span>, null,
+    React.createElement<span class="list">(<span class="keyword">Form</span>.Row, null,
+      React.createElement<span class="list">(<span class="keyword">Form</span>.Label, null)</span>,
+      React.createElement<span class="list">(<span class="keyword">Form</span>.Input, null)</span>
+    )</span>
+  )</span>
+)</span><span class="comment">;</span>
+</code></pre><blockquote>
+<p>Note: 这个特性只在v0.11及以上被支持.</p>
+</blockquote>
+<h3 id="JavaScript_表达式">JavaScript 表达式</h3><h4 id="属性里的表达式">属性里的表达式</h4><p>要在属性里使用JavaScript表达式,把表达式包在 {} 里,而不是 “” 里</p>
+<pre><code><span class="comment">// Input (JSX):</span>
+<span class="keyword">var</span> person = &lt;Person name={<span class="built_in">window</span>.isLoggedIn ? <span class="built_in">window</span>.name : <span class="string">''</span>} /&gt;;
+<span class="comment">// Output (JS):</span>
+<span class="keyword">var</span> person = React.createElement(
+  Person,
+  {name: <span class="built_in">window</span>.isLoggedIn ? <span class="built_in">window</span>.name : <span class="string">''</span>}
+);
+</code></pre><h4 id="属性值是一个布尔值">属性值是一个布尔值</h4><p>如果一个属性的值被省略了,JSX会认为它的默认值就是 <code>true</code>. 如果要让它的值为 <code>false</code>,就必须要传入表达式, 这在HTML form表单里很常见,比如 <code>disabled</code> <code>required</code> <code>checked</code> <code>readonly</code> 属性等…</p>
+<pre><code><span class="comment">// 下面这两种禁用按钮的方式在JSX里是等价的.</span>
+&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"button"</span> disabled /&gt;;
+&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"button"</span> disabled={<span class="keyword">true</span>} /&gt;;
+
+<span class="comment">// 下面这两种不禁用按钮的方式在JSX里是等价的.</span>
+&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"button"</span> /&gt;;
+&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"button"</span> disabled={<span class="keyword">false</span>} /&gt;;
+</code></pre><h4 id="子元素表达式">子元素表达式</h4><p>同样的,JavaScript表达式也可以表示子元素</p>
+<pre><code><span class="comment">// Input (JSX):</span>
+<span class="keyword">var</span> content = &lt;Container&gt;{<span class="built_in">window</span>.isLoggedIn ? &lt;Nav /&gt; : &lt;Login /&gt;}&lt;/Container&gt;;
+<span class="comment">// Output (JS):</span>
+<span class="keyword">var</span> content = React.createElement(
+  Container,
+  <span class="keyword">null</span>,
+  <span class="built_in">window</span>.isLoggedIn ? React.createElement(Nav) : React.createElement(Login)
+);
+</code></pre><h4 id="注释">注释</h4><p>在JSX里添加注释很简单;他们只是JS表达式.有一点需要注意,当你在标签的子元素里使用注释时,使用 {} 把注释内容包起来.</p>
+<pre><code><span class="keyword">var</span> content = (
+  &lt;Nav&gt;
+    {<span class="comment">/* child comment, put {} around */</span>}
+    &lt;Person
+      <span class="comment">/* multi
+         line
+         comment */</span>
+      name={<span class="built_in">window</span>.isLoggedIn ? <span class="built_in">window</span>.name : <span class="string">''</span>} <span class="comment">// end of line comment</span>
+    /&gt;
+  &lt;/Nav&gt;
+);
+</code></pre><blockquote>
+<p>Note: JSX和HTML相似,但不完全相同.查看 <a href="https://facebook.github.io/react/docs/jsx-gotchas.html" target="_blank" rel="external">JSX gotchas</a> ,里面列出了一些常见的坑.</p>
+</blockquote>
+<p><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank" rel="external">查看原文</a></p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSX/">JSX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-displaying-date" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/15/displaying-date/" class="article-date">
+  	<time datetime="2016-03-15T08:57:42.000Z" itemprop="datePublished">2016-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/15/displaying-date/">displaying date</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="展示数据">展示数据</h2><p>视图最基本的任务就是展示数据.React使得数据的展示变得简单,并且当数据发生变化时自动更新界面.</p>
+<h3 id="开始">开始</h3><p>看个最简单的例子.创建一个 <em>hello-react.html</em> 文件,代码如下:</p>
+<pre><code><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Hello React<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://fb.me/react-0.14.7.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://fb.me/react-dom-0.14.7.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"example"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span>&gt;</span><span class="actionscript">
+
+      <span class="comment">// ** Your code goes here! **</span>
+
+    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><p>文本剩下的内容围绕在上面的这个模板里注释部分应该写的JavaScript代码以及JSX代码</p>
+<pre><code><span class="keyword">var</span> HelloWorld = React.createClass({
+  render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> (
+      &lt;p&gt;
+        Hello, &lt;input type=<span class="string">"text"</span> placeholder=<span class="string">"Your name here"</span> /&gt;!
+        It <span class="keyword">is</span> {<span class="keyword">this</span>.props.date.toTimeString()}
+      &lt;/p&gt;
+    );
   }
-  <span class="keyword">if</span> (<span class="number">0xDC00</span> &lt;= code &amp;&amp; code &lt;= <span class="number">0xDFFF</span>) { <span class="comment">// 低位</span>
-    <span class="comment">// 返回false以跳出循环的本次迭代,因为在上次迭代时,遇到和它配对的那个高位时,已经处理过它了(处理的过程就是注释掉的那段)</span>
-    <span class="keyword">return</span> <span class="literal">false</span>;
-    <span class="comment">/*hi = str.charCodeAt(idx - 1);
-    low = code;
-    return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;*/</span>
-  }
-  <span class="keyword">return</span> code;
+});
+
+setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  ReactDOM.render(
+    &lt;HelloWorld date={<span class="keyword">new</span> Date()} /&gt;,
+    document.getElementById(<span class="string">'example'</span>)
+  );
+}, <span class="number">500</span>);
+</code></pre><h3 id="响应式更新">响应式更新</h3><p>在浏览器里打开 <em>hello-react.html</em> ,在文本框里输入你的名字.注意,React只改变视图的时间部分 - 你输入的名字还在,虽然你没有写任何代码来指定这个行为,但React已经识别了你的需求,帮你做了正确的处理.</p>
+<p>React识别它的方法是: 如果没有必要,React就不会操作DOM.<strong>它使用了一个内部的虚拟DOM来比较差异,为你计算出最高效的改变DOM的方法. </strong></p>
+<p>这个组件的数据输入被称为 <em>props</em> - “properties”的缩写.他们会被传入JSX语法的属性里.(比如上面这个例子的 <code>date</code> 属性).注意,<em>props</em> 在组件内是不能被改变的,所以,不要给 <em>this.props</em> 赋值.</p>
+<h3 id="组件就像函数">组件就像函数</h3><p>React组件非常简单.你可以认为他们就是简单的函数,函数带有<code>props</code>和<code>state</code>(后面会说到)这和两个参数,然后负责渲染HTML.有了这个概念,组件就很容易理解了.</p>
+<blockquote>
+<p>注意: 有一个限制,React组件只能渲染一个根节点.如果你想要返回多个节点,他们必须被包在一个根节点里.</p>
+</blockquote>
+<h3 id="JSX_语法:">JSX 语法:</h3><p>我们十分确定,比起”模板”和”展示逻辑”,组件可以更好的分离关注点.我们认为,html和渲染html的代码,他们是紧密相连的.展示逻辑通常非常复杂,而使用模板引擎来展示它则变得更难以处理.</p>
+<p>我们发现,最有效的解决这个问题的办法就是,直接从javascript代码来生成HTML和组件数.这样就好像是使用一种富有表达力的编程语言来创建视图.</p>
+<p>为了让它变得更简单,我们加入了一种简单的,<strong>可选的</strong>类似HTML的语法来创建这些React树节点.</p>
+<p>JSX允许你使用HTML语法来创建JavaScript对象.使用原生的JavaScript来生成一个节点可以这样写:</p>
+<pre><code><span class="tag">React</span><span class="class">.createElement</span>(<span class="string">'a'</span>, {<span class="attribute">href</span>: <span class="string">'https://facebook.github.io/react/'</span>}, <span class="string">'Hello!'</span>)
+</code></pre><p>使用JSX语法后变成这样:</p>
+<pre><code><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"https://facebook.github.io/react/"</span>&gt;</span>Hello!<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+</code></pre><p>可以看到,这使得创建React应用变得简单,并且是开发者喜欢的语法,但每个人都有自己的工作流程,所以<em>并不是一定要在React里使用JSX语法**</em></p>
+<p>JSX非常小.了解更多关于JSX的知识,查看:<a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank" rel="external">JSX in depth</a>,或者查看在线转换: <a href="https://babeljs.io/repl/" target="_blank" rel="external">the Babel REPL</a> </p>
+<p>JSX和HTML非常相似,但是不完全相同.查看<a href="https://facebook.github.io/react/docs/jsx-gotchas.html" target="_blank" rel="external">JSX gotchas</a>,里面包含他们的主要不同点.</p>
+<p><a href="http://babeljs.io/docs/setup/" target="_blank" rel="external">Babel提供了许多帮助你使用JSX的方法</a>,从命令行工具到Ruby on Rails的集成都有.选择最适合你的方式.</p>
+<h3 id="不使用JSX">不使用JSX</h3><p>JSX完全是可选的,你在写React的时候,不一定要使用JSX,你完全可以通过 <code>React.createElement</code> 方法,使用纯Javascript来创建React元素,它包含了标签的名字或组件,一个属性对象,以及任意数量的子组件作为参数传入.</p>
+<pre><code><span class="keyword">var</span> child1 = React.createElement(<span class="string">'li'</span>, <span class="keyword">null</span>, <span class="string">'First Text Content'</span>);
+<span class="keyword">var</span> child2 = React.createElement(<span class="string">'li'</span>, <span class="keyword">null</span>, <span class="string">'Second Text Content'</span>);
+<span class="keyword">var</span> root = React.createElement(<span class="string">'ul'</span>, { className: <span class="string">'my-list'</span> }, child1, child2);
+ReactDOM.render(root, <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>));
+</code></pre><p>方便起见,你可以把创建自定义组件的函数赋值给一个函数,以便于获取调用.</p>
+<pre><code><span class="keyword">var</span> Factory = React.createFactory(ComponentClass);
+...
+<span class="keyword">var</span> root = Factory({ custom: <span class="string">'prop'</span> });
+ReactDOM.render(root, <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>));
+</code></pre><p>React已经有内置的工厂函数来生成一些常用的标签:</p>
+<pre><code><span class="keyword">var</span> root = React.DOM.ul({ className: <span class="string">'my-list'</span> },
+             React.DOM.li(<span class="literal">null</span>, <span class="string">'Text Content'</span>)
+           );
+</code></pre><p><a href="https://facebook.github.io/react/docs/displaying-data.html" target="_blank" rel="external">原文地址</a></p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-spread-operator" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/15/spread-operator/" class="article-date">
+  	<time datetime="2016-03-15T04:07:02.000Z" itemprop="datePublished">2016-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/15/spread-operator/">spread operator</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>spread operator</em> 当需要多个参数(调用函数时),或多个元素(在数组字面量里)时,可以使用一个简单的表达式来指向他们.</p>
+<h2 id="语法">语法</h2><p>调用函数时:</p>
+<pre><code><span class="tag">myFunction</span>(..<span class="class">.iterableObj</span>);
+</code></pre><p>在数组字面量里使用时:</p>
+<pre><code>[...iterableObj, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]
+</code></pre><p>在解构赋值中使用:</p>
+<pre><code>[a, b, ...iterableObj] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
+</code></pre><h2 id="栗子">栗子</h2><h3 id="取代apply">取代apply</h3><p>比如: 当你想把一个数组的值传入函数作为参数,通常会使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" target="_blank" rel="external">Function.prototype.apply</a></p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(x, y, z)</span> </span>{ }
+<span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];
+myFunction.apply(<span class="literal">null</span>, args);
+</code></pre><p>有了ES6的spread语法,你可以这样写:</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(x, y, z)</span> </span>{ }
+<span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];
+myFunction(...args);
+</code></pre><p>参数列表里的任意参数你都可以使用spread,并且可以多次使用:   </p>
+<pre><code><span class="function">function <span class="title">myFunction</span><span class="params">(v, w, x, y, z)</span> </span>{ }
+var args = [<span class="number">0</span>, <span class="number">1</span>];
+myFunction(-<span class="number">1</span>, ...args, <span class="number">2</span>, ...[<span class="number">3</span>]);
+</code></pre><h3 id="更强大的数组字面量">更强大的数组字面量</h3><p>比如: 如果你有一个数组,然后想创建一个包含了这个数组的新的数组,那么仅仅使用数组字面量的语法就不够了,你不得不再自己写代码,结合使用 <code>push splice concat</code> 等方法.但有了spread语法,这一切变得很简单:</p>
+<pre><code><span class="atom">var</span> <span class="atom">parts</span> = [<span class="string">'shoulders'</span>, <span class="string">'knees'</span>];
+<span class="atom">var</span> <span class="atom">lyrics</span> = [<span class="string">'head'</span>, ...<span class="atom">parts</span>, <span class="string">'and'</span>, <span class="string">'toes'</span>]; // [<span class="string">"head"</span>, <span class="string">"shoulders"</span>, <span class="string">"knees"</span>, <span class="string">"and"</span>, <span class="string">"toes"</span>]
+</code></pre><p>就像在参数列表里使用一样,…可以在数组字面量的任何地方使用,并且可以多次使用.</p>
+<h3 id="在_new_对象时使用">在 new 对象时使用</h3><p>比如: 在ES5里,通过 <code>apply</code> 方法来调用 new 关键字是不行的.(在ES5里,apply使用的是[[call]],不是[[Construct]]).但在ES6里,spread语法支持它.</p>
+<pre><code><span class="built_in">var</span> dateFields = readDateFields(database);
+<span class="built_in">var</span> d = <span class="literal">new</span> <span class="built_in">Date</span>(<span class="attribute">...</span>dateFields);
+</code></pre><h3 id="取代push">取代push</h3><p>比如: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push" target="_blank" rel="external">push</a>可以往数组里插入一个数组.在ES5里,通常是这样实现的:</p>
+<pre><code>var arr1 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];
+var arr2 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
+<span class="comment">// Append all items from arr2 onto arr1</span>
+Array.prototype.push.apply(arr1, arr2);
+</code></pre><p>有了ES6的spread,它可以这样写:</p>
+<pre><code>var arr1 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];
+var arr2 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
+arr1.push(...arr2);
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator" target="_blank" rel="external">原文地址</a></p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Array-from" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/11/Array-from/" class="article-date">
+  	<time datetime="2016-03-11T09:17:55.000Z" itemprop="datePublished">2016-03-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/11/Array-from/">Array.from()</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Array.from()</code> 方法从一个类数组或可迭代对象,创建一个新的数组实例.</p>
+<p>在 ES6里, 类的语法允许你从内置的类和自定义的类创建子类,因此,像 <code>Array.from</code> 这样类的静态方法也被 <code>Array</code> 的子类所继承了,它创建的是子类的实例,而不是 <code>Array</code> 的实例.</p>
+<h2 id="语法">语法</h2><pre><code>Array.<span class="function"><span class="title">from</span><span class="params">(arrayLike[, mapFn[, thisArg]])</span></span>
+</code></pre><h3 id="参数">参数</h3><p><strong>arrayLike</strong></p>
+<p>一个类数组或可迭代对象,用于被转换成数组.</p>
+<p><strong>mapFn</strong></p>
+<p>可选的.数组里每个元素都要经过这个函数的执行.</p>
+<p><strong>thisArg</strong></p>
+<p>可选的.当执行 <code>mapFn</code> 的时候,函数的this指针指向这个参数</p>
+<h2 id="描述">描述</h2><p><code>Array.from()</code> 允许你通过以下对象创建数组对象:</p>
+<ul>
+<li>类数组对象(有<code>length</code>属性,并且每个元素都有索引值的对象)</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank" rel="external">可迭代对象</a>(你可以获取到它的元素的对象,比如<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank" rel="external">Map</a>和<a href="">Set</a>)</li>
+</ul>
+<p><code>Array.from()</code> 有一个可选的参数 <code>mapFn</code> ,可以对创建的数组的每个元素迭代执行 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank" rel="external">map</a> 函数.说的更清楚点,<code>Array.from(obj,mapFn,thisArg)</code> 和 <code>Array.from(obj).map(mapFn,thisArg)</code> 效果是一样的,只是它不产生中间数组.这对某些数组子类是很有用的,比如 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays" target="_blank" rel="external">typed arrays</a>,因为对于他们,中间数组的值不得不被删减以适应对应的类型.</p>
+<p><code>from()</code>方法的<code>length</code>属性值是 1.</p>
+<h2 id="栗子">栗子</h2><pre><code><span class="comment">// 类数组对象 (arguments) 转数组</span>
+<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>);
 }
-</code></pre><h4 id="改造charCodeAt()来处理当一开始就已经知道非基本平面字符(non-Basic-Multilingual-Plane)_[4]的高位在哪个位置出现的情况:">改造charCodeAt()来处理当一开始就已经知道非基本平面字符(non-Basic-Multilingual-Plane) [4]的高位在哪个位置出现的情况:</h4><pre><code><span class="function"><span class="keyword">function</span> <span class="title">knownCharCodeAt</span>(<span class="params">str, idx</span>) </span>{
-  str += <span class="string">''</span>;
-  <span class="keyword">var</span> code,
-      end = str.length;
 
-  <span class="keyword">var</span> surrogatePairs = <span class="regexp">/[\uD800-\uDBFF][\uDC00-\uDFFF]/g</span>;
-  <span class="keyword">while</span> ((surrogatePairs.exec(str)) != <span class="literal">null</span>) {
-    <span class="keyword">var</span> li = surrogatePairs.lastIndex;
-    <span class="keyword">if</span> (li - <span class="number">2</span> &lt; idx) {
-      idx++;
-    }
-    <span class="keyword">else</span> {
-      <span class="keyword">break</span>;
-    }
-  }
+f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); 
+<span class="comment">// [1, 2, 3]</span>
 
-  <span class="keyword">if</span> (idx &gt;= end || idx &lt; <span class="number">0</span>) {
-    <span class="keyword">return</span> <span class="literal">NaN</span>;
-  }
 
-  code = str.charCodeAt(idx);
+<span class="comment">// 可迭代对象...</span>
+<span class="comment">// Set</span>
+<span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">"foo"</span>, <span class="built_in">window</span>]);
+<span class="built_in">Array</span>.from(s);   
+<span class="comment">// ["foo", window]</span>
 
-  <span class="keyword">var</span> hi, low;
-  <span class="keyword">if</span> (<span class="number">0xD800</span> &lt;= code &amp;&amp; code &lt;= <span class="number">0xDBFF</span>) {
-    hi = code;
-    low = str.charCodeAt(idx + <span class="number">1</span>);
-    <span class="comment">// Go one further, since one of the "characters" is part of a surrogate pair</span>
-    <span class="keyword">return</span> ((hi - <span class="number">0xD800</span>) * <span class="number">0x400</span>) + (low - <span class="number">0xDC00</span>) + <span class="number">0x10000</span>;
-  }
-  <span class="keyword">return</span> code;
-}
-</code></pre><h2 id="codePointAt()">codePointAt()</h2><p><code>codePointAt()</code>方法返回一个Unicode码点值,它是一个非负整数,</p>
-<h3 id="语法-1">语法</h3><pre><code>str.<span class="function"><span class="title">codePointAt</span><span class="params">(pos)</span></span>
-</code></pre><h4 id="参数-1">参数</h4><p><strong>pos</strong></p>
-<p>指定从字符串里获取Unicode码点的索引位置.</p>
-<h3 id="描述-1">描述</h3><p>如果在指定的位置没有元素,返回undefined.如果指定位置没有 UTF-16 surrogate pair, 返回指定位置的 code unit 的码点.</p>
-<h3 id="栗子">栗子</h3><pre><code><span class="string">'ABC'</span>.codePointAt(<span class="number">1</span>);          <span class="comment">// 非UTF-16 surrogate pair ,返回A的Unicode码点: 66</span>
-<span class="string">'\uD800\uDC00'</span>.codePointAt(<span class="number">0</span>); <span class="comment">// UTF-16 surrogate pair 返回整个字符的码点: 65536</span>
 
-<span class="string">'XYZ'</span>.codePointAt(<span class="number">42</span>);         <span class="comment">// undefined</span>
-</code></pre><h3 id="兼容低版本浏览器(Polyfill)">兼容低版本浏览器(Polyfill)</h3><p>下面的扩展允许你在原本不支持这个方法的低版本的浏览器中像支持ES6一样的使用codePointAt()方法.</p>
-<pre><code><span class="comment">/*! http://mths.be/codepointat v0.1.0 by @mathias */</span>
-<span class="keyword">if</span> (!<span class="built_in">String</span>.prototype.codePointAt) {
-  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-<span class="pi">    'use strict'</span>; <span class="comment">// needed to support `apply`/`call` with `undefined`/`null`</span>
-    <span class="keyword">var</span> codePointAt = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>) </span>{
-      <span class="keyword">if</span> (<span class="keyword">this</span> == <span class="literal">null</span>) {
-        <span class="keyword">throw</span> <span class="built_in">TypeError</span>();
+<span class="comment">// Map</span>
+<span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">8</span>]]);
+<span class="built_in">Array</span>.from(m);                          
+<span class="comment">// [[1, 2], [2, 4], [4, 8]]  </span>
+
+
+<span class="comment">// 字符串</span>
+<span class="built_in">Array</span>.from(<span class="string">"foo"</span>);                      
+<span class="comment">// ["f", "o", "o"]</span>
+<span class="comment">// 查看下面的pollify,可以看到,有一句是 Object(arrayLike),既把参数转换为对象.字符串`'foo'`通过`Object('foo')`以后,变成了这样的对象:</span>
+<span class="comment">// String {0: "f", 1: "o", 2: "o", length: 3, [[PrimitiveValue]]: "foo"}</span>
+
+
+<span class="comment">// 使用一个箭头函数作为map函数来操作元素.</span>
+<span class="built_in">Array</span>.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], x =&gt; x + x);      
+<span class="comment">// [2, 4, 6]</span>
+
+
+<span class="comment">// 生成数字序列</span>
+<span class="built_in">Array</span>.from({length: <span class="number">5</span>}, (v, k) =&gt; k);    
+<span class="comment">// [0, 1, 2, 3, 4]</span>
+</code></pre><h2 id="Polyfill">Polyfill</h2><p><code>Array.from</code> 方法被添加在第六版的 ECMA-262 标准中; 因此,在其他版本的标准中可能不能使用.你可以在你脚本的开头插入下面这段代码来使用它.这个算法事实上也是在ECMA-262第六版里指定的算法. 假设 <code>Object</code> 和 <code>TypeError</code> 是已经存在的方法. <code>callback.call</code> 相当于 <code>Function.prototype.call</code>. 另外,由于真正的迭代器不能被polyfilled,所以这个执行环境不支持 ECMA-262第六版所定义的 generic iterable</p>
+<pre><code><span class="comment">// Production steps of ECMA-262, Edition 6, 22.1.2.1</span>
+<span class="comment">// 参考: https://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.from</span>
+<span class="keyword">if</span> (!<span class="built_in">Array</span>.from) {
+  <span class="built_in">Array</span>.from = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> toStr = <span class="built_in">Object</span>.prototype.toString;
+    <span class="keyword">var</span> isCallable = <span class="function"><span class="keyword">function</span> (<span class="params">fn</span>) </span>{
+      <span class="keyword">return</span> <span class="keyword">typeof</span> fn === <span class="string">'function'</span> || toStr.call(fn) === <span class="string">'[object Function]'</span>;
+    };
+    <span class="keyword">var</span> toInteger = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>{
+      <span class="keyword">var</span> number = <span class="built_in">Number</span>(value);
+      <span class="keyword">if</span> (<span class="built_in">isNaN</span>(number)) { <span class="keyword">return</span> <span class="number">0</span>; }
+      <span class="keyword">if</span> (number === <span class="number">0</span> || !<span class="built_in">isFinite</span>(number)) { <span class="keyword">return</span> number; }
+      <span class="keyword">return</span> (number &gt; <span class="number">0</span> ? <span class="number">1</span> : -<span class="number">1</span>) * <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.abs(number));
+    };
+    <span class="keyword">var</span> maxSafeInteger = <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>;
+    <span class="keyword">var</span> toLength = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>{
+      <span class="keyword">var</span> len = toInteger(value);
+      <span class="keyword">return</span> <span class="built_in">Math</span>.min(<span class="built_in">Math</span>.max(len, <span class="number">0</span>), maxSafeInteger);
+    };
+
+    <span class="comment">// The length property of the from method is 1.</span>
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">from</span>(<span class="params">arrayLike<span class="comment">/*, mapFn, thisArg */</span></span>) </span>{
+      <span class="comment">// 1. 把this对象定义成变量C.</span>
+      <span class="keyword">var</span> C = <span class="keyword">this</span>;
+
+      <span class="comment">// 2. 把需要转换的类数组对象定义成变量items</span>
+      <span class="keyword">var</span> items = <span class="built_in">Object</span>(arrayLike);
+
+      <span class="comment">// 3. 如果遇到意外则抛出错误.(items).</span>
+      <span class="keyword">if</span> (arrayLike == <span class="literal">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"Array.from requires an array-like object - not null or undefined"</span>);
       }
-      <span class="keyword">var</span> string = <span class="built_in">String</span>(<span class="keyword">this</span>);
-      <span class="keyword">var</span> size = string.length;
-      <span class="comment">// `ToInteger`</span>
-      <span class="keyword">var</span> index = position ? <span class="built_in">Number</span>(position) : <span class="number">0</span>;
-      <span class="keyword">if</span> (index != index) { <span class="comment">// better `isNaN`</span>
-        index = <span class="number">0</span>;
-      }
-      <span class="comment">// Account for out-of-bounds indices:</span>
-      <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) {
-        <span class="keyword">return</span> <span class="literal">undefined</span>;
-      }
-      <span class="comment">// Get the first code unit</span>
-      <span class="keyword">var</span> first = string.charCodeAt(index);
-      <span class="keyword">var</span> second;
-      <span class="keyword">if</span> ( <span class="comment">// check if it’s the start of a surrogate pair</span>
-        first &gt;= <span class="number">0xD800</span> &amp;&amp; first &lt;= <span class="number">0xDBFF</span> &amp;&amp; <span class="comment">// high surrogate</span>
-        size &gt; index + <span class="number">1</span> <span class="comment">// there is a next code unit</span>
-      ) {
-        second = string.charCodeAt(index + <span class="number">1</span>);
-        <span class="keyword">if</span> (second &gt;= <span class="number">0xDC00</span> &amp;&amp; second &lt;= <span class="number">0xDFFF</span>) { <span class="comment">// low surrogate</span>
-          <span class="comment">// http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae</span>
-          <span class="keyword">return</span> (first - <span class="number">0xD800</span>) * <span class="number">0x400</span> + second - <span class="number">0xDC00</span> + <span class="number">0x10000</span>;
+
+      <span class="comment">// 4. mapfn没有定义时, 不执行mapping迭代操作</span>
+      <span class="keyword">var</span> mapFn = <span class="built_in">arguments</span>.length &gt; <span class="number">1</span> ? <span class="built_in">arguments</span>[<span class="number">1</span>] : <span class="keyword">void</span> <span class="literal">undefined</span>;
+      <span class="keyword">var</span> T;
+      <span class="keyword">if</span> (<span class="keyword">typeof</span> mapFn !== <span class="string">'undefined'</span>) {
+        <span class="comment">// 5. else</span>
+        <span class="comment">// 5. a. 如果 IsCallable(mapfn) 是false, 抛出 TypeError 错误.</span>
+        <span class="keyword">if</span> (!isCallable(mapFn)) {
+          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Array.from: when provided, the second argument must be a function'</span>);
+        }
+
+        <span class="comment">// 5. b. 如果提供了thisArg参数, 把thisArg定义成变量T; 反之,T就是undefined</span>
+        <span class="keyword">if</span> (<span class="built_in">arguments</span>.length &gt; <span class="number">2</span>) {
+          T = <span class="built_in">arguments</span>[<span class="number">2</span>];
         }
       }
-      <span class="keyword">return</span> first;
+
+      <span class="comment">// 10. 获取对象的长度</span>
+      <span class="comment">// 11. 把对象的长度通过 ToLength(lenValue) 转换,并将结果赋值给len.</span>
+      <span class="keyword">var</span> len = toLength(items.length);
+
+      <span class="comment">// 13. 如果 IsConstructor(C) 是 true, 则:</span>
+      <span class="comment">// 13. a. 通过C来执行内部的Construct构造函数,把对象的长度作为参数传入.把执行结果定义为变量A.</span>
+      <span class="comment">// 14. a. 反之, 创建一个新的数组(len),并把它定义为变量A.</span>
+      <span class="keyword">var</span> A = isCallable(C) ? <span class="built_in">Object</span>(<span class="keyword">new</span> C(len)) : <span class="keyword">new</span> <span class="built_in">Array</span>(len);
+
+      <span class="comment">// 16. 定义变量k,初始值为0.</span>
+      <span class="keyword">var</span> k = <span class="number">0</span>;
+      <span class="comment">// 17. 循环 while k &lt; len… (also steps a - h)</span>
+      <span class="keyword">var</span> kValue;
+      <span class="keyword">while</span> (k &lt; len) {
+        kValue = items[k];
+        <span class="keyword">if</span> (mapFn) {
+          A[k] = <span class="keyword">typeof</span> T === <span class="string">'undefined'</span> ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+        } <span class="keyword">else</span> {
+          A[k] = kValue;
+        }
+        k += <span class="number">1</span>;
+      }
+      <span class="comment">// 18. 把length添加进去 Put(A, "length", len, true).</span>
+      A.length = len;
+      <span class="comment">// 20. 返回 A.</span>
+      <span class="keyword">return</span> A;
     };
-    <span class="keyword">if</span> (<span class="built_in">Object</span>.defineProperty) {
-      <span class="built_in">Object</span>.defineProperty(<span class="built_in">String</span>.prototype, <span class="string">'codePointAt'</span>, {
-        <span class="string">'value'</span>: codePointAt,
+  }());
+}
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from" target="_blank" rel="external">原文地址</a></p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-fromCodePoint" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/04/fromCodePoint/" class="article-date">
+  	<time datetime="2016-03-04T08:16:59.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/fromCodePoint/">fromCodePoint()</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>静态 <strong>String.fromCodePoint()</strong> 方法通过传入的码点序列来返回一个字符串</p>
+<h2 id="语法">语法</h2><pre><code>String.<span class="function"><span class="title">fromCodePoint</span><span class="params">(num1[, ...[, numN]])</span></span>
+</code></pre><h3 id="参数">参数</h3><p><strong>num1,…,numN</strong></p>
+<p>一个码点序列</p>
+<h3 id="报错">报错</h3><p>如果传入一个无效的Unicode码点,会报错 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError" target="_blank" rel="external">RangeError</a>.(e.g. “RangeError: NaN is not a valid code point”)</p>
+<h2 id="描述">描述</h2><p>由于 <code>fromCodePoint()</code> 是 <code>String</code> 对象的静态方法,所以调用的时候要用 <code>String.fromCodePoint()</code>, 记住它不是你创建的字符串对象的方法.</p>
+<h2 id="栗子">栗子</h2><p>使用 <code>fromCodePoint()</code></p>
+<pre><code><span class="built_in">String</span>.fromCodePoint(<span class="number">42</span>);       <span class="comment">// "*"</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">65</span>, <span class="number">90</span>);   <span class="comment">// "AZ"</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">0x404</span>);    <span class="comment">// "\u0404"</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">0x2F804</span>);  <span class="comment">// "\uD87E\uDC04"</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">194564</span>);   <span class="comment">// "\uD87E\uDC04"</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1D306</span>, <span class="number">0x61</span>, <span class="number">0x1D307</span>) <span class="comment">// "\uD834\uDF06\u0061\uD834\uDF07"</span>
+
+<span class="built_in">String</span>.fromCodePoint(<span class="string">'_'</span>);      <span class="comment">// RangeError</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="literal">Infinity</span>); <span class="comment">// RangeError</span>
+<span class="built_in">String</span>.fromCodePoint(-<span class="number">1</span>);       <span class="comment">// RangeError</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">3.14</span>);     <span class="comment">// RangeError</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="number">3e-2</span>);     <span class="comment">// RangeError</span>
+<span class="built_in">String</span>.fromCodePoint(<span class="literal">NaN</span>);      <span class="comment">// RangeError</span>
+</code></pre><p>仅使用 <code>String.fromCharCode()</code> 没有办法获取到下面这类高位的码点对应的字符.但是使用<code>String.fromCodePoint()</code>既可以返回两个自己的字符,也可以返回四个字节的字符.<br>(i.e., 它可以返回一个length为2的单字符,比如’𠮷’);</p>
+<pre><code><span class="built_in">console</span>.log(String.fromCodePoint(<span class="number">0x2F804</span>)); <span class="regexp">//</span> <span class="keyword">or</span> <span class="number">194564</span> <span class="keyword">in</span> decimal
+</code></pre><h2 id="Ployfill">Ployfill</h2><p><code>String.fromCharCode()</code> 方法已经被添加为 ES6 的一个标准方法,但还不能被所有的浏览器或环境所支持,可以使用下面的代码来兼容:</p>
+<pre><code><span class="comment">/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */</span>
+<span class="keyword">if</span> (!<span class="built_in">String</span>.fromCodePoint) {
+  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+    <span class="keyword">var</span> defineProperty = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="comment">// IE 8 only supports `Object.defineProperty` on DOM elements</span>
+      <span class="keyword">try</span> {
+        <span class="keyword">var</span> object = {};
+        <span class="keyword">var</span> $defineProperty = <span class="built_in">Object</span>.defineProperty;
+        <span class="keyword">var</span> result = $defineProperty(object, object, object) &amp;&amp; $defineProperty;
+      } <span class="keyword">catch</span>(error) {}
+      <span class="keyword">return</span> result;
+    }());
+    <span class="keyword">var</span> stringFromCharCode = <span class="built_in">String</span>.fromCharCode;
+    <span class="keyword">var</span> floor = <span class="built_in">Math</span>.floor;
+    <span class="keyword">var</span> fromCodePoint = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="keyword">var</span> MAX_SIZE = <span class="number">0x4000</span>;
+      <span class="keyword">var</span> codeUnits = [];
+      <span class="keyword">var</span> highSurrogate;
+      <span class="keyword">var</span> lowSurrogate;
+      <span class="keyword">var</span> index = -<span class="number">1</span>;
+      <span class="keyword">var</span> length = <span class="built_in">arguments</span>.length;
+      <span class="keyword">if</span> (!length) {
+        <span class="keyword">return</span> <span class="string">''</span>;
+      }
+      <span class="keyword">var</span> result = <span class="string">''</span>;
+      <span class="keyword">while</span> (++index &lt; length) {
+        <span class="keyword">var</span> codePoint = <span class="built_in">Number</span>(<span class="built_in">arguments</span>[index]);
+        <span class="keyword">if</span> (
+          !<span class="built_in">isFinite</span>(codePoint) ||       <span class="comment">// `NaN`, `+Infinity`, or `-Infinity`</span>
+          codePoint &lt; <span class="number">0</span> ||              <span class="comment">// not a valid Unicode code point</span>
+          codePoint &gt; <span class="number">0x10FFFF</span> ||       <span class="comment">// not a valid Unicode code point</span>
+          floor(codePoint) != codePoint <span class="comment">// not an integer</span>
+        ) {
+          <span class="keyword">throw</span> <span class="built_in">RangeError</span>(<span class="string">'Invalid code point: '</span> + codePoint);
+        }
+        <span class="keyword">if</span> (codePoint &lt;= <span class="number">0xFFFF</span>) { <span class="comment">// BMP code point</span>
+          codeUnits.push(codePoint);
+        } <span class="keyword">else</span> { <span class="comment">// Astral code point; split in surrogate halves</span>
+          <span class="comment">// http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae</span>
+          codePoint -= <span class="number">0x10000</span>;
+          highSurrogate = (codePoint &gt;&gt; <span class="number">10</span>) + <span class="number">0xD800</span>;
+          lowSurrogate = (codePoint % <span class="number">0x400</span>) + <span class="number">0xDC00</span>;
+          codeUnits.push(highSurrogate, lowSurrogate);
+        }
+        <span class="keyword">if</span> (index + <span class="number">1</span> == length || codeUnits.length &gt; MAX_SIZE) {
+          result += stringFromCharCode.apply(<span class="literal">null</span>, codeUnits);
+          codeUnits.length = <span class="number">0</span>;
+        }
+      }
+      <span class="keyword">return</span> result;
+    };
+    <span class="keyword">if</span> (defineProperty) {
+      defineProperty(<span class="built_in">String</span>, <span class="string">'fromCodePoint'</span>, {
+        <span class="string">'value'</span>: fromCodePoint,
         <span class="string">'configurable'</span>: <span class="literal">true</span>,
         <span class="string">'writable'</span>: <span class="literal">true</span>
       });
     } <span class="keyword">else</span> {
-      <span class="built_in">String</span>.prototype.codePointAt = codePointAt;
+      <span class="built_in">String</span>.fromCodePoint = fromCodePoint;
     }
   }());
 }
-</code></pre><h2 id="总结">总结</h2><p>上面关于<code>charCodeAt()</code>和<code>codePointAt()</code>的详解分别来自于:<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt" target="_blank" rel="external">charCodeAt()</a>以及<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt" target="_blank" rel="external">codePointAt()</a>;</p>
-<p>这里面有几个重点:</p>
-<ol>
-<li>Unicode 码点,基本多语言平面(Basic-Multilingual-Plane)只支持0-65535的码点,每个字符占用两个字节,对应一个码点,超过这个范围的码点,需要使用四个字节,两个 code unit,, 一个高位(U+D800到U+DBFF),一个低位(U+DC00到U+DFFF),他们组成一个 surrogate pair,代表一个字符.</li>
-<li>charCodeAt() 方法只返回对应位置的code unit对应的码点.不管这个码点是不是代表了一个字符,不管这个code unit是独立的字符还是 surrogate pair 的一部分.</li>
-<li>codePointAt() 方法返回对应位置的code unit 或 surrogate pair的码点: 遇到独立能代表字符的码点,就返回它; 遇到 surrogate pair 里的高位 code unit,就返回整个 surrogate pair 的码点; 遇到 surrogate pair 里的低位 code unit,也返回这个 code unit 对应的码点(虽然它不配合任何字符).</li>
-<li>文章中多次用到一个公式,就是已知 surrogate pair 的高位 code unit 的码点和低位 code unit 的码点,如何求得整个 surrogate pair 的码点,这个公式来自于<a href="http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae" target="_blank" rel="external">surrogate-formulae</a></li>
-</ol>
-<p>最后,再给出一个综合例子,帮助理解:<a href="https://jsfiddle.net/caqmpasb/1/" target="_blank" rel="external">online site</a></p>
-<pre><code>console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.charCodeAt(<span class="number">0</span>)); <span class="comment"> //55296  </span>
-console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.charCodeAt(<span class="number">1</span>)); <span class="comment"> //56320  </span>
-console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.codePointAt(<span class="number">0</span>));<span class="comment"> //65536  获取的是整个 surrogate pair 的码点</span>
-console.<span class="built_in">log</span>(<span class="string">'\uD800\uDC00'</span>.codePointAt(<span class="number">1</span>));<span class="comment"> //56320  获取的是'\uDC00'的码点, 同charCodeAt()   </span>
-console.<span class="built_in">log</span>(<span class="string">'\uD800'</span>.codePointAt(<span class="number">0</span>));      <span class="comment"> //55296  获取的是'\uD800'的码点, 同charCodeAt()</span>
-
-<span class="comment">
-//根据阮一峰老师的文章:"当我们遇到两个字节，发现它的码点在U+D800到U+DBFF之间，就可以断定，紧跟在后面的两个字节的码点，应该在U+DC00到U+DFFF之间，这四个字节必须放在一起解读。"</span><span class="comment">
-//所以,'\uD800\uDC00'应该两个码点一起解读,解读的结果就是65536</span>
-
-console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.<span class="built_in">length</span>); <span class="comment"> //2</span>
-console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.codePointAt(<span class="number">0</span>)); <span class="comment"> //134071 </span>
-console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.codePointAt(<span class="number">1</span>)); <span class="comment"> //57271</span>
-<span class="comment">
-//𠮷(ji)这个字,是由两个码点,四个字节组成的,所以它的length是2.两个码点一起解读,得到的结果就是134071</span>
-<span class="comment">
-//最后一点,当获取这类需要两个码点一起解读组成一个字符的时候,如果获取高位的code point,它得到的会是整个字符的Unicode值,但如果获取低位的code point,它得到的依然是第二个码点的Unicode值.</span>
-</code></pre><hr>
-<p>[1]:<em>code point(码点)</em> Unicode里的码点,有几种表达方式,比如 ‘©’ 符号,它的码点是 <em>U+00A9</em> 或 <em>0xA9</em> 或 <em>\u00A9</em> 或十进制的 <em>169</em><br>其中 <em>\u00A9</em> 是js字符串里使用的方法, <em>0xA9</em> 是写js的时候使用的方法, <em>169</em> 最容易理解,就是一一对应的数字嘛,和ASCII的0-255数字一样,每个数字代表一个码点.</p>
-<hr>
-<p>[2]:<em>code unit</em> 不知道中文应该翻译成啥,编码单元? 在UTF-16编码方式时,如果是一个四字节的字符,比如上面一个土,下面一个口,念<a href="http://www.zdic.net/z/87/wy/20BB7.htm" target="_blank" rel="external">‘ji’</a>的那个字,它的Unicode码点是 <em>U+20BB7</em>,变成两个字节以后应该是 <em>\uD842\uDFB7</em> .在UTF-16编码里,需要由两个字节组成的字符,其中的每个字节就称为一个 <em>code unit</em> ,两个 <em>code unit</em> 组成一个 <em>surrogate pair</em>.  </p>
-<hr>
-<p>[3]:<em>surrogate pair</em> 不知道中文翻译成啥. 在UTF-16编码里,如有四个字节,两个 <em>code unit</em> 组成的字符,它就被称为 surrogate pair </p>
-<hr>
-<p>[4]:<em>Basic-Multilingual-Plane</em> 基本多语言平面. Unicode码点是由多个平面组成的,每个平面存放65536(2^16)个码点,其中第一个平面被称为 基本多语言平面 或者 BMP. 它包含了从 U+0000 到 U+FFFF 的码点,这些是各国最常用的字符.</p>
-<hr>
-<p>其他参考:<a href="http://www.ruanyifeng.com/blog/2014/12/unicode.html" target="_blank" rel="external">阮一峰老师写的Unicode资料</a></p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/encoding/">encoding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unicode/">unicode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utf-16/">utf-16</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-method-definations" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/18/method-definations/" class="article-date">
-  	<time datetime="2016-02-18T02:16:41.000Z" itemprop="datePublished">2016-02-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/18/method-definations/">method definitions</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从ECMAScript2015(ES6)开始,引入了一种在初始化对象的时候,给对象定义方法的简约语法.为原来给一个函数定义一个方法名的键值对语法提供了一种简写语法.</p>
-<h2 id="语法">语法</h2><pre><code>var obj = {
-  property( parameters… ) {},
-  *generator( parameters… ) {},
-// also with computed keys:
-  [<span class="link_label">property</span>](<span class="link_url"> parameters… </span>) {},
-  *[<span class="link_label">generator</span>](<span class="link_url"> parameters… </span>) {},
-// compare ES5 getter/setter syntax:
-  get property() {},
-  set property(value) {}
-};
-</code></pre><h2 id="描述">描述</h2><p>这种简写的语法类似于ES5引入的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">setter</a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set" target="_blank" rel="external">getter</a>语法</p>
-<p>比如下面的代码:</p>
-<pre><code><span class="keyword">var</span> obj = {
-  foo: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{},
-  bar: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}
-};
-</code></pre><p>现在你可以把他们简写成这样:</p>
-<pre><code>var obj = {
-  foo(){},
-  bar(){}     
-};
-</code></pre><p>简写generator方法:</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*" target="_blank" rel="external">Generator methods</a>也可以使用简写的语法.但是要注意,’<em>‘必须在属性名的前面,就是说 `</em> g(){}<code>是正确的,而</code>g *(){}` 是不对的.</p>
-<pre><code><span class="comment">// 使用一个属性名+函数 (ES6之前)</span>
-<span class="keyword">var</span> obj2 = {
-  g: <span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>{
-    <span class="keyword">var</span> index = <span class="number">0</span>;
-    <span class="keyword">while</span>(<span class="literal">true</span>)
-      <span class="keyword">yield</span> index++;
-  }
-};
-
-<span class="comment">// 同一个对象,使用简洁语法</span>
-<span class="keyword">var</span> obj2 = { 
-  * g() {
-    <span class="keyword">var</span> index = <span class="number">0</span>;
-    <span class="keyword">while</span>(<span class="literal">true</span>)
-      <span class="keyword">yield</span> index++;
-  }
-};
-
-<span class="keyword">var</span> it = obj2.g();
-<span class="built_in">console</span>.log(it.next().value); <span class="comment">// 0</span>
-<span class="built_in">console</span>.log(it.next().value); <span class="comment">// 1</span>
-</code></pre><h3 id="方法定义不是构造函数:">方法定义不是构造函数:</h3><p>方法定义的结果不是构造函数,尝试实例化它会返回一个<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" target="_blank" rel="external">Type</a>; </p>
-<pre><code><span class="keyword">var</span> obj = { 
-  <span class="keyword">method</span>() {},
-};
-new obj.<span class="keyword">method</span>; // <span class="type">TypeError</span>: obj.<span class="keyword">method</span> <span class="keyword">is</span> <span class="keyword">not</span> a constructor
-
-<span class="keyword">var</span> obj = { 
-  * g() {} 
-};
-new obj.g; // <span class="type">TypeError</span>: obj.g <span class="keyword">is</span> <span class="keyword">not</span> a constructor (changed <span class="keyword">in</span> <span class="type">ES2016</span>)
-</code></pre><h2 id="栗子">栗子</h2><h3 id="简单的场景">简单的场景</h3><pre><code><span class="keyword">var</span> obj={
-    a:<span class="string">'foo'</span>,
-    b(){<span class="keyword">return</span> <span class="keyword">this</span>.a}
-}
-<span class="built_in">console</span>.log(obj.b());    <span class="comment">//'foo'</span>
-</code></pre><h3 id="计算后的属性名">计算后的属性名</h3><p>简洁语法也支持计算后的属性名</p>
-<pre><code>var bar = {
-  foo0 : function (){<span class="keyword">return</span> <span class="number">0</span>;},
-  foo1(){<span class="keyword">return</span> <span class="number">1</span>;},
-  [<span class="string">"foo"</span> + <span class="number">2</span>](){<span class="keyword">return</span> <span class="number">2</span>;},
-};
-
-console.<span class="built_in">log</span>(bar.foo0()); <span class="comment">// 0</span>
-console.<span class="built_in">log</span>(bar.foo1()); <span class="comment">// 1</span>
-console.<span class="built_in">log</span>(bar.foo2()); <span class="comment">// 2</span>
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions" target="_blank" rel="external">原文地址</a></p>
-
+</code></pre>
         
           <!-- show an end symbol if the article is fully displayed -->
           <hr/>
@@ -534,369 +934,6 @@ console.<span class="built_in">log</span>(bar.foo2()); <span class="comment">// 
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-function-asterisk" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/16/function-asterisk/" class="article-date">
-  	<time datetime="2016-02-16T08:47:47.000Z" itemprop="datePublished">2016-02-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/16/function-asterisk/">function asterisk</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>function*</strong>声明(<code>function</code> 关键字加上一个星号)定义一个生成器函数,返回一个生成器(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator" target="_blank" rel="external">Generator</a>)对象.</p>
-<p>你还可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction" target="_blank" rel="external">GeneratorFunction</a>构造函数以及<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function*" target="_blank" rel="external">function* expression</a>来定义生成器函数.</p>
-<h2 id="语法">语法</h2><pre><code>function* <span class="built_in">name</span>([<span class="built_in">param</span>[, <span class="built_in">param</span>[, ... <span class="built_in">param</span>]]]) {
-    statements
-}
-</code></pre><p><strong>name</strong></p>
-<p>函数的名字</p>
-<p><strong>param</strong></p>
-<p>传递给函数的参数的名字.一个函数最多可以带有255个参数.</p>
-<p><strong>statements</strong></p>
-<p>statements由函数体组成.</p>
-<h2 id="描述">描述</h2><p>Generators 是可以退出和再次进入的函数.它的上下文(变量的绑定)在整个重新进入的过程中一直会被保存.</p>
-<p>调用一个generator函数,并不会立刻执行函数体;而是返回一个函数的迭代器(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterator" target="_blank" rel="external">iterator</a>).<br>每当调用迭代器的 <code>next()</code> 方法时,generator的函数体就会被执行,直到它遇到第一个<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield" target="_blank" rel="external">yield</a>表达式. 它指定了迭代器的返回值,如果使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*" target="_blank" rel="external">yield*</a>,则代理到另一个generator函数. <code>next()</code>方法返回一个对象,对象的 <code>value</code> 属性的值是 <code>yield</code> 表达式的值; <code>done</code> 属性的值表明该generator是否已经执行完了全部的yield. 详见<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/next" target="_blank" rel="external">Generator.prototype.next()</a>.<br>当调用迭代器的 <code>return(param)</code> 方法时,Generator被关闭,返回参数 <code>param</code> 的值,详见 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return" target="_blank" rel="external">Generator.prototype.return()</a> </p>
-<h2 id="栗子">栗子</h2><h3 id="简单的栗子">简单的栗子</h3><pre><code>function* idMaker(){
-  <span class="keyword">var</span> index = 0;
-  <span class="keyword">while</span>(index &lt; 3)
-    yield index++;
-}
-
-<span class="keyword">var</span> <span class="keyword">gen</span> = idMaker();
-
-console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// 0</span>
-console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// 1</span>
-console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().done);  <span class="comment">// false</span>
-console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// 2</span>
-console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().done);  <span class="comment">// true</span>
-console.<span class="literal">log</span>(<span class="keyword">gen</span>.next().value); <span class="comment">// undefined</span>
-</code></pre><h3 id="使用_yield*_的栗子">使用 <code>yield*</code> 的栗子</h3><pre><code><span class="function"><span class="keyword">function</span>* <span class="title">anotherGenerator</span>(<span class="params">i</span>) </span>{
-  <span class="keyword">yield</span> i + <span class="number">1</span>;
-  <span class="keyword">yield</span> i + <span class="number">2</span>;
-  <span class="keyword">yield</span> i + <span class="number">3</span>;
-}
-
-<span class="function"><span class="keyword">function</span>* <span class="title">generator</span>(<span class="params">i</span>)</span>{
-  <span class="keyword">yield</span> i;
-  <span class="keyword">yield</span>* anotherGenerator(i);
-  <span class="keyword">yield</span> i + <span class="number">10</span>;
-}
-
-<span class="keyword">var</span> gen = generator(<span class="number">10</span>);
-
-<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 10</span>
-<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 11</span>
-<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 12</span>
-<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 13</span>
-<span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 20</span>
-</code></pre><blockquote>
-<p>这里需要注意,使用yield*返回的代理迭代器拥有自己的闭包环境,两个i不是同一个i,如果把另一个参数换成a,可能更清晰一点…</p>
-</blockquote>
-<h3 id="生成器不是构造函数">生成器不是构造函数</h3><p>下面这样做是不行的:</p>
-<pre><code><span class="function"><span class="keyword">function</span>* <span class="title">f</span>(<span class="params"></span>) </span>{}
-<span class="keyword">var</span> obj = <span class="keyword">new</span> f; <span class="comment">// throws "TypeError: f is not a constructor"</span>
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*" target="_blank" rel="external">原文地址</a> </p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-setter" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/16/setter/" class="article-date">
-  	<time datetime="2016-02-16T03:45:01.000Z" itemprop="datePublished">2016-02-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/16/setter/">setter</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>set</strong>语法把对象的某个属性绑定到一个函数上,当<strong>设置</strong>该属性的时候执行这个函数</p>
-<h2 id="语法">语法</h2><pre><code><span class="collection">{set prop<span class="list">(<span class="keyword"><span class="built_in">val</span></span>)</span> <span class="collection">{ . . . }</span>}</span>
-<span class="collection">{set <span class="collection">[expression]</span><span class="list">(<span class="keyword"><span class="built_in">val</span></span>)</span> <span class="collection">{ . . . }</span>}</span>
-</code></pre><h3 id="参数">参数</h3><p><strong>prop</strong></p>
-<p>需要绑定到函数的属性名</p>
-<p><strong>val</strong></p>
-<p>一个变量的别名,它的值就是想要赋值给 <code>prop</code> 属性的值.</p>
-<p><strong>表达式</strong></p>
-<p>从ECMAScript 6 开始,你可以使用一个表达式来得到一个计算后的属性名来绑定所给的函数.</p>
-<p><strong>描述</strong></p>
-<p>在JavaScript里,一个setter可以实现当指定的属性试图被改变的时候执行一个函数.Setter通常和getter结合使用来创建一个伪状态.属性的setter不能给该属性一个确定的属性值.</p>
-<p>使用 <code>set</code> 的时候需要注意一下几点:</p>
-<ul>
-<li>它可以拥有一个id,id可以是数字也可以是字符串</li>
-<li>它必须拥有一个参数.不能少也不能多(<a href="http://whereswalden.com/2010/08/22/incompatible-es5-change-literal-getter-and-setter-functions-must-now-have-exactly-zero-or-one-arguments/" target="_blank" rel="external">查看更多</a>)</li>
-<li>在对象字面量里,一个属性只能有一个setter,并且setter绑定函数的属性不能再指定它的值,反之亦然.({ set x(v) { }, set x(v) { } } and { x: …, set x(v) { } } 类似于这样的是不行的.)</li>
-</ul>
-<p>setter可以通过 <code>delete</code> 方法删除</p>
-<h2 id="栗子">栗子</h2><h3 id="在对象初始化的时候给属性添加setter">在对象初始化的时候给属性添加setter</h3><p>这会给 <code>o</code> 对象添加一个名为 <code>current</code> 的伪属性,每当它被分配属性值的时候, <code>log</code> 属性会被更新,被分配的属性值会被记录.</p>
-<pre><code>var o = {
-  <span class="function"><span class="built_in">set</span> <span class="title">current</span> <span class="params">(str)</span> </span>{
-    <span class="keyword">this</span>.<span class="built_in">log</span>[<span class="keyword">this</span>.<span class="built_in">log</span>.length] = str;
-  },
-  <span class="built_in">log</span>: []
-}
-
-console.<span class="built_in">log</span>(o.current);
-o.current = <span class="number">1</span>;
-console.<span class="built_in">log</span>(o.<span class="built_in">log</span>);
-o.current = <span class="number">2</span>;
-console.<span class="built_in">log</span>(o.<span class="built_in">log</span>);
-</code></pre><p>注意,current属性并没有被定义,试图访问它会得到undefined.Note that current is not defined and any attempts to access it will result in undefined.</p>
-<h3 id="使用_delete_操作来删除setter">使用 <code>delete</code> 操作来删除setter</h3><p>如果你想把setter删除,只需要使用 <code>delete</code> 就行了.</p>
-<pre><code><span class="operator"><span class="keyword">delete</span> o.<span class="keyword">current</span>;</span>
-</code></pre><h3 id="使用_defineProperty_给一个既存的对象添加setter">使用 <code>defineProperty</code> 给一个既存的对象添加setter</h3><p>想要在任何时间给一个既存的对象添加setter ,可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">Object.defineProperty()</a></p>
-<pre><code><span class="keyword">var</span> o = { a:<span class="number">0</span> };
-
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">"b"</span>, { set: <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>{ <span class="keyword">this</span>.a = x / <span class="number">2</span>; } });
-
-o.b = <span class="number">10</span>; <span class="comment">// Runs the setter, which assigns 10 / 2 (5) to the 'a' property</span>
-<span class="built_in">console</span>.log(o.a) <span class="comment">// 5</span>
-</code></pre><h3 id="使用计算后的属性名">使用计算后的属性名</h3><blockquote>
-<p>注意: 计算后的属性名属于试验中技术, ECMAScript 6 的目标的一部分, 还没有被浏览器广泛支持. 在不支持的环境下会触发语法错误.<br>(经过测试,在目前的chrome里是可以用的.)</p>
-</blockquote>
-<pre><code><span class="keyword">var</span> expr = <span class="string">"foo"</span>;
-
-<span class="keyword">var</span> obj = {
-  baz: <span class="string">"bar"</span>,
-  <span class="keyword">set</span> [expr](v) { <span class="keyword">this</span>.baz = v; }
-};
-
-<span class="built_in">console</span>.log(obj.baz); <span class="comment">// "bar"</span>
-obj.foo = <span class="string">"baz"</span>;      <span class="comment">// run the setter</span>
-<span class="built_in">console</span>.log(obj.baz); <span class="comment">// "baz"</span>
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">查看原文</a></p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-getter" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/15/getter/" class="article-date">
-  	<time datetime="2016-02-15T09:55:47.000Z" itemprop="datePublished">2016-02-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/15/getter/">getter</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>get</strong>语法把对象的某个属性绑定到一个函数上,当<strong>访问</strong>该属性的时候执行这个函数</p>
-<h2 id="语法">语法</h2><pre><code>{get prop() { ... } }
-{get [<span class="link_label">expression</span>](<span class="link_url"></span>) { ... } }
-</code></pre><h3 id="参数">参数</h3><p><strong>prop</strong></p>
-<p>需要绑定到函数的属性名</p>
-<p><strong>表达式</strong></p>
-<p>从ECMAScript 6 开始,你可以使用一个表达式来得到一个计算后的属性名来绑定所给的函数.</p>
-<h2 id="描述">描述</h2><p>有时候,你会想要让属性值是一个动态计算出的值,或者映射一个外部变量的状态而不需要显式地调用一个方法.在JavaScript里,你可以通过getter来实现它. 同一个对象的同一个属性不能同时绑定getter函数并且指定拥有一个值,但可以通过结合使用getter和setter来创建一个伪属性.</p>
-<p>使用getter的时候需要注意以下几点:</p>
-<ul>
-<li>它可以拥有一个id,id可以是数字也可以是字符串</li>
-<li>它不能拥有参数.一个也不能有.(<a href="http://whereswalden.com/2010/08/22/incompatible-es5-change-literal-getter-and-setter-functions-must-now-have-exactly-zero-or-one-arguments/" target="_blank" rel="external">查看更多</a>)</li>
-<li>在对象字面量里,一个属性只能有一个getter,并且getter绑定函数的属性不能再指定它的值,反之亦然.({ get x() { }, get x() { } } and { x: …, get x() { } } 类似于这样的是不行的.)</li>
-</ul>
-<p>getter可以通过 <code>delete</code> 方法删除</p>
-<h2 id="栗子">栗子</h2><h3 id="在对象初始化的时候给属性添加getter">在对象初始化的时候给属性添加getter</h3><p>这会给 <code>ocj</code> 对象创建一个名为 <code>latest</code> 的伪属性,在打印它的时候会返回数组的最后一个值.</p>
-<pre><code>var <span class="keyword">log</span> = [<span class="string">'test'</span>];
-var obj = {
-  get latest () {
-    <span class="keyword">if</span> (<span class="keyword">log</span>.<span class="keyword">length</span> == <span class="number">0</span>) <span class="keyword">return</span> undefined;
-    <span class="keyword">return</span> <span class="keyword">log</span>[<span class="keyword">log</span>.<span class="keyword">length</span> - <span class="number">1</span>]
-  }
-}
-console.<span class="keyword">log</span> (obj.latest); <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"test"</span>.
-</code></pre><p>注意,重新给 <code>latest</code> 属性指定值不会生效:</p>
-<pre><code>var <span class="keyword">log</span> = [<span class="string">'test'</span>];
-var obj = {
-  get latest () {
-    <span class="keyword">if</span> (<span class="keyword">log</span>.<span class="keyword">length</span> == <span class="number">0</span>) <span class="keyword">return</span> undefined;
-    <span class="keyword">return</span> <span class="keyword">log</span>[<span class="keyword">log</span>.<span class="keyword">length</span> - <span class="number">1</span>]
-  }
-}
-console.<span class="keyword">log</span> (obj.latest); <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"test"</span>.
-<span class="keyword">log</span>.<span class="keyword">push</span>(<span class="string">'bunny'</span>);
-console.<span class="keyword">log</span>(obj.latest);  <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"bunny"</span>
-obj.latest = <span class="number">3</span>;
-console.<span class="keyword">log</span>(obj.latest);  <span class="regexp">//</span> Will <span class="keyword">return</span> <span class="string">"bunny"</span> still
-</code></pre><h3 id="使用_delete_操作来删除getter">使用 <code>delete</code> 操作来删除getter</h3><p>如果你想把getter删除,只需要使用 <code>delete</code> 就行了.</p>
-<pre><code><span class="operator"><span class="keyword">delete</span> obj.latest;</span>
-</code></pre><h3 id="使用_defineProperty_给一个既存的对象添加getter">使用 <code>defineProperty</code> 给一个既存的对象添加getter</h3><p>想要在任何时间给一个既存的对象添加getter ,可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">Object.defineProperty()</a></p>
-<pre><code><span class="keyword">var</span> o = { a:<span class="number">0</span> }
-
-<span class="built_in">Object</span>.defineProperty(o, <span class="string">"b"</span>, { get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{ <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>; } });
-
-<span class="built_in">console</span>.log(o.b) <span class="comment">// Runs the getter, which yields a + 1 (which is 1)</span>
-</code></pre><h3 id="使用计算后的属性名">使用计算后的属性名</h3><blockquote>
-<p>注意: 计算后的属性名属于试验中技术, ECMAScript 6 的目标的一部分, 还没有被浏览器广泛支持. 在不支持的环境下会触发语法错误.<br>(经过测试,在目前的chrome里是可以用的.)</p>
-</blockquote>
-<pre><code>var expr = "foo";
-
-var obj = {
-  get [<span class="link_label">expr</span>](<span class="link_url"></span>) { return "bar"; }
-};
-
-console.log(obj.foo); // "bar"
-</code></pre><h3 id="智能_/_重写自身_/_懒getter">智能 / 重写自身 / 懒getter</h3><p>getter提供了一种定义对象属性的方式,但是它的值要到获取属性值的时候才会被计算. 也就是说, getter会延迟计算属性值,直到需要用到这个值,所以如果这个值一直用不到,则永远不需要为计算它而付出开销.</p>
-<p>另外一个对getter进行额外优化的技术方案是: 智能getters 或 <a href="https://en.wikipedia.org/wiki/Memoization" target="_blank" rel="external">制表</a>getters. 它可以延迟计算属性值,并且把计算结果进行缓存,让之后的访问直接获取缓存结果. 属性值会在第一次访问时进行计算并缓存,然后之后的访问会直接读取缓存结果而不是再次计算.这在以下场景下是很实用的:</p>
-<ul>
-<li>如果计算一个属性值会花费很多代价(占取很多随机内容,消耗CPU时间,产生大量工作线程,检索远程文件,等)</li>
-<li>属性值目前暂时不会用到,而是之后才会用到,甚至一直都用不到.</li>
-<li>如果它要被多次使用到,但是这个值不会变化,每次都不需要重新计算,甚至不能重新计算.</li>
-</ul>
-<p>也就是说,如果某个属性值是可能会变化的,你就不能使用懒getter,因为它不会重新计算值.</p>
-<p>在下面的这个例子里,对象有一个getter作为它的notifier属性,在获取属性的时候,这个属性被删除后再次添加,但新增属性所拥有的就是普通的属性值.最后这个值被返回.</p>
-<pre><code><span class="keyword">get</span> notifier() {
-  <span class="keyword">delete</span> <span class="keyword">this</span>.notifier;
-  <span class="keyword">return</span> <span class="keyword">this</span>.notifier = <span class="built_in">document</span>.getElementById(<span class="string">"bookmarked-notification-anchor"</span>);
-},
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external">查看原文</a></p>
-
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es5/">es5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 	</div>
 
       
@@ -920,7 +957,7 @@ console.log(obj.foo); // "bar"
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
@@ -928,7 +965,7 @@ console.log(obj.foo); // "bar"
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 code_bunny
+    		&copy; 2017 code_bunny
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

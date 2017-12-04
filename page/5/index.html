@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/JSX/" style="font-size: 10px;">JSX</a> <a href="/tags/React/" style="font-size: 12.5px;">React</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -191,11 +191,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-hexo-build-two" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-learn-grunt-one" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/03/12/hexo-build-two/" class="article-date">
-  	<time datetime="2015-03-12T09:59:53.000Z" itemprop="datePublished">2015-03-12</time>
+      <a href="/2015/05/03/learn-grunt-one/" class="article-date">
+  	<time datetime="2015-05-03T07:47:22.000Z" itemprop="datePublished">2015-05-03</time>
 </a>
     </div>
   
@@ -208,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/12/hexo-build-two/">使用hexo搭建github.io博客(二)</a>
+      <a class="article-title" href="/2015/05/03/learn-grunt-one/">grunt学习实战(1)</a>
     </h1>
   
 
@@ -217,102 +217,617 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">使用hexo搭建github.io博客(一)</a>这篇文章我是写在博客园上的,现在既然成功的搭建了github.io博客,那我就拿这篇开刀,真正的在我的github博客上发布一篇文章吧~</p>
-<p>在搭建(一)完成后,就有了一个空的博客,里面只有一篇’Hello World’.现在就来学习如何写博客</p>
-<h3 id="在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的-">在这之前,有很重要的一点需要补充,就是一定要打开github发来的邮件,然后点击验证,否则后面的操作都是无法实现的.</h3><p><strong>一.配置整站</strong></p>
-<p>打开hexo目录下的<code>_config.yml</code>文件,做如下配置,如果没有写到的,那就是保持默认:</p>
-<pre><code># Hexo Configuration
-## Docs: http://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
+        <p>grunt基础知识我就不再写了,直接看<a href="http://gruntjs.com/" target="_blank" rel="external">官网</a>就可以了.官网的教程还是挺清楚的.</p>
+<p>大概看了一点以后,打算自己试试看,就按照现在公司的项目需求,拿来练练手.需求如下:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150503.01.png" alt="项目结构"></p>
+<p><code>gruntProject</code>根目录下,有html页面,less文件夹,jssrc文件夹.<br>less文件夹下,有一些公共的less文件,像<code>global.less</code>,<code>mixins.less</code>,<code>variables.less</code>.</p>
+<p>像index,buy,这些比较大的页面,会有一个文件夹,把它里面的每个版块分别写入一个less文件,而根目录下的index.less,则引入了index文件夹下的less文件.</p>
+<p><code>jssrc</code>文件夹下则是每个页面引入的js,至于jq等框架,则不在这个根目录下,在更外层,这里暂时不需要考虑.</p>
+<p>我们的需求就是,<code>404.less</code>,<code>buy.less</code>,<code>index.less</code>,这些页面需要直接引用的less,是需要被编译成css,并且压缩的,压缩后输出在根目录的<code>css</code>文件夹下.而公共的less,则不需要编译,另外,less文件夹下的文件夹里的less文件,也是不需要编译并输出的.说白了就是,一个页面引入一个css,其它作为依赖被引入的less文件,都不需要编译.而js文件,每个都需要压缩,压缩后输出到js文件夹下.</p>
+<hr>
+<p>这样,一共需要用到四个插件:</p>
+<ol>
+<li>编译less的插件: <em>grunt-contrib-less</em></li>
+<li>压缩js的插件: <em>grunt-contrib-uglify</em></li>
+<li>实时监测的插件: <em>grunt-contrib-watch</em></li>
+<li>加载所有插件的插件: <em>load-grunt-tasks</em></li>
+</ol>
+<hr>
+<p>首先创建一个<code>package.json</code>文件: <em>npm init</em></p>
+<p>然后安装插件:</p>
+<ol>
+<li>安装grunt-cli: <em>sudo npm install -g grunt-cli</em></li>
+<li>安装grunt: <em>npm install grunt –save-dev</em></li>
+<li>安装load-grunt-tasks: <em>npm install load-grunt-tasks –save-dev</em></li>
+<li>安装另外几个插件,不赘述</li>
+</ol>
+<p>然后开始书写<code>Gruntfile.js</code>:</p>
+<pre><code><span class="pi">'use strict'</span>;
 
-# Site
-title: code_bunny's blog                      #设置header里的title
-subtitle: never giveup reading!               #副标题
-description: never giveup reading!            #描述
-author: code_bunny                            #作者名,会显示在左下角
-email: 973295131@qq.com                       #邮箱呗
-language: zh-CN                               #设置中文
-timezone:
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>{
 
-# URL
-## If your site is put in a subdirectory, <span class="operator"><span class="keyword">set</span> <span class="keyword">url</span> <span class="keyword">as</span> <span class="string">'http://yoursite.com/child'</span> <span class="keyword">and</span> root <span class="keyword">as</span> <span class="string">'/child/'</span>
-<span class="keyword">url</span>: <span class="keyword">http</span>://yoursite.com
-root: /
-permalink: :<span class="keyword">year</span>/:<span class="keyword">month</span>/:<span class="keyword">day</span>/:title/
-permalink_defaults:
+    <span class="built_in">require</span>(<span class="string">'load-grunt-tasks'</span>)(grunt)
 
-# <span class="keyword">Directory</span>
-source_dir: <span class="keyword">source</span>
-public_dir: <span class="keyword">public</span>
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
-skip_render:
+    <span class="comment">// Project configuration.</span>
+    grunt.initConfig({
+        pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),
+        watch: {
+            files:[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+            tasks:[<span class="string">'default'</span>]
+        },
+        uglify: {
+            build: {
+                expand: <span class="literal">true</span>,
+                cwd: <span class="string">'jssrc/'</span>,
+                src: <span class="string">'*.js'</span>,
+                dest: <span class="string">'js/'</span>,
+                ext: <span class="string">'.min.js'</span>,
+                extDot: <span class="string">'last'</span>
+            }
+        },
+        less: {
+            options: {
+                compress:<span class="literal">true</span>
+            },
+            build: {
+                expand: <span class="literal">true</span>,
+                cwd: <span class="string">'less/'</span>,
+                src: [<span class="string">'*.less'</span>,<span class="string">'!global.less'</span>,<span class="string">'!mixins.less'</span>,<span class="string">'!variables.less'</span>],
+                dest: <span class="string">'css/'</span>,
+                ext: <span class="string">'.min.css'</span>,
+                extDot: <span class="string">'last'</span>
+            }
+        }
+    });
 
-# Writing
-new_post_name: :title.md # <span class="keyword">File</span> <span class="keyword">name</span> <span class="keyword">of</span> <span class="keyword">new</span> posts
-default_layout: post
-titlecase: <span class="literal">false</span> # Transform title <span class="keyword">into</span> titlecase
-external_link: <span class="literal">true</span> # <span class="keyword">Open</span> <span class="keyword">external</span> links <span class="keyword">in</span> <span class="keyword">new</span> tab
-filename_case: <span class="number">0</span>
-render_drafts: <span class="literal">false</span>
-post_asset_folder: <span class="literal">false</span>
-relative_link: <span class="literal">false</span>
-future: <span class="literal">true</span>
-highlight:
-  <span class="keyword">enable</span>: <span class="literal">true</span>
-  line_number: <span class="literal">true</span>
-  tab_replace:
+    <span class="comment">// 默认被执行的任务列表。</span>
+    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
 
-# <span class="keyword">Category</span> &amp; Tag
-default_category: uncategorized
-category_map:
-tag_map:
+};
+</code></pre><p>下面分析一下这个文件:</p>
+<p>1.基本格式:</p>
+<pre><code><span class="pi">'use strict'</span>;
 
-# <span class="built_in">Date</span> / <span class="keyword">Time</span> <span class="keyword">format</span>
-## Hexo uses Moment.js <span class="keyword">to</span> <span class="keyword">parse</span> <span class="keyword">and</span> display <span class="built_in">date</span>
-## You can customize the <span class="built_in">date</span> <span class="keyword">format</span> <span class="keyword">as</span> defined <span class="keyword">in</span>
-## <span class="keyword">http</span>://momentjs.com/docs/#/displaying/<span class="keyword">format</span>/
-<span class="keyword">date_format</span>: YYYY-MM-DD
-<span class="keyword">time_format</span>: HH:mm:ss
+<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>{
 
-# Pagination
-## <span class="keyword">Set</span> per_page <span class="keyword">to</span> <span class="number">0</span> <span class="keyword">to</span> <span class="keyword">disable</span> pagination
-per_page: <span class="number">5</span>                               #设置每页显示多少篇文章
-pagination_dir: page
+    ...
 
-# Extensions
-## Plugins: <span class="keyword">http</span>://hexo.io/plugins/
-## Themes: <span class="keyword">http</span>://hexo.io/themes/
-theme: yilia                              #设置要使用的模板,暂时不要改,以后会说到怎么换模板
+};
+</code></pre><hr>
+<p>2.加载<code>package.json</code>的devDependencies里的插件:</p>
+<pre><code><span class="function"><span class="title">require</span><span class="params">(<span class="string">'load-grunt-tasks'</span>)</span><span class="params">(grunt)</span></span>
+</code></pre><hr>
+<p>3.配置任务:</p>
+<pre><code><span class="tag">grunt</span><span class="class">.initConfig</span>({
 
-# Deployment 这些还是按照上一篇配置
-## Docs: <span class="keyword">http</span>://hexo.io/docs/deployment.html
-deploy:
-  <span class="keyword">type</span>: git
-  repository: https://github.com/jinyanhuan/jinyanhuan.github.io
-  branch: <span class="keyword">master</span></span>
-</code></pre><p><strong>二.添加新文章</strong></p>
-<p>在hexo所在的文件夹下右键打开<code>Git Bash</code></p>
-<p>执行:<em>hexo new “my new post”</em></p>
+    ...
+
+})
+</code></pre><hr>
+<p>4.获取<code>package.json</code>里的参数(这个例子用不到):</p>
+<pre><code>pkg: grunt<span class="class">.file</span><span class="class">.readJSON</span>(<span class="string">'package.json'</span>),
+</code></pre><hr>
+<p>5.配置<code>uglify</code>任务:</p>
+<pre><code><span class="tag">uglify</span>: {
+    <span class="tag">build</span>: {
+        <span class="attribute">expand</span>: true,
+        <span class="attribute">cwd</span>: <span class="string">'jssrc/'</span>,
+        <span class="attribute">src</span>: <span class="string">'*.js'</span>,
+        <span class="attribute">dest</span>: <span class="string">'js/'</span>,
+        <span class="attribute">ext</span>: <span class="string">'.min.js'</span>,
+        <span class="attribute">extDot</span>: <span class="string">'last'</span>
+    }
+}
+</code></pre><p>这里使用的是<strong>动态配置</strong>的方法,就是说,不是针对某几个文件,而是所有匹配的文件.</p>
+<ul>
+<li><em>expand</em>: <em>true</em> 开始动态配置</li>
+<li><em>cwd</em>: 路径,是下面的<em>src</em>的相对路径</li>
+<li><em>src</em>: 需要压缩的文件,相对于<em>cwd</em>路径,<em>\</em>.js<em>表示</em>cwd<em>根目录下的所有js文件.<em>*(不包括子文件夹下的js)</em></em></li>
+<li><em>dest</em>: 压缩后输入的js的路径.不是相对于<em>cwd</em>哦,就是相对于项目根目录.</li>
+<li><em>ext</em>: 压缩后的文件的后缀名替换.</li>
+<li><em>extDot</em>: 从文件名里的第几个句点开始替换.这里定义<em>last</em>,就表示从最后一个句点开始替换.比如<code>a.b.c.js</code>,从最后一个句点开始替换,就是<code>.js</code>部分替换成<em>ext</em>.</li>
+</ul>
+<p>这样做的好处是不需要经常改动配置文件,但是当文件非常多,并且开启了<code>watch</code>任务的时候,对电脑的性能是个很大的挑战.</p>
+<hr>
+<p>6.配置<code>less</code>任务:</p>
+<pre><code><span class="tag">less</span>: {
+    <span class="tag">options</span>: {
+        <span class="tag">compress</span><span class="pseudo">:true</span>
+    },
+    <span class="tag">build</span>: {
+        <span class="attribute">expand</span>: true,
+        <span class="attribute">cwd</span>: <span class="string">'less/'</span>,
+        <span class="attribute">src</span>: [<span class="string">'*.less'</span>,<span class="string">'!global.less'</span>,<span class="string">'!mixins.less'</span>,<span class="string">'!variables.less'</span>],
+        <span class="attribute">dest</span>: <span class="string">'css/'</span>,
+        <span class="attribute">ext</span>: <span class="string">'.min.css'</span>,
+        <span class="attribute">extDot</span>: <span class="string">'last'</span>
+    }
+}
+</code></pre><p>less任务的options中设置<em>compress</em>属性为<em>true</em>,表示编译后需要压缩.</p>
+<p>同样,less任务也使用动态配置,它和<code>uglify</code>任务的配置有一点不同:</p>
+<p><em>src</em>里排除了<code>global.lee</code>,<code>mixins.less</code>,<code>variables.less</code>,这些全局的,不需要编译的文件.</p>
+<hr>
+<p>7.配置<code>watch</code>任务:</p>
+<pre><code><span class="tag">watch</span>: <span class="rules">{
+    <span class="rule"><span class="attribute">files</span>:<span class="value">[<span class="string">'jssrc/*.js'</span>,<span class="string">'less/**/*.less'</span>],
+    tasks:[<span class="string">'default'</span>]
+</span></span></span>}
+</code></pre><p><em>files</em>属性配置需要监测变化的文件,<em>tasks</em>属性配置文件变化以后需要执行的任务.</p>
+<p>这里再次用到了一个很重要的知识点: <em>/\</em>.js<em> 表示目录下所有的js文件,<strong>不包括</strong>目录的子目录下的js文件. </em>/**/*.less* 表示目录下的所有less文件,包括目录的子目录下的less文件.</p>
+<hr>
+<p>8.注册<code>default</code>任务:</p>
+<pre><code><span class="atom">grunt</span>.<span class="atom">registerTask</span>(<span class="string">'default'</span>, [<span class="string">'uglify'</span>,<span class="string">'less'</span>]);
+</code></pre><p>把默认要执行的任务定义为<code>uglify</code>任务和<code>less</code>任务.</p>
+<hr>
+<p>然后执行一下<em>grunt</em>,就可以看到文件被编译压缩好了:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150503.02.png" alt="编译压缩"></p>
+<p>开启实时监测模式: <em>grunt watch</em>, 然后修改less或者js,都会实时编译压缩.</p>
+<hr>
+<p><a href="https://github.com/OOP-Code-Bunny/grunt/tree/master/gruntProject-1" target="_blank" rel="external">查看源码</a></p>
 <blockquote>
-<p>注意,这里的”my new post”要有引号,必须是英文,不能是数字哦</p>
+<p>其实grunt就是使用一个又一个的插件,它的复杂在于插件很多都是英文的,比较难看懂,锻炼英文水平挺好~还有就是当多个插件混合使用的时候,尤其是使用了yeoman,下次我就会学习使用了yeoman以后再使用grunt.到时候再来写博客.</p>
 </blockquote>
-<p>然后在<code>E:\hexo\source\_posts\</code>下面找到这个名为<code>my new post.md</code>的文件,在编辑器里打开它.</p>
-<p>如下配置:</p>
-<pre><code>title: <span class="string">"my new post"</span>             <span class="preprocessor">#可以随意修改,可以是中文</span>
-date: <span class="number">2015</span>-<span class="number">03</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">54</span>:<span class="number">06</span>        <span class="preprocessor">#创建的时间,一般不改</span>
-categories: blog                 <span class="preprocessor">#文章文类</span>
-tags: [标签<span class="number">1</span>,便签<span class="number">2</span>]                 <span class="preprocessor">#文章tag标签,多个标签用逗号隔开</span>
----
-<span class="preprocessor">#这里开始使用markdown语法书写文章的内容</span>
-</code></pre><p>执行: <em>hexo generate</em> 生成</p>
-<p>执行: <em>hexo server</em> 在本地预览</p>
-<p>没有问题后,执行: <em>hexo deploy</em> 发布到github</p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grunt/">grunt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端工程化/">前端工程化</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-less-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/26/less-in-webstorm/" class="article-date">
+  	<time datetime="2015-04-26T05:23:58.000Z" itemprop="datePublished">2015-04-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/26/less-in-webstorm/">在webstorm中配置less的自动编译</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇说了使用webstorm自动编译sass,这篇说说怎么自动编译less,其实是差不多的.</p>
+<p>由于我的hexo从原来的windows搬到了mac os 上,顺便也当练练手,试一下.</p>
+<p>首先,需要下载编译less的包,执行 <em>npm install -g less</em> (如果是mac下,需要加上sudo)</p>
+<p>安装完以后它会显示你安装的路径,这个路径需要记下来,后面会用到.</p>
+<p>下面几步和sass是一样的,只是选择的是less</p>
+<p>点击左上角的<code>File</code>→<code>Settings</code>→<code>File Watchers</code></p>
 <blockquote>
-<p>现在为止，就已经搭建起博客，进行一些基本配置，并学会了怎么发表文章。下一篇讲解怎么更换博客主题,让博客变得美美哒</p>
+<p>在mac os下,应该是<code>WebStorm</code>→<code>Preferences</code>→<code>Tools</code>→<code>File Watchers</code></p>
+</blockquote>
+<p>在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择less</p>
+<p>按照下图进行配置:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.01.png" alt="webstorm配置less自动编译1"></p>
+<p>其中有两个选项是需要修改配置的:</p>
+<p>1.<em>Program</em>:</p>
+<p>这里填写的是less编译包安装的路径,就是前面一开始要记下来的那个路径.</p>
+<p>2.<em>Outputpaths to refresh</em>:</p>
+<p>这里填写的是less编译后的css文件的路径,和sass里的Arguments参数一样,这里的<code>$FileParentDir$</code>表示的是less文件所在的文件夹的父级文件夹,而不是less文件的父文件夹.</p>
+<p>和sass一样,它只能编译你打开的项目里的文件</p>
+<p>比如打开<code>test1</code>项目,就可以自动编译less:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.02.png" alt="webstorm配置less自动编译2"></p>
+<p><strong>下面说个比较复杂的功能,sass和其它file watcher都一样用</strong></p>
+<p>在配置<em>Outputpaths to refresh</em>这个参数,以及sass里配置<em>Arguments</em>参数的时候,都用到了’$FileParentDir$’这个参数,那么这个是哪里来的? 如果我还有其它配置路径的需求,要怎么做呢?</p>
+<p>再回去看下的配置的图:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.01.png" alt="webstorm配置less自动编译1"></p>
+<p>可以看到,在每个参数的后面都有个按钮,叫 <code>insert macro...</code> 打开这个,就可以看到有哪些参数是可以配置的,选中以后,它会按照你当前打开的文件来举例说明这个参数的结果是什么.</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.03.png" alt="webstorm配置less自动编译3"></p>
+<p>比如这个 $FileName 就是当前文件的名字,其它的每个都可以点击查看,点击insert就插入这个参数.</p>
+<p>举个栗子,我工作中需要用到这样的路径: less文件夹下按照模块分,公共部分直接在less文件夹下,其它的各个板块分别在各自的文件夹下,比如index模块,就在index文件夹下,最后编译出来的css都到css文件夹下:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150426.04.png" alt="webstorm配置less自动编译4"></p>
+<p>就可以这样配置<em>Outputpaths to refresh</em>:</p>
+<p><em>\$ProjectFileDir\$/css/\$FileNameWithoutExtension\$.css</em></p>
+<blockquote>
+<p>这样,webstorm自带的配置方法已经可以满足很多需求了,如果项目架构实在太复杂,那只能移步grunt或者fis了,后续会继续学习grunt.</p>
+</blockquote>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webstorm/">webstorm</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-sass-in-webstorm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/03/sass-in-webstorm/" class="article-date">
+  	<time datetime="2015-04-03T10:30:04.000Z" itemprop="datePublished">2015-04-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/03/sass-in-webstorm/">在webstorm中配置sass的自动编译</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webstorm支持sass的同步编译,也就是即写即编译,并且可以指定编译后的css的目录.</p>
+<p>本文使用的webstorm为8.0版本</p>
+<p>点击左上角的<code>File</code>→<code>Settings</code>→<code>File Watchers</code></p>
+<p>在弹窗的窗口的右上角点击绿色的 ‘+’ 号,然后选择scss</p>
+<p>按照下图进行配置:</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150404.01.gif" alt="webstorm配置sass自动编译1"></p>
+<p>其中红色的两个地方是需要修改的,其他我没有改过,都是默认就是那样的.</p>
+<p><em>Arguments</em>:</p>
+<p>可以配置编译后的文件的输出路径,我这里写的是:</p>
+<p><code>--no-cache --update --sourcemap --watch $FileName$:$FileParentDir$\css\$FileNameWithoutExtension$.css</code></p>
+<p>注意, <code>$FileName$</code>后面有个冒号,然后<code>$FileParentDir$</code>表示的是<strong>scss文件所在的文件夹的父级文件夹</strong>,而不是scss文件的父文件夹.</p>
+<p>举个栗子,我的项目叫<code>sass-learn</code>,里面有个scss文件夹,里面存放scss文件,那么按照这样配置的结果,style.scss所在的文件夹就是scss,scss的父文件夹就是sass-learn,然后找到sass-learn下的css文件夹,编译后的style.css文件就会在这里.</p>
+<p><img src="http://jinyanhuan.github.io/blogimages/20150404.02.gif" alt="webstorm配置sass自动编译2"></p>
+<p><em>Output paths to refresh</em>:</p>
+<p>改成这样:<code>$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map</code></p>
+<blockquote>
+<p>在使用的过程中还有两点需要注意:</p>
+</blockquote>
+<p>1.同步编译只能在项目文件夹下,也就是webstorm左侧打开的项目.随便打开一个项目外的文件是不行的.<br>2.这个和webstorm没有什么关系,就是sass编译不能带有中文,无论是路径名,文件名,文件里的内容,都不能识别中文,如果要修改它也不是不可以,但我觉得不用中文也挺好的,养成好习惯嘛.</p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webstorm/">webstorm</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-hexo-build-four" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/30/hexo-build-four/" class="article-date">
+  	<time datetime="2015-03-30T06:58:43.000Z" itemprop="datePublished">2015-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/30/hexo-build-four/">使用hexo搭建github.io博客(四)-美化主题&amp;添加多说</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://jinyanhuan.github.io/2015/03/16/hexo-bulid-three/" target="_blank" rel="external">上一篇</a>里介绍了怎么更换博客的主题,这篇介绍如何在细节上完善这个主题,以及如何添加多说评论</p>
+<p><strong>完善细节</strong></p>
+<p>hexo的博客主题使用的是stylus技术,类似于less和sass吧.最后的文章都只有一个css,就是style.css,它在<code>E:hexo/public/css/style.css</code>,不过这个是通过<em>hexo generate</em>编译过后得到的样式表,要修改的话,需要到主题包里去修改:主题包里样式在这里:<code>E:\hexo\themes\yilia\source\css</code><br>然后就找到对应的样式,改改就可以了,具体怎么找,这个是stylus的技术.一般来说都很简单,都是小地方改动,都能找到的.</p>
+<p>举个栗子,这个主题本来所有的字体都是宋体,我希望把它换成雅黑,那我可以找到它:</p>
+<p><code>E:\hexo\themes\yilia\source\css\style.styl</code>:</p>
+<p>修改body的字体:</p>
+<pre><code><span class="tag">body</span>
+  <span class="attribute">font-family</span><span class="value">:<span class="string">"Microsoft Yahei"</span>,<span class="string">"HelveticaNeue-Light"</span>,<span class="string">"Helvetica Neue Light"</span>,<span class="string">"Helvetica Neue"</span>,Helvetica,Arial,sans-serif;</span>
+  ...
+</code></pre><p>这样,文章的字体就会变成雅黑</p>
+<p>又比如,它主题里的行内代码片段只有这样的<code>code</code>,但是我希望有一种这样的<em>code</em>,但是我觉得倾斜是不必要的,那么我就可以把markdown里面本来的倾斜体定义成<em>code</em>这种行内代码段:</p>
+<p><code>E:\hexo\themes\yilia\source\css\_partial\article.styl</code>:</p>
+<pre><code><span class="class">.article-entry</span>{
+  ...
+  <span class="tag">em</span> {
+    <span class="attribute">font-style</span>: normal;
+    <span class="attribute">background</span>: <span class="hexcolor">#fbedeb</span>;
+    <span class="attribute">color</span>: <span class="hexcolor">#e2678f</span>;
+    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">5px</span>;
+    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">2px</span>;
+    <span class="attribute">font-size</span>: <span class="number">0.9em</span>;
+    <span class="attribute">-webkit-border-radius</span>: <span class="number">3px</span>;
+    <span class="attribute">border-radius</span>: <span class="number">3px</span>;
+  }
+  ...
+}
+</code></pre><p>这样我就把原来主题中的斜体改成了我喜欢的<em>code</em>这样.</p>
+<p><strong>添加多说评论</strong></p>
+<p>登陆多说以后,访问<a href="http://duoshuo.com/create-site/" target="_blank" rel="external">这里</a>获取到通用代码,我的是这样的:</p>
+<pre><code><span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"请将此处替换成文章在你的站点中的ID"</span> <span class="attribute">data-title</span>=<span class="value">"请替换成文章的标题"</span> <span class="attribute">data-url</span>=<span class="value">"请替换成文章的网址"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
+<span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+    <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
+    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+        ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
+        ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
+        ds.charset = <span class="string">'UTF-8'</span>;
+        (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]
+         || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);
+    })();
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
+</code></pre><p>这段代码可以在<a href="http://codebunny.duoshuo.com/admin/tools/" target="_blank" rel="external">这里</a>找到,其中的<em>codebunny</em>是它叫你填信息的时候填的多说域名</p>
+<blockquote>
+<p>注意这地方有个<code>short_name:&quot;codebunny&quot;</code></p>
+</blockquote>
+<p>然后找到主题里对应放置评论部分的视图模板,不同的主题所在的位置也不同,我的在这里:</p>
+<p><code>E:\hexo\themes\yilia\layout\_partial\article.ejs</code></p>
+<p>找到原来的评论部分:</p>
+<pre><code>&lt;<span class="preprocessor">%</span> <span class="keyword">if</span> <span class="comment">(!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)</span>{ <span class="preprocessor">%</span>&gt;
+    ...
+&lt;<span class="preprocessor">%</span> } <span class="preprocessor">%</span>&gt;
+</code></pre><p>替换为:</p>
+<pre><code><span class="xml"></span>&lt;%<span class="perl"> <span class="keyword">if</span> (!<span class="keyword">index</span> &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname){ </span>%&gt;<span class="xml">
+<span class="tag">&lt;<span class="title">section</span> <span class="attribute">id</span>=<span class="value">"comments"</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说评论框 start --&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ds-thread"</span> <span class="attribute">data-thread-key</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> post.layout </span>%&gt;<span class="xml"><span class="tag"><span class="value">-</span></span></span>&lt;%=<span class="perl"> post.slug </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-title</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> post.title </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span> <span class="attribute">data-url</span>=<span class="value">"</span></span></span>&lt;%=<span class="perl"> page.permalink </span>%&gt;<span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说评论框 end --&gt;</span>
+  <span class="comment">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+    <span class="keyword">var</span> duoshuoQuery = {short_name:<span class="string">"codebunny"</span>};
+    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+      ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;
+      ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;
+      ds.charset = <span class="string">'UTF-8'</span>;
+      (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]
+              || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);
+    })();
+  </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="comment">&lt;!-- 多说公共JS代码 end --&gt;</span>
+<span class="tag">&lt;/<span class="title">section</span>&gt;</span>
+</span>&lt;%<span class="perl"> } </span>%&gt;<span class="xml"></span>
+</code></pre><p>也就是说,把前面得到的通用代码复制到<code>&lt;section id=&quot;comments&quot;&gt;&lt;/section&gt;</code>里面去,然后把<code>data-thread-key</code> <code>data-title</code> <code>data-url</code> 如上替换就好了.</p>
+<p>然后找到主题的<code>_config.yml</code>,添加一个变量:</p>
+<pre><code><span class="attribute">duoshuo_shortname</span>: <span class="string">codebunny</span>
+</code></pre><p>这里的<code>codebunny</code>就是刚才的short_name,也就是多说域名.</p>
+
+        
+          <!-- show an end symbol if the article is fully displayed -->
+          <hr/>
+          <p class="article-more-link">
+            <a>end</a>
+          </p>
+        
+      
+    </div>
+    
+    <div class="article-info">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/blog/">blog</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-hexo-bulid-three" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/16/hexo-bulid-three/" class="article-date">
+  	<time datetime="2015-03-16T09:42:28.000Z" itemprop="datePublished">2015-03-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/16/hexo-bulid-three/">使用hexo搭建github.io博客(三)-更换主题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<a href="http://jinyanhuan.github.io/2015/03/12/hexo-build-two/" target="_blank" rel="external">上一篇</a>完成后,我们知道了要怎么来发布博客文章,但是,这个博客丑了点,这篇就来说说怎么更换主题让博客变得高大上</p>
+<p><strong>一.寻找喜欢的主题</strong></p>
+<p>可以在<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">这里</a>找到</p>
+<p>我自己找到了一款更好看的,在<a href="http://litten.github.io/2014/08/31/hexo-theme-yilia/" target="_blank" rel="external">这里</a></p>
+<p>以我自己的安装过程为例:</p>
+<p><strong>二.安装主题</strong>:</p>
+<p>到hexo所在的路径下<code>E:hexo</code>,右键打开<code>Git Bush</code>,执行:</p>
+<pre><code>$ git <span class="keyword">clone</span> <span class="title">https</span>://github.com/litten/hexo-theme-yilia.git themes/yilia
+</code></pre><p><strong>三.使用主题</strong>:</p>
+<p>打开<code>_config.yml</code>做如下修改:</p>
+<pre><code><span class="attribute">theme</span>: <span class="string">yilia</span>
+</code></pre><p><strong>四.更新主题</strong>:</p>
+<p>进入<code>E:hexo/themes/yilia</code>,右键打开<code>Git Bush</code>,执行 <em>git pull</em>:</p>
+<p><strong>五.测试推送</strong>:</p>
+<p>回到<code>E:hexo</code>,执行: <em>hexo generate</em> <em>hexo server</em>, 打开<code>localhost:4000</code>预览,就可以看到新的主题了</p>
+<p>然后<em>hexo deploy</em>推送到github.io</p>
+<p><strong>六.配置主题</strong>:</p>
+<p>主题配置在<code>E:\hexo\themes\yilia</code>下的<code>_config.yml</code>:</p>
+<p>我是这样配置的:</p>
+<pre><code><span class="preprocessor"># Header</span>
+menu:
+ 主页: /
+ 所有文章: /archives
+ # 随笔: /tags/随笔
+
+<span class="preprocessor"># SubNav</span>
+subnav:
+ github: <span class="string">"https://github.com/OOP-Code-Bunny/"</span>       <span class="comment">//github地址</span>
+ weibo: <span class="string">"http://weibo.com/p/1005052438739075/home"</span>  <span class="comment">//微博地址</span>
+ rss: <span class="string">"#"</span>                                           <span class="comment">//订阅</span>
+ zhihu: <span class="string">"#"</span>                                         <span class="comment">//知乎地址</span>
+ #douban: <span class="string">"#"</span>                                       <span class="comment">//下面这些前面带#的,就不显示在主页上,如果有账号,就可以打开</span>
+ #mail: <span class="string">"#"</span>
+ #facebook: <span class="string">"#"</span>
+ #google: <span class="string">"#"</span>
+ #twitter: <span class="string">"#"</span>
+ #linkedin: <span class="string">"#"</span>
+
+rss: /atom.xml
+
+<span class="preprocessor"># Content</span>
+excerpt_link: more
+fancybox: <span class="literal">true</span>
+mathjax: <span class="literal">true</span>
+
+<span class="preprocessor"># Miscellaneous</span>
+google_analytics: <span class="string">''</span>
+favicon: /favicon.png
+
+<span class="preprocessor">#你的头像url</span>
+avatar: <span class="string">"https://avatars1.githubusercontent.com/u/11350373?v=3&amp;s=460"</span>     <span class="comment">//设置头像图片</span>
+<span class="preprocessor">#是否开启分享</span>
+share: <span class="literal">true</span>
+<span class="preprocessor">#是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key</span>
+<span class="preprocessor">#若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论</span>
+duoshuo: <span class="literal">true</span>                                                             <span class="comment">//使用'多说'评论</span>
+<span class="preprocessor">#是否开启云标签</span>
+tagcloud: <span class="literal">true</span>
+
+<span class="preprocessor">#是否开启友情链接</span>
+<span class="preprocessor">#不开启——</span>
+<span class="preprocessor">#friends: false</span>
+<span class="preprocessor">#开启——</span>
+friends:
+ 我的github: https:<span class="comment">//github.com/OOP-Code-Bunny/                           //自定义友情链接</span>
+ 周孝刚: https:<span class="comment">//github.com/a5635268/</span>
+ 王麟: http:<span class="comment">//kingarthas37.github.io/</span>
+ 郑印: https:<span class="comment">//github.com/zhengyin/</span>
+
+<span class="preprocessor">#是否开启“关于我”。</span>
+<span class="preprocessor">#不开启——</span>
+<span class="preprocessor">#aboutme: false</span>
+<span class="preprocessor">#开启——</span>
+aboutme: 虽然咸鱼翻身还是咸鱼,但至少可以变得好吃一点                                   <span class="comment">//关于我介绍</span>
+
+duoshuo_shortname: codebunny                                             <span class="comment">//多说域名,后面再解释</span>
+</code></pre><p><strong>七.发布主题</strong>:</p>
+<p><em>hexo generate</em> <em>hexo deploy</em> 发布到github.io</p>
+<blockquote>
+<p>下一篇讲解怎么对主题做一些美化修改,以及添加多说评论</p>
 </blockquote>
 
         
@@ -350,117 +865,9 @@ tags: [标签<span class="number">1</span>,便签<span class="number">2</span>] 
 
 
   
-    <article id="post-my-new-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/03/10/my-new-post/" class="article-date">
-  	<time datetime="2015-03-10T09:54:06.000Z" itemprop="datePublished">2015-03-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/10/my-new-post/">markdown 格式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="这里是h1段落">这里是h1段落</h1><h2 id="这里是h2段落">这里是h2段落</h2><h3 id="这里是h3段落">这里是h3段落</h3><p>一段文字里带有<em>重点</em></p>
-<p>一段文字里带有<strong>重点</strong></p>
-<p>一段文字里带有<code>coding</code></p>
-<blockquote>
-<p>表示引用文字内容</p>
-</blockquote>
-<hr>
-<ul>
-<li>这是无序列表项</li>
-<li>这是无序列表项</li>
-<li>这是无序列表项</li>
-</ul>
-<ol>
-<li>这是有序列表项</li>
-<li>这是有序列表项</li>
-</ol>
-<h1 id="下面这个是嵌套的列表">下面这个是嵌套的列表</h1><ul>
-<li>外层列表项目<ul>
-<li>内层列表项目</li>
-<li>内层无序列表项目</li>
-<li>内层列表项目</li>
-</ul>
-</li>
-<li>外层列表项目</li>
-</ul>
-<p>直接把一个URL现实为超链接: <a href="http://www.cnblogs.com/liulangmao/" target="_blank" rel="external">我的博客园</a></p>
-<p>这是一个图像: <img src="http://img.boqiicdn.com/Data/BK/A/1407/30/img85001406708905.jpg" alt="兔子"></p>
-<p>行的开头空四格,表示程序代码(另外必须换行再换行,不能只换一次行):</p>
-<p>Javascript:</p>
-<pre><code><span class="comment">/**
- * nth element in the fibonacci series.
- * <span class="doctag">@param</span> n &gt;= 0
- * <span class="doctag">@return</span> the nth element, &gt;= 0.
- */</span>
-<span class="function"><span class="keyword">function</span> <span class="title">fib</span><span class="params">(n)</span> </span>{
-    <span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">1</span>;
-    <span class="keyword">var</span> tmp;
-    <span class="keyword">while</span> (--n &gt;= <span class="number">0</span>) {
-        tmp = a;
-        a += b;
-       b = tmp;
-    }
-    <span class="keyword">return</span> a;
-}
-
-document.write(fib(<span class="number">10</span>));
-</code></pre>
-        
-          <!-- show an end symbol if the article is fully displayed -->
-          <hr/>
-          <p class="article-more-link">
-            <a>end</a>
-          </p>
-        
-      
-    </div>
-    
-    <div class="article-info">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 </div>
@@ -468,7 +875,7 @@ document.write(fib(<span class="number">10</span>));
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 code_bunny
+    		&copy; 2017 code_bunny
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

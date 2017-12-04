@@ -15,7 +15,7 @@ ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point
 <meta property="og:description" content="这篇文章主要介绍javascript里的charCodeAt()方法和ES6引进的codePointAt()方法.
 在说这两个方法之前,必须要先补充一些关于Unicode编码的知识…
 ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point)[1].用于代表256个字符.但是这256个字符只是常用字符,各国语言,包括中文,远远超过这个范围.所以Unicode">
-<meta property="og:updated_time" content="2016-02-26T10:48:06.000Z">
+<meta property="og:updated_time" content="2016-02-29T02:38:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="charCodeAt() and codePointAt()">
 <meta name="twitter:description" content="这篇文章主要介绍javascript里的charCodeAt()方法和ES6引进的codePointAt()方法.
@@ -120,7 +120,7 @@ ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
+						<a href="/tags/JSX/" style="font-size: 10px;">JSX</a> <a href="/tags/React/" style="font-size: 12.5px;">React</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/tags/es5/" style="font-size: 15px;">es5</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/utf-16/" style="font-size: 10px;">utf-16</a> <a href="/tags/webstorm/" style="font-size: 12.5px;">webstorm</a> <a href="/tags/前端工程化/" style="font-size: 10px;">前端工程化</a>
 					</div>
 				</section>
 				
@@ -241,6 +241,7 @@ ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point
 <p>在说这两个方法之前,必须要先补充一些关于Unicode编码的知识…</p>
 <p>ASCII码是256(2^8)个(0-255)数字,每一个数字都是一个码点(code point)[1].用于代表256个字符.但是这256个字符只是常用字符,各国语言,包括中文,远远超过这个范围.所以Unicode就出现了,Unicode源于一个很简单的想法：将全世界所有的字符包含在一个集合里，计算机只要支持这一个字符集，就能显示所有的字符，再也不会有乱码了。</p>
 <p>可以这么理解,Unicode码是ASCII码的一个超集(superset).它的前128个code point和ASCII是一致的.后面又增加了很多很多字符.而UTF-32,UTF-8,UTF-16,都是Unicode码的编码形式:</p>
+<a id="more"></a>
 <p><strong>UTF-32</strong><br>用固定长度的四个字节来表示每个码点,就算有些字符只需要一个字节,也通过把空缺位添加0来强制转换成8个字节.由于四个字节有32-bit,所以称为UTF-32编码.由于太浪费空间,比ASCII编码文件要大四倍,所以不能使用.</p>
 <p><strong>UTF-8</strong><br>用可变长度的字节来表示每个码点,如果只需要一个字节就能表示的,就用一个字节,一个不够,就用两个…所以,在UTF-8编码下,一个字符有可能由1-4个字节组成.</p>
 <p><strong>UTF-16</strong><br>结合了固定长度和可变长度,它只有两个字节和四个字节两种方式来表示码点.如果是两个字节,那么码点的范围应该是（U+0000到U+FFFF）,如果是四个字节,那么码点的范围应该是（U+010000到U+10FFFF）.<br>但是注意,我们不能直接使用 <em>U+010000</em> 这样的形式(应该是因为位数不同所以不能…),所以,四个字节的码点需要使用两个 <em>code unit</em> [2],来组成一个 <em>surrogate pair</em> [3]. 其中第一个code unit的范围是从 <em>0xD800</em> 到 <em>0xDBFF</em>,被成为高位(high surrogate)或头位(lead surrogate),第二个code unit的范围是从 <em>0xDC00</em> 到 <em>0xDFFF</em>,被称为低位(low surrogate)或尾位(trail surrogate).</p>
@@ -416,6 +417,15 @@ console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.cod
     
 <nav id="article-nav">
   
+    <a href="/2016/03/04/fromCodePoint/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          fromCodePoint()
+        
+      </div>
+    </a>
+  
   
     <a href="/2016/02/18/method-definations/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">method definitions</div>
@@ -471,7 +481,7 @@ console.<span class="built_in">log</span>(<span class="string">'𠮷'</span>.cod
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 code_bunny
+    		&copy; 2017 code_bunny
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

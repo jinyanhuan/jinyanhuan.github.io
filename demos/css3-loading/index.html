@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>css3进度条</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/loading.js"></script>
+</head>
+<body>
+    <h1>HTML5+CSS3 Loading进度条</h1>
+    <h2>create by <a href="http://www.nixi8.com" target="_blank">黑丝小白兔</a></h2>
+    <div class="loading_content">
+        <div class="loading_bar">
+            <!--由于loading_bar有padding值,得到的不是进度条的实际长度.所以,这个还要再套个loading_length用于获取进度条的实际总长度-->
+            <div class="loading_length">
+                <div class="loading_bg">
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="percent">
+            <span>45%</span>
+        </div>
+    </div>
+</body>
+</html>
