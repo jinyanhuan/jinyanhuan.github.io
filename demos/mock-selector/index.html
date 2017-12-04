@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML5+CSS3+JavaScript 下拉菜单</title>
+        <link rel="stylesheet" type="text/css" href="style/reset.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" type="text/css" href="style/icon_font.css">
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="js/dropdownlist.js"></script>
+    </head>
+    
+    <body>
+    	<h1>HTML5+CSS3+JavaScript 下拉菜单</h1>
+        <h2>create by <a href="http://www.nixi8.com/" target="_blank">黑丝小白兔</a></h2>
+        <div class="content">
+            <!--需要变成仿sel下拉菜单的元素,使用 <div class="menu"></div> 来包括-->
+            <div class="menu">
+                <!--
+                data-color="red"
+                data-是不变的
+                color是data的名字
+                red是color的值
+                -->
+                <select name="select" id="nav_menu" data-color="red">
+                    <option value="0">请选择你想去的地方</option>
+                    <option value="1" class="home">首页 - home</option>
+                    <option value="2" class="forum">社区 - forum</option>
+                    <option value="3" class="store">商城 - store</option>
+                    <option value="4" class="question">问问 - question</option>
+                    <option value="5" class="reading">阅览室 - reading</option>
+                    <option value="6" class="job">招聘 - job</option>
+                    <option value="7" class="setting">设置 - setting</option>
+                </select>
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+
+.card_box {
+    width:1110px; margin:30px auto; -webkit-perspective: 1500px
+}
+.card_box ul li {
+    float:left; width:350px; height:280px; margin-right:30px; position:relative
+}
+.card_box ul li:last-child {
+    margin-right:0
+}
+.card_box ul li a {
+    display:block; width:100%; height:100%; -webkit-transition:0.5s all linear; -webkit-transform:rotateY(0); -webkit-transform-origin:center bottom; -webkit-transform-style: preserve-3d; -webkit-backface-visibility: hidden
+}
+.card_box ul li:hover a {
+    -webkit-transform:rotateY(180deg)
+}
+.card_box ul li div {
+    position:absolute; z-index:2; -webkit-backface-visibility: hidden
+}
+.card_box ul li div.card_nag {
+    z-index:1; width:100%; height:100%; background:#FFF2AF; color:#BF6706; -webkit-transform:rotateY(180deg)
+}
+.card_box ul li div.card_nag h3 {
+    text-align:center; width:80%; padding:20px 0; border-bottom:1px dashed #BF6706; font-size:16px; margin:0 auto
+}
+.card_box ul li div.card_nag p {
+    width:80%; line-height:18px; margin:16px auto; text-indent:24px;
+}
+
+/*特别注意:*/
+/*过渡和动画,必须加在a里面,然后给li加hover伪类,如果hover和过渡是加在同一个元素上,会出现下面这种bug:
+由于在旋转过程中,元素转到90度的时候,宽度就没有了,那个时候,相当于鼠标已经离开了该元素了,然后再转过来时,鼠标又hover上了该元素.等于鼠标离开了一次,又进入了一次.
+但如果是给li加hover,那么,即使a元素转到90度,鼠标离开了a元素,但依然是在li元素上的,这样就不会导致bug.
+*/

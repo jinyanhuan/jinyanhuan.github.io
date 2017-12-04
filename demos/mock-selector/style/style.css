@@ -1,0 +1,54 @@
+.content {
+    width:980px; height:800px; margin:auto
+}
+.menu dl {
+    position:relative; width:300px; margin:auto
+}
+.menu dl dt,.menu dl dd {
+    position:absolute; width:300px; height:60px; line-height:60px; font-family:'Microsoft YaHei'; font-size:16px; color:#333; background:#fff; box-shadow:1px 1px 1px rgba(0,0,0,0.1); cursor:pointer
+}
+.menu dl dd {
+    color:#bcbcbc; cursor:pointer; -webkit-backface-visibility:hidden; -webkit-transition:0.5s background ease , 0.5s color ease
+}
+.menu dl dd:hover {
+    background:#059BFF; color:#fff
+}
+.menu dl dd span,.menu dl dt.selected span {
+    display:block; height:60px; line-height:60px; padding-left:80px; position:relative; text-transform:uppercase
+}
+.menu dl dd span i,.menu dl dt.selected span i {
+    display:block; position:absolute; left:24px; top:15px; font-size:30px
+}
+.menu dl dt {
+    position:relative; z-index:8
+}
+.menu dl dt span {
+    padding-left:30px; -webkit-transition:0.5s color ease
+}
+.menu dl dt b {
+    display: block; position:absolute; right:0; top:10px; width:47px; height:40px; border-left:1px solid #ccc
+}
+.menu dl dt b i {
+    display:block; position:absolute; top:12px; right:15px; -webkit-transition:0.5s -webkit-transform ease
+}
+.menu.cur dl dt b i {
+    -webkit-transform:rotate(180deg)
+}
+.menu dl dt.selected span {
+    color:#059BFF
+}
+.menu.cur dl dt span {
+    color:#059BFF
+}
+
+/*不同的颜色版本:当dl添加不同的类名,拥有不同的颜色,类似于换肤*/
+.menu dl.red dd:hover {
+    background:#DB2526; color:#fff
+}
+.menu dl.red dt.selected span {
+    color:#DB2526
+}
+.menu.cur dl.red dt span {
+    color:#DB2526
+}
+

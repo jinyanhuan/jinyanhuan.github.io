@@ -1,0 +1,9 @@
+html,body,h1,h2,h3,h4,h5,h6,div,ul,ol,li,dl,dt,dd,iframe,textarea,input,button,p,strong,b,a,span,del,pre{margin:0; padding:0; -webkit-text-size-adjust:none;}
+h1,h2,h3,h4,h5,h6,em,del{font-style:normal; font-weight:normal; font-size:100%; -webkit-text-size-adjust:none;}
+
+ul,dl,ol{list-style:none;}
+img{border:0;}
+body{padding-bottom:100px; font-size:14px; font-family:Microsoft YaHei, 'Lato', Calibri, Arial, sans-serif; background:url(../images/mainbg.png) #eee;}
+h1{padding-top:100px; height:50px; line-height:50px; font-size:28px; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,.2); text-align:center;}
+h2,h2 a{margin-bottom:50px; font-size:16px; text-align:center; color:#5b71ad; text-decoration:none; text-shadow:1px 1px 1px rgba(255,255,255,0.5);}
+h2 a:hover{text-decoration:underline;}

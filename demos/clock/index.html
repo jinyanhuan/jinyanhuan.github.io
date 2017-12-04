@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        body {
+            background:url(http://www.shuimukj.net/images/bg3.gif)
+        }
+        p {
+            font-family:'微软雅黑';
+            font-size:14px;
+            color:#52A781;
+            text-shadow:1px 1px 0px #fff;
+            text-align:center
+        }
+        p:first-of-type {
+            font-size:26px;
+        }
+        .clock {
+            width:360px;
+            height:360px;
+            margin:80px auto;
+            border-radius:50%;
+            border:1px solid #52A781;
+            position:relative;
+            background:rgba(192,220,192,0.3);
+            background:
+                -webkit-gradient(
+                    radial,
+                    15% 15%,0, 15% 15%,240,
+                    from(rgba(255,255,255,0.1)),
+                    to(rgba(192,220,192,0.3))
+                );
+            background:
+                -moz-radial-gradient(
+                    15% 15%,
+                    circle
+                    farthest-side,
+                    rgba(255,255,255,0.1),
+                    rgba(192,220,192,0.3)
+                );
+            box-shadow:3px 3px 6px #D7E0D7;
+        }
+    </style>
+
+    <script src="css3.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var clock = $('.clock')[0];
+            for(i=0;i<60;i++){
+                var keduWidth = 1;
+                var keduHeight = 8;
+                var angle = 6*i;
+                if(i%5==0){
+                    keduWidth = 3;
+                    keduHeight = 10;
+                }
+                var kedu = document.createElement('div');
+                kedu.style.cssText='width:'+keduWidth+'px; height:'+keduHeight+'px; background:#52A781; position:absolute; left:180px; top:4px'
+                setCss3(kedu,{'transform':'rotate('+angle+'deg)','transform-origin':'0 176px'})
+                clock.appendChild(kedu);
+            }
+
+            var hourLine = document.createElement('div');
+            hourLine.style.cssText = 'width:107px; height:5px; background:#52A781; position:absolute; top:178px; left:180px';
+            clock.appendChild(hourLine);
+
+            var minLine = document.createElement('div');
+            minLine.style.cssText = 'width:148px; height:3px; background:#52A781; position:absolute; top:179px; left:180px';
+            clock.appendChild(minLine);
+
+            var secLine = document.createElement('div');
+            secLine.style.cssText = 'width:168px; height:1px; background:#52A781; position:absolute; top:180px; left:160px';
+            clock.appendChild(secLine);
+
+            var dot =document.createElement('div');
+            dot.style.cssText = 'width:14px; height:14px; border-radius:50%; background:#52A781; position:absolute; left:173px; top:173px';
+            clock.appendChild(dot);
+
+            var time = new Date();
+            var hour = time.getHours();
+            var min = time.getMinutes();
+            var sec = time.getSeconds();
+            setTimeLine(min,sec,hour);
+
+            setInterval(function(){
+                var time = new Date();
+                var hour = time.getHours();
+                var min = time.getMinutes();
+                var sec = time.getSeconds();
+                setTimeLine(min,sec,hour);
+            },1000)
+
+            function setTimeLine(min,sec,hour){
+                setMin(sec,min);
+                setSec(sec);
+                setHour(min,hour);
+            }
+
+            function setMin(sec,min){
+                var angel = min*6+(6*(sec/60))-90;
+                setCss3(minLine,{'transform':'rotate('+angel+'deg)','transform-origin':'0 1px'});
+            }
+            function setSec(sec){
+                var angel = sec*6-90;
+                setCss3(secLine,{'transform':'rotate('+angel+'deg)','transform-origin':'20px 0'});
+            }
+            function setHour(min,hour){
+                var angel = hour*30+(30* (min/60))-90;
+                setCss3(hourLine,{'transform':'rotate('+angel+'deg)','transform-origin':'0 2px'})
+            }
+
+        })
+    </script>
+
+</head>
+<body>
+    <div class="clock"></div>
+    <p>css3时钟</p>
+    <p>作者: 黑丝小白兔@copyright</p>
+</body>
+</html>

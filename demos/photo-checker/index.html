@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="author" content="���Ի�" />
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ <style>
+ body{background:url("image/body-bg.png") repeat;}
+ .cover{width:100%;height:100%;background:#000;opacity:0.6;filter:alpha(opacity=60);position:absolute;top:0;left:0;z-index:3;}
+ .photo-list{width:880px;margin:30px auto;cursor:pointer;}
+ .photo-list .list{width:249px;height:145px;border:5px solid #9cb5b1;padding:5px;background:#fff;float:left;margin:10px;position:relative;}
+ .photo-list .list .photo-cover{width:249px;height:145px;background:url("image/photo-cover.png") repeat;position:absolute;opacity:0.6;filter:alpha(opacity=60);z-index:1;}
+ .photo-list .list .icon-big{z-index:2;width:36px;height:36px;background:url("image/icon-big.png") no-repeat;position:absolute;left:112px;top:60px;}
+ .big-photo{filter:alpha(opacity=100);opacity:1;width:249px;height:145px;padding:10px;background:#fff;position:absolute;left:0;top:0;display:none;z-index:4}
+ .big-photo img{width:100%;height:100%;}
+ .p-r{position:relative;width:100%;height:100%}
+ .big-photo .close{width:30px;height:30px;background:url("image/fancybox.png") no-repeat -40px 0;position:absolute;top:-25px;right:-25px;cursor:pointer}
+ .big-photo .arrow{width:30px;height:30px;background:url("image/fancybox.png") no-repeat;position:absolute;top:49%;display:none;cursor:pointer}
+ .big-photo .arrow-l{background-position:-40px -30px;left:12px}
+ .big-photo .arrow-r{background-position:-40px -60px;right:12px}
+ .loading{width:37px;height:37px;background:url("image/ajax-loader.gif") no-repeat;position:absolute;z-index:5;display:none;}
+ </style>
+ <script type="text/javascript" src="http://cdnimg.ocj.com.cn/common/js/jquery-1.10.2.min.js"></script>
+
+ <script language="javascript" type="text/javascript" src="move(jquery).js"></script>
+ 
+ <script language="javascript" type="text/javascript">
+ $(function(){
+ 
+    var num=0;
+	var flag=false;
+
+	/*ÿ��ͼƬhoverʱ�������*/
+	$('.list','.photo-list').hover(
+       function(){
+	      $(this).prepend('<div class="photo-cover"></div><div class="icon-big"></div>');
+	   }
+	   ,
+	   function(){
+	      $(this).children().not('img').remove();
+	   }	
+	)
+
+	var site=[];     //����������ȡ��ʼ״̬���ֵ������
+	var srcBig=[];   //����������ȡ��Ҫ���صĴ�ͼ�����ӵ�����
+ 
+    /*�����ֵ��������,����,site�����е�ÿһ��ֵ����һ��json����*/
+	$('.list','.photo-list').each(function(i){
+	    site[i]={
+		left:$(this).offset().left,
+		top:$(this).offset().top,
+		width:$(this).width(),
+		height:$(this).height(),
+		opacity:0                    
+		}
+		srcBig.push($('img',this).attr('bigsrc'))
+	})
+
+    
+    var bigPic=$('.big-photo');
+    
+	/*����СͼƬ�������¼�*/
+	$('.list','.photo-list').each(function(i){
+	     $(this).click(function(){
+			 bigPic.css(site[i]);    //���ô�ͼ��λ�úʹ�С��ʼ������Сͼͬ���λ�ô�С 				 
+             $('.cover').show();     //��ʾ��Ļ����
+			 popOut(i);			     //���õ�������
+		 })
+	});
+
+    /*�رմ�ͼ*/
+    $('.close',bigPic).click(function(){
+	     var that=$(this);
+		 $('.cover').hide();  
+         that.hide();                    //�˶���ʱ���ùرհ�ť��������,�������ʾ
+		 var index=num;
+		 //�ȷŴ��˶�,Ȼ��ص�����С.
+		 bigPic.animate({                   
+		     width:bigPic.width()+30,
+			 height:bigPic.height()+30,
+             top:bigPic.offset().top-30,
+			 left:bigPic.offset().left-30
+		 },150,'',function(){bigPic.animate(site[index],200,'',function(){$(this).hide();that.show()})});      
+	})
+    
+    /*������ͼƬ����ʾ���Ұ�ť,�뿪����*/
+	bigPic.hover(function(){
+      $(this).find('.arrow').show();
+	  }
+	  ,function(){
+	  $(this).find('.arrow').hide();
+	  }
+	)
+ 
+    /*���л�ͼƬʱ,ʹ��popOut����,���൱������ԭ�رĳ���һ��ͼƬ��ʼ״̬���ǵ�ǰ���ڵ�״̬*/
+
+    /*��ť�л�ͼƬ*/
+    $('.arrow-l',bigPic).click(function(){
+	  var last=$('.list','.photo-list').length;
+	  var index=(num==0)?--last:--num;
+	  popArrow(index);
+	})
+
+    /*�Ұ�ť�л�ͼƬ*/
+    $('.arrow-r',bigPic).click(function(){
+	  var last=$('.list','.photo-list').length;
+	  var index=(num==--last)?0:++num;
+	  popArrow(index); 
+	})
+
+    /*�����л�ͼƬ�ĵ�������*/
+    function popArrow (index) {
+       bigPic.find('.arrow').hide();
+	   bigPic.find('img').css('opacity','0');
+	   popOut(index);
+	   bigPic.find('img').animate({opacity:1},600,'',function(){bigPic.find('.arrow').show();});       
+	}
+
+    /*��������*/
+	function popOut (index) {		 
+		 num=index;
+		 $('.loading').css({left:$(window).width()/2-18,top:$(window).height()/2-18,}).show();   //ͼƬδ������ʱ��ʾgif���ض���.
+		 var img=new Image();        //����ͼ�����
+		 img.src=srcBig[index]       //�Ӵ����������л�ȡ��Ӧ�����Ӳ��Ӹ�ǰ������ͼ�����
+		 img.onload=function(){      //����ͼ�������ʱִ��(ע:�������겻�ܻ�ȡͼƬ�Ŀ��)
+		     bigPic.find('img').attr('src',img.src)     //����ͼ������src���Ը�ֵ�������Ԫ�����img�����src����
+			 $('.loading').hide();   //ͼƬ�������Ժ�����gif���ض���
+			 var siteEnd={           //����һ��json����,������Ŵ�ͼ�Ŀ���˶����ֵ(ͨ��img����������)
+			 width:img.width,
+			 height:img.height,
+			 left:($(window).width()-img.width-20)/2,
+			 top:($(window).height()-img.height-20)/2,
+			 opacity:100
+			 }
+		 bigPic.show().fiexible(siteEnd,3);    //ע��,ֻ�������������,��ΪsiteEnd����onload���������,�����������,�ͷ��ʲ�������.	 
+		 }
+	}
+ })
+ </script>
+
+ </head>
+
+ <body>
+    <div class="cover" style="display:none"></div>
+	<div class="loading"></div>
+	<div class="photo-list">
+	    <div class="list">
+			<img src="image/1.jpg" bigsrc="image/big1.jpg"/>
+		</div>
+	    <div class="list">
+		    <img src="image/2.jpg" bigsrc="image/big2.jpg"/>
+		</div>
+	    <div class="list">
+		    <img src="image/3.jpg" bigsrc="image/big3.jpg"/>
+		</div>
+	    <div class="list">
+		    <img src="image/4.jpg" bigsrc="image/big4.jpg"/>
+		</div>
+	    <div class="list">
+		    <img src="image/5.jpg" bigsrc="image/big5.jpg"/>
+	    </div>
+		<div class="list">
+		    <img src="image/6.jpg" bigsrc="image/big6.jpg"/>
+		</div>
+	</div>
+	<div class="big-photo">
+	  <div class="p-r">
+		<div class="close"></div>
+		<div class="arrow-r arrow"></div>
+		<div class="arrow-l arrow"></div>
+		<img src=""/>
+      </div>
+	</div>
+ </body>
+</html>

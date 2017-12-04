@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>css3三维云</title>
+    <style>
+
+    *{
+    margin:0; padding:0; list-style:none
+    }
+    body {
+     background:#000
+    }
+    .scene {
+     width:500px;
+     height:500px;
+     /*border:1px solid #fff;*/
+     margin:100px auto;
+     perspective:1000px;             /*进深总是定义在最外层div*/
+     -webkit-perspective:1000px
+    }
+    .out {
+     width:100%; height:100%;
+     position: relative;
+     transform-style: preserve-3d;               /*第二层和第三层都需要添加此属性*/
+     -webkit-transform-style: preserve-3d;
+     transform: translateZ(-250px);              /*将球的z轴中心移到和屏幕一致的位置*/
+     -webkit-transform: translateZ(-250px);
+    }
+    .out ul {
+    /*border:1px solid #fff;*/
+    width:100%; height:100%;
+    position: relative;
+    transform-style:preserve-3d;                 /*第二层和第三层都需要添加此属性*/
+    -webkit-transform-style:preserve-3d;
+    }
+    .out ul li {
+    position:absolute;
+    width:80px;
+    height:50px;
+    background:rgba(32,163,115,1);
+    padding:3px;
+    border-radius:5px;
+    background-clip:content-box;
+    box-shadow:0 0 10px #2ED69B;
+    color:#fff;
+    font-size:14px;
+    font-family: 'Microsoft YaHei';
+    text-align:center;
+    line-height:50px
+    }
+
+
+    </style>
+    <script type="text/javascript" src="css3.js"></script>
+    <script type="text/javascript" src="drawBall.js"></script>
+    <script type="text/javascript" src="mouseScroll.js"></script>
+    <script type="text/javascript" src="rectRotate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.onload=function(){
+            var scene = document.getElementsByClassName('scene')[0];
+            var outBall = document.getElementsByClassName('out')[0];
+            var innerBall = outBall.getElementsByTagName('ul')[0]
+//最初始的随机出现若干个标签
+//            for(var i=0;i<50;i++){
+//                var aLi = document.createElement('li');
+//                var theta = Math.random()*Math.PI;   //θ的范围是0-180度之间的任意值,这里的角度是弧度
+//                var phi = Math.random()*Math.PI*2;   //φ的范围是0-360度之间的任意值,这里的角度是弧度
+//                var radii = 250;                     //球的半径就是250
+//                var x = radii*Math.sin(theta)*Math.sin(phi)+250;   //屏幕的x值相当于计算球坐标系中的y值
+//                var y = radii*Math.cos(theta)+250;            //屏幕的y值相当于计算球坐标系中的z值
+//                var z = radii*Math.sin(theta)*Math.cos(phi)    //屏幕的z值相当于计算球坐标系中的x值
+//                aLi.style.cssText='left:'+x+'px;top:'+y+'px';
+//                setCss3(aLi,{'transform':'translateZ('+z+'px) rotateX('+(theta-Math.PI/2)+'rad) rotateY('+phi+'rad)'});
+//                innerBall.appendChild(aLi);
+//            }
+            var newBall = new drawBall();                //将drawBall实例化
+            newBall.draw();                              //执行drawBall里的draw()方法
+            //执行过draw()时,先执行setAngle(),获得所有标签的球坐标系中的两个角度.
+            //然后再创建若干个li,并且为每个li定义样式(位置,旋转),并把所有的li存入newBall对象的titles数组中
+            for(var i=0;i<newBall.length;i++){
+                //将titles数组中的各个li插入到球中
+                innerBall.appendChild(newBall.titles[i])
+            }
+
+            var rect = new math();                       //将math实例化
+            rect.mouse = [1,1,0];                        //对象的mouse属性用于存储鼠标的位置,为了后面计算旋转方向
+            var angleStep = 1;                           //旋转需要定义一个每次旋转增加值
+            ballRotate = function(){
+                if(angleStep>1){                         //鼠标拖动旋转停下后,有一个从快到慢的缓冲
+                    angleStep*=0.9;
+                }
+                else {
+                    angleStep = 1;
+                }
+                rect.theta+=angleStep;                   //rect对象里的theta属性,表示旋转到的角度,这里是每60ms加一度
+                rect.rotates();                          //执行rect对象里的rotates()方法,此方法可以得到一个arr数组,用于存放3d运动矩阵中的16个值
+                var arr = rect.arr;
+                setCss3(innerBall,{'transform':'matrix3d('+arr[0]+','+arr[1]+','+arr[2]+','+arr[3]+','+arr[4]+','+arr[5]+','+arr[6]+','+arr[7]+','+arr[8]+','+arr[9]+','+arr[10]+','+arr[11]+','+arr[12]+','+arr[13]+','+arr[14]+','+arr[15]+')'})
+            }
+
+            var scrollBall = setInterval(ballRotate,60);
+
+            //鼠标滚轴改变大小
+            var endZ = -250;      //一开始的z轴值就是-250px(第27行中定义的)
+            //调用鼠标滚动函数
+            mouseScroll(scene,function(){
+                endZ+=10;        //向上滚动的话,z轴值增加,球向前,看起来变大
+                setCss3(outBall,{'transform':'translateZ('+endZ+'px)'})
+            },function(){
+                endZ-=10;        //向下滚动的话,z轴值减小,球向后,看起来变小
+                setCss3(outBall,{'transform':'translateZ('+endZ+'px)'})
+            })
+
+            //鼠标拖动,球跟着动
+            scene.onmousedown = function(e){                       //场景里鼠标按下添加事件
+                var e = e||window.event;
+                var ballLeft = scene.offsetLeft;
+                var ballTop = scene.offsetTop;
+                var startMouseLeft = e.clientX;
+                var startMouseTop = e.clientY;
+                var startLeft = startMouseLeft - ballLeft - 250;   //计算初始点击时的鼠标相对于球中心的left值
+                var startTop = startMouseTop - ballTop - 250;      //计算初始点击时的鼠标相对于球中心的top值
+                var end;
+
+                //对于mousemove事件,可以理解为,在鼠标移动的时候,每间隔很短的时间里执行一次mousemove事件函数,注意是每隔很短的时间执行,事实上也不可能是一直不间断的执行.
+
+
+                clearInterval(scrollBall);
+                document.onmousemove=function(e){
+                    var e = e||window.event;
+                    var endMouseLeft = e.clientX;
+                    var endMouseTop = e.clientY;
+                    var endLeft = endMouseLeft - ballLeft - 250;   //计算移动时鼠标相对于球中心的left值
+                    var endTop = endMouseTop - ballTop - 250;      //计算移动时鼠标相对于球中心的top值
+                    rect.mouse = [endLeft,endTop,0];               //将获得的鼠标现对于球中心的坐标传入给对象的mouse属性,以便重新计算旋转的方向
+
+                    //定义在mousemove事件的很短的某个间隔时间内,鼠标移动了多少距离.
+                    end = Math.sqrt((endLeft-startLeft)*(endLeft-startLeft)+(endTop-startTop)*(endTop-startTop))
+                    //在某个间隔时间内,根据鼠标移动的距离来确定旋转角度加了多少度.end越大,转动的角度越大.
+                    rect.theta+=end/8;                       //直接用end值做步幅有时候会太大,所以需要除以8
+                    rect.rotates();                          //执行rect对象里的rotates()方法,此方法可以得到一个arr数组,用于存放3d运动矩阵中的16个值
+                    var arr = rect.arr;
+                    setCss3(innerBall,{'transform':'matrix3d('+arr[0]+','+arr[1]+','+arr[2]+','+arr[3]+','+arr[4]+','+arr[5]+','+arr[6]+','+arr[7]+','+arr[8]+','+arr[9]+','+arr[10]+','+arr[11]+','+arr[12]+','+arr[13]+','+arr[14]+','+arr[15]+')'})
+                    //把当前的位置作为下一次计算end值的初始值
+                    startLeft = endLeft;
+                    startTop = endTop;
+                    //*注意:使用鼠标拖动来滚动球体,并不能做到从点击时当前运动的位置开始换方向进行运动
+                    //     ballRotate函数里的角度,还是上一次运动的角度,而新运动开始的角度是几度并不重要;
+                }
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    //将旋转增加的步幅设置为拖动结束时的end值
+                    angleStep = end;
+                    //注:这里不需要end/8,因为这里是60ms执行一次,但是mousemove事件中的间隔要比60ms小很多,所以不除以8会动的很快
+                    scrollBall = setInterval(ballRotate,60)
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="scene">
+    <div class="out">
+         <ul>
+         </ul>
+    </div>
+</div>
+
+</body>
+</html>

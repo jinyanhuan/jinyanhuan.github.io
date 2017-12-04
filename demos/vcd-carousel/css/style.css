@@ -1,0 +1,33 @@
+.cd_main {
+    width:198px; height:272px; margin:40px auto 20px; position:relative
+}
+.cd_main .cd {
+    display:block; position:absolute; top:61px; left:75px; width:146px; height:146px; background:url(../images/bg.png) no-repeat -510px 0; -webkit-transition:.3s left linear,1.2s -webkit-transform ease .3s
+}
+.cd_main .cd.scroll {
+    left:122px; -webkit-transform:rotateZ(2880deg);
+}
+.cd_main ul {
+    position:absolute; top:3px; left:2px; width:178px; height:264px; background:url(../images/bg.png) no-repeat -265px -2px
+}
+.cd_main ul li {
+    position:absolute; opacity:0; -webkit-transition:.6s opacity linear
+}
+.cd_main ul li.cur {
+    opacity:1
+}
+.cd_main a {
+    position:absolute; display:block; width:198px; height:272px; background:url(../images/bg.png) no-repeat;
+}
+.cd_main .links {
+    position:absolute; height:8px; top:240px; left:46px; /*opacity:0; visibility: hidden;*/ -webkit-transition:.3s opacity linear
+}
+.cd_main .links span {
+    display:block; border:4px solid #fffbd7; border-radius:100%; float:left; margin:0 5px
+}
+.cd_main .links span.cur,.cd_main .links span:hover {
+    border:2px solid #fffbd7; width:4px; height:4px;
+}
+.cd_main:hover .links {
+    visibility: visible; opacity:1;
+}

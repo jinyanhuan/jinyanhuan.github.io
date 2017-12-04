@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>index</title>
+		<style>
+			*{margin:0px;padding:0px;list-style:none;font-size:12px;font-family:'Arial'}
+            a{text-decoration:none;}
+			img{border:0;}
+			.hide{display:none;}
+			.main-slide{width:980px;height:190px;border:1px solid #c9caca;border-radius:3px;box-shadow:0px 0px 3px #c9caca;margin: 30px auto; }
+			.main-slide .slide-top{height:159px;width:100%;position:relative;overflow:hidden;}
+			.main-slide .slide-top .pd{width:140px;float:left;position:absolute;text-align:center;top:-200px;left:490px;}
+			.main-slide .slide-nav{width:100%;height:31px;background:url(images/itembg.png) repeat-x 0px 0px;}
+            .main-slide .slide-nav .t-c{width:280px;margin:0 auto;}
+			.main-slide .slide-nav a{display:block;height:31px;line-height:31px;float:left;margin:0 18px;color:#7F7F7F}
+		    .main-slide .slide-nav a.cur{background:url(images/carat_active.png) no-repeat center 0;color:#333;text-shadow:0 1px rgba(255, 255, 255, 0.9)}
+		    .main-slide .slide-nav a:hover{color:#333;text-shadow:0 1px rgba(255, 255, 255, 0.9)}
+		</style>
+		<script type="text/javascript" src="http://cdnimg.ocj.com.cn/common/js/jquery-1.10.2.min.js"></script>
+
+		<script type="text/javascript" src="move.js"></script>
+		<script type="text/javascript">
+           $(function(){
+			 var newIndex=0;
+			 show(newIndex);
+             var onOff;
+			 
+			 $('a','.slide-nav').click(function(){
+				if(onOff===false){
+				    return
+				}
+				onOff=false;
+				$('a','.slide-nav').removeClass('cur');
+				$(this).addClass('cur')
+				var index=$('a','.slide-nav').index($(this));
+				setStart();
+				hide(newIndex,index);
+                /*需要将newIndex传入show函数,但是show函数是1秒后执行,执行的时候newIndex已经等于index了.*/
+				var indexOut=newIndex;
+				setTimeout(function(){
+				    show(index,indexOut);
+				},700)
+				newIndex=index;
+			 })
+
+             function setStart () {
+			      $('.pd').not($('.pd'+newIndex)).css({left:2*$('.slide-top').width(),top:0})
+			 }
+             
+			 //隐藏函数  
+             /*num是要被隐藏掉的索引,clickNum是将要被显示出的索引.*/
+             function hide (num,clickNum) {
+                var pd=$('.pd'+num);
+				var i
+				var leftHide;
+
+				if(num>clickNum){
+				   i=pd.length-1;
+				   var t=setInterval(function(){
+				      fiexible(pd[i],{left:2*$('.slide-top').width()});
+				      i--;
+					  if(i==-1){
+					     clearInterval(t);
+					  }
+				   },60)
+				}
+				else{
+				   i=0; 
+				   var t=setInterval(function(){
+				      fiexible(pd[i],{left:-2*$('.slide-top').width()});
+				      i++;
+					  if(i==pd.length){
+					     clearInterval(t);
+					  }
+				   },60)
+				}				
+			 }
+			 
+			 //显示函数
+             /*num是要被显示的索引,clickNum是被隐藏掉的索引.*/
+			 function show (num,clickNum) {
+				var pd=$('.pd'+num);	
+				var pos=getPosL(pd);
+				var i;
+				if(num<clickNum){
+					pd.css({left:-2*$('.slide-top').width(),top:0})
+				    i=pd.length-1;
+					var t=setInterval(function(){
+					   /*!!!注意:使用fiexible函数来改变left和top时,必须在样式中预先定义left和top的值,然后才能进行改变!!!*/
+					   fiexible(pd[i],{left:pos[i],top:0});    
+					   i--;
+					   if(i==-1){
+					      clearInterval(t);
+						  onOff=true;
+					   }
+				    },60)	                    
+				}
+				else{
+				    i=0;
+					var t=setInterval(function(){
+					   /*!!!注意:使用fiexible函数来改变left和top时,必须在样式中预先定义left和top的值,然后才能进行改变!!!*/
+					   fiexible(pd[i],{left:pos[i],top:0});    
+					   i++;
+					   if(i==pd.length){
+					      clearInterval(t);
+						  onOff=true;
+					   }
+				    },60)										
+				}			
+			 }			 
+		   
+		   })    
+             
+          /*传入元素获得元素绝对定位left值数组*/
+		   function getPosL (ele) {
+             var baseL=($('.slide-top').width()-ele.length*ele.width())/2
+			 var arr=[];
+				for(var i=0;i<ele.length;i++){
+					var posL1=baseL+i*ele.width();
+					arr.push(posL1);
+				}
+			 return arr;  
+		   }  
+
+			 /*通过类名获取元素的另一种写法(不一定对)*/
+			 function getClass (cName,obj) {
+                var ele=obj.getElementsByTagName('*');
+				var reg=new RegExp('//b'+cName+'//b');
+				var arr=[];
+				for(var i=0;i<ele.length;i++){
+                    if(reg.test(ele[i].className)){
+				       arr.push(ele[i])
+					}
+				}
+			    return arr;
+			 }
+		</script>
+	</head>
+	<body>
+		<div class="main-slide">
+		    <div class="slide-top">
+			     <!--第一页-->
+				 
+				 <div class="pd pd0">
+				     <img src="images/macbookair.jpg"/>
+					 Macbook Air
+				 </div>
+				 <div class="pd pd0">
+				     <img src="images/macbookpro.jpg"/>
+					 Macbook Pro
+				 </div>
+			     <div class="pd pd0">
+				     <img src="images/macmini.jpg"/>
+					 Mac mini
+				 </div>
+			     <div class="pd pd0">
+				     <img src="images/imac.jpg"/>
+					 iMac
+				 </div>
+			     <div class="pd pd0">
+				     <img src="images/macpro.jpg"/>
+					 Mac Pro
+				 </div>
+			     <div class="pd pd0">
+				     <img src="images/macosx_mountainlion.jpg"/>
+					 OS X Mountain Lion
+				 </div>
+
+			     <!--第二页-->
+				 
+				 <div class="pd pd1">
+				     <img src="images/ilife.jpg"/>
+					 iLife
+				 </div>
+				 <div class="pd pd1">
+				     <img src="images/iwork.jpg"/>
+					 iWork
+				 </div>
+			     <div class="pd pd1">
+				     <img src="images/safari.jpg"/>
+					 Safari
+				 </div>
+			     <div class="pd pd1">
+				     <img src="images/aperture.jpg"/>
+					 Aperture
+				 </div>
+			     <div class="pd pd1">
+				     <img src="images/final_cut_pro.jpg"/>
+					 Final Cut Pro
+				 </div>
+			     <div class="pd pd1">
+				     <img src="images/logic_pro.jpg"/>
+					 Logic Pro
+				 </div>
+				 
+			     <!--第三页-->
+				 
+				 <div class="pd pd2">
+				     <img src="images/keyboard.jpg"/>
+					 Apple Wireless Keyboard
+				 </div>
+				 <div class="pd pd2">
+				     <img src="images/magicmouse.jpg"/>
+					 Magic Mouse
+				 </div>
+			     <div class="pd pd2">
+				     <img src="images/magictrackpad.jpg"/>
+					 Magic Trackpad
+				 </div>
+			     <div class="pd pd2">
+				     <img src="images/imac.jpg"/>
+					 LED Cinema Display
+				 </div>
+			     <div class="pd pd2">
+				     <img src="images/airportexpress.jpg"/>
+					 AirPort Express
+				 </div>
+			     <div class="pd pd2">
+				     <img src="images/airportextreme.jpg"/>
+					 AirPort Extreme
+				 </div>
+			     <div class="pd pd2">
+				     <img src="images/timecapsule.jpg"/>
+					 Time Capsule
+				 </div>
+
+			     <!--第四页-->
+				 
+				 <div class="pd pd3">
+				     <img src="images/macosx_server.jpg"/>
+					 OS X Server
+				 </div>
+				 <div class="pd pd3">
+				     <img src="images/macpro_server.jpg"/>
+					 Mac Pro with OS X Server
+				 </div>
+			     <div class="pd pd3">
+				     <img src="images/apple_remote_desktop.jpg"/>
+					 Apple Remote Desktop
+				 </div>
+			     <div class="pd pd3">
+				     <img src="images/macmini_server.jpg"/>
+					 Mac mini with OS
+				 </div>
+
+			</div>
+			<div class="slide-nav">
+			   <div class="t-c">
+				 <a href="javascript:void()" class="cur">Mac</a>
+				 <a href="javascript:void()">应用软件</a>
+				 <a href="javascript:void()">配件</a>
+				 <a href="javascript:void()">服务器</a>
+			   </div>
+			</div>
+		</div>
+	</body>
+</html>
+
